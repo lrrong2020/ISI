@@ -8,11 +8,34 @@
 
 # To Do List
 
-1.  Draft design of the UI (hand-drawn diagrams?)
+1. Draft design of the UI (hand-drawn diagrams?)
 
    - What are the pages / interfaces?
+
+     - products page
+
+     - product detail page
+
+     - related account management page
+
+     - shopping cart page
+
+     - purchase tracking page
+
+     - purchase order detail page
+
+     - product catalogue page
+
+     - purchase order list pages
+
+     - purchase order processing page
+
+       
+
    - Initial thoughts
+
    - Refer to similar products
+
    - Come up with the **[1] prototype**
 
    
