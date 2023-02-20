@@ -6,6 +6,7 @@ import store from '@/store'
 
 import './assets/main.css'
 import 'vant/lib/index.css';
+import 'amfe-flexible'
 
 import { Button } from 'vant';
 
