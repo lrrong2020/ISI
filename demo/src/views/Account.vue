@@ -1,16 +1,9 @@
 <template>
-    <div class="about">
-      <h1>User</h1>
-    </div>
-  </template>
+  <div style="background-color: aqua;">
+    <h1>Account</h1>
+  </div>
+</template>
   
-  <style>
-  @media (min-width: 1024px) {
-    .about {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-  }
-  </style>
-  
+<style>
+
+</style>
