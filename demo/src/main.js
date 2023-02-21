@@ -8,13 +8,20 @@ import 'vant/lib/index.css';
 import 'amfe-flexible'
 import '@vant/touch-emulator';
 
-import { Button } from 'vant';
+//Vant
+import { Button,Tabbar,TabbarItem,NavBar,Icon } from 'vant';
 
 const app = createApp(App)
 
 app.use(router)
 app.config.globalProperties.axios = axios
 app.use(store)
+
+//Vant
 app.use(Button);
+app.use(Tabbar);
+app.use(TabbarItem);
+app.use(NavBar);
+app.use(Icon);
 
 app.mount('#app')

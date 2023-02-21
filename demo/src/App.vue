@@ -1,86 +1,48 @@
-<script setup>
+<script>
+import { ref } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { showToast } from 'vant';
+
+export default {
+  setup() {
+    const active = ref(0);
+    const onClickLeft = () => history.back();
+    const onClickRight = () => showToast('Search');
+    return { 
+      active,
+      onClickLeft,
+      onClickRight,
+     };
+  },
+};
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+<!--Top NavBar-->
+  <van-nav-bar fixed title="标题" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
+    <template #right>
+      <van-icon name="search" size="18" />
+    </template>
+  </van-nav-bar>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+<!--Blank Space-->
+  <div style="height: 1rem;"></div>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <van-button type="primary">主要按钮</van-button>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
+<!--RouterView-->
   <RouterView />
+
+<!--Blank Space-->
+  <div style="height: 2rem;"></div>
+
+<!--Tabbar-->
+  <van-tabbar v-model="active" @change="onChange" route>
+    <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>
+    <van-tabbar-item replace to="/about" icon="shopping-cart-o">Cart</van-tabbar-item>
+    <van-tabbar-item replace to="/account" icon="user-circle-o">Account</van-tabbar-item>
+  </van-tabbar>
+
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
