@@ -1,6 +1,6 @@
 package com.example.restservice;
 
-import com.example.restservice.Dao.CustomerDao;
+import com.example.restservice.Dao.Dao;
 import com.example.restservice.models.Customer;
 import com.example.restservice.services.CustomerService;
 
@@ -26,7 +26,7 @@ public class GreetingController {
 		return customerService.getAllCustomers();
 	}
 	@GetMapping("/customer/:id")
-	public Customer getCustomer(@RequestBody int id) {
+	public Customer getCustomer(@RequestBody String id) {
 		return customerService.getCustomer(id);
 	}
 	@PostMapping("/customer/add")

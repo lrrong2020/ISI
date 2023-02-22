@@ -1,37 +1,31 @@
 package com.example.restservice.services;
 
-import java.util.HashMap;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.example.restservice.Dao.CustomerDao;
+import com.example.restservice.Dao.Dao;
 import com.example.restservice.models.Customer;
 
 public class CustomerService{
-	
+
 	@Autowired
-	private CustomerDao dao;
+	private Dao<Customer> dao;
 	
 	public String addCustomer(Customer customer) {
-		dao.saveCustomer(customer);
+		dao.save(customer);
 		return "The new customer has been added into database, Id is " + customer.getCustomerId();
 	}
-	public Customer getCustomer(int customerId) {
-		return dao.getById(customerId);
+	public Customer getCustomer(String customerId) {
+		return (Customer) dao.get(customerId);
 	}
 	public List<Customer> getAllCustomers() {
-		return dao.findAll();
+		return dao.getAll();
 	}
-	public String deleteCustomer(int customerId) {
-		dao.deleteCustomer(customerId);
-		return "Customer Id is deleted: " + customerId;
+	public String deleteCustomer(Customer customer) {
+		dao.delete(customer);
+		return "Customer Id is deleted: " + customer.getCustomerId();
 	}
 	public String updateCustomer(Customer customer) {
-		dao.saveCustomer(customer);
+		dao.save(customer);
 		return "Customer Id is updated: "+customer.getCustomerId();
 	}
-	 
-	
-
 }

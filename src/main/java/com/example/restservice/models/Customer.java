@@ -6,34 +6,40 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="customer_table")
-public class Customer{	
+@Table(name = "customer_table")
+public class Customer {
 	@Id
-	private int customerId;
+	private String customerId;
+
 	@Column
 	private String customerName;
+
 	@Column
 	private String customerEmail;
+
 	@Column
 	private String customerPassword;
+
 	@Column
 	private String shippingAddress;
-	
-	public Customer(){}
 
-	public Customer(int customerId,String customerName,String customerEmail, String customerPassword, String shippingAddress) {
+	public Customer() {
+	}
+
+	public Customer(String customerId, String customerName, String customerEmail, String customerPassword,
+			String shippingAddress) {
 		this.customerId = customerId;
 		this.customerName = customerName;
 		this.customerEmail = customerEmail;
 		this.customerPassword = customerPassword;
 		this.shippingAddress = shippingAddress;
 	}
-	
-	public int getCustomerId() {
+
+	public String getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 
@@ -68,6 +74,5 @@ public class Customer{
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
-	
-	
+
 }

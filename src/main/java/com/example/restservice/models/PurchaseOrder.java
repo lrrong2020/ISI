@@ -15,18 +15,27 @@ import javax.persistence.Column;
 public class PurchaseOrder {
 	@Id
 	private String purchaseOrderNumber;
+	
 	@Column
 	private Date purchaseDate;
+	
 	@Column
 	private int totalAmount;
+	
 	@Column
 	private String status;
-	@OneToMany(cascade=CascadeType.ALL)
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	
 	@JoinColumn(name = "fk_po_id")
 	private String customerId;
+	
 	@Column
 	private Date shipmentDate;
-	public PurchaseOrder() {};
+
+	public PurchaseOrder() {
+	};
+
 	public PurchaseOrder(String purchaseOrderNumber, Date purchaseDate, int totalAmount, String status,
 			String customerId, Date shipmentDate) {
 		this.purchaseOrderNumber = purchaseOrderNumber;
@@ -84,11 +93,5 @@ public class PurchaseOrder {
 	public void setShipmentDate(Date shipmentDate) {
 		this.shipmentDate = shipmentDate;
 	}
-	
-	
-	
-	
-	
-	
 
 }
