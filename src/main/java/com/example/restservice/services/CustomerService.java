@@ -24,8 +24,8 @@ public class CustomerService{
 		dao.delete(customer);
 		return "Customer Id is deleted: " + customer.getCustomerId();
 	}
-	public String updateCustomer(Customer customer) {
-		dao.save(customer);
+	public String updateCustomer(Customer customer, String[] params) {
+		dao.update(customer, params);
 		return "Customer Id is updated: "+customer.getCustomerId();
 	}
 }
