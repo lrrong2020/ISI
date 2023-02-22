@@ -24,10 +24,12 @@ export default {
       <van-icon name="search" size="18" />
     </template>
   </van-nav-bar>
+
 <!--RouterView-->
   <p style="background-color: aqua; margin: 0 auto;">aaaaa</p>
   <router-view></router-view>
   <p style="background-color: red; margin: 0 auto;">aaaaa</p>
+  
 <!--Tabbar-->
   <van-tabbar placeholder height: v-model="active" @change="onChange" route>
     <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>

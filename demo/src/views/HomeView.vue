@@ -1,63 +1,38 @@
-<script setup>
+<script>
+import product from "@/product.js"
+
+export default {
+  data () {
+    return {
+      items: product.items,
+    }
+  },
+}
 </script>
 
 <template>
-    <div>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1>Product List</h1>
-        <h1 style="background-color: red;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: yellow;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: red;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: yellow;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: red;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: yellow;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: red;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: yellow;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: red;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: yellow;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: red;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: yellow;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: red;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: yellow;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: red;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: yellow;margin: 0 auto;">Product List</h1>
-        <h1 style="background-color: red;margin: 0 auto;">Product List</h1>
+  <div>
+    <van-card
+      v-for="(item,index) in items"
+      :key="index"
+      :num="item.num"
+      :price="item.price"
+      :desc="item.desc"
+      :title="item.title"
+      :thumb="item.thumb"
+      class="product_list"
+    >
+  <template #tags>
+    <van-tag plain type="primary">标签</van-tag>
+    <van-tag plain type="primary">标签</van-tag>
+  </template>
+  <template #footer>
+    <van-button size="mini">按钮</van-button>
+    <van-button size="mini">按钮</van-button>
+  </template>
+</van-card>
     </div>
 </template>
 
 <style scoped>
-h1 {
-    background-color: yellow;
-    margin: 0 auto;
-}
 </style>
