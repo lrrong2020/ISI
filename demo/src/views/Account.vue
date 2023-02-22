@@ -1,23 +1,18 @@
 <script>
-import { showToast } from 'vant';
-
 export default {
   name: "Account",
   components: {},
   setup() {
-    const onAdd = () => showToast('新增');
-    return {
-      onAdd,
-    };
   },
 };
 </script>
 
 <template>
-  <div style="background-color: aqua;">
-    <h1>Account</h1>
-  </div>
-  <van-contact-card type="add" @click="onAdd" />
+  <van-button plain size="large" to="/login"
+  icon="https://fastly.jsdelivr.net/npm/@vant/assets/user-active.png"
+  type="primary">
+    Login
+  </van-button>
 </template>
 
 <style>

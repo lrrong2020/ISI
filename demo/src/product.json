@@ -1,0 +1,45 @@
+[
+    {
+        "num": 1,
+        "price": 1,
+        "desc": "aaaaaaaa",
+        "title": "Product title1",
+        "thumb":"https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+        "num": 2,
+        "price": 2,
+        "desc": "bbbbbbbb",
+        "title": "Product title2",
+        "thumb":"https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+        "num": 3,
+        "price": 3,
+        "desc": "ccccccccc",
+        "title": "Product title3",
+        "thumb":"https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+        "num": 4,
+        "price": 4,
+        "desc": "dddddddd",
+        "title": "Product title4",
+        "thumb":"https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+        "num": 5,
+        "price": 5,
+        "desc": "eeeeeeee",
+        "title": "Product title5",
+        "thumb":"https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+        "num": 6,
+        "price": 6,
+        "desc": "fffffffff",
+        "title": "Product title6",
+        "thumb":"https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    }
+    
+]

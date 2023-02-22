@@ -1,13 +1,13 @@
 <script>
 export default {
-  name: "Login",
+  name: "SignUp",
   components: {},
 };
 </script>
 
 <template>
     <div>
-        Login
+        Sign Up
     </div>
 </template>
 
