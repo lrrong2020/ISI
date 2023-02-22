@@ -9,26 +9,26 @@ import java.util.Map;
 
 public class ProductDaoImpl implements Dao<Product> {
 
-	private HashMap<String, Product> products = null;
+	private HashMap<Integer, Product> products = null;
 	
 	public ProductDaoImpl() 
 	{
-		products = new HashMap<String, Product>();
-		products.put("A01", new Product());
-		products.put("A02", new Product());
+		products = new HashMap<Integer, Product>();
+		products.put(2001, new Product());
+		products.put(2002, new Product());
 	}
 	
 	
 	/* methods */
 	
-	private String generateKey() 
+	private Integer generateKey() 
 	{
-		return "fakeKey";
+		return 0;
 	}
 	
 	/* setters and getters */
 	@Override
-	public Product get(String productId)
+	public Product get(Integer productId)
 	{
 		// TODO Auto-generated method stub
 		return products.get(productId);
@@ -38,7 +38,7 @@ public class ProductDaoImpl implements Dao<Product> {
 	public List<Product> getAll()
 	{
 		List<Product> productList = new ArrayList<Product>();
-		for(Map.Entry<String, Product> entry : products.entrySet()) 
+		for(Map.Entry<Integer, Product> entry : products.entrySet()) 
 		{
 			productList.add(entry.getValue());
 		}
@@ -51,7 +51,7 @@ public class ProductDaoImpl implements Dao<Product> {
 	{
 		// TODO Auto-generated method stub
 		
-		String fakeAutoGenerateId = this.generateKey();
+		Integer fakeAutoGenerateId = this.generateKey();
 		
 		products.put(fakeAutoGenerateId, product);
 	}

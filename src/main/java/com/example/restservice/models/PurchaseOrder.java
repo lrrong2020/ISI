@@ -14,7 +14,7 @@ import javax.persistence.Column;
 @Entity
 public class PurchaseOrder {
 	@Id
-	private String purchaseOrderNumber;
+	private Integer purchaseOrderNumber;
 	
 	@Column
 	private Date purchaseDate;
@@ -36,7 +36,7 @@ public class PurchaseOrder {
 	public PurchaseOrder() {
 	};
 
-	public PurchaseOrder(String purchaseOrderNumber, Date purchaseDate, int totalAmount, String status,
+	public PurchaseOrder(Integer purchaseOrderNumber, Date purchaseDate, int totalAmount, String status,
 			String customerId, Date shipmentDate) {
 		this.purchaseOrderNumber = purchaseOrderNumber;
 		this.purchaseDate = purchaseDate;
@@ -46,11 +46,11 @@ public class PurchaseOrder {
 		this.shipmentDate = shipmentDate;
 	}
 
-	public String getPurchaseOrderNumber() {
+	public Integer getPurchaseOrderNumber() {
 		return purchaseOrderNumber;
 	}
 
-	public void setPurchaseOrderNumber(String purchaseOrderNumber) {
+	public void setPurchaseOrderNumber(Integer purchaseOrderNumber) {
 		this.purchaseOrderNumber = purchaseOrderNumber;
 	}
 

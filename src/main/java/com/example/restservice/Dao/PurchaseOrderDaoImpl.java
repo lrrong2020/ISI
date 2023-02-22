@@ -9,30 +9,30 @@ import java.util.Map;
 
 public class PurchaseOrderDaoImpl implements Dao<PurchaseOrder> {
 
-	private HashMap<String, PurchaseOrder> PurchaseOrders = null;
+	private HashMap<Integer, PurchaseOrder> PurchaseOrders = null;
 
 	public PurchaseOrderDaoImpl() {
-		PurchaseOrders = new HashMap<String, PurchaseOrder>();
-		PurchaseOrders.put("PO01", new PurchaseOrder());
-		PurchaseOrders.put("PO02", new PurchaseOrder());
+		PurchaseOrders = new HashMap<Integer, PurchaseOrder>();
+		PurchaseOrders.put(1000, new PurchaseOrder());
+		PurchaseOrders.put(1001, new PurchaseOrder());
 	}
 
 	/* methods */
 
-	private String generateKey() {
-		return "fakeKey";
+	private Integer generateKey() {
+		return 0;
 	}
 
 	/* setters and getters */
 	@Override
-	public PurchaseOrder get(String PurchaseOrderNumber) {
+	public PurchaseOrder get(Integer PurchaseOrderNumber) {
 		return PurchaseOrders.get(PurchaseOrderNumber);
 	}
 
 	@Override
 	public List<PurchaseOrder> getAll() {
 		List<PurchaseOrder> purchaseOrderList = new ArrayList<PurchaseOrder>();
-		for (Map.Entry<String, PurchaseOrder> entry : PurchaseOrders.entrySet()) {
+		for (Map.Entry<Integer, PurchaseOrder> entry : PurchaseOrders.entrySet()) {
 			purchaseOrderList.add(entry.getValue());
 		}
 
@@ -41,7 +41,7 @@ public class PurchaseOrderDaoImpl implements Dao<PurchaseOrder> {
 
 	@Override
 	public void save(PurchaseOrder purchaseOrder) {
-		String fakeAutoGenerateId = this.generateKey();
+		Integer fakeAutoGenerateId = this.generateKey();
 		PurchaseOrders.put(fakeAutoGenerateId, purchaseOrder);
 	}
 

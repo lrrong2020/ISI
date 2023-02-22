@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GreetingController {
+	
+	
 	@Autowired
 	private CustomerService customerService;
 	
@@ -26,7 +28,7 @@ public class GreetingController {
 		return customerService.getAllCustomers();
 	}
 	@GetMapping("/customer/:id")
-	public Customer getCustomer(@RequestBody String id) {
+	public Customer getCustomer(@RequestBody Integer id) {
 		return customerService.getCustomer(id);
 	}
 	@PostMapping("/customer/add")

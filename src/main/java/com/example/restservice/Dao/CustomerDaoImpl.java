@@ -37,7 +37,7 @@ public class CustomerDaoImpl implements Dao<Customer>, JpaRepository<Customer, I
 	
 	/* setters and getters */
 	@Override
-	public Customer get(String customerId)
+	public Customer get(Integer customerId)
 	{
 		return customers.get(customerId);
 	}
