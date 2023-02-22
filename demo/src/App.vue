@@ -4,6 +4,8 @@ import { RouterLink, RouterView } from 'vue-router'
 import { showToast } from 'vant';
 
 export default {
+  name: "App",
+  components: {},
   setup() {
     const active = ref(0);
     const onClickLeft = () => history.back();
@@ -26,14 +28,13 @@ export default {
   </van-nav-bar>
 
 <!--RouterView-->
-  <p style="background-color: aqua; margin: 0 auto;">aaaaa</p>
   <router-view></router-view>
-  <p style="background-color: red; margin: 0 auto;">aaaaa</p>
+
   
 <!--Tabbar-->
   <van-tabbar placeholder height: v-model="active" @change="onChange" route>
     <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>
-    <van-tabbar-item replace to="/about" icon="shopping-cart-o">Cart</van-tabbar-item>
+    <van-tabbar-item replace to="/cart" icon="shopping-cart-o">Cart</van-tabbar-item>
     <van-tabbar-item replace to="/account" icon="user-circle-o">Account</van-tabbar-item>
   </van-tabbar>
 </template>

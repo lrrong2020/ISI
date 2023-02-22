@@ -1,7 +1,12 @@
 <script>
 import product from "@/product.js"
+import EmployeeList from '@/components/EmployeeList.vue';
 
 export default {
+  name: "Home",
+  components: {
+    EmployeeList,
+  },
   data () {
     return {
       items: product.items,
@@ -12,6 +17,7 @@ export default {
 
 <template>
   <div>
+    <employee-list />
     <van-card
       v-for="(item,index) in items"
       :key="index"
