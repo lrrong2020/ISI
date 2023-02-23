@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
-import VueAxios from 'vue-axios'
+//import VueAxios from 'vue-axios'
 import store from '@/store'
 
 import 'vant/lib/index.css';
@@ -15,7 +15,9 @@ Field,CellGroup,Tag } from 'vant';
 
 const app = createApp(App)
 
-app.use(VueAxios, axios)
+//app.use(VueAxios, axios)
+//app.config.globalProperties.$http = axios
+//axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com'
 app.use(router)
 app.config.globalProperties.axios = axios
 app.use(store)
