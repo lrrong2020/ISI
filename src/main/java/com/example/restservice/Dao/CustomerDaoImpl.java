@@ -16,7 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-public class CustomerDaoImpl implements Dao<Customer>, JpaRepository<Customer, Integer>  {
+public class CustomerDaoImpl implements Dao2, JpaRepository<Customer, Integer>  {
 
 	private HashMap<Integer, Customer> customers = null;
 	
@@ -36,41 +36,41 @@ public class CustomerDaoImpl implements Dao<Customer>, JpaRepository<Customer, I
 	}
 	
 	/* setters and getters */
-	@Override
-	public Customer get(Integer customerId)
-	{
-		return customers.get(customerId);
-	}
+//	@Override
+//	public Customer get(Integer customerId)
+//	{
+//		return customers.get(customerId);
+//	}
 
 	
 	/* Dao Methods */
 	
-	@Override
-	public List<Customer> getAll()
-	{
-		List<Customer> customerList = new ArrayList<Customer>();
-		for(Map.Entry<Integer, Customer> entry : customers.entrySet()) 
-		{
-			customerList.add(entry.getValue());
-		}
-		
-		return customerList;
-	}
+//	@Override
+//	public List<Customer> getAll()
+//	{
+//		List<Customer> customerList = new ArrayList<Customer>();
+//		for(Map.Entry<Integer, Customer> entry : customers.entrySet()) 
+//		{
+//			customerList.add(entry.getValue());
+//		}
+//		
+//		return customerList;
+//	}
 
-	@Override
-	public void save(Customer customer)
-	{
-		Integer fakeAutoGenerateId = this.generateKey();
-		
-		customers.put(fakeAutoGenerateId, customer);
-	}
+//	@Override
+//	public void save(Customer customer)
+//	{
+//		Integer fakeAutoGenerateId = this.generateKey();
+//		
+//		customers.put(fakeAutoGenerateId, customer);
+//	}
 
-	@Override
-	public void update(Customer customer, String[] params)
-	{
-		customers.put(customer.getCustomerId(), customer);
-	}
-	
+//	@Override
+//	public void update(Customer customer, String[] params)
+//	{
+//		customers.put(customer.getCustomerId(), customer);
+//	}
+//	
 	@Override
 	public void delete(Customer customer)
 	{
@@ -218,5 +218,75 @@ public class CustomerDaoImpl implements Dao<Customer>, JpaRepository<Customer, I
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public Optional<Customer> findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean existsById(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public long count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void deleteAllById(Iterable<? extends Integer> ids) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void deleteAll(Iterable<? extends Customer> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Customer getReferenceById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public <S extends Customer> S save(S entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+//	@Override
+//	public void save(Customer t) {
+//		// TODO Auto-generated method stub
+//
+//	}
 	
 }

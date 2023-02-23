@@ -2,7 +2,11 @@ package com.example.restservice.Dao;
 
 import java.util.List;
 
-public interface Dao<T> {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.restservice.models.Customer;
+
+public interface Dao<T>{
     
     T get(Integer id);
     

@@ -26,6 +26,7 @@ import com.example.restservice.services.CustomerService;
 		)
 @EntityScan(basePackages = {"com.example.restservice.models"})
 public class AppConfig {
+	
 	@Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
             EntityManagerFactoryBuilder builder, DataSource dataSource, 

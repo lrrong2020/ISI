@@ -22,7 +22,7 @@ public class RestServiceApplication {
 //Just for try it
 	public static void main(String[] args) throws ClassNotFoundException {
 		
-		String url = "jdbc:sqlite:/D:\\2022-2023\\Some data\\demo\\demo\\src\\main\\resources/customer.db";
+		String url = "jdbc:sqlite:src\\main\\resources\\customer.db";
 		try {
             Connection conn = DriverManager.getConnection(url);
             if (conn != null) {

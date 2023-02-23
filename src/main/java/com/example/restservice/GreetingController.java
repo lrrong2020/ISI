@@ -3,6 +3,9 @@ package com.example.restservice;
 import com.example.restservice.Dao.Dao;
 import com.example.restservice.models.Customer;
 import com.example.restservice.services.CustomerService;
+//import com.sun.org.slf4j.internal.Logger;
+
+import jline.internal.Log;
 
 import java.util.List;
 import java.util.Map;
@@ -15,26 +18,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import lombok.extern.slf4j.Slf4j;
 @RestController
+@Slf4j
 public class GreetingController {
 	
 	
 	@Autowired
 	private CustomerService customerService;
 	
-	@GetMapping("/customer")
-	public List<Customer> getAllCustomers(){
-		return customerService.getAllCustomers();
-	}
+//	@GetMapping("/customer")
+//	public List<Customer> getAllCustomers(){
+//		return customerService.getAllCustomers();
+//	}
 	@GetMapping("/customer/:id")
+	
 	public Customer getCustomer(@RequestBody Integer id) {
+		Log.info("==========ID: " + id);
 		return customerService.getCustomer(id);
 	}
-	@PostMapping("/customer/add")
-	public String addCustomer(@RequestBody Customer customer) {
-		return customerService.addCustomer(customer);
-	}
+//	@PostMapping("/customer/add")
+//	public String addCustomer(@RequestBody Customer customer) {
+//		return customerService.addCustomer(customer);
+//	}
 	
     
     
