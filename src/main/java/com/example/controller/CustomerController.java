@@ -24,6 +24,7 @@ public class CustomerController {
 	@PostMapping("/customer/add")
 	public Customer addCustomer(@RequestParam(value = "customerName", defaultValue = "CustomerName") String customerName) {
 		Customer newCustomer = new Customer(customerName);
+		System.out.println(customerName);
 		customerService.addCustomer(newCustomer);
 		return newCustomer;
 	}
