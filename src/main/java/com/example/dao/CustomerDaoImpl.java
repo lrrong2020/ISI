@@ -227,6 +227,7 @@ public class CustomerDaoImpl {
 	public List<Customer> getAll(){
 		List<Customer> customerList = new ArrayList<Customer>();
 		for (Map.Entry<Integer, Customer> entry : customers.entrySet()) {
+			System.out.println("Entry value.getName(): " + entry.getValue().getCustomerName());
 			customerList.add(entry.getValue());
 		}
 		return customerList;
@@ -237,6 +238,9 @@ public class CustomerDaoImpl {
 	@Override
 	public void save(Customer customer) {
 		Integer fakeAutoGenerateId = this.generateKey();
+		
+		System.out.println("CustomerName in save(): " + customer.getCustomerName());
+		
 		customer.setCustomerId(fakeAutoGenerateId);
 		customers.put(fakeAutoGenerateId, customer);
 		
