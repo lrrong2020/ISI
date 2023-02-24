@@ -1,26 +1,29 @@
 package com.example.model;
 
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.Id;
-//import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-//@Entity
-//@Table(name = "customer_table")
+
+@Entity
+
 public class Customer {
-//	@Id
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	
 	private Integer customerId;
 
-//	@Column
+	
 	private String customerName;
 
-//	@Column
+	
 	private String customerEmail;
 
-//	@Column
+	
 	private String customerPassword;
 
-//	@Column
+	
 	private String shippingAddress;
 
 	public Customer() {
