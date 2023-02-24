@@ -1,9 +1,13 @@
 <template>
     <div>
         <button @click="getPosts">Show Posts</button>
+        data:
     <div v-for="item in dataJson" :key="dataJson.num">
-        <p>{{ item.num }} | {{ item.price }} | {{ item.desc }} | {{ item.title }} | {{ item.thumb }}</p>
+         <!-- <p>{{ item.num }} | {{ item.price }} | {{ item.desc }} | {{ item.title }} | {{ item.thumb }}</p> -->
+         <p>{{ item.customerId }} | {{ item.customerName }}</p>
     </div>    
+
+    Errors: {{errors}}
             
         
     </div>
@@ -17,6 +21,7 @@ export default {
     data(){
         return {
            dataJson:[],
+           errors:"",
         }
     },
     mounted() {
@@ -26,17 +31,34 @@ export default {
 
          //setTimeOut may be added to simulate network congestion
 
-         loadData()
-            .then((res) =>{
-                console.log("Successfully fetched the data: ");
-                console.log(res);
+        //  loadData()
+        //     .then((res) =>{
+        //         console.log("Successfully fetched the data: ");
+        //         console.log(res);
 
-                //store the data to the local variable
-                this.dataJson = res;
+        //         //store the data to the local variable
+        //         this.dataJson = res;
 
-                //if(res.status.code == “404”)
+        //         //if(res.status.code == “404”)
 
-                //
+        //         //
+        //     });
+
+        console.log("I am herererererererer");
+        fetch('http://localhost:8080/customer/all')
+            .then((response) => {
+                console.log("response: ");
+                console.log(response.json);
+                return response.json()
+            })
+            .then((data) => {
+                console.log("=======================================");
+                console.log(data);
+                this.dataJson = data;
+            }).catch((err) => {
+                console.log("error occurred");
+                console.log(err.stack);
+                this.errors = err.stack;
             });
 
     },
