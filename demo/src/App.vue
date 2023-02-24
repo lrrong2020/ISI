@@ -21,7 +21,7 @@ export default {
 
 <template>
 <!--Top NavBar-->
-  <van-nav-bar fixed placeholder title="标题" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
+  <van-nav-bar fixed placeholder title="Title" left-text="Back" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
     <template #right>
       <van-icon name="search" size="18" />
     </template>
@@ -29,8 +29,7 @@ export default {
 
 <!--RouterView-->
   <router-view></router-view>
-
-  
+ 
 <!--Tabbar-->
   <van-tabbar placeholder height: v-model="active" @change="onChange" route>
     <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>

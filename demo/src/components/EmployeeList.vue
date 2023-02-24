@@ -5,6 +5,7 @@
     <div v-for="item in dataJson" :key="dataJson.num">
          <!-- <p>{{ item.num }} | {{ item.price }} | {{ item.desc }} | {{ item.title }} | {{ item.thumb }}</p> -->
          <p>{{ item.customerId }} | {{ item.customerName }}</p>
+
     </div>    
 
     Errors: {{errors}}
@@ -24,25 +25,12 @@ export default {
            errors:"",
         }
     },
-    mounted() {
-
-         //pretend to load data from the api, may rewrite later on   
-         const loadData = () => Promise.resolve(Object.values(data));
-
-         //setTimeOut may be added to simulate network congestion
-
-        //  loadData()
-        //     .then((res) =>{
-        //         console.log("Successfully fetched the data: ");
-        //         console.log(res);
-
-        //         //store the data to the local variable
-        //         this.dataJson = res;
-
-        //         //if(res.status.code == “404”)
-
-        //         //
-        //     });
+    mounted(){
+        this.axios.get('https://jsonplaceholder.typicode.com/users')
+        .then((res) => {
+            // console.log(res.data)
+            // this.dataJson = res.data
+        })
 
         console.log("I am herererererererer");
         fetch('http://localhost:8080/customer/all')
@@ -61,7 +49,8 @@ export default {
                 this.errors = err.stack;
             });
 
-    },
+    }
+    // },
     // methods: {
     //     getPosts() {
     //         fetch('https://jsonplaceholder.typicode.com/todos/1')
