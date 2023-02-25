@@ -3,7 +3,10 @@
         <button @click="getPosts">Show Posts</button>
     <div v-for="item in dataJson" :key="dataJson.id" style="font-size: small;">
         <p>{{ item.id }} | {{ item.name }} | {{ item.username }} | {{ item.email }} | {{ item.address }}</p>
+
     </div>    
+
+    Errors: {{errors}}
             
         
     </div>
@@ -17,36 +20,34 @@ export default {
     data(){
         return {
            dataJson:[],
+           errors:"",
         }
     },
     mounted(){
         this.axios.get('https://jsonplaceholder.typicode.com/users')
         .then((res) => {
-            console.log(res.data)
-            this.dataJson = res.data
+            // console.log(res.data)
+            // this.dataJson = res.data
         })
+
+        console.log("I am herererererererer");
+        fetch('http://localhost:8080/customer/all')
+            .then((response) => {
+                console.log("response: ");
+                console.log(response.json);
+                return response.json()
+            })
+            .then((data) => {
+                console.log("=======================================");
+                console.log(data);
+                this.dataJson = data;
+            }).catch((err) => {
+                console.log("error occurred");
+                console.log(err.stack);
+                this.errors = err.stack;
+            });
+
     }
-//fetch method
-    // mounted() {
-
-    //      //pretend to load data from the api, may rewrite later on   
-    //      const loadData = () => Promise.resolve(Object.values(data));
-
-    //      //setTimeOut may be added to simulate network congestion
-
-    //      loadData()
-    //         .then((res) =>{
-    //             console.log("Successfully fetched the data: ");
-    //             console.log(res);
-
-    //             //store the data to the local variable
-    //             this.dataJson = res;
-
-    //             //if(res.status.code == “404”)
-
-    //             //
-    //         });
-
     // },
     // methods: {
     //     getPosts() {
