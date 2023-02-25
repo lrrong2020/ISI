@@ -1,13 +1,10 @@
 <script>
 import product from "@/product.js"
-import EmployeeList from '@/components/EmployeeList.vue';
 import data from '@/product.json'
 
 export default {
   name: "Home",
-  components: {
-    EmployeeList,
-  },
+  components: {},
   data () {
     return {
       items: product.items,
@@ -59,8 +56,6 @@ export default {
       </template>
     </van-card>
 
-    <!--Test-->
-    <employee-list />
 
     <!--Get data from .js-->
     <van-card
