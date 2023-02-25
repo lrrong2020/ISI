@@ -11,7 +11,7 @@ import '@vant/touch-emulator';
 
 //Vant
 import { ConfigProvider,Button,Tabbar,TabbarItem,NavBar,Icon,Card,ContactCard,Row,Form, 
-Field,CellGroup,Tag } from 'vant';
+Field,CellGroup,Tag} from 'vant';
 
 const app = createApp(App)
 

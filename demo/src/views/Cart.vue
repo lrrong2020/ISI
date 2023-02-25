@@ -7,7 +7,7 @@ export default {
 
 <template>
     <div style="background-color: aqua;">
-      <h1>Shopping Cart</h1>
+      <h1 style="font-size: large;">Shopping Cart</h1>
     </div>
 </template>
   

@@ -1,7 +1,7 @@
 <template>
     <div>
         <button @click="getPosts">Show Posts</button>
-    <div v-for="item in dataJson" :key="dataJson.id">
+    <div v-for="item in dataJson" :key="dataJson.id" style="font-size: small;">
         <p>{{ item.id }} | {{ item.name }} | {{ item.username }} | {{ item.email }} | {{ item.address }}</p>
     </div>    
             

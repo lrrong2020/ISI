@@ -21,6 +21,21 @@ export default {
       onSubmit,
     };
   },
+  methods: {
+    async signUp() {
+      let result = await this.axios.post('http://localhost:3000/users', {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        address: this.address,
+      });
+      console.log(result);
+      if (result.status === 201) {
+        alert("Sign Up Success");
+        localStorage.setItem("user-info", JSON.stringify(result.data));
+      }
+    },
+  },
 };
 </script>
 
@@ -75,7 +90,7 @@ export default {
         />
         </van-cell-group>
         <div style="margin: 16px;">
-          <van-button round block type="primary" native-type="submit">
+          <van-button round block type="primary" native-type="submit" @click="signUp">
             Sign Up
           </van-button>
         </div>
