@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dao.CustomerDao;
-import com.example.dao.CustomerDaoImpl;
-import com.example.dao.Dao;
 import com.example.model.Customer;
 
 @Service
@@ -25,7 +23,7 @@ public class CustomerService {
 	
 	public Customer getCustomer(Integer customerId) 
 	{
-		 Customer customer = dao.findById(customerId).orElse(null);
+		 	Customer customer = dao.findById(customerId).orElse(null);
 		    if (customer != null) {
 		        Hibernate.initialize(customer);
 		    }
@@ -36,9 +34,22 @@ public class CustomerService {
 		return dao.findAll();
 	}
 	
-	//public void updateCustomer(Customer customer, String[]params) {
-	//	customerDao.update(customer, params);
-	//}
+	public Customer updateCustomer(Integer customerId, Customer customer) {
+		Customer existCustomer = dao.findById(customerId).orElse(null);
+	    if (existCustomer != null) {
+	        Hibernate.initialize(existCustomer);
+	    }
+	    if (customer.getCustomerName()!=null)
+	    	existCustomer.setCustomerName(customer.getCustomerName());
+		if (customer.getCustomerEmail()!=null)
+			existCustomer.setCustomerEmail(customer.getCustomerEmail());
+		if(customer.getCustomerPassword()!=null)
+			existCustomer.setCustomerPassword(customer.getCustomerPassword());
+		if(customer.getShippingAddress()!=null)
+			existCustomer.setShippingAddress(customer.getShippingAddress());
+		dao.save(existCustomer);
+		return existCustomer;
+	}
 	
 	public String deleteCustomer(Customer customer) {
 		dao.delete(customer);

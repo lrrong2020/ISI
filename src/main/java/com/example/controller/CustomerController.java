@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,31 +17,37 @@ import com.example.model.Customer;
 import com.example.service.CustomerService;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
+@RequestMapping("/customer")
 public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
 	
-	@PostMapping("/customer/add")
+	@PostMapping("/add")
 	public Customer addCustomer(@RequestBody Customer customer) {
 		customerService.addCustomer(customer);
 		return customer;
 	}
 	
-	@GetMapping("/customer/{customerId}")
+	@GetMapping("/{customerId}")
 	public Customer getCustomer(@PathVariable Integer customerId) {
 		return customerService.getCustomer(customerId);
 	}
 	
-	@GetMapping("/customer/all")
+	@GetMapping("/all")
 	public List<Customer> getAllCustomer() {
 		return customerService.getAllCustomers();
 	}
 	
-	@PostMapping("/customer/{customerId}/delete") 
+	@PostMapping("/{customerId}/delete") 
 	public void deleteCustomer(@PathVariable int customerId){
 		Customer customer = customerService.getCustomer(customerId);
 		customerService.deleteCustomer(customer);	
+	}
+	
+	@PostMapping("/{customerId}")
+	public Customer updateCustomer(@PathVariable Integer customerId, @RequestBody Customer customer) {
+		return customerService.updateCustomer(customerId, customer);
 	}
 	
 	/*@PostMapping("/customer/add")
