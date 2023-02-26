@@ -2,8 +2,6 @@
 export default {
   name: "Account",
   components: {},
-  setup() {
-  },
 };
 </script>
 
