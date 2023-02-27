@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/home/index.vue'
+import Home from '@/views/home/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,23 +7,37 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/home/index.vue')
+      components: {
+        default: Home,
+        Footer: () => import('@/components/Footer.vue'),
+      }
     },
     
     {
       path: '/cart',
       name: 'cart',
-      component: () => import('../views/cart/index.vue')
+      components: {
+        default: () => import('@/views/cart/index.vue'),
+        Footer: () => import('@/components/Footer.vue'),
+      }
     },
+
     {
       path: '/order',
       name: 'order',
-      component: () => import('../views/order/index.vue')
+      components: {
+        default: () => import('@/views/order/index.vue'),
+        Footer: () => import('@/components/Footer.vue'),
+      } 
     },
+
     {
       path: '/account',
       name: 'account',
-      component: () => import('../views/account/index.vue')
+      components: {
+        default: () => import('@/views/account/index.vue'),
+        Footer: () => import('@/components/Footer.vue'),
+      } 
     },
     
   ]
