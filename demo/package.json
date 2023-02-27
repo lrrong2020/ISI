@@ -13,6 +13,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
+    "amfe-flexible": "^2.2.1",
+    "postcss-pxtorem": "^6.0.0",
     "vite": "^4.1.3"
   }
 }
