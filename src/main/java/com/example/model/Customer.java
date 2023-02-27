@@ -29,6 +29,7 @@ public class Customer {
 	private String shippingAddress;
 
 	public Customer() {
+		
 	}
 
 	public Customer(int customerId, String customerName, String customerEmail, String customerPassword,

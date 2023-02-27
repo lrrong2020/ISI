@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dao.PurchaseOrderDao;
+import com.example.model.Customer;
 import com.example.model.Product;
 import com.example.model.PurchaseOrder;
 
@@ -44,7 +45,10 @@ public class PurchaseOrderService {
 	    	existOrder.setTotalAmount(order.getTotalAmount());
 	    if(order.getShipmentDate()!=null && existOrder.getStatus()=="shipped")
 	    	existOrder.setShipmentDate(order.getShipmentDate());
-	    if(order.getCustomer()!=null)
+	    if(order.getCustomer()!=null) {
+	    	Customer customer = order.getCustomer();
+	    	//if(customer.)
+	    }
 	    	existOrder.setCustomer(order.getCustomer());
 	    
 	    return existOrder;

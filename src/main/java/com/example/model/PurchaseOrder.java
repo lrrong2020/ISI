@@ -3,6 +3,7 @@ package com.example.model;
 import java.sql.Date;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +16,7 @@ import jakarta.persistence.OneToMany;
 public class PurchaseOrder {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "purchase_order_number")
 	private long purchaseOrderNumber;
 	
 	private Date purchaseDate;
