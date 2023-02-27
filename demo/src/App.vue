@@ -20,6 +20,15 @@ import { RouterLink, RouterView } from 'vue-router'
   <div class="aaa">
     <p>AAA</p>
   </div>
+  <svg class="icon" aria-hidden="true">
+    <use xlink:href="#icon-adduser"></use>
+  </svg>
+  <svg class="icon" aria-hidden="true">
+    <use xlink:href="#icon-home"></use>
+  </svg>
+  <svg class="icon" aria-hidden="true">
+    <use xlink:href="#icon-cart"></use>
+  </svg>
 </template>
 
 <style scoped>
