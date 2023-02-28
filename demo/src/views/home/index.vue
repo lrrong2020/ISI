@@ -50,8 +50,11 @@ export default {
         overflow-y: auto;
         .header {
             background-image: linear-gradient(#9e0aee, #ffffff);
-            padding: 20px 20px 40px 20px;
+            // display: flex;
+            // justify-content: space-between;
+            // align-items: center;
             text-align: center;
+            padding: 20px 20px 40px 20px;
             .title {
                 font-size: 30px;
                 font-weight: 600;
@@ -60,7 +63,7 @@ export default {
         .main{
             margin-top: -30px;
             .bg{
-                background-image: linear-gradient(#ffffff, #ff5f5f);
+                background-color: #c9c9c9;
                 padding: 10px 20px 0px 20px;
                 border-radius: 30px 30px 0px 0px;
                 

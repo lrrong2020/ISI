@@ -1,16 +1,120 @@
 {
-  "posts": [
+  "products": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "num": "1",
+      "price": "1.00",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+      "id": 2,
+      "num": "2",
+      "price": "2.00",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+      "id": 3,
+      "num": "3",
+      "price": "3.00",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+      "id": 4,
+      "num": "4",
+      "price": "4.00",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+      "id": 5,
+      "num": "5",
+      "price": "5.00",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+      "id": 6,
+      "num": "6",
+      "price": "6.00",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+      "id": 7,
+      "num": "7",
+      "price": "7.00",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+    },
+    {
+      "id": 8,
+      "num": "8",
+      "price": "8.00",
+      "desc": "描述信息",
+      "title": "商品标题",
+      "thumb": "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
     }
   ],
-  "comments": [
+  "brands": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "name": "Apple",
+      "icon": "icon-apple"
+    },
+    {
+      "id": 2,
+      "name": "HuaWei",
+      "icon": "icon-huawei"
+    },
+    {
+      "id": 3,
+      "name": "Xiaomi",
+      "icon": "icon-xiaomi"
+    },
+    {
+      "id": 4,
+      "name": "Lenovo",
+      "icon": "icon-lenovo"
+    },
+    {
+      "id": 5,
+      "name": "Samsung",
+      "icon": "icon-samsung"
+    },
+    {
+      "id": 6,
+      "name": "Oppo",
+      "icon": "icon-oppo-fill-round"
+    },
+    {
+      "id": 7,
+      "name": "Vivo",
+      "icon": "icon-vivo-fill-round"
+    },
+    {
+      "id": 8,
+      "name": "Realme",
+      "icon": "icon-xiaomi1"
+    },
+    {
+      "id": 9,
+      "name": "Nokia",
+      "icon": "icon-nokia"
+    },
+    {
+      "id": 10,
+      "name": "Asus",
+      "icon": "icon-asus1193370easyiconnet"
     }
   ],
   "profile": {

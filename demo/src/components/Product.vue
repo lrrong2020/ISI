@@ -3,58 +3,45 @@ import { reactive,toRefs } from 'vue';
 
 export default {
     name: "Product",
-    setup() {
-      let data = reactive({
-        product: [
-            {
-                num: "2",
-                price: "3.00",
-                desc: "描述信息",
-                title: "商品标题",
-                thumb: "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg",
-            },
-            {
-                num: "3",
-                price: "13.00",
-                desc: "描述信息",
-                title: "商品标题",
-                thumb: "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg",
-            },
-            {
-                num: "4",
-                price: "15.00",
-                desc: "描述信息",
-                title: "商品标题",
-                thumb: "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg",
-            },
-            {
-                num: "5",
-                price: "6.00",
-                desc: "描述信息",
-                title: "商品标题",
-                thumb: "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg",
-            },
-            {
-                num: "6",
-                price: "334.00",
-                desc: "描述信息",
-                title: "商品标题",
-                thumb: "https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg",
-            }
-            
-        ]
-      });
-
-      return {
-        ...toRefs(data),
-      }
+    data() {
+        return {
+            products: [],
+        }
+    },
+    mounted() {
+        this.getProductList();
+    },
+    methods: {
+        getProductList() {
+            this.axios.get("http://localhost:3000/products").then((response) => {
+                this.products = response.data;
+                console.log(response.data)
+            })
+        }
     },
     
 }
 </script>
 
 <template>
-    Product
+   <van-card
+        v-for="item in products"
+        :key="item.id"
+        :num="item.num"
+        :price="item.price"
+        :desc="item.desc"
+        :title="item.title"
+        :thumb="item.thumb"
+        >
+        <template #tags>
+            <van-tag plain type="primary">tag1</van-tag>
+            <van-tag plain type="primary">tag2</van-tag>
+        </template>
+        <template #footer>
+            <van-button size="mini">Cart</van-button>
+            <van-button size="mini">Buy</van-button>
+        </template>
+    </van-card>
 </template>
 
 <style lang="less" scoped>
