@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { showToast } from 'vant';
 
 export default {
+  name: "Search",
   setup() {
     const value = ref('');
     const onSearch = (val) => showToast(val);

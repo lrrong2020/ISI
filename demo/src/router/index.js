@@ -39,6 +39,15 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       } 
     },
+    {
+      path: '/detail',
+      name: 'detail',
+      components: {
+        default: () => import('@/views/detail/index.vue'),
+        Header: () => import('@/components/Header.vue'),
+        DetailFooter: () => import('@/components/DetailFooter.vue'),
+      }
+    }
     
   ]
 })

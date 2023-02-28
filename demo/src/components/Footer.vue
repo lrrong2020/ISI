@@ -9,7 +9,7 @@ export default {
             tabbarHeight: '58px',
             tabbarItemIconSize: '35px',
             tabbarItemFontSize: '15px',
-            tabbarItemActiveColor: '#9e0aee',
+            tabbarItemActiveColor: '#7232dd',
         });
         return { 
             active,

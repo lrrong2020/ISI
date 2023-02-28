@@ -1,12 +1,12 @@
 <script>
 export default {
-    name: "Order", 
+    name: "Detail",
 }
 </script>
 
 <template>
     <div>
-        Order
+        Detail page
     </div>
 </template>
 

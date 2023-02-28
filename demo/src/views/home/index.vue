@@ -49,7 +49,7 @@ export default {
         flex: 1;
         overflow-y: auto;
         .header {
-            background-image: linear-gradient(#9e0aee, #ffffff);
+            background-image: linear-gradient(#7232dd, #ffffff);
             // display: flex;
             // justify-content: space-between;
             // align-items: center;
@@ -58,6 +58,7 @@ export default {
             .title {
                 font-size: 30px;
                 font-weight: 600;
+                font-family: "Comic Sans MS"
             }
         }
         .main{
