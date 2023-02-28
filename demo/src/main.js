@@ -11,7 +11,7 @@ import '@vant/touch-emulator';
 
 //Vant
 import { ConfigProvider,Button,Tabbar,TabbarItem,NavBar,Icon,Card,ContactCard,Row,Form, 
-Field,CellGroup,Tag } from 'vant';
+Field,CellGroup,Tag,Col} from 'vant';
 
 const app = createApp(App)
 
@@ -24,6 +24,6 @@ app.use(store)
 
 //Vant
 app.use(ConfigProvider).use(Button).use(Tabbar).use(TabbarItem).use(NavBar).use(Icon)
-.use(Card).use(ContactCard).use(Row).use(Form).use(Field).use(CellGroup).use(Tag);
+.use(Card).use(ContactCard).use(Row).use(Form).use(Field).use(CellGroup).use(Tag).use(Col);
 
 app.mount('#app')

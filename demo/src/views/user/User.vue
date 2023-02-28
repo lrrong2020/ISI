@@ -3,7 +3,6 @@ import { ref } from 'vue';
 
 export default {
   name: "User",
-
   components: {},
 
 };

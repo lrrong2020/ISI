@@ -2,12 +2,11 @@
 export default {
   name: "Account",
   components: {},
-  setup() {
-  },
 };
 </script>
 
 <template>
+<div>
   <van-button plain size="large" to="/login"
   icon="https://fastly.jsdelivr.net/npm/@vant/assets/user-active.png"
   type="primary">
@@ -19,6 +18,7 @@ export default {
   type="primary">
     Sign Up
   </van-button>
+</div>
 </template>
 
 <style>

@@ -7,47 +7,58 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      components: {
+        default: HomeView,
+        BottomNavBar: () => import('@/components/BottomNavBar.vue'),
+        TopNavBar: () => import('@/components/TopNavBar.vue'),
+      } 
     },
+
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('../views/NotFound.vue')
+    },
+
     {
       path: '/cart',
       name: 'cart',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Cart.vue')
+      components: {
+        default: () => import('../views/Cart.vue'),
+        BottomNavBar: () => import('@/components/BottomNavBar.vue'),
+        TopNavBar: () => import('@/components/TopNavBar.vue'),
+      }
     },
+
     {
       path: '/account',
       name: 'account',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Account.vue')
+      components: {
+        default: () => import('../views/Account.vue'),
+        BottomNavBar: () => import('@/components/BottomNavBar.vue'),
+        TopNavBar: () => import('@/components/TopNavBar.vue'),
+      }
     },
+
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/login/Login.vue'),
     },
+    
     {
       path: '/signup',
       name: 'signup',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/signup/SignUp.vue'),
     },
+    
     {
       path: '/user',
       name: 'user',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/user/User.vue'),
+      meta: {
+        requiresAuth: true,
+      }
     },
   ]
 })
