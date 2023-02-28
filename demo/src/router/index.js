@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Home from '@/views/home/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,58 +8,47 @@ const router = createRouter({
       path: '/',
       name: 'home',
       components: {
-        default: HomeView,
-        BottomNavBar: () => import('@/components/BottomNavBar.vue'),
-        TopNavBar: () => import('@/components/TopNavBar.vue'),
-      } 
+        default: Home,
+        Footer: () => import('@/components/Footer.vue'),
+      }
     },
-
-    {
-      path: '/:pathMatch(.*)*',
-      name: 'NotFound',
-      component: () => import('../views/NotFound.vue')
-    },
-
+    
     {
       path: '/cart',
       name: 'cart',
       components: {
-        default: () => import('../views/Cart.vue'),
-        BottomNavBar: () => import('@/components/BottomNavBar.vue'),
-        TopNavBar: () => import('@/components/TopNavBar.vue'),
+        default: () => import('@/views/cart/index.vue'),
+        Footer: () => import('@/components/Footer.vue'),
       }
+    },
+
+    {
+      path: '/order',
+      name: 'order',
+      components: {
+        default: () => import('@/views/order/index.vue'),
+        Footer: () => import('@/components/Footer.vue'),
+      } 
     },
 
     {
       path: '/account',
       name: 'account',
       components: {
-        default: () => import('../views/Account.vue'),
-        BottomNavBar: () => import('@/components/BottomNavBar.vue'),
-        TopNavBar: () => import('@/components/TopNavBar.vue'),
+        default: () => import('@/views/account/index.vue'),
+        Footer: () => import('@/components/Footer.vue'),
+      } 
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      components: {
+        default: () => import('@/views/detail/index.vue'),
+        Header: () => import('@/components/Header.vue'),
+        DetailFooter: () => import('@/components/DetailFooter.vue'),
       }
-    },
-
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/login/Login.vue'),
-    },
+    }
     
-    {
-      path: '/signup',
-      name: 'signup',
-      component: () => import('../views/signup/SignUp.vue'),
-    },
-    
-    {
-      path: '/user',
-      name: 'user',
-      component: () => import('../views/user/User.vue'),
-      meta: {
-        requiresAuth: true,
-      }
-    },
   ]
 })
 

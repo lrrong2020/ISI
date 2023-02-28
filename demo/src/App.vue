@@ -1,39 +1,31 @@
 <script>
-import { ref } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
 
-
 export default {
-  name: "App",
-  components: {},
-};
+  name: 'App',
+  components: {
+    RouterLink,
+    RouterView,
+  }
+}
 </script>
 
 <template>
-<div>
-<!--Top NavBar-->
-  <router-view class="topNav view" name="TopNavBar"></router-view>
+  <div>
+    <!--Header-->
+    <router-view class="view header" name="Header"></router-view>
 
-<!--RouterView-->
-  <router-view v-slot="{Component}">
-    <transition name="slide" mode="out-in">
-      <component :is="Component" />
-    </transition>
-  </router-view>
+    <!--Main-->
+    <router-view class="main view"></router-view>
 
-<!--Tabbar-->
-  <router-view class="bottomNav view" name="BottomNavBar"></router-view>
-</div>
+    <!--Footer-->
+    <router-view class="view footer" name="Footer"></router-view>
+
+    <!--DetailFooter-->
+    <router-view class="view detail-footer" name="DetailFooter"></router-view>
+  </div>
 </template>
 
-<style lang="css">
-.slide-enter-active,
-.slide-leave-active {
-  transition: opacity 1s, transform 1s;
-}
-.slide-enter-from,
-.slide-leave-to {
-  opacity: 0;
-  transform: translateX(-30%);
-}
+<style scoped>
+
 </style>

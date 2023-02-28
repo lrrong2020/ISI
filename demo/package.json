@@ -9,19 +9,19 @@
   },
   "dependencies": {
     "@vant/touch-emulator": "^1.4.0",
-    "amfe-flexible": "^2.2.1",
-    "axios": "^1.3.3",
-    "json-server": "^0.17.2",
-    "postcss-pxtorem": "^5.1.1",
+    "axios": "^1.3.4",
     "vant": "^4.0.11",
-    "vue": "^3.2.45",
+    "vue": "^3.2.47",
     "vue-axios": "^3.5.2",
-    "vue-router": "^4.1.6",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
+    "amfe-flexible": "^2.2.1",
+    "less": "^4.1.3",
+    "less-loader": "^11.1.0",
+    "postcss-pxtorem": "^6.0.0",
     "unplugin-vue-components": "^0.24.0",
-    "vite": "^4.0.0"
+    "vite": "^4.1.3"
   }
 }
