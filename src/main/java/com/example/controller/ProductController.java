@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Product;
@@ -23,6 +24,7 @@ public class ProductController {
 	
 	@PostMapping("/add")
 	public Product addProduct(@RequestBody Product product) {
+		
 		return productService.addProduct(product);
 	}
 	
@@ -45,6 +47,13 @@ public class ProductController {
 	public void deleteCustomer(@PathVariable long productId){
 		Product product = productService.getProduct(productId);
 		productService.deleteProduct(product);	
+	}
+	
+	@GetMapping("/")
+	public Product getProductByProductName(@RequestParam("productName") String productName) {
+		System.out.println("=======");
+		
+		return productService.getProductByName(productName);
 	}
 	
 	
