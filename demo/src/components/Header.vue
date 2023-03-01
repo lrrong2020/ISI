@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-    <van-config-provider :theme-vars="themeVars">
+    
         <van-nav-bar
         :border="false"
         title="Title"
@@ -20,7 +20,7 @@ export default {
         @click-left="onClickLeft"
         class="header"
         />
-    </van-config-provider> 
+   
 </template>
 
 <style lang="less" scoped>
