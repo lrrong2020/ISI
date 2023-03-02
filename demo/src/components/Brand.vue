@@ -13,7 +13,7 @@ export default {
     getBrandList() {
       this.axios.get("http://localhost:3000/brands").then((response) => {
         this.brands = response.data;
-        console.log(response.data)
+        // console.log(response.data)
       })
     }
   },

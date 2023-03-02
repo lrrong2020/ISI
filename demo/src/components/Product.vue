@@ -1,6 +1,7 @@
 <script>
 import { reactive } from 'vue';
 import { ref } from 'vue';
+import { mapState } from 'vuex';
 //Brand
 import Brand from '@/components/Brand.vue';
 
@@ -35,7 +36,6 @@ export default {
   //业务逻辑
   data() {
     return {
-      products: [],
       totalItems: 0,
       currentPage: 1,
       itemsPerPage: 5,
@@ -45,20 +45,29 @@ export default {
 
     }
   },
-  mounted() {
+  created() {
     this.getProductList();
   },
+  mounted() {
+ 
+  },
+  computed: {
+    ...mapState(['Product']),
+  },
   methods: {
-    // getDataFromStore() {
-    //     // this.$store.dispatch('products/getProducts', this.productStore);
-    //     // this.productStore = this.$store.state.products.products;
-    // },
+    
+
+    //getProductList from Store
     getProductList() {
-      this.axios.get("http://localhost:3000/fakeBackendProducts").then((response) => {
-        this.products = response.data;
-        console.log(response.data)
-      })
+       this.$store.dispatch('Product/getProductList');
+       console.log("1");
     },
+    //searchProduct
+    searchProduct() {
+      this.$store.dispatch('Product/searchProduct', this.searchValue);
+      console.log("2");
+    },
+
     toDetail() {
       this.$router.push('/detail')
     },
@@ -76,14 +85,22 @@ export default {
     onSearch(val) {
       showToast(val);
     },
-    onClickButton() {
-      console.log(this.searchValue);
-      this.axios.get("http://localhost:8080/product/search?productName=" + this.searchValue)
-      .then((response) => {
-        this.products = response.data;
-        console.log(response.data)
-      })
-    },
+
+    // getProductList() {
+    //   this.axios.get("http://localhost:3000/fakeBackendProducts").then((response) => {
+    //     this.products = response.data;
+    //     console.log(response.data)
+    //   })
+    // },
+
+    // onClickButton() {
+    //   console.log(this.searchValue);
+    //   this.axios.get("http://localhost:8080/product/search?productName=" + this.searchValue)
+    //   .then((response) => {
+    //     this.products = response.data;
+    //     console.log(response.data)
+    //   })
+    // },
   }, 
 }
 </script>
@@ -99,7 +116,7 @@ export default {
     @search="onSearch"
     >
     <template #action>
-      <div @click="onClickButton" class="button">Search</div>
+      <div @click="searchProduct" class="button">Search</div>
     </template>
   </van-search>
   <!--Brand-->
@@ -107,7 +124,7 @@ export default {
   <van-config-provider :theme-vars="themeVars">
   <!--全局样式-->
     <van-card
-      v-for="item in products.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
+      v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
       :key="item.productId"
       :num="5"
       :price="item.price"
@@ -123,7 +140,7 @@ export default {
       </template>
     </van-card>
     <!--Paging-->
-    <van-pagination v-model="currentPage" :total-items="products.length" 
+    <van-pagination v-model="currentPage" :total-items="Product.productList.length" 
     :show-page-size="5" :items-per-page="itemsPerPage" @change="pagechange">
       <template #prev-text>
           <van-icon name="arrow-left" />

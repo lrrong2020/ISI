@@ -89,6 +89,126 @@
       "property": "Black",
       "brand": "Huawei",
       "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+    },
+    {
+      "productId": 5,
+      "productName": "iPhone14",
+      "price": 5000,
+      "property": "Blue",
+      "brand": "Apple",
+      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+    },
+    {
+      "productId": 6,
+      "productName": "Xiaomi13",
+      "price": 6000,
+      "property": "White",
+      "brand": "Xiaomi",
+      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+    },
+    {
+      "productId": 7,
+      "productName":"HuaweiP40",
+      "price": 8000,
+      "property": "Black",
+      "brand": "Huawei",
+      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+    },
+    {
+      "productId": 8,
+      "productName": "iPhone14",
+      "price": 5000,
+      "property": "Blue",
+      "brand": "Apple",
+      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+    },
+    {
+      "productId": 9,
+      "productName": "Xiaomi13",
+      "price": 6000,
+      "property": "White",
+      "brand": "Xiaomi",
+      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+    },
+    {
+      "productId": 10,
+      "productName":"HuaweiP40",
+      "price": 8000,
+      "property": "Black",
+      "brand": "Huawei",
+      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+    },
+    {
+      "productId": 11,
+      "productName": "iPhone14",
+      "price": 5000,
+      "property": "Blue",
+      "brand": "Apple",
+      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+    },
+    {
+      "productId": 12,
+      "productName": "Xiaomi13",
+      "price": 6000,
+      "property": "White",
+      "brand": "Xiaomi",
+      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+    },
+    {
+      "productId": 13,
+      "productName":"HuaweiP40",
+      "price": 8000,
+      "property": "Black",
+      "brand": "Huawei",
+      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+    },
+    {
+      "productId": 14,
+      "productName": "iPhone14",
+      "price": 5000,
+      "property": "Blue",
+      "brand": "Apple",
+      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+    },
+    {
+      "productId": 15,
+      "productName": "Xiaomi13",
+      "price": 6000,
+      "property": "White",
+      "brand": "Xiaomi",
+      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+    },
+    {
+      "productId": 16,
+      "productName":"HuaweiP40",
+      "price": 8000,
+      "property": "Black",
+      "brand": "Huawei",
+      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+    },
+    {
+      "productId": 17,
+      "productName": "iPhone14",
+      "price": 5000,
+      "property": "Blue",
+      "brand": "Apple",
+      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+    },
+    {
+      "productId": 18,
+      "productName": "Xiaomi13",
+      "price": 6000,
+      "property": "White",
+      "brand": "Xiaomi",
+      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+    },
+    {
+      "productId": 19,
+      "productName":"HuaweiP40",
+      "price": 8000,
+      "property": "Black",
+      "brand": "Huawei",
+      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
     }
   ],
   "brands": [
