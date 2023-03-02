@@ -29,15 +29,35 @@ export default {
       },500);
     },
     //Search Product
+    // searchProduct(context,searchValue){
+    //   console.log(searchValue);
+    //   axios.get("http://localhost:8080/product/search?productName=" + searchValue)
+    //   .then((response)=>{
+    //     console.log(response.data);
+    //     context.commit('Search',response.data);
+    //   }).catch((error)=>{
+    //     alert(error.message);
+    //   });
+    // },
     searchProduct(context,searchValue){
-      console.log(searchValue);
-      axios.get("http://localhost:8080/product/search?productName=" + searchValue)
-      .then((response)=>{
-        console.log(response.data);
-        context.commit('Search',response.data);
-      }).catch((error)=>{
-        alert(error.message);
-      });
+    console.log(searchValue);
+    axios.get("http://localhost:8080/product/search?productName=" + searchValue)
+    .then((response)=>{
+      console.log("reponse.data in searchProduct()");
+      console.log(response.data); 
+      //see if the returned data type: array or object
+  
+  
+      //1. if it is a single object, then wrap it with an array
+      const responseDataArr = [];
+      responseDataArr.push(response.data);
+      console.log("responseDataArr");
+      console.log(responseDataArr);
+      context.commit('Search', responseDataArr); 
+      //2. else if it is an array, just commit data itself
+    }).catch((error)=>{
+      alert(error.message);
+    });
     },
   },
   getters: {

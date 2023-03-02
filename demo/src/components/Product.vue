@@ -81,6 +81,10 @@ export default {
       console.log(this.page);
       this.page = null;
     },
+    //After clear
+    showList() {
+      this.getProductList();
+    },
     //search
     onSearch(val) {
       showToast(val);
@@ -114,6 +118,7 @@ export default {
     background="#ffffff"
     placeholder="Type to search"
     @search="onSearch"
+    @clear="showList"
     >
     <template #action>
       <div @click="searchProduct" class="button">Search</div>
