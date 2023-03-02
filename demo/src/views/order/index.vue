@@ -1,13 +1,13 @@
 <script>
 export default {
-    name: "Order", 
+  name: "Order", 
 }
 </script>
 
 <template>
-    <div>
-        Order
-    </div>
+  <div>
+    Order
+  </div>
 </template>
 
 <style lang="less" scoped>
