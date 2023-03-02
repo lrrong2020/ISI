@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.model.Product;
 import com.example.service.ProductService;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -49,9 +49,9 @@ public class ProductController {
 		productService.deleteProduct(product);	
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/search")
 	public Product getProductByProductName(@RequestParam("productName") String productName) {
-		System.out.println("=======");
+		System.out.println("productname" + productName);
 		
 		return productService.getProductByName(productName);
 	}
