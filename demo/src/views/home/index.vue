@@ -2,6 +2,7 @@
 import Search from '@/components/Search.vue';
 import Brand from '@/components/Brand.vue';
 import Product from '@/components/Product.vue';
+import { showToast } from 'vant';
 
 export default {
     name: "Home",
@@ -10,7 +11,6 @@ export default {
         Brand,
         Product,
     },
-    
 };
 </script>
 <template>
@@ -24,12 +24,10 @@ export default {
             <div class="main">
                 <div class="bg">
                     <div class="search">
-                        <Search />
+                        <!-- <Search /> -->
                     </div>
                     <div class="sort">
-                        <div>
-                            <Brand />
-                        </div>
+                        <!-- <Brand /> -->
                     </div>
                     <div class="product">
                         <Product />

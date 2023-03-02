@@ -1,6 +1,8 @@
 <script>
 import { reactive } from 'vue';
 import { ref } from 'vue';
+//Brand
+import Brand from '@/components/Brand.vue';
 
 export default {
     name: "Product",
@@ -26,6 +28,10 @@ export default {
             themeVars,
         };
     },
+    //Brand
+    components: {
+        Brand,
+    },
     //业务逻辑
     data() {
         return {
@@ -34,6 +40,8 @@ export default {
             currentPage: 1,
             itemsPerPage: 5,
             page: null,
+            //search
+            searchValue: '',
 
         }
     },
@@ -60,12 +68,39 @@ export default {
             console.log(this.page);
             this.page = null;
         },
+        //search
+        onSearch(val) {
+            showToast(val);
+        },
+        onClickButton() {
+            console.log(this.searchValue);
+            this.axios.get("http://localhost:8080/product/search?productName=" + this.searchValue)
+            .then((response) => {
+                this.products = response.data;
+                console.log(response.data)
+            })
+        },
     },
     
 }
 </script>
 
 <template>
+    <!--Search-->
+    <van-search
+        v-model="searchValue"
+        show-action
+        shape="round"
+        background="#ffffff"
+        placeholder="Type to search"
+        @search="onSearch"
+        >
+            <template #action>
+                <div @click="onClickButton" class="button">Search</div>
+            </template>
+    </van-search>
+    <!--Brand-->
+    <Brand />   
     <van-config-provider :theme-vars="themeVars">
     <!--全局样式-->
         <van-card
