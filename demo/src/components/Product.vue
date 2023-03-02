@@ -58,7 +58,7 @@ export default {
             this.currentPage = page;
             this.getProductList();
             console.log(this.page);
-            this.page = '';
+            this.page = null;
         },
     },
     

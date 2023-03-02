@@ -7,7 +7,7 @@ export default {
   setup() {
     const value = ref('');
     const onSearch = (val) => showToast(val);
-    const onClickButton = () => showToast(value.value);
+    const onClickButton = () => { console.log(value.value) };
     return {
       value,
       onSearch,
