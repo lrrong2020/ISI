@@ -26,9 +26,9 @@ export default {
     placeholder="Type to search"
     @search="onSearch"
     >
-        <template #action>
-            <div @click="onClickButton" class="button">Search</div>
-        </template>
+      <template #action>
+        <div @click="onClickButton" class="button">Search</div>
+      </template>
     </van-search>
 </template>
 <style lang="less" scoped>

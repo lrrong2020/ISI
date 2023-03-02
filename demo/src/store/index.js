@@ -1,10 +1,12 @@
 import { createStore} from 'vuex'
-import Product from './modules/product'
-
+import Count from './modules/Count.js'
+import Product from './modules/Product.js'
 
 export default createStore({
+
   modules: {
-    products: Product,
-  },
+    C: Count,
+    Product: Product,
+  }
 
 })
