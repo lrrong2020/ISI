@@ -1,6 +1,7 @@
 <script>
 import { reactive } from 'vue';
 import { ref } from 'vue';
+import { toRaw } from 'vue';
 import { mapState } from 'vuex';
 //Brand
 import Brand from '@/components/Brand.vue';
@@ -42,7 +43,6 @@ export default {
       page: null,
       //search
       searchValue: '',
-
     }
   },
   created() {
@@ -65,7 +65,8 @@ export default {
     //searchProduct
     searchProduct() {
       this.$store.dispatch('Product/searchProduct', this.searchValue);
-      console.log("2");
+      // this.$store.dispatch('Product/getProductList');
+      console.log(`search Product: ${this.searchValue}`);
     },
 
     toDetail() {
@@ -90,6 +91,11 @@ export default {
       showToast(val);
     },
 
+    //clear
+    showList() {
+      this.getProductList();
+    },
+
     // getProductList() {
     //   this.axios.get("http://localhost:3000/fakeBackendProducts").then((response) => {
     //     this.products = response.data;
@@ -110,6 +116,7 @@ export default {
 </script>
 
 <template>
+
   <!--Search-->
   <van-search
     v-model="searchValue"
@@ -173,6 +180,10 @@ export default {
     </van-cell-group>
   <!--全局样式-->
   </van-config-provider>
+
+  <p>
+  {{ Product.errorMsg }}
+  </p>
 </template>
 
 <style lang="less" scoped>
