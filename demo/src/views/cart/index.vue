@@ -25,13 +25,17 @@ export default {
 
 <template>
     <div class="bg">
+        <!--TopTitle-->
         <van-nav-bar title="Cart" />
+        <!--NumberofItems-->
         <div>{{ number }}</div>
+        <!--IfEmptyCart-->
         <div class="empty" v-if="!number">
             <van-empty description="Your cart is empty!">
                 <van-button type="success" @click="toHome">Go to shop</van-button>
             </van-empty>
         </div>
+        <!--IfNotEmptyCart-->
         <div class="non-empty">
             <van-swipe-cell v-for="i in number" :key="i">
                 <van-card
@@ -47,6 +51,7 @@ export default {
                 </template>
             </van-swipe-cell>
         </div>
+        <!--AddandRemove-->
         <van-button type="success" @click="add">Add 1 item</van-button>
         <van-button type="danger" @click="remove">Remove 1 item</van-button>
     </div>

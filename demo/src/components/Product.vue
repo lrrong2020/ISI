@@ -13,14 +13,14 @@ export default {
         const themeVars = reactive({
             cardRadius: '20px',
             cardThumbSize: '150px',
-            cardThumbRadius: '20px',
+            cardThumbRadius: '0px',
             cardBackground: '#ffffff',
             cardPriceColor: '#ee0a24',
-            cardFontSize: '20px',
+            cardFontSize: '15px',
             cardTitleLineHeight: '50px',
             cardDescLineHeight: '50px',
-            cardPriceFontSize: '20px',
-            cardPriceIntegerFontSize: '30px',
+            cardPriceFontSize: '15px',
+            cardPriceIntegerFontSize: '25px',
             gridItemContentPadding: '0px',
         });
 
@@ -49,8 +49,12 @@ export default {
         this.getProductList();
     },
     methods: {
+        // getDataFromStore() {
+        //     // this.$store.dispatch('products/getProducts', this.productStore);
+        //     // this.productStore = this.$store.state.products.products;
+        // },
         getProductList() {
-            this.axios.get("http://localhost:3000/products").then((response) => {
+            this.axios.get("http://localhost:3000/fakeBackendProducts").then((response) => {
                 this.products = response.data;
                 console.log(response.data)
             })
@@ -105,12 +109,12 @@ export default {
     <!--全局样式-->
         <van-card
             v-for="item in products.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
-            :key="item.id"
-            :num="item.num"
+            :key="item.productId"
+            :num="5"
             :price="item.price"
-            :desc="item.desc"
-            :title="item.title"
-            :thumb="item.thumb"
+            :desc="item.brand"
+            :title="item.productName"
+            :thumb="item.url"
             @click="toDetail"
             class="card"
             >

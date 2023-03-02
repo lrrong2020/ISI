@@ -2,7 +2,6 @@
 import Search from '@/components/Search.vue';
 import Brand from '@/components/Brand.vue';
 import Product from '@/components/Product.vue';
-import { showToast } from 'vant';
 
 export default {
     name: "Home",
