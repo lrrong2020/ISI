@@ -56,6 +56,12 @@ public class ProductController {
 		return productService.getProductByName(productName);
 	}
 	
+	@GetMapping("/filter")
+	public Product getProductsByBrand(@RequestParam("brand") String brand) {
+		System.out.println("brand:" + brand);
+		
+		return productService.getProductsByBrand(brand);
+	}
 	
 
 }

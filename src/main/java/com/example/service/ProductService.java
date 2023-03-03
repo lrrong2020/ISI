@@ -81,6 +81,17 @@ public class ProductService {
 		
 		return product;
 	}
+
+	public Product getProductsByBrand(String brand) {
+		System.out.println("brand: " + brand);
+		
+		Product product = dao.findAllByProductBrand(brand);
+		
+		System.out.println("Found Product Id: " + product.getProductId());
+
+		
+		return product;
+	}
 	
 	
 	//filter by product brand

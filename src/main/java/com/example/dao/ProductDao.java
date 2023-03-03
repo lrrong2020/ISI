@@ -14,4 +14,9 @@ public interface ProductDao  extends JpaRepository<Product, Long>{
 	@Query("SELECT p FROM Product p WHERE " +
 			"p.productName LIKE :productName")
 	Product findByProductName(@Param("productName") String productName);
+
+	
+	@Query("SELECT p FROM Product p WHERE " +
+			"p.brand LIKE :brand")
+	Product findAllByProductBrand(@Param("brand") String brand);
 }
