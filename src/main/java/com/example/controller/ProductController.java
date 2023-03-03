@@ -57,7 +57,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/filter")
-	public Product getProductsByBrand(@RequestParam("brand") String brand) {
+	public List<Product> getProductsByBrand(@RequestParam("brand") String brand) {
 		System.out.println("brand:" + brand);
 		
 		return productService.getProductsByBrand(brand);

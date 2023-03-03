@@ -82,15 +82,17 @@ public class ProductService {
 		return product;
 	}
 
-	public Product getProductsByBrand(String brand) {
+	public List<Product> getProductsByBrand(String brand) {
 		System.out.println("brand: " + brand);
 		
-		Product product = dao.findAllByProductBrand(brand);
+		List<Product> products = dao.findAllByProductBrand(brand);
 		
-		System.out.println("Found Product Id: " + product.getProductId());
-
+		for(Product product: products) 
+		{
+			System.out.println("prodcut Name: " + product.getProductName());
+		}
 		
-		return product;
+		return products;
 	}
 	
 	
