@@ -101,6 +101,51 @@ export default {
         alert(error.message);
       });
     },
+
+    filterProductByBrand(context, brand){
+      console.log();
+
+      axios.get("http://127.0.0.1:8080/product/filter?brand=" + brand)
+      .then((response)=>{
+        console.log("reponse.data in filterProductByBrand()");
+        console.log(response.data);
+
+        //see if the returned data type: array or object
+        console.log("typeof response.data");
+
+        var typeOfResponseData = typeof response.data; 
+        console.log(typeOfResponseData)
+
+        // if(typeof response.data !== "array")
+        // {
+        
+        // //1. if it is a single object, then wrap it with an array
+        // const responseDataArr = [];
+        // responseDataArr.push(response.data);
+        // console.log("responseDataArr");
+        // console.log(responseDataArr);
+        // context.commit('SetProductList', responseDataArr);
+
+        // }
+
+        // else
+        // {
+          context.commit('SetProductList', response.data);
+
+        // }
+
+
+        //2. else if it is an array, just commit data itself
+        
+      }).catch((error)=>{
+        alert(error.message);
+      });
+
+      
+      context.commit();
+    },
+
+
   },
   getters: {
 

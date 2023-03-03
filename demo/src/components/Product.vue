@@ -69,6 +69,11 @@ export default {
       console.log(`search Product: ${this.searchValue}`);
     },
 
+    filterByBrand(event){
+      console.log(event.target.id);
+      this.$store.dispatch('Product/filterProductByBrand', event.target.id);
+    },
+
     toDetail() {
       this.$router.push('/detail')
     },
@@ -133,8 +138,25 @@ export default {
   </van-search>
   <!--Brand-->
   <Brand />   
+
+
+  <van-button size="small" type="primary" id="Xiaomi" @click="filterByBrand">
+          Xiaomi
+  </van-button>
+
+  <van-button size="small" type="primary" id="Huawei" @click="filterByBrand">
+          Huawei
+  </van-button>
+
+  <van-button size="small" type="primary" id="Apple" @click="filterByBrand">
+          Apple
+  </van-button>
+
   <van-config-provider :theme-vars="themeVars">
   <!--全局样式-->
+
+
+
     <van-card
       v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
       :key="item.productId"
