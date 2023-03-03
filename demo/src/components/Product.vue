@@ -43,6 +43,7 @@ export default {
       page: null,
       //search
       searchValue: '',
+      isFiltering: false,
     }
   },
   created() {
@@ -70,8 +71,24 @@ export default {
     },
 
     filterByBrand(event){
+      this.isFiltering = true;
+
+      console.log("this.isFiltering after filter: ");
+      console.log(this.isFiltering);
+
       console.log(event.target.id);
       this.$store.dispatch('Product/filterProductByBrand', event.target.id);
+
+    },
+
+    resetFilter(){
+      console.log("reset filter");
+      this.isFiltering = false;
+
+      console.log("this.isFiltering after reset: ");
+      console.log(this.isFiltering);
+
+      this.showList();
     },
 
     toDetail() {
@@ -150,6 +167,11 @@ export default {
 
   <van-button size="small" type="primary" id="Apple" @click="filterByBrand">
           Apple
+  </van-button>
+
+
+  <van-button plain hairline size="small" type="primary" id="Reset" @click="resetFilter" v-if="isFiltering">
+          Reset
   </van-button>
 
   <van-config-provider :theme-vars="themeVars">
