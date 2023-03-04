@@ -93,8 +93,8 @@ export default {
 
     //clear
     showList() {
-      this.getProductList();
-    },
+      this.getProductList();
+    },
 
     // getProductList() {
     //   this.axios.get("http://localhost:3000/fakeBackendProducts").then((response) => {
@@ -137,7 +137,7 @@ export default {
   <!--全局样式-->
     <van-card
       v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
-      :key="item.productId"
+      :key="item.id"
       :num="5"
       :price="item.price"
       :desc="item.brand"

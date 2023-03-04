@@ -54,7 +54,7 @@ export default {
     //Get ProductList from Backend
     getProductList(context){
       console.log("getProductList");    
-        axios.get("http://127.0.0.1:8080/product/all")
+        axios.get("http://localhost:3000/fakeBackendProducts")
         .then((response)=>{
           console.log("reponse.data in getProductList()");
           console.log(response.data);

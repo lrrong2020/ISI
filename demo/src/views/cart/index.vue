@@ -1,25 +1,33 @@
 <script>
+import { ref } from 'vue';
+import CheckOut from '../../components/CheckOut.vue';
 export default {
-  name: "Cart",
-  
-  data() {
-    return {
-      number: 0,
+    name: "Cart",
+    setup() {
+        const value = ref(1);
+        return { value };
+    },
+    data() {
+        return {
+            number: 0,
+        };
+    },
+    methods: {
+        add() {
+            this.number++;
+        },
+        remove() {
+            if (this.number > 0) {
+                this.number--;
+            }
+        },
+        toHome() {
+            this.$router.push({ path: "/" });
+        },
+    },
+    components: { 
+      CheckOut,
     }
-  },
-  methods: {
-    add() {
-      this.number++;
-    },
-    remove() {
-      if (this.number > 0) {
-        this.number--;
-      }
-    },
-    toHome() {
-      this.$router.push({ path: "/" });
-    },
-  }
 }
 </script>
 
@@ -45,7 +53,11 @@ export default {
         title="商品标题"
         class="goods-card"
         thumb="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
-        />
+        >
+          <template #footer>
+            <van-stepper v-model="value" />
+          </template>
+        </van-card>
         <template #right>
           <van-button square text="删除" type="danger" class="delete-button" @click="remove"/>
         </template>
@@ -54,6 +66,10 @@ export default {
     <!--AddandRemove-->
     <van-button type="success" @click="add">Add 1 item</van-button>
     <van-button type="danger" @click="remove">Remove 1 item</van-button>
+    <!--CheckOut-->
+    <div>
+      <CheckOut v-if="number"/>
+    </div>
   </div>
 </template>
 

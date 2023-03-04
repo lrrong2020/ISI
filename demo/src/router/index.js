@@ -39,6 +39,23 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       } 
     },
+
+    {
+      path: '/login',
+      name: 'login',
+      components: {
+        default: () => import('@/views/account/Login.vue'),
+      } 
+    },
+
+    {
+      path: '/signup',
+      name: 'signup',
+      components: {
+        default: () => import('@/views/account/SignUp.vue'),
+      } 
+    },
+
     {
       path: '/detail',
       name: 'detail',

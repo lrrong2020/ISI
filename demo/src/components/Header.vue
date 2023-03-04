@@ -22,7 +22,5 @@ export default {
 </template>
 
 <style lang="less" scoped>
-.header {
-  background-image: linear-gradient(#7232dd, #ffffff);
-}
+
 </style>

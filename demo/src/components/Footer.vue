@@ -22,7 +22,7 @@ export default {
 <template>
   <div>
     <van-config-provider :theme-vars="themeVars">
-      <van-tabbar placeholder height: v-model="active" route>
+      <van-tabbar placeholder v-model="active" route>
         <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>
         <van-tabbar-item replace to="/cart" icon="shopping-cart-o">Cart</van-tabbar-item>
         <van-tabbar-item replace to="/order" icon="orders-o">Order</van-tabbar-item>

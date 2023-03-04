@@ -1,10 +1,8 @@
 <script>
-import CountVuex from "@/components/CountVuex.vue";
 import { mapState } from "vuex";
 export default {
   name: "Account",
   components: {
-    CountVuex,
   },
   computed: {
     ...mapState(["Product"]),
@@ -15,10 +13,18 @@ export default {
 
 <template>
   <div>
-    Account
-    <CountVuex />
-    <div>{{ Product.productList.length }}</div>
-  </div>
+    <van-button plain size="large" to="/login"
+    icon="https://fastly.jsdelivr.net/npm/@vant/assets/user-active.png"
+    type="primary">
+      Login
+    </van-button>
+
+    <van-button plain size="large" to="/signup"
+    icon="https://fastly.jsdelivr.net/npm/@vant/assets/user-active.png"
+    type="primary">
+      Sign Up
+    </van-button>
+</div>
 </template>
 
 <style lang="less" scoped>

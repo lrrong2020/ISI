@@ -12,17 +12,23 @@ export default {
 
 <template>
   <div>
-    <!--Header-->
-    <router-view class="view header" name="Header"></router-view>
-
-    <!--Main-->
-    <router-view class="main view"></router-view>
-
-    <!--Footer-->
-    <router-view class="view footer" name="Footer"></router-view>
-
-    <!--DetailFooter-->
-    <router-view class="view detail-footer" name="DetailFooter"></router-view>
+    <div>
+      <!--Header-->
+      <router-view class="view header" name="Header"></router-view>
+    </div>
+    <div>
+      <!--Main-->
+      <router-view class="main view"></router-view>
+    </div>
+    <div>
+      <!--Footer-->
+      <router-view class="view footer" name="Footer"></router-view>
+    </div>
+    <div>
+      <!--DetailFooter-->
+      <router-view class="view detail-footer" name="DetailFooter"></router-view>
+    </div>
+    
   </div>
 </template>
 
