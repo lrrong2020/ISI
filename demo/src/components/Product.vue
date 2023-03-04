@@ -43,6 +43,7 @@ export default {
       page: null,
       //search
       searchValue: '',
+      isFiltering: false,
     }
   },
   created() {
@@ -67,6 +68,27 @@ export default {
       this.$store.dispatch('Product/searchProduct', this.searchValue);
       // this.$store.dispatch('Product/getProductList');
       console.log(`search Product: ${this.searchValue}`);
+    },
+
+    filterByBrand(event){
+      this.isFiltering = true;
+
+      console.log("this.isFiltering after filter: ");
+      console.log(this.isFiltering);
+
+      console.log(event.target.id);
+      this.$store.dispatch('Product/filterProductByBrand', event.target.id);
+
+    },
+
+    resetFilter(){
+      console.log("reset filter");
+      this.isFiltering = false;
+
+      console.log("this.isFiltering after reset: ");
+      console.log(this.isFiltering);
+
+      this.showList();
     },
 
     toDetail() {
@@ -133,8 +155,30 @@ export default {
   </van-search>
   <!--Brand-->
   <Brand />   
+
+
+  <van-button size="small" type="primary" id="Xiaomi" @click="filterByBrand">
+          Xiaomi
+  </van-button>
+
+  <van-button size="small" type="primary" id="Huawei" @click="filterByBrand">
+          Huawei
+  </van-button>
+
+  <van-button size="small" type="primary" id="Apple" @click="filterByBrand">
+          Apple
+  </van-button>
+
+
+  <van-button plain hairline size="small" type="primary" id="Reset" @click="resetFilter" v-if="isFiltering">
+          Reset
+  </van-button>
+
   <van-config-provider :theme-vars="themeVars">
   <!--全局样式-->
+
+
+
     <van-card
       v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
       :key="item.id"
