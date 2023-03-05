@@ -1,33 +1,37 @@
 <script>
 import { ref } from 'vue';
-import CheckOut from '../../components/CheckOut.vue';
+import { mapState } from 'vuex';
+
 export default {
     name: "Cart",
-    setup() {
-        const value = ref(1);
-        return { value };
-    },
     data() {
         return {
             number: 0,
+            numItem: 1,
         };
     },
-    methods: {
-        add() {
-            this.number++;
-        },
-        remove() {
-            if (this.number > 0) {
-                this.number--;
-            }
-        },
-        toHome() {
-            this.$router.push({ path: "/" });
-        },
+    created() {
+      this.$store.dispatch('Cart/getCartItems');
     },
-    components: { 
-      CheckOut,
-    }
+    computed: {
+      ...mapState(['Cart']),
+    },
+    methods: {
+      deleteCartItem(item) {
+        this.$store.dispatch('Cart/deleteCartItem', item);
+      },
+      add() {
+          this.number++;
+      },
+      remove() {
+          if (this.number > 0) {
+              this.number--;
+          }
+      },
+      toHome() {
+          this.$router.push({ path: "/" });
+      },
+    },
 }
 </script>
 
@@ -36,30 +40,30 @@ export default {
     <!--TopTitle-->
     <van-nav-bar title="Cart" />
     <!--NumberofItems-->
-    <div>{{ number }}</div>
+    <div>{{ Cart.CartTotal }}</div>
     <!--IfEmptyCart-->
-    <div class="empty" v-if="!number">
+    <div class="empty" v-if="!Cart.CartTotal">
       <van-empty description="Your cart is empty!">
         <van-button type="success" @click="toHome">Go to shop</van-button>
       </van-empty>
     </div>
     <!--IfNotEmptyCart-->
     <div class="non-empty">
-      <van-swipe-cell v-for="i in number" :key="i">
+      <van-swipe-cell v-for="item in Cart.Cart" :key="item">
         <van-card
-        num="2"
-        price="2.00"
-        desc="描述信息"
-        title="商品标题"
         class="goods-card"
-        thumb="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
+        :num="item.quantity"
+        :price="item.price"
+        :desc="item.brand"
+        :title="item.productName"
+        :thumb="item.url[0]"
         >
           <template #footer>
-            <van-stepper v-model="value" />
+            <van-stepper v-model="numItem" />
           </template>
         </van-card>
         <template #right>
-          <van-button square text="删除" type="danger" class="delete-button" @click="remove"/>
+          <van-button square text="删除" type="danger" class="delete-button" @click="deleteCartItem(item.id)"/>
         </template>
       </van-swipe-cell>
     </div>
@@ -67,8 +71,10 @@ export default {
     <van-button type="success" @click="add">Add 1 item</van-button>
     <van-button type="danger" @click="remove">Remove 1 item</van-button>
     <!--CheckOut-->
-    <div>
-      <CheckOut v-if="number"/>
+    <div v-if="Cart.CartTotal">
+      <van-submit-bar :price="3050" button-text="Submit Order" @submit="onSubmit">
+        <van-checkbox>Select All</van-checkbox>
+      </van-submit-bar>
     </div>
   </div>
 </template>

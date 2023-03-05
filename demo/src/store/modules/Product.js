@@ -79,7 +79,7 @@ export default {
     searchProduct(context,searchValue){
 
       console.log(searchValue);
-      axios.get("http://127.0.0.1:8080/product/search?productName=" + searchValue)
+      axios.get(`http://127.0.0.1:8080/product/search?productName=${searchValue}`)
       .then((response)=>{
         console.log("reponse.data in searchProduct()");
         console.log(response.data);

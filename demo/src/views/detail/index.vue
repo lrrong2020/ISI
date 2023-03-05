@@ -1,44 +1,88 @@
 <script>
 import { ref } from 'vue';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+import { mapState } from 'vuex';
 
 export default {
   name: "Detail",
   setup() {
     const active = ref(0);
 
-    const text = 'Vant is lightweight, customizable and customizable, 2017 at present. . . Official official official official vue 2 vue 2 vue 3 vue 3 vue 3 version version version version version WeChat WeChat applet';
-    return { text,active };
+    return { active };
   },
+  data() {
+    return {
+      // id: '',
+      Detail: {},
+    }
+  },
+  created() {
+    // this.id = this.$route.params.id;
+    this.getDetail();
+    this.getCartItems();
+  },
+  // mounted() {
+  //   console.log(this.Detail);
+  // },
+  computed: {
+    ...mapState(['Cart']),
+  },
+  methods: {
+    getDetail() {
+      axios.get(`http://localhost:3000/fakeBackendProducts/${this.$route.params.id}`).then((response) => {
+        this.Detail = response.data;
+      })
+    },
+    //Cart
+    getCartItems() {
+      this.$store.dispatch('Cart/getCartItems');
+    },
+    addCartItem() {
+      this.$store.dispatch('Cart/addCartItem', this.Detail);
+    },
+    goToCart() {
+      this.$router.push({ name: 'Cart' });
+    },
+  }
 }
 </script>
 
 <template>
   <div class="bg">
     <div class="swipe">
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item>1</van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
+      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#1989fa">
+        <van-swipe-item v-for="img in this.Detail.url" :key="img">
+          <img :src="img" height="250" width="250" style="padding-top: 40px;">
+        </van-swipe-item>
       </van-swipe>
     </div>
     <div class="main">
       <div class="price">
-        <p><van-tag plain type="danger">Price</van-tag> $1000</p>
+        <p><van-tag plain type="danger">Price</van-tag> ${{this.Detail.price}}</p>
       </div>
       <div class="name">
-        <p> Product Name</p>
+        <p>{{ this.Detail.productName }}</p>
       </div>
       <div class="desc">
-        <p><van-tag plain type="primary">Brand</van-tag>{{ text }}</p>
+        <p><van-tag plain type="primary">{{ this.Detail.brand }}</van-tag>{{ this.Detail.productName }}</p>
       </div>
     </div>
     <div class="prop">
       <van-tabs v-model:active="active" swipeable>
         <van-tab v-for="index in 3" :title="'Prop' + index">
-          Prop {{ index }}
+          {{ this.Detail.property }} {{ index }}
         </van-tab>
       </van-tabs>
+    </div>
+    <div class="footer">
+      <van-action-bar>
+        <van-action-bar-icon icon="chat-o" text="客服" />
+        <van-action-bar-icon icon="cart-o" text="Cart" @click="goToCart" :badge="!Cart.CartTotalQuantity ? '' : Cart.CartTotalQuantity"/>
+        <van-action-bar-button color="#be99ff" type="warning" text="Add to Cart" @click="addCartItem"/>
+        <van-action-bar-button color="#7232dd" type="danger" text="Buy Now" @click="onClickButtonBuy"/>
+      </van-action-bar>
     </div>
   </div>
 </template>
@@ -46,11 +90,10 @@ export default {
 <style lang="less" scoped>
 .bg{
     .my-swipe .van-swipe-item {
-    color: #fff;
     font-size: 20px;
     line-height: 150px;
     text-align: center;
-    background-color: #39a9ed;
+    background-color: #ff0000a8;
   }
   .main{
     border-radius: 15px;

@@ -72,7 +72,12 @@
       "price": 5000,
       "property": "Blue",
       "brand": "Apple",
-      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      "url": [
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      ],
+      "quantity": 2
     },
     {
       "id": 3,
@@ -80,15 +85,25 @@
       "price": 6000,
       "property": "White",
       "brand": "Xiaomi",
-      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      "url": [
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      ],
+      "quantity": 3
     },
     {
       "id": 4,
-      "productName":"HuaweiP40",
+      "productName": "HuaweiP40",
       "price": 8000,
       "property": "Black",
       "brand": "Huawei",
-      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      "url": [
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 5,
@@ -96,7 +111,12 @@
       "price": 5000,
       "property": "Blue",
       "brand": "Apple",
-      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      "url": [
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      ],
+      "quantity": 5
     },
     {
       "id": 6,
@@ -104,15 +124,25 @@
       "price": 6000,
       "property": "White",
       "brand": "Xiaomi",
-      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      "url": [
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 7,
-      "productName":"HuaweiP40",
+      "productName": "HuaweiP40",
       "price": 8000,
       "property": "Black",
       "brand": "Huawei",
-      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      "url": [
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 8,
@@ -120,7 +150,12 @@
       "price": 5000,
       "property": "Blue",
       "brand": "Apple",
-      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      "url": [
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      ],
+      "quantity": 5
     },
     {
       "id": 9,
@@ -128,15 +163,25 @@
       "price": 6000,
       "property": "White",
       "brand": "Xiaomi",
-      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      "url": [
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 10,
-      "productName":"HuaweiP40",
+      "productName": "HuaweiP40",
       "price": 8000,
       "property": "Black",
       "brand": "Huawei",
-      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      "url": [
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 11,
@@ -144,7 +189,12 @@
       "price": 5000,
       "property": "Blue",
       "brand": "Apple",
-      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      "url": [
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      ],
+      "quantity": 5
     },
     {
       "id": 12,
@@ -152,15 +202,25 @@
       "price": 6000,
       "property": "White",
       "brand": "Xiaomi",
-      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      "url": [
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 13,
-      "productName":"HuaweiP40",
+      "productName": "HuaweiP40",
       "price": 8000,
       "property": "Black",
       "brand": "Huawei",
-      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      "url": [
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 14,
@@ -168,7 +228,12 @@
       "price": 5000,
       "property": "Blue",
       "brand": "Apple",
-      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      "url": [
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      ],
+      "quantity": 5
     },
     {
       "id": 15,
@@ -176,15 +241,25 @@
       "price": 6000,
       "property": "White",
       "brand": "Xiaomi",
-      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      "url": [
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 16,
-      "productName":"HuaweiP40",
+      "productName": "HuaweiP40",
       "price": 8000,
       "property": "Black",
       "brand": "Huawei",
-      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      "url": [
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 17,
@@ -192,7 +267,12 @@
       "price": 5000,
       "property": "Blue",
       "brand": "Apple",
-      "url":"https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      "url": [
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      ],
+      "quantity": 5
     },
     {
       "id": 18,
@@ -200,15 +280,40 @@
       "price": 6000,
       "property": "White",
       "brand": "Xiaomi",
-      "url":"https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      "url": [
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg",
+        "https://i01.appmifile.com/webfile/globalimg/in/cms/C084F2A5-D3CE-B4F6-1A22-18D8F26397A0!800x800!85.jpg"
+      ],
+      "quantity": 5
     },
     {
       "id": 19,
-      "productName":"HuaweiP40",
+      "productName": "HuaweiP40",
       "price": 8000,
       "property": "Black",
       "brand": "Huawei",
-      "url": "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      "url": [
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg",
+        "https://sc04.alicdn.com/kf/H60569f3e0ca54653a59478c9daa821e7Y.jpg"
+      ],
+      "quantity": 5
+    }
+  ],
+  "cart": [
+    {
+      "id": 1,
+      "productName": "iPhone14",
+      "price": 5000,
+      "property": "Blue",
+      "brand": "Apple",
+      "url": [
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png",
+        "https://png.monster/wp-content/uploads/2022/09/png.monster-209.png"
+      ],
+      "quantity": 2
     }
   ],
   "brands": [
@@ -262,8 +367,5 @@
       "name": "Asus",
       "icon": "icon-asus1193370easyiconnet"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

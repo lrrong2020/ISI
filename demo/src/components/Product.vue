@@ -91,8 +91,8 @@ export default {
       this.showList();
     },
 
-    toDetail() {
-      this.$router.push('/detail')
+    toDetail(item) {
+      this.$router.push({ name: 'Detail', params: { id: item } });
     },
     pagechange(page) {
       this.currentPage = page;
@@ -148,6 +148,8 @@ export default {
     placeholder="Type to search"
     @search="onSearch"
     @clear="showList"
+    @update:model-value="searchProduct"
+
     >
     <template #action>
       <div @click="searchProduct" class="button">Search</div>
@@ -177,17 +179,15 @@ export default {
   <van-config-provider :theme-vars="themeVars">
   <!--全局样式-->
 
-
-
     <van-card
       v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
       :key="item.id"
-      :num="5"
+      :num="item.quantity"
       :price="item.price"
       :desc="item.brand"
       :title="item.productName"
-      :thumb="item.url"
-      @click="toDetail"
+      :thumb="item.url[0]"
+      @click="toDetail(item.id)"
       class="card"
       >
       <template #tags>

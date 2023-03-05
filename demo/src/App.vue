@@ -24,10 +24,6 @@ export default {
       <!--Footer-->
       <router-view class="view footer" name="Footer"></router-view>
     </div>
-    <div>
-      <!--DetailFooter-->
-      <router-view class="view detail-footer" name="DetailFooter"></router-view>
-    </div>
     
   </div>
 </template>

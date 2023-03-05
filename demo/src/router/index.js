@@ -6,7 +6,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       components: {
         default: Home,
         Footer: () => import('@/components/Footer.vue'),
@@ -15,7 +15,7 @@ const router = createRouter({
     
     {
       path: '/cart',
-      name: 'cart',
+      name: 'Cart',
       components: {
         default: () => import('@/views/cart/index.vue'),
         Footer: () => import('@/components/Footer.vue'),
@@ -24,7 +24,7 @@ const router = createRouter({
 
     {
       path: '/order',
-      name: 'order',
+      name: 'Order',
       components: {
         default: () => import('@/views/order/index.vue'),
         Footer: () => import('@/components/Footer.vue'),
@@ -33,7 +33,7 @@ const router = createRouter({
 
     {
       path: '/account',
-      name: 'account',
+      name: 'Account',
       components: {
         default: () => import('@/views/account/index.vue'),
         Footer: () => import('@/components/Footer.vue'),
@@ -42,7 +42,7 @@ const router = createRouter({
 
     {
       path: '/login',
-      name: 'login',
+      name: 'Login',
       components: {
         default: () => import('@/views/account/Login.vue'),
       } 
@@ -50,19 +50,18 @@ const router = createRouter({
 
     {
       path: '/signup',
-      name: 'signup',
+      name: 'Signup',
       components: {
         default: () => import('@/views/account/SignUp.vue'),
       } 
     },
 
     {
-      path: '/detail',
-      name: 'detail',
+      path: '/detail/:id',
+      name: 'Detail',
       components: {
         default: () => import('@/views/detail/index.vue'),
         Header: () => import('@/components/Header.vue'),
-        DetailFooter: () => import('@/components/DetailFooter.vue'),
       }
     }
     
