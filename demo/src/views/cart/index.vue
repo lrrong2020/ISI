@@ -20,14 +20,6 @@ export default {
       deleteCartItem(item) {
         this.$store.dispatch('Cart/deleteCartItem', item);
       },
-      add() {
-          this.number++;
-      },
-      remove() {
-          if (this.number > 0) {
-              this.number--;
-          }
-      },
       toHome() {
           this.$router.push({ path: "/" });
       },
@@ -62,17 +54,15 @@ export default {
             <van-stepper v-model="numItem" />
           </template>
         </van-card>
-        <template #right>
-          <van-button square text="删除" type="danger" class="delete-button" @click="deleteCartItem(item.id)"/>
+        <template class="button" #right>
+          <van-button square text="Delete" type="danger" class="delete-button" @click="deleteCartItem(item.id)"/>
         </template>
       </van-swipe-cell>
     </div>
-    <!--AddandRemove-->
-    <van-button type="success" @click="add">Add 1 item</van-button>
-    <van-button type="danger" @click="remove">Remove 1 item</van-button>
+    <div class="block"></div>
     <!--CheckOut-->
     <div v-if="Cart.CartTotal">
-      <van-submit-bar :price="3050" button-text="Submit Order" @submit="onSubmit">
+      <van-submit-bar currency="$" :price="Cart.CartTotalPrice * 100" button-text="Submit Order" @submit="onSubmit" class="footer">
         <van-checkbox>Select All</van-checkbox>
       </van-submit-bar>
     </div>
@@ -83,9 +73,21 @@ export default {
 .goods-card {
     margin: 0;
     background-color: #ffffff;
+    width: 100%;
   }
-
-  .delete-button {
-    height: 100%;
-  }
+.button{
+  width: auto;
+}
+.delete-button {
+  height: 100%;
+}
+.block{
+  position: relative;
+  height: 45px;
+}
+.footer{
+  position: fixed;
+  bottom: 7%;
+  width: 100%;
+}
 </style>

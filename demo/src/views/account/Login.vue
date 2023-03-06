@@ -1,42 +1,41 @@
 <script>
 import { ref } from 'vue';
+import { mapState } from 'vuex';
 export default {
   name: "Login",
   components: {},
   data: () => ({
-    username: '',
+    email: '',
     password: '',
   }),
+  computed: {
+    ...mapState(['User']),
+  },
   methods: {
-    login() {
-      this.$store.dispatch('login', {
-        username: this.username,
-        password: this.password,
-      })
-      .then(success => {
-        if (success) {
-          this.$router.push('/user');
-        }
-      })
-      .catch(error => {
-        this.$toast.fail(error);
-      });
-    },
+    // login() {
+    //   this.$store.dispatch('login', {
+    //     username: this.username,
+    //     password: this.password,
+    //   })
+    //   .then(success => {
+    //     if (success) {
+    //       this.$router.push('/user');
+    //     }
+    //   })
+    //   .catch(error => {
+    //     this.$toast.fail(error);
+    //   });
+    // },
     onClickLeft() {
       this.$router.push('/account')
-    }
-  },
-  setup() {
-    const username = ref('');
-    const password = ref('');
-    const onSubmit = (values) => {
-      console.log('submit', values);
-    };
-    return {
-      username,
-      password,
-      onSubmit,
-    };
+    },
+    onSubmit(value) {
+      console.log(value);
+    },
+    // Password length function check
+    validator(val) {
+      return /^.{6,20}$/.test(val);
+    },
   },
 };
 </script>
@@ -65,13 +64,17 @@ export default {
       <van-form @submit="onSubmit">
         <van-cell-group inset>
         <van-field
-          v-model="username"
-          name="Username"
-          label="Username"
+          v-model="email"
+          name="Email"
+          label="Email"
           right-icon="contact"
-          placeholder="Username"
-          :rules="[{ required: true, message: 'Please enter username' }]"
+          placeholder="Email"
+          :rules="[
+            { required: true, message: 'Please enter e-mail' },
+            { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: 'Please enter valid email' },
+          ]"
         />
+
         <van-field
           v-model="password"
           type="password"
@@ -79,7 +82,10 @@ export default {
           label="Password"
           right-icon="closed-eye"
           placeholder="Password"
-          :rules="[{ required: true, message: 'Please enter password' }]"
+          :rules="[
+            { required: true, message: 'Please enter password' },
+            { validator, message: 'Password must be at least 6 characters' },
+          ]"
         />
         </van-cell-group>
         <div style="margin: 16px;">
@@ -87,10 +93,8 @@ export default {
             Login
           </van-button>
         </div>
-        <div style="margin: 16px;">
-          <van-button round block type="primary" native-type="submit" to="/signup">
-            Sign Up
-          </van-button>
+        <div style="margin: 16px; text-align: center; font-size: medium;">
+          <router-link to="/signup">Sign Up</router-link>
         </div>
       </van-form>
     </div>

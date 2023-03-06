@@ -6,8 +6,8 @@ export default {
   setup() {
     const active = ref(0);
     const themeVars = reactive({
-      tabbarHeight: '58px',
-      tabbarItemIconSize: '35px',
+      tabbarHeight: '7%' ,
+      tabbarItemIconSize: '30px',
       tabbarItemFontSize: '15px',
       tabbarItemActiveColor: '#7232dd',
     });
@@ -22,7 +22,7 @@ export default {
 <template>
   <div>
     <van-config-provider :theme-vars="themeVars">
-      <van-tabbar placeholder v-model="active" route>
+      <van-tabbar :placeholder="true" :fixed="true" :z-index="1000" v-model="active" route>
         <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>
         <van-tabbar-item replace to="/cart" icon="shopping-cart-o">Cart</van-tabbar-item>
         <van-tabbar-item replace to="/order" icon="orders-o">Order</van-tabbar-item>

@@ -3,39 +3,37 @@ import { ref } from 'vue';
 export default {
   name: "SignUp",
   components: {},
-  setup() {
-    const username = ref('');
-    const email = ref('');
-    const password = ref('');
-    const address = ref('');
-    const onSubmit = (values) => {
-      console.log('submit', values);
-    };
+  data() {
     return {
-      username,
-      password,
-      email,
-      address,
-      onSubmit,
-    };
+      username: '',
+      email: '',
+      password: '',
+      address: '',
+    }
   },
   methods: {
-    async signUp() {
-      let result = await this.axios.post('http://localhost:3000/users', {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-        address: this.address,
-      });
-      console.log(result);
-      if (result.status === 201) {
-        alert("Sign Up Success");
-        localStorage.setItem("user-info", JSON.stringify(result.data));
-      }
-    },
+    // async signUp() {
+    //   let result = await this.axios.post('http://localhost:3000/users', {
+    //     username: this.username,
+    //     email: this.email,
+    //     password: this.password,
+    //     address: this.address,
+    //   });
+    //   console.log(result);
+    //   if (result.status === 201) {
+    //     alert("Sign Up Success");
+    //     localStorage.setItem("user-info", JSON.stringify(result.data));
+    //   }
+    // },
     onClickLeft() {
       this.$router.push('/account')
-    }
+    },
+    onSubmit(value) {
+      console.log(value);
+    },
+    validator(val) {
+      return /^.{6,20}$/.test(val);
+    },
   },
 };
 </script>
@@ -69,7 +67,9 @@ export default {
           label="Username"
           right-icon="contact"
           placeholder="Your username"
-          :rules="[{ required: true, message: 'Please enter username' }]"
+          :rules="[
+            { required: true, message: 'Please enter username' },
+          ]"
         />
         <van-field
           v-model="email"
@@ -77,7 +77,10 @@ export default {
           label="E-mail"
           right-icon="envelop-o"
           placeholder="Your e-mail"
-          :rules="[{ required: true, message: 'Please enter E-mail' }]"
+          :rules="[
+            { required: true, message: 'Please enter E-mail' },
+            { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: 'Please enter valid email' },  
+          ]"
         />
         <van-field
           v-model="password"
@@ -86,7 +89,10 @@ export default {
           label="Password"
           right-icon="closed-eye"
           placeholder="Your password"
-          :rules="[{ required: true, message: 'Please enter password' }]"
+          :rules="[
+            { required: true, message: 'Please enter password' },
+            { validator, message: 'Password must be at least 6 characters' },
+          ]"
         />
         <van-field
           v-model="address"
@@ -94,18 +100,18 @@ export default {
           label="Address"
           right-icon="location-o"
           placeholder="Your address"
-          :rules="[{ required: true, message: 'Please enter address' }]"
+          :rules="[
+            { required: true, message: 'Please enter address' },
+          ]"
         />
         </van-cell-group>
         <div style="margin: 16px;">
-          <van-button round block type="primary" native-type="submit" @click="signUp">
+          <van-button round block type="primary" native-type="submit">
             Sign Up
           </van-button>
         </div>
-        <div style="margin: 16px;">
-          <van-button round block type="primary" native-type="submit" to="/login">
-            Login
-          </van-button>
+        <div style="margin: 16px; text-align: center; font-size: medium;">
+          <router-link to="/login">Login</router-link>
         </div>
       </van-form>
     </div>
