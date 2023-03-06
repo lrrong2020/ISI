@@ -367,5 +367,14 @@
       "name": "Asus",
       "icon": "icon-asus1193370easyiconnet"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Grant1",
+      "password": "111111",
+      "email": "12345@qq.com",
+      "address": "aaaaa"
+    }
   ]
 }
