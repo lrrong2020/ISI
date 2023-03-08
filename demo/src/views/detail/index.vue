@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     getDetail() {
-      axios.get(`http://localhost:3000/fakeBackendProducts/${this.$route.params.id}`).then((response) => {
+      axios.get(`http://127.0.0.1:8080/product/${this.$route.params.id}`).then((response) => {
         this.Detail = response.data;
       })
     },
@@ -53,8 +53,8 @@ export default {
   <div class="bg">
     <div class="swipe">
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#1989fa">
-        <van-swipe-item v-for="img in this.Detail.url" :key="img">
-          <img :src="img" height="250" width="250" style="padding-top: 40px;">
+        <van-swipe-item v-for="img in 3" :key="img">
+          <img :src="this.Detail.url" height="250" width="250" style="padding-top: 40px;">
         </van-swipe-item>
       </van-swipe>
     </div>

@@ -21,7 +21,7 @@ export default defineConfig({
   },
   
   css: {
-    postcss: {
+    postcss: {  // postcss配置
       plugins: [
         postCssPxToRem({
           rootValue: 37.5, // 1rem的大小

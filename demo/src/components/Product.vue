@@ -181,13 +181,13 @@ export default {
 
     <van-card
       v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
-      :key="item.id"
+      :key="item.productId"
       :num="item.quantity"
       :price="item.price"
       :desc="item.brand"
       :title="item.productName"
-      :thumb="item.url[0]"
-      @click="toDetail(item.id)"
+      :thumb="item.url"
+      @click="toDetail(item.productId)"
       class="card"
       >
       <template #tags>
