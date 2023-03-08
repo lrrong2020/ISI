@@ -29,45 +29,57 @@ public class Product {
 	@Nonnull
 	private String url;
 	
+	@Nonnull
+	private int quantity;
+
+	//constructors
 	public Product() {};
-	public Product(long productId,String productName,int price,String property,String brand,String url) {
+	public Product(long productId, String productName, int price, String property, String brand, String url, int quantity) {
 		this.productId = productId;
 		this.productName = productName;
 		this.price = price;
 		this.property = property;
 		this.brand = brand;
 		this.url = url;
+		this.quantity = quantity;
 	}
+	
+	//methods
 	public long getProductId() {
 		return productId;
 	}
 	public void setProductId(long productId) {
 		this.productId = productId;
 	}
+	
 	public String getProductName() {
 		return productName;
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+	
 	public int getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	
 	public String getProperty() {
 		return property;
 	}
 	public void setProperty(String property) {
 		this.property = property;
 	}
+	
 	public String getBrand() {
 		return brand;
 	}
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
+	
 	public String getUrl() {
 		return url;
 	}
@@ -75,5 +87,11 @@ public class Product {
 		this.url = url;
 	}
 	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	
 }
