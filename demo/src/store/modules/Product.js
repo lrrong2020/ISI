@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+//localhost cannot run on android studio. 127.0.0.1 can run
+const API_HOST_ANDROID_RUNNABLE = "http://127.0.0.1:8080";
 
 
 export default {
@@ -54,7 +56,7 @@ export default {
     //Get ProductList from Backend
     getProductList(context){
       console.log("getProductList");    
-        axios.get("http://localhost:8080/product/all")
+        axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/all`)
         .then((response)=>{
           console.log("reponse.data in getProductList()");
           console.log(response.data);
@@ -68,7 +70,7 @@ export default {
     //Search Product
     // searchProduct(context,searchValue){
     //   console.log(searchValue);
-    //   axios.get("http://localhost:8080/product/search?productName=" + searchValue)
+    //   axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=` + searchValue)
     //   .then((response)=>{
     //     console.log(response.data);
     //     context.commit('Search',response.data);
@@ -79,7 +81,7 @@ export default {
     searchProduct(context,searchValue){
 
       console.log(searchValue);
-      axios.get(`http://127.0.0.1:8080/product/search?productName=${searchValue}`)
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=${searchValue}`)
       .then((response)=>{
         console.log("reponse.data in searchProduct()");
         console.log(response.data);
@@ -105,7 +107,7 @@ export default {
     filterProductByBrand(context, brand){
       console.log();
 
-      axios.get("http://127.0.0.1:8080/product/filter?brand=" + brand)
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=` + brand)
       .then((response)=>{
         console.log("reponse.data in filterProductByBrand()");
         console.log(response.data);
