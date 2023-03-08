@@ -18,7 +18,7 @@ export default {
     <div class="content">
     <!--Header-->
       <div class="header">
-        <div class="title">Product List</div>
+        <div class="title">Product Catelog Vendor</div>
       </div>
     <!--Main-->
       <div class="main">

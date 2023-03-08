@@ -10,7 +10,7 @@ const router = createRouter({
       name: 'VendorHome',
       components: {
         default: VendorHome,
-        Footer: () => import('@/components/Footer.vue'),
+        Footer: () => import('@/components/Vendor/VendorFooter.vue'),
       }
     },
 
@@ -73,7 +73,25 @@ const router = createRouter({
         default: () => import('@/views/detail/index.vue'),
         Header: () => import('@/components/Header.vue'),
       }
-    }
+    },
+
+    {
+      path: '/Vendor/detail/:id',
+      name: 'VendorProductDetail',
+      components: {
+        default: () => import('@/Vendor/views/Vendor/detail/index.vue'),
+        Header: () => import('@/components/Vendor/VendorHeader.vue'),
+      }
+    },
+
+    {
+      path: '/Vendor/add',
+      name: 'VendorProductAdd',
+      components: {
+        default: () => import('@/views/Vendor/add/addProduct.vue'),
+        Header: () => import('@/components/Vendor/VendorHeader.vue'),
+      }
+    },
     
   ]
 })
