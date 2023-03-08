@@ -1,10 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/home/index.vue'
+import VendorHome from '@/views/Vendor/home/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
+    {  
+      path: '/Vendor/',
+      name: 'VendorHome',
+      components: {
+        default: VendorHome,
+        Footer: () => import('@/components/Footer.vue'),
+      }
+    },
+
+    {  
       path: '/',
       name: 'Home',
       components: {
