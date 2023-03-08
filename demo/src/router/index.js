@@ -19,6 +19,9 @@ const router = createRouter({
       components: {
         default: () => import('@/views/cart/index.vue'),
         Footer: () => import('@/components/Footer.vue'),
+      },
+      meta: {
+        requireAuth: true
       }
     },
 
@@ -28,7 +31,10 @@ const router = createRouter({
       components: {
         default: () => import('@/views/order/index.vue'),
         Footer: () => import('@/components/Footer.vue'),
-      } 
+      },
+      meta: {
+        requireAuth: true
+      }
     },
 
     {
@@ -37,7 +43,10 @@ const router = createRouter({
       components: {
         default: () => import('@/views/account/index.vue'),
         Footer: () => import('@/components/Footer.vue'),
-      } 
+      },
+      meta: {
+        requireAuth: true
+      }
     },
 
     {
@@ -67,5 +76,16 @@ const router = createRouter({
     
   ]
 })
-
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    //登录后会在localStorage中存储标识
+    if (localStorage.isLogin === 'login') {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
+})
 export default router

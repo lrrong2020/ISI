@@ -1,15 +1,24 @@
 <script>
 import { ref } from 'vue';
+import router from '../../router';
+import { mapState } from 'vuex';
+
 export default {
   name: "SignUp",
   components: {},
   data() {
     return {
-      username: '',
-      email: '',
-      password: '',
-      address: '',
+      customerName: '',
+      customerEmail: '',
+      customerPassword: '',
+      shippingAddress: '',
     }
+  },
+  created() {
+    this.getUser();
+  },
+  computed: {
+    ...mapState(['User']),
   },
   methods: {
     // async signUp() {
@@ -25,11 +34,60 @@ export default {
     //     localStorage.setItem("user-info", JSON.stringify(result.data));
     //   }
     // },
+    getUser() {
+      this.$store.dispatch('User/getUser');
+    },    
     onClickLeft() {
-      this.$router.push('/account')
+      this.$router.push('/')
     },
     onSubmit(value) {
-      console.log(value);
+      // console.log(value)
+      if (this.User.user.length > 0) {
+        //遍历用户列表，如果用户已存在，则不添加
+        for (let i = 0; i < this.User.user.length; i++) {
+          if (this.User.user[i].customerEmail === value.customerEmail) {
+            console.log("User already exists");
+            return; //退出函数
+          }
+        }
+        //如果用户不存在，则添加
+        this.SignUp(value);
+        console.log("调用SingUp 1");
+      } else {
+        //如果用户列表为空，则添加
+        this.SignUp(value);
+        console.log("调用SingUp 2");
+      }
+        
+      // if (localStorage.userInfo) {
+      //   let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      //   if (userInfo['email'] === value['email']) {
+      //     console.log("Username already exists");
+      //     return;
+      //   }
+      // } else {
+      //   this.SignUp(value);
+      // }
+
+      // clear input
+      this.customerName = '';
+      this.customerEmail = '';
+      this.customerPassword = '';
+      this.shippingAddress = '';
+    },
+    SignUp(value) {
+      this.$store.dispatch('User/signup', value);
+      // localStorage.setItem("userInfo", JSON.stringify(value));
+      console.log("添加用户成功");
+
+      // Set current user
+      let currentUser = value;
+      this.$store.commit('User/setCurrentUser', currentUser);
+      console.log("current user:")
+      console.log(currentUser);
+
+      localStorage.setItem("isLogin", "login");
+      this.$router.push('/account');
     },
     validator(val) {
       return /^.{6,20}$/.test(val);
@@ -62,8 +120,8 @@ export default {
       <van-form @submit="onSubmit">
         <van-cell-group inset>
         <van-field
-          v-model="username"
-          name="Username"
+          v-model="customerName"
+          name="customerName"
           label="Username"
           right-icon="contact"
           placeholder="Your username"
@@ -72,8 +130,8 @@ export default {
           ]"
         />
         <van-field
-          v-model="email"
-          name="E-mail"
+          v-model="customerEmail"
+          name="customerEmail"
           label="E-mail"
           right-icon="envelop-o"
           placeholder="Your e-mail"
@@ -83,9 +141,9 @@ export default {
           ]"
         />
         <van-field
-          v-model="password"
+          v-model="customerPassword"
           type="password"
-          name="Password"
+          name="customerPassword"
           label="Password"
           right-icon="closed-eye"
           placeholder="Your password"
@@ -95,8 +153,8 @@ export default {
           ]"
         />
         <van-field
-          v-model="address"
-          name="Address"
+          v-model="shippingAddress"
+          name="shippingAddress"
           label="Address"
           right-icon="location-o"
           placeholder="Your address"
@@ -115,7 +173,9 @@ export default {
         </div>
       </van-form>
     </div>
+    <div v-for="user in User.user" :key="user.customerId">User: {{ user.customerName }} | {{ user.customerPassword }} </div>
   </div>
+  
 </template>
 
 <style scoped>
