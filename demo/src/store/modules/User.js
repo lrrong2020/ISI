@@ -12,6 +12,7 @@ export default {
   mutations: {
     setUser(state, data) {
       state.user = data;
+      state.currentUser = data[data.length - 1];
       // console.log(state.user);
     },
     setCurrentUser(state, data) {

@@ -38,7 +38,7 @@ const router = createRouter({
     },
 
     {
-      path: '/account',
+      path: '/account/:id',
       name: 'Account',
       components: {
         default: () => import('@/views/account/index.vue'),
