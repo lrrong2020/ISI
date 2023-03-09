@@ -81,6 +81,19 @@ public class ProductService {
 		
 		return product;
 	}
+
+	public List<Product> getProductsByBrand(String brand) {
+		System.out.println("brand: " + brand);
+		
+		List<Product> products = dao.findAllByProductBrand(brand);
+		
+		for(Product product: products) 
+		{
+			System.out.println("prodcut Name: " + product.getProductName());
+		}
+		
+		return products;
+	}
 	
 	
 	//filter by product brand
