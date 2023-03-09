@@ -35,6 +35,7 @@ export default {
     },
     Logout() {
       localStorage.removeItem("isLogin");
+      this.$store.commit('User/deleteCurrentUser');
       this.$router.push({ name: 'Login' });
     }
   }

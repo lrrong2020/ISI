@@ -156,7 +156,7 @@ export default {
     </template>
   </van-search>
   <!--Brand-->
-  <Brand />   
+  <!-- <Brand />    -->
 
 
   <van-button size="small" type="primary" id="Xiaomi" @click="filterByBrand">

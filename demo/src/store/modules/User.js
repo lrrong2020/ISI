@@ -12,11 +12,15 @@ export default {
   mutations: {
     setUser(state, data) {
       state.user = data;
-      state.currentUser = data[data.length - 1];
+      // state.currentUser = data[data.length - 1];
+      console.log("setUser");
       // console.log(state.user);
     },
     setCurrentUser(state, data) {
       state.currentUser = data;
+    },
+    deleteCurrentUser(state) {
+      state.currentUser = {};
     }
 
   },
@@ -25,6 +29,7 @@ export default {
     //   axios.get(`${API_HOST_ANDROID_RUNNABLE}/customer/all`)
     //     .then((response) => {
     //       context.commit("setUser", response.data);
+    //       console.log("getUser");
     //     })
     //     .catch((error) => {
     //       console.log(error);
@@ -34,6 +39,7 @@ export default {
       await axios.get(`${API_HOST_ANDROID_RUNNABLE}/customer/all`)
         .then((response) => {
           context.commit("setUser", response.data);
+          console.log("getUser");
         })
         .catch((error) => {
           console.log(error);
@@ -97,6 +103,7 @@ export default {
     //   axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/add`, data)
     //     .then((response) => {
     //       context.dispatch("getUser", response.data);
+    //       console.log("signup");
     //     })
     //     .catch((error) => {
     //       console.log(error);
@@ -106,6 +113,7 @@ export default {
       await axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/add`, data)
       .then((response) => {
         context.dispatch("getUser", response.data);
+        console.log("signup");
       })
       .catch((error) => {
         console.log(error);

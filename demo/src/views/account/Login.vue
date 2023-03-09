@@ -49,7 +49,7 @@ export default {
 
               // Set current user
               let currentUser = this.User.user[i];
-              // this.$store.commit('User/setCurrentUser', currentUser);
+              this.$store.commit('User/setCurrentUser', currentUser);
               console.log(currentUser);
 
               localStorage.setItem("isLogin", "login");

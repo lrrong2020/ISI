@@ -80,15 +80,30 @@ export default {
       console.log("添加用户成功");
       await this.$store.dispatch('User/getUser');
       console.log("获取用户列表成功");
-      // Set current user
-      let currentUser = await this.getCurrentUser();  
-      console.log("current user:");
-      console.log(currentUser);
-      //set isLogin
-      localStorage.setItem("isLogin", "login");
-      //跳转到Account页面
-      this.$router.push({ name: 'Account', params: { id: currentUser.customerId } });
+
+      for (let i = 0; i < this.User.user.length; i++) {
+        if (this.User.user[i].customerEmail === value.customerEmail) {
+          // Set current user
+          let currentUser = this.User.user[i];
+          this.$store.commit('User/setCurrentUser', currentUser);
+          console.log("current user:");
+          console.log(currentUser);
+          //set isLogin
+          localStorage.setItem("isLogin", "login");
+          //跳转到Account页面
+          this.$router.push({ name: 'Account', params: { id: currentUser.customerId } });
+        }
+      }
+
     },
+      // // Set current user
+      // let currentUser = await this.getCurrentUser();  
+      // console.log("current user:");
+      // console.log(currentUser);
+      // //set isLogin
+      // localStorage.setItem("isLogin", "login");
+      // //跳转到Account页面
+      // this.$router.push({ name: 'Account', params: { id: currentUser.customerId } });
     getCurrentUser() {
       return this.$store.state.User.currentUser;
     },

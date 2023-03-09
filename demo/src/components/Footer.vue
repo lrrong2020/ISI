@@ -1,5 +1,6 @@
 <script>
 import { ref,reactive } from 'vue';
+import { mapState } from 'vuex';
 
 export default {
   name: "Footer",
@@ -15,7 +16,15 @@ export default {
       active,
       themeVars,
     };
-  }
+  },
+  computed: {
+    ...mapState(['User']),
+  },
+  methods: {
+    toAccount() {
+      this.$router.push({ name: 'Account', params: { id: this.User.currentUser.customerId } });
+    },
+  },
 }    
 </script>
 
@@ -26,7 +35,7 @@ export default {
         <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>
         <van-tabbar-item replace to="/cart" icon="shopping-cart-o">Cart</van-tabbar-item>
         <van-tabbar-item replace to="/order" icon="orders-o">Order</van-tabbar-item>
-        <van-tabbar-item replace to="/account" icon="user-circle-o">Account</van-tabbar-item>
+        <van-tabbar-item replace icon="user-circle-o" @click="toAccount">Account</van-tabbar-item>
       </van-tabbar>
     </van-config-provider>
   </div>
