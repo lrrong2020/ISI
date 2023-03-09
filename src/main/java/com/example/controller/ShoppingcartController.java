@@ -20,6 +20,8 @@ import com.example.model.Shoppingcart;
 import com.example.service.CustomerService;
 import com.example.service.ShoppingcartService;
 
+import jakarta.persistence.EntityManager;
+
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/customer/{customerId}/shoppingcart")
@@ -28,6 +30,8 @@ public class ShoppingcartController {
 	private ShoppingcartService service;
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private EntityManager entityManager;
 	@PostMapping("/add")
 	public void createShoppingcart(@PathVariable int customerId, @RequestBody HashMap<Product, Integer> productList) {
 		Set<Product> quantityList = productList.keySet();
@@ -53,4 +57,16 @@ public class ShoppingcartController {
 	public void deleteShoppingcart(@PathVariable int customerId) {
 		service.deleteShoppingcart(customerId);
 	}
-}
+	@PostMapping("/{productId}/update")
+	public void updateItemOfShoppingcart(@PathVariable int customerId, @PathVariable long productId, @RequestBody int newQuantity) {
+		List<Shoppingcart> records = service.getShoppingcart(customerId);
+		for(Shoppingcart s: records) {
+			if(s.getProduct().getProductId()==productId) {
+				s.setQuantity(newQuantity);
+				entityManager.persist(s);
+				break;
+			}
+				
+		}
+	}
+	}
