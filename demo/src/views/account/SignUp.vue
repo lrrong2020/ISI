@@ -75,20 +75,37 @@ export default {
       this.customerPassword = '';
       this.shippingAddress = '';
     },
-    SignUp(value) {
-      this.$store.dispatch('User/signup', value);
-      // localStorage.setItem("userInfo", JSON.stringify(value));
+    async SignUp(value) {
+      await this.$store.dispatch('User/signup', value);
       console.log("添加用户成功");
-
+      await this.$store.dispatch('User/getUser');
+      console.log("获取用户列表成功");
       // Set current user
-      let currentUser = value;
-      this.$store.commit('User/setCurrentUser', currentUser);
-      console.log("current user:")
+      let currentUser = await this.getCurrentUser();  
+      console.log("current user:");
       console.log(currentUser);
-
+      //set isLogin
       localStorage.setItem("isLogin", "login");
-      this.$router.push('/account');
+      //跳转到Account页面
+      this.$router.push({ name: 'Account', params: { id: currentUser.customerId } });
     },
+    getCurrentUser() {
+      return this.$store.state.User.currentUser;
+    },
+    // SignUp(value) {
+    //   this.$store.dispatch('User/signup', value);
+    //   // localStorage.setItem("userInfo", JSON.stringify(value));
+    //   console.log("添加用户成功");
+
+    //   // Set current user
+    //   let currentUser = value;
+    //   this.$store.commit('User/setCurrentUser', currentUser);
+    //   console.log("current user:")
+    //   console.log(currentUser);
+
+    //   localStorage.setItem("isLogin", "login");
+    //   // this.$router.push('/account');
+    // },
     validator(val) {
       return /^.{6,20}$/.test(val);
     },

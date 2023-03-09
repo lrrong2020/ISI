@@ -21,8 +21,17 @@ export default {
 
   },
   actions: {
-    getUser(context) {
-      axios.get(`${API_HOST_ANDROID_RUNNABLE}/customer/all`)
+    // getUser(context) {
+    //   axios.get(`${API_HOST_ANDROID_RUNNABLE}/customer/all`)
+    //     .then((response) => {
+    //       context.commit("setUser", response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
+    // },
+    async getUser(context) {
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/customer/all`)
         .then((response) => {
           context.commit("setUser", response.data);
         })
@@ -30,41 +39,77 @@ export default {
           console.log(error);
         })
     },
-    deleteUser(context, data) {
-      axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/${data}/delete`)
-        .then((response) => {
-          context.dispatch("getUser", response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+    // deleteUser(context, data) {
+    //   axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/${data}/delete`)
+    //     .then((response) => {
+    //       context.dispatch("getUser", response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
+    // },
+    async deleteUser(context, data) {
+      await axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/${data}/delete`)
+      .then((response) => {
+        context.dispatch("getUser", response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     },
-    updateUser(context, data) {
-      axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/${data}`)
-        .then((response) => {
-          context.dispatch("getUser", response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+    // updateUser(context, data) {
+    //   axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/${data}`)
+    //     .then((response) => {
+    //       context.dispatch("getUser", response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
+    // },
+    async updateUser(context, data) {
+      await axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/${data}`)
+      .then((response) => {
+        context.dispatch("getUser", response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     },
-    login(context, data) {
-      axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/login`, data)
-        .then((response) => {
-          context.dispatch("getUser", response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+    // login(context, data) {
+    //   axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/login`, data)
+    //     .then((response) => {
+    //       context.dispatch("getUser", response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
+    // },
+    async login(context, data) {
+      await axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/login`, data)
+      .then((response) => {
+        context.dispatch("getUser", response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     },
-    signup(context, data) {
-      axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/add`, data)
-        .then((response) => {
-          context.dispatch("getUser", response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+    // signup(context, data) {
+    //   axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/add`, data)
+    //     .then((response) => {
+    //       context.dispatch("getUser", response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
+    // },
+    async signup(context, data) {
+      await axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/add`, data)
+      .then((response) => {
+        context.dispatch("getUser", response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     },
   },
   getters: {
