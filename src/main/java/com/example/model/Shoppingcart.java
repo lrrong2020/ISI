@@ -1,6 +1,6 @@
 package com.example.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,7 +24,17 @@ public class Shoppingcart {
     
     private int quantity;
     
-    private int unitPrice;
+    
+    public Shoppingcart(Customer customer, Product product, int quantity, int unitPrice, Date lastUpdate) {
+		super();
+		this.customer = customer;
+		this.product = product;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.lastUpdate = lastUpdate;
+	}
+
+	private int unitPrice;
     
     public int getUnitPrice() {
 		return unitPrice;
