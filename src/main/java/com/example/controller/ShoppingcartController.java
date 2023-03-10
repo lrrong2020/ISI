@@ -13,17 +13,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Customer;
 import com.example.model.Product;
 import com.example.model.Shoppingcart;
 import com.example.service.CustomerService;
+import com.example.service.ProductService;
 import com.example.service.ShoppingcartService;
 
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
 @RequestMapping("/customer/{customerId}/shoppingcart")
 public class ShoppingcartController {
@@ -31,15 +34,42 @@ public class ShoppingcartController {
 	private ShoppingcartService service;
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private ProductService productService;
+	
 	@Autowired
 	private EntityManager entityManager;
+	
+//	@PostMapping("/add")
+//	public void createShoppingcart(@PathVariable int customerId, @RequestBody ArrayList<Product> productList) {
+//		Customer customer = customerService.getCustomer(customerId);
+//		for(Product p: productList) {
+//			Shoppingcart s = new Shoppingcart(customer, p, 1,p.getPrice(), new Date());
+//			service.createShoppingcart(s);
+//		}
+//		
+//		/*for(Product p: productList) {
+//			Shoppingcart s = new Shoppingcart(customerId, p.getProductId());
+//			
+//		}*/
+//	}
 	@PostMapping("/add")
-	public void createShoppingcart(@PathVariable int customerId, @RequestBody ArrayList<Product> productList) {
+	public void createShoppingcart(@PathVariable int customerId, @RequestBody int productId) {
+		
+		System.out.println("productId: " + productId);
 		Customer customer = customerService.getCustomer(customerId);
-		for(Product p: productList) {
-			Shoppingcart s = new Shoppingcart(customer, p, 1,p.getPrice(), new Date());
-			service.createShoppingcart(s);
-		}
+		
+		Product product = productService.getProduct(productId);
+		System.out.println(product.getBrand() + ",");
+		
+//		for(Product p: productList) {
+//			Shoppingcart s = new Shoppingcart(customer, p, 1,p.getPrice(), new Date());
+//			service.createShoppingcart(s);
+//		}
+		
+		Shoppingcart s = new Shoppingcart(customer, product, 1, product.getPrice(), new Date());
+		service.createShoppingcart(s);
 		
 		/*for(Product p: productList) {
 			Shoppingcart s = new Shoppingcart(customerId, p.getProductId());
@@ -56,6 +86,8 @@ public class ShoppingcartController {
 	public void deleteShoppingcart(@PathVariable int customerId) {
 		service.deleteShoppingcart(customerId);
 	}
+	
+	@Transactional
 	@PostMapping("/{productId}/update")
 	public void updateItemOfShoppingcart(@PathVariable int customerId, @PathVariable long productId, @RequestBody int newQuantity) {
 		List<Shoppingcart> records = service.getShoppingcart(customerId);

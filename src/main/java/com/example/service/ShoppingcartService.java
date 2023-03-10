@@ -19,6 +19,7 @@ public class ShoppingcartService {
 	private CustomerDao customerDao;
 	
 	public Shoppingcart createShoppingcart(Shoppingcart s) {
+		System.out.println(s.getQuantity());
 		return dao.save(s);
 	}
 	

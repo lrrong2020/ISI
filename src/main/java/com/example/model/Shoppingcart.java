@@ -2,12 +2,14 @@ package com.example.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import com.example.model.*;
 
 @Entity
 @IdClass(ShoppingcartId.class)
@@ -25,8 +27,15 @@ public class Shoppingcart {
     private int quantity;
     
     
+    public Shoppingcart() {
+    	super();
+    }
+    
     public Shoppingcart(Customer customer, Product product, int quantity, int unitPrice, Date lastUpdate) {
 		super();
+		
+		System.out.println("Constructing shopping cart");
+		
 		this.customer = customer;
 		this.product = product;
 		this.quantity = quantity;

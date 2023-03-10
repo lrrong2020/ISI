@@ -20,7 +20,7 @@ import com.example.service.OrderDetailService;
 import com.example.service.ProductService;
 import com.example.service.PurchaseOrderService;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
 @RequestMapping("/order/{orderId}")
 public class OrderDetailController {

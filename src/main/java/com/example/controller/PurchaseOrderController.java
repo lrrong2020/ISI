@@ -21,7 +21,7 @@ import com.example.service.PurchaseOrderService;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
 @RequestMapping("/order")
 public class PurchaseOrderController {
