@@ -30,6 +30,18 @@ public class OrderDetail {
 	
 	private int totalPrice;
 	
+	public OrderDetail() {
+		super();
+	}
+	
+	public OrderDetail(PurchaseOrder order, Product product, int quantity, int totalPrice) {
+		super();
+		this.order = order;
+		this.product = product;
+		this.quantity = quantity;
+		this.totalPrice = totalPrice;
+	}
+
 	public PurchaseOrder getOrder() {
 		return order;
 	}
