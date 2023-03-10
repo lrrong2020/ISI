@@ -44,12 +44,15 @@ public class ShoppingcartService {
 		return dao.findAll();
 	}
 	public void deleteProductInShoppingcart(int customerId, long productId) {
-		//ShoppingcartId id = new ShoppingcartId(customerId, productId);
 		Customer customer = customerDao.getReferenceById(customerId);
+		//List<Shoppingcart> dao.findByCustomer(customerDao.getReferenceById(customerId));
 		Product product = productDao.getReferenceById(productId);
-		ShoppingcartId id = new ShoppingcartId(customer, product);
-		dao.delete(dao.getReferenceById(id));
-		System.out.println("after delete: ");
+
+		//ShoppingcartId id = new ShoppingcartId(customer, product);
+		//dao.delete(dao.getReferenceById(id));
+		//dao.deleteByProduct(productDao.getReferenceById(productId));
+		//dao.findByCustomer(customerDao.getReferenceById(customerId));
+
 	}
 	public void deleteShoppingcart(int customerId) {
 		dao.deleteByCustomer(customerDao.getReferenceById(customerId));
