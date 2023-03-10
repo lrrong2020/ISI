@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,12 +34,10 @@ public class ShoppingcartController {
 	@Autowired
 	private EntityManager entityManager;
 	@PostMapping("/add")
-	public void createShoppingcart(@PathVariable int customerId, @RequestBody HashMap<Product, Integer> productList) {
-		Set<Product> quantityList = productList.keySet();
+	public void createShoppingcart(@PathVariable int customerId, @RequestBody ArrayList<Product> productList) {
 		Customer customer = customerService.getCustomer(customerId);
-		for(Product p: quantityList) {
-			int quantity = productList.get(p);
-			Shoppingcart s = new Shoppingcart(customer, p, quantity,p.getPrice(), new Date());
+		for(Product p: productList) {
+			Shoppingcart s = new Shoppingcart(customer, p, 1,p.getPrice(), new Date());
 			service.createShoppingcart(s);
 		}
 		

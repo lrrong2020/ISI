@@ -29,19 +29,18 @@ public class Product {
 	@Nonnull
 	private String url;
 	
-	@Nonnull
-	private int quantity;
+	
 
 	//constructors
 	public Product() {};
-	public Product(long productId, String productName, int price, String property, String brand, String url, int quantity) {
+	public Product(long productId, String productName, int price, String property, String brand, String url) {
 		this.productId = productId;
 		this.productName = productName;
 		this.price = price;
 		this.property = property;
 		this.brand = brand;
 		this.url = url;
-		this.quantity = quantity;
+		
 	}
 	
 	//methods
@@ -87,11 +86,11 @@ public class Product {
 		this.url = url;
 	}
 	
-	public int getQuantity() {
+	/*public int getQuantity() {
 		return quantity;
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+	*/
 }
