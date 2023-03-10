@@ -82,8 +82,9 @@ public class ShoppingcartController {
 		return service.getShoppingcart(customerId);
 	}
 	
-	@PostMapping("/delete")
-	public void deleteShoppingcart(@PathVariable int customerId) {
+	//clear shopping cart of a certain customer
+	@PostMapping("/clear")
+	public void clearShoppingcart(@PathVariable int customerId) {
 		service.deleteShoppingcart(customerId);
 	}
 	
@@ -92,12 +93,16 @@ public class ShoppingcartController {
 	public void updateItemOfShoppingcart(@PathVariable int customerId, @PathVariable long productId, @RequestBody int newQuantity) {
 		List<Shoppingcart> records = service.getShoppingcart(customerId);
 		for(Shoppingcart s: records) {
-			if(s.getProduct().getProductId()==productId) {
+			if(s.getProduct().getProductId() == productId) {
+				//0
+				if(newQuantity == 0) {
+					//delete the record
+				}
+				
 				s.setQuantity(newQuantity);
 				entityManager.persist(s);
 				break;
 			}
-				
 		}
 	}
 	}

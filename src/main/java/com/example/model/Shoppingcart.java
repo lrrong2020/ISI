@@ -26,7 +26,6 @@ public class Shoppingcart {
     
     private int quantity;
     
-    
     public Shoppingcart() {
     	super();
     }
