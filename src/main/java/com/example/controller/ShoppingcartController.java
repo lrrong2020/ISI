@@ -83,6 +83,7 @@ public class ShoppingcartController {
 	}
 	
 	//clear shopping cart of a certain customer
+	@Transactional
 	@PostMapping("/clear")
 	public void clearShoppingcart(@PathVariable int customerId) {
 		service.deleteShoppingcart(customerId);
@@ -97,7 +98,8 @@ public class ShoppingcartController {
 				//0
 				if(newQuantity == 0) {
 					//delete the record
-					service.deleteProductInShoppingcart(customerId, productId)
+					System.out.println("newQuantity is 0");
+					service.deleteProductInShoppingcart(customerId, productId);
 				}
 				
 				s.setQuantity(newQuantity);

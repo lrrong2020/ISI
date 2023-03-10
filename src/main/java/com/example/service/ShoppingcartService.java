@@ -29,7 +29,15 @@ public class ShoppingcartService {
 	}
 	
 	public List<Shoppingcart> getShoppingcart(int customerId) {
-		return dao.findByCustomer(customerDao.getReferenceById(customerId));
+		System.out.println("service.getShoppingCart(): " + customerId);
+		
+		List<Shoppingcart> myList = dao.findByCustomer(customerDao.getReferenceById(customerId));
+		
+		for (Shoppingcart item: myList) {
+			System.out.println("[item]\n" + "productId: " + item.getProduct().getProductId() + "\ncustomerId: " + item.getCustomer().getCustomerId());
+		}
+		
+		return myList;
 	}
 	
 	public List<Shoppingcart> getAllShoppingcart() {
@@ -41,6 +49,7 @@ public class ShoppingcartService {
 		Product product = productDao.getReferenceById(productId);
 		ShoppingcartId id = new ShoppingcartId(customer, product);
 		dao.delete(dao.getReferenceById(id));
+		System.out.println("after delete: ");
 	}
 	public void deleteShoppingcart(int customerId) {
 		dao.deleteByCustomer(customerDao.getReferenceById(customerId));

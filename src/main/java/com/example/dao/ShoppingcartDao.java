@@ -12,6 +12,7 @@ import com.example.model.ShoppingcartId;
 
 public interface ShoppingcartDao extends JpaRepository<Shoppingcart, ShoppingcartId>{
 	List<Shoppingcart> findByCustomer(Customer customer);
-
+	
+	
     void deleteByCustomer(Customer customer);
 }
