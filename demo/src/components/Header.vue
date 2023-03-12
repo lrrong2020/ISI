@@ -16,6 +16,8 @@ export default {
   :border="false"
   title="Title"
   left-arrow
+  fixed
+  placeholder
   @click-left="onClickLeft"
   class="header"
   />

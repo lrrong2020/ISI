@@ -2,6 +2,9 @@
 import { ref } from 'vue';
 import { mapState } from 'vuex';
 
+import { showSuccessToast, showFailToast } from 'vant';
+import 'vant/es/toast/style';
+
 export default {
   name: "Login",
   components: {},
@@ -39,12 +42,14 @@ export default {
     onSubmit(value) {
       console.log(value);
       if (!this.User.user.length) {
+        showFailToast('User not found');
         console.log("User not found 1");
         return;
       } else {
         for (let i = 0; i < this.User.user.length; i++) {
           if (this.User.user[i].customerEmail === value.customerEmail) {
             if (this.User.user[i].customerPassword === value.customerPassword) {
+              showSuccessToast('Login Success');
               console.log("Login Success");
 
               // Set current user
@@ -55,11 +60,15 @@ export default {
               localStorage.setItem("isLogin", "login");
               this.$router.push({ name: 'Account', params: { id: currentUser.customerId } });
             } else {
+              showFailToast('Password or email is incorrect');
+              this.customerEmail = '';
+              this.customerPassword = '';
               console.log("Password is incorrect");
             }
             return;
           }
         }
+        showFailToast('User not found');
         console.log("User not found 2");
       }
       // if (!localStorage.userInfo) {

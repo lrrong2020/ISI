@@ -3,6 +3,9 @@ import { mapState } from "vuex";
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { showSuccessToast, showFailToast } from 'vant';
+import 'vant/es/toast/style';
+
 const state = reactive({
   user: {},
   loading: true
@@ -36,7 +39,10 @@ export default {
     Logout() {
       localStorage.removeItem("isLogin");
       this.$store.commit('User/deleteCurrentUser');
+      this.$store.commit('Cart/clearCart')
       this.$router.push({ name: 'Login' });
+
+      showSuccessToast('Logout Success');
     }
   }
 }

@@ -1,5 +1,7 @@
 <script>
-import { showToast } from 'vant';
+import { showSuccessToast, showFailToast } from 'vant';
+import 'vant/es/toast/style';
+import 'vant/es/notify/style';
 
 export default {
   name: "Order", 
@@ -9,6 +11,11 @@ export default {
       onAdd,
     };
   },
+  methods: {
+    aaa() {
+      showFailToast('失败文案');
+    },
+  }
 }
 </script>
 
@@ -27,11 +34,11 @@ export default {
       <van-contact-card add-text="Change your address" type="edit" @click="onAdd" />
     </div>
     <div>
-
+      <van-button type="primary" round block @click="aaa">Submit</van-button>
     </div>
   </div>
 </template>
 
-<style lang="less" scoped>
+<style>
 
 </style>

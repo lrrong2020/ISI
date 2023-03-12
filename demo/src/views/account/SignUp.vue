@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import router from '../../router';
 import { mapState } from 'vuex';
 
+import { showSuccessToast, showFailToast } from 'vant';
+import 'vant/es/toast/style';
+
 export default {
   name: "SignUp",
   components: {},
@@ -46,6 +49,8 @@ export default {
         //遍历用户列表，如果用户已存在，则不添加
         for (let i = 0; i < this.User.user.length; i++) {
           if (this.User.user[i].customerEmail === value.customerEmail) {
+            showFailToast('Email already exists');
+            this.customerEmail = '';
             console.log("User already exists");
             return; //退出函数
           }
@@ -77,6 +82,7 @@ export default {
     },
     async SignUp(value) {
       await this.$store.dispatch('User/signup', value);
+      showSuccessToast('Sign Up Success');
       console.log("添加用户成功");
       await this.$store.dispatch('User/getUser');
       console.log("获取用户列表成功");
