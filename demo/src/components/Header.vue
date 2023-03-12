@@ -1,12 +1,10 @@
 <script>
 export default {
   name: "Header",
-  setup() {
-    const onClickLeft = () => history.back();
-
-    return {
-      onClickLeft,
-    };
+  methods: {
+    onClickLeft() {
+      this.$router.push('/');
+    },
   },
 }
 </script>

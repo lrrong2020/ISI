@@ -40,7 +40,10 @@ export default {
           quantity: 0,
         };
         this.$store.dispatch('Cart/updateCartItems', payload);
-      }
+      },
+      toDetail(productId) {
+      this.$router.push({ name: 'Detail', params: { id: productId } });
+    },
     },
 }
 </script>
@@ -66,6 +69,7 @@ export default {
         :desc="item.brand"
         :title="item.productName"
         :thumb="item.url"
+        @click="toDetail(item.productId)"
         >
           <template #footer>
             <van-stepper
