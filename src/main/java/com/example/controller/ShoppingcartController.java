@@ -98,6 +98,7 @@ public class ShoppingcartController {
 				if(newQuantity == 0) {
 					//delete the record
 					service.deleteProductInShoppingcart(customerId, productId);
+					break;
 				}
 				
 				s.setQuantity(newQuantity);

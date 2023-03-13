@@ -39,8 +39,9 @@ public class ShoppingcartService {
 		Customer customer = customerDao.getReferenceById(customerId);
 		//List<Shoppingcart> dao.findByCustomer(customerDao.getReferenceById(customerId));
 		Product product = productDao.getReferenceById(productId);
-		//ShoppingcartId id = new ShoppingcartId(customer, product);
-		//dao.delete(dao.getReferenceById(id));
+		ShoppingcartId id = new ShoppingcartId(customer, product);
+		dao.delete(dao.getReferenceById(id));
+		System.out.println("Delete successfully!");
 		//dao.deleteByProduct(productDao.getReferenceById(productId));
 		//dao.findByCustomer(customerDao.getReferenceById(customerId));
 	}
