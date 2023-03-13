@@ -24,12 +24,22 @@ public class ShoppingcartService {
 	private ProductDao productDao;
 	
 	public Shoppingcart createShoppingcart(Shoppingcart s) {
-		System.out.println(s.getQuantity());
+		System.out.println("shoppingcartService.CreateShoppingcart()");
+		
+		System.out.println("shoppingcart" + s.getQuantity());
 		return dao.save(s);
 	}
 	
 	public List<Shoppingcart> getShoppingcart(int customerId) {
-		return dao.findByCustomer(customerDao.getReferenceById(customerId));
+		System.out.println("service.getShoppingCart(): " + customerId);
+		
+		List<Shoppingcart> myList = dao.findByCustomer(customerDao.getReferenceById(customerId));
+		
+		for (Shoppingcart item: myList) {
+			System.out.println("[item]\n" + "productId: " + item.getProduct().getProductId() + "\ncustomerId: " + item.getCustomer().getCustomerId());
+		}
+		
+		return myList;
 	}
 	
 	public List<Shoppingcart> getAllShoppingcart() {
@@ -39,11 +49,14 @@ public class ShoppingcartService {
 		Customer customer = customerDao.getReferenceById(customerId);
 		//List<Shoppingcart> dao.findByCustomer(customerDao.getReferenceById(customerId));
 		Product product = productDao.getReferenceById(productId);
+
 		ShoppingcartId id = new ShoppingcartId(customer, product);
 		dao.delete(dao.getReferenceById(id));
 		System.out.println("Delete successfully!");
+
 		//dao.deleteByProduct(productDao.getReferenceById(productId));
 		//dao.findByCustomer(customerDao.getReferenceById(customerId));
+
 	}
 	public void deleteShoppingcart(int customerId) {
 		dao.deleteByCustomer(customerDao.getReferenceById(customerId));
