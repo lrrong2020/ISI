@@ -102,6 +102,7 @@ public class ShoppingcartController {
 					System.out.println("newQuantity is 0");
 
 					service.deleteProductInShoppingcart(customerId, productId);
+					break;
 				}
 				
 				s.setQuantity(newQuantity);
