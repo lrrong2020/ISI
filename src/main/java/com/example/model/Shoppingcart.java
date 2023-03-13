@@ -15,7 +15,7 @@ import com.example.model.*;
 @IdClass(ShoppingcartId.class)
 public class Shoppingcart {
 	@Id
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
 
