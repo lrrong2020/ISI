@@ -13,21 +13,10 @@ export default {
   },
   mutations: {
     UpdateCart(state, data) {
-      //如果购物车没有该商品的productId，就push进去
-      //如果购物车有该商品的productId，就更新quantity
-      //如果quantity为0，就删除该商品
-      const cart = [data[0].product];
-      state.Cart = cart;
-      state.CartTotal = data[0].quantity
-      state.CartTotalQuantity = data[0].quantity;
-      state.CartTotalPrice = data[0].quantity * data[0].product.price;
-
-      // state.CartTotalQuantity = data.reduce((acc, item) => {
-      //   return acc + item.quantity;
-      // }, 0);
-      // state.CartTotalPrice = data.reduce((acc, item) => {
-      //   return acc + item.quantity * item.price;
-      // }, 0);
+      state.Cart = data;
+      state.CartTotal = data.length;
+      state.CartTotalQuantity = state.Cart.reduce((a, b) => a + b.quantity, 0);
+      state.CartTotalPrice = state.Cart.reduce((a, b) => a + b.quantity * b.product.price, 0);
     },
     //For Log out
     clearCart(state) {
@@ -43,8 +32,8 @@ export default {
       .then((response) => {
         context.commit("UpdateCart", response.data);
         console.log("Cart:")
-        console.log(response.data[0]);
-        console.log(response.data[0].product);
+        console.log(response.data);
+        console.log(response.data.length);
       })
       .catch((error) => {
         console.log(error);

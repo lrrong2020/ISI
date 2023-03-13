@@ -43,37 +43,23 @@ export default {
       this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
     },
     addCartItem(productId) {
+      // const payload = {
+      //   customerId: this.User.currentUser.customerId,
+      //   productId: productId,
+      //   quantity: 1,
+      // };
       const payload = {
         customerId: this.User.currentUser.customerId,
         productId: productId,
-        quantity: 1,
       };
-      const payload2 = {
-        customerId: this.User.currentUser.customerId,
-        productId: productId,
-      };
-      if (this.Cart.Cart.length == 0) {
-        this.$store.dispatch('Cart/addCartItems', payload2);
-      } 
-      if (this.Cart.Cart.length != 0) {
-        if (this.Cart.Cart[0].productId == productId && this.Cart.CartTotal > 0) {
-        showFailToast('Already in the cart');
-        } 
-        else {
-          this.$store.dispatch('Cart/updateCartItems', payload);
-          // showSuccessToast('Added successfully');
-        }
+      //判断如果有这个商品就不添加
+      //若果没有这个商品就添加
+      if (this.Cart.Cart.some(item => item.product.productId == productId)) {
+        showFailToast('You have added this product!');
+      } else {
+        this.$store.dispatch('Cart/addCartItems', payload);
+        showSuccessToast('Added successfully!');
       }
-
-      // else if (this.Cart.Cart != null) {
-      //   if (this.Cart.Cart[0].productId == productId && this.Cart.CartTotal > 0) {
-      //   showFailToast('Already in the cart');
-      //   } 
-      //   else {
-      //     this.$store.dispatch('Cart/updateCartItems', payload);
-      //     // showSuccessToast('Added successfully');
-      //   }
-      // }
       
       
     },
@@ -121,8 +107,8 @@ export default {
     </div>
     <!-- <div>{{ Cart.Cart[0].productId }}</div> -->
     <!-- <div>{{ Detail.productId }}</div> -->
-    <div>product {{ Detail }}</div>
-    <div>Cart: {{ Cart.Cart }}</div>
+    <!-- <div>product {{ Detail }}</div>
+    <div>Cart: {{ Cart.Cart }}</div> -->
     <div class="block"></div>
   </div>
 </template>
