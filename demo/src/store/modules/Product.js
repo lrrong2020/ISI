@@ -156,9 +156,7 @@ export default {
     vendorAddProduct(context, value){
       console.log("vendorAddProduct()");
       console.log(value);
-      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/add`, {
-        params: value
-      })
+      axios.post(`${API_HOST_ANDROID_RUNNABLE}/product/add`, value)
       .then((response)=>{
         console.log("vendorAddProduct response: ");
         console.log(response);

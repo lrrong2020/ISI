@@ -3,7 +3,7 @@
     <van-cell-group inset>
       <van-field
         v-model="productName"
-        name="Product"
+        name="productName"
         label="Product"
         placeholder="The name of the product"
         :rules="[{ required: true, message: 'Product Name is required' }]"
@@ -11,7 +11,7 @@
 
       <van-field 
       v-model="property" 
-      name="Property"
+      name="property"
       label="Property" 
       placeholder="What color?" 
       :rules="[{ required: true, message: 'Property is required' }]"
@@ -19,7 +19,7 @@
 
       <van-field 
       v-model="brand" 
-      name="Brnad"
+      name="brand"
       label="Brand" 
       placeholder="Which brand?" 
       :rules="[{ required: true, message: 'Brand is required' }]"
@@ -27,7 +27,7 @@
 
       <van-field
         v-model="price"
-        name="Price"
+        name="price"
         type="number"
         label="Price"
         placeholder="Set price to 2dp"
@@ -36,7 +36,7 @@
 
       <van-field 
       v-model="image" 
-      name="Image"
+      name="url"
       type="url" 
       label="Image" 
       placeholder="imageeeeee" 
