@@ -1,6 +1,6 @@
 package com.example.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
