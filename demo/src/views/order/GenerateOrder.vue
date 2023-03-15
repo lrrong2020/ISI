@@ -1,11 +1,31 @@
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "GenerateOrder",
+  data() {
+    return {
+      showPay: false,
+    };
+  },
+  computed: {
+    ...mapState(['Cart', 'User']),
+  },
   methods: {
     onClickLeft() {
       //router回到上一个页面
       this.$router.go(-1);
-    }
+    },
+    handleCreateOrder () {
+      this.showPay = true;
+    },
+    async handlePayOrder(){
+      // const payload = {
+      //   customerId: this.User.currentUser.customerId,
+      // };
+      // await this.$store.dispatch('Order/createOrder', payload);
+      // this.orderNo = this.$store.state.Order.orderNo;
+      // this.showPay = true;
+    },
   }
 }
 </script>
@@ -19,12 +39,122 @@ export default {
         @click-left="onClickLeft"
       />
     </div>
-    <div class="address">
-      <van-contact-card lang="en" type="edit" icon="location-o" name="Grant" list="Macao" :editable="false" />
+    <div class="address-wrap">
+      <van-icon name="location-o" class="arrow" />
+      <div class="name" @click="goTo">
+        <span>{{ User.currentUser.customerName }}</span>
+        <span style="padding-left: 15px;">{{ User.currentUser.customerEmail }}</span>
+      </div>
+      <div class="address">
+        {{ User.currentUser.shippingAddress }}
+      </div>
+    </div>
+    <div class="orderList">
+      <van-swipe-cell v-for="item in Cart.Cart" :key="item">
+        <van-card
+          :num="item.quantity"
+          :price="item.product.price"
+          :desc="item.product.brand"
+          :title="item.product.productName"
+          :thumb="item.product.url"
+          class="goods-card"
+          
+        />
+      </van-swipe-cell>
+    </div>
+    <div class="footer">
+      <div class="pay-wrap">
+      <div class="price">
+        <span>Total Amount</span>
+        <span>${{ Cart.CartTotalPrice }}</span>
+      </div>
+      <van-button @click="handleCreateOrder" class="pay-btn" color="#9805fa" type="primary" block>Conform</van-button>
+    </div>
+    <van-popup
+      closeable
+      :close-on-click-overlay="false"
+      v-model:show="showPay"
+      position="bottom"
+      :style="{ height: '30%' }"
+    >
+      <div :style="{ width: '90%', margin: '0 auto', padding: '50px 0' }">
+        <van-button :style="{ marginBottom: '10px' }" color="#1989fa" block @click="handlePayOrder()">Alipay</van-button>
+        <van-button color="#4fc08d" block @click="handlePayOrder()">WeChat Pay</van-button>
+      </div>
+    </van-popup>
     </div>
   </div>
 </template>
 
 <style lang="less" scoped>
-
+.address-wrap {
+  margin-bottom: 20px;
+  background: #fff;
+  position: relative;
+  font-size: 17px;
+  padding: 15px;
+  color: #222333;
+  .address {
+    margin: 8px 0px;
+    padding-left: 20px;
+  }
+  .name {
+    margin: 8px 0px;
+    padding-left: 20px;
+  }
+  .arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+  }
+  &::before {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: -webkit-repeating-linear-gradient(135deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #1989fa 0, #1989fa 45%, transparent 0, transparent 50%);
+    background: repeating-linear-gradient(-45deg, #ff6c6c 0, #ff6c6c 20%, transparent 0, transparent 25%, #1989fa 0, #1989fa 45%, transparent 0, transparent 50%);
+    background-size: 80px;
+    content: '';
+  }
+}
+.orderList {
+  margin-bottom: 20px;
+  .goods-card {
+    margin: 5px 0px;
+    width: 100%;
+  }
+}
+.pay-wrap {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      padding: 10px 0;
+      padding-bottom: 50px;
+      border-top: 1px solid #e9e9e9;
+      >div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 5%;
+        margin: 10px 0;
+        font-size: 14px;
+        span:nth-child(2) {
+          color: red;
+          font-size: 18px;
+        }
+      }
+      .pay-btn {
+        position: fixed;
+        bottom: 7px;
+        right: 0;
+        left: 0;
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
 </style>

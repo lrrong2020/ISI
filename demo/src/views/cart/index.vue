@@ -1,5 +1,4 @@
 <script>
-import { ref } from 'vue';
 import { mapState } from 'vuex';
 
 export default {
@@ -75,7 +74,7 @@ export default {
         :thumb="item.product.url"
         @click="toDetail(item.product.productId)"
         >
-          <template #footer>
+        <template #footer>
             <van-stepper
               integer
               :min="1"
@@ -86,8 +85,8 @@ export default {
             />
           </template>
         </van-card>
-        <template class="button" #right>
-          <van-button square icon="delete-o" type="danger" class="delete-button" @click="deleteCartItem(item.product.productId)"/>
+        <template #right>
+          <van-button square text="Delete" type="danger" class="delete-button" @click="deleteCartItem(item.product.productId)"/>
         </template>
       </van-swipe-cell>
     </div>
@@ -113,9 +112,6 @@ export default {
     background-color: #ffffff;
     width: 100%;
   }
-.button{
-  width: auto;
-}
 .delete-button {
   height: 100%;
 }
