@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.dao.OrderDetailDao;
 import com.example.model.OrderDetail;
 import com.example.model.OrderDetailId;
+import com.example.model.Product;
 import com.example.model.PurchaseOrder;
 
 @Service
@@ -30,5 +31,10 @@ public class OrderDetailService {
 		dao.delete(detail);
 		return "Purchase order "+ detail.getOrder().getPurchaseOrderNumber() + "product " + detail.getProduct().getProductId()
 				+ "is deleted successfully!";
+	}
+	
+	public String addProductToOrderDetail(OrderDetail detail, Product product) {
+		detail.setProduct(product);
+		return "Add product "+product.getProductName() + "Successfully!";
 	}
 }

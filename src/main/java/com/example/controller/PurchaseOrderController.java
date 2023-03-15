@@ -23,7 +23,7 @@ import jakarta.transaction.Transactional;
 
 @CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
-@RequestMapping("/order")
+@RequestMapping("customer/{customerId}/order")
 public class PurchaseOrderController {
 	
 	@Autowired

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Customer;
 import com.example.model.Product;
+import com.example.model.PurchaseOrder;
 import com.example.model.Shoppingcart;
 import com.example.service.CustomerService;
 import com.example.service.ProductService;
@@ -40,6 +41,12 @@ public class ShoppingcartController {
 	
 	@Autowired
 	private EntityManager entityManager;
+	
+	@Autowired
+    private PurchaseOrderController orderController;
+	
+	@Autowired
+    private OrderDetailController orderDetailController;
 	
 //	@PostMapping("/add")
 //	public void createShoppingcart(@PathVariable int customerId, @RequestBody ArrayList<Product> productList) {
@@ -111,4 +118,29 @@ public class ShoppingcartController {
 			}
 		}
 	}
+	
+	@Transactional
+	@PostMapping("/checkout")
+	public void checkOutAllTheProducts(@PathVariable int customerId, @RequestBody int totalAmount) {
+		
+		List<Shoppingcart> shoppingcartRecords = getShoppingcart(customerId);
+		for(Shoppingcart cart:shoppingcartRecords) {
+			Date purchaseDate = new Date();
+			int amount = totalAmount;
+			String status = "pending";
+			Customer customer = customerService.getCustomer(customerId);
+			PurchaseOrder order = new PurchaseOrder();
+			PurchaseOrder newOrder = orderController.addPurchaseOrder(order);
+			newOrder.setCustomer(customer);
+			newOrder.setStatus(status);
+			newOrder.setTotalAmount(totalAmount);
+			newOrder.setPurchaseDate(purchaseDate);
+			entityManager.persist(newOrder);
+			orderDetailController.addOrderDetail(newOrder.getPurchaseOrderNumber(), cart);
+		}
+		
+		clearShoppingcart(customerId);
+		
+		
 	}
+}

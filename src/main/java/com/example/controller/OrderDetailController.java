@@ -16,13 +16,14 @@ import com.example.model.OrderDetail;
 import com.example.model.OrderDetailId;
 import com.example.model.Product;
 import com.example.model.PurchaseOrder;
+import com.example.model.Shoppingcart;
 import com.example.service.OrderDetailService;
 import com.example.service.ProductService;
 import com.example.service.PurchaseOrderService;
 
 @CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
-@RequestMapping("/order/{orderId}")
+@RequestMapping("customer/{customerId}/order/{orderId}")
 public class OrderDetailController {
 	@Autowired
 	private OrderDetailService service;
@@ -31,14 +32,22 @@ public class OrderDetailController {
 	@Autowired
 	private PurchaseOrderService orderService;
 	
+	
+	
 	@GetMapping("/detail")
 	public List<OrderDetail> getOrderDetail() {
 		return service.getAllOrderDetail();
 	}
 	
 	@PostMapping("/detail/add")
-	public OrderDetail addOrderDetail(OrderDetail orderDetail) {
-		return service.addOrderDetail(orderDetail);
+	public void addOrderDetail(@PathVariable long orderId,@RequestBody Shoppingcart cart) {
+		int sum = 0;
+		Product product = cart.getProduct();
+		PurchaseOrder order = orderService.getPurchaseOrder(orderId);
+		OrderDetail orderDetail = new OrderDetail(order, product, cart.getQuantity(),cart.getUnitPrice()*cart.getQuantity());
+		//sum += cart.getQuantity();
+		service.addOrderDetail(orderDetail);
+		
 	}
 	
 	@PutMapping("/detail/{productId}/update")
