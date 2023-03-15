@@ -32,7 +32,10 @@ public class OrderDetailService {
 		return "Purchase order "+ detail.getOrder().getPurchaseOrderNumber() + "product " + detail.getProduct().getProductId()
 				+ "is deleted successfully!";
 	}
-	
+	public String deleteOrderDetailById(long orderNumber) {
+		dao.deleteByPurchaseOrderNumber(orderNumber);
+		return "Purchase order "+ orderNumber + "is deleted successfully!";
+	}
 	public String addProductToOrderDetail(OrderDetail detail, Product product) {
 		detail.setProduct(product);
 		return "Add product "+product.getProductName() + "Successfully!";

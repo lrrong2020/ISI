@@ -54,11 +54,15 @@ public class OrderDetailController {
 		Product product = cart.getProduct();
 		PurchaseOrder order = orderService.getPurchaseOrder(orderId);
 		OrderDetail orderDetail = new OrderDetail(order, product, cart.getQuantity(),cart.getUnitPrice()*cart.getQuantity());
-		//sum += cart.getQuantity();
+		sum += cart.getQuantity();
+		//order.setTotalAmount(sum);
 		service.addOrderDetail(orderDetail);
 		
 	}
-	
+	@PostMapping("/detail/delete")
+	public void deleteOrderDetail(@PathVariable long orderId) {
+		service.deleteOrderDetailById(orderId);
+	}
 	@PutMapping("/detail/{productId}/update")
 	public OrderDetail updateOrderDetail(@PathVariable long orderId, @PathVariable long pid, @RequestBody OrderDetail detailRequest) {
 		Product product = productService.getProduct(pid);
@@ -77,5 +81,6 @@ public class OrderDetailController {
 		return service.deleteOrderDetail(service.getOrderDetail(id));
 		
 	}
+	
 	
 }

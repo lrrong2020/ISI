@@ -35,6 +35,9 @@ public class PurchaseOrderController {
 	@Autowired
 	private EntityManager entityManager;
 	
+	@Autowired
+	private OrderDetailController orderDetailController;
+	
 	@PostMapping("/add")
 	public PurchaseOrder addPurchaseOrder(@RequestBody PurchaseOrder order) {
 		return orderService.addPurchaseOrder(order);
@@ -71,6 +74,7 @@ public class PurchaseOrderController {
 	@PostMapping("/{orderId}/delete") 
 	public void deletePurchaseOrder(@PathVariable long orderId){
 		PurchaseOrder order = orderService.getPurchaseOrder(orderId);
+		orderDetailController.deleteOrderDetail(orderId);
 		orderService.deletePurchaseOrder(order);
 	}
 	
