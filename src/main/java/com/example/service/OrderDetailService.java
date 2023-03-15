@@ -24,8 +24,8 @@ public class OrderDetailService {
 	public OrderDetail getOrderDetail(OrderDetailId id) {
 		return dao.findById(id).orElseThrow();
 	}
-	public List<OrderDetail> getAllOrderDetail() {
-		return dao.findAll();
+	public List<OrderDetail> getAllOrderDetail(long orderNumber) {
+		return dao.findByPurchaseOrderNumber(orderNumber);
 	}
 	public String deleteOrderDetail(OrderDetail detail) {
 		dao.delete(detail);

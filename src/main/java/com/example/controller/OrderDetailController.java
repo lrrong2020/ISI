@@ -35,8 +35,8 @@ public class OrderDetailController {
 	
 	
 	@GetMapping("/detail")
-	public List<OrderDetail> getOrderDetail() {
-		return service.getAllOrderDetail();
+	public List<OrderDetail> getOrderDetail(@PathVariable long orderId) {
+		return service.getAllOrderDetail(orderId);
 	}
 	
 	@PostMapping("/detail/add")
