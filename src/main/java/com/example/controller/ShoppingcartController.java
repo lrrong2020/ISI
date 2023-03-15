@@ -45,6 +45,9 @@ public class ShoppingcartController {
 	@Autowired
     private PurchaseOrderController orderController;
 	
+	@Autowired
+    private OrderDetailController orderDetailController;
+	
 //	@PostMapping("/add")
 //	public void createShoppingcart(@PathVariable int customerId, @RequestBody ArrayList<Product> productList) {
 //		Customer customer = customerService.getCustomer(customerId);
@@ -116,20 +119,27 @@ public class ShoppingcartController {
 		}
 	}
 	
+	@Transactional
 	@PostMapping("/checkout")
 	public void checkOutAllTheProducts(@PathVariable int customerId, @RequestBody int totalAmount) {
-		Date purchaseDate = new Date();
-		int amount = totalAmount;
-		String status = "pending";
-		Customer customer = customerService.getCustomer(customerId);
-		PurchaseOrder order = new PurchaseOrder();
-		PurchaseOrder newOrder = orderController.addPurchaseOrder(order);
-		newOrder.setCustomer(customer);
-		newOrder.setStatus(status);
-		newOrder.setTotalAmount(totalAmount);
-		newOrder.setPurchaseDate(purchaseDate);
-		entityManager.persist(newOrder);
+		
 		List<Shoppingcart> shoppingcartRecords = getShoppingcart(customerId);
+		for(Shoppingcart cart:shoppingcartRecords) {
+			Date purchaseDate = new Date();
+			int amount = totalAmount;
+			String status = "pending";
+			Customer customer = customerService.getCustomer(customerId);
+			PurchaseOrder order = new PurchaseOrder();
+			PurchaseOrder newOrder = orderController.addPurchaseOrder(order);
+			newOrder.setCustomer(customer);
+			newOrder.setStatus(status);
+			newOrder.setTotalAmount(totalAmount);
+			newOrder.setPurchaseDate(purchaseDate);
+			entityManager.persist(newOrder);
+			orderDetailController.addOrderDetail(newOrder.getPurchaseOrderNumber(), cart);
+		}
+		
+		
 		
 	}
 }

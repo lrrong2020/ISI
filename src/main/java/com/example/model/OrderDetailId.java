@@ -3,6 +3,7 @@ package com.example.model;
 import java.io.Serializable;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
 
 
 public class OrderDetailId implements Serializable {
