@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,18 @@ public class OrderDetailController {
 	
 	
 	@GetMapping("/detail")
-	public List<OrderDetail> getOrderDetail() {
-		return service.getAllOrderDetail();
+	public List<OrderDetail> getOrderDetail(@PathVariable long orderId) {
+		return service.getAllOrderDetail(orderId);
 	}
-	
+	@GetMapping("/detail/products")
+	public List<Product> getProductOfOneOrder(@PathVariable long orderId) {
+		List<OrderDetail> details = getOrderDetail(orderId);
+		List<Product> products = new ArrayList<>();
+		for(OrderDetail detail:details) {
+			products.add(detail.getProduct());
+		}
+		return products;
+	}
 	@PostMapping("/detail/add")
 	public void addOrderDetail(@PathVariable long orderId,@RequestBody Shoppingcart cart) {
 		int sum = 0;

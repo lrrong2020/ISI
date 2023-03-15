@@ -17,5 +17,5 @@ import com.example.model.Shoppingcart;
 @Repository
 public interface OrderDetailDao extends JpaRepository<OrderDetail, OrderDetailId>{
 	@Query("SELECT od FROM OrderDetail od WHERE od.order.purchaseOrderNumber = :purchaseOrderNumber")
-    List<OrderDetail> findByPurchaseOrderNumber(@Param("purchaseOrderNumber") int purchaseOrderNumber);
+    List<OrderDetail> findByPurchaseOrderNumber(@Param("purchaseOrderNumber") long purchaseOrderNumber);
 }
