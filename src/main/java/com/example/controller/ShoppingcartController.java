@@ -139,6 +139,7 @@ public class ShoppingcartController {
 			orderDetailController.addOrderDetail(newOrder.getPurchaseOrderNumber(), cart);
 		}
 		
+		clearShoppingcart(customerId);
 		
 		
 	}
