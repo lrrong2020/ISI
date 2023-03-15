@@ -46,8 +46,9 @@ public class PurchaseOrderController {
 	}
 	
 	@GetMapping("/all")
-	public List<PurchaseOrder> getAllPurchaseOrder() {
-		return orderService.getAllPurchaseOrder();
+	public List<PurchaseOrder> getAllPurchaseOrder(@PathVariable int customerId) {
+		Customer customer = customerService.getCustomer(customerId);
+		return orderService.getAllPurchaseOrder(customer);
 	}
 	
 	@Transactional
