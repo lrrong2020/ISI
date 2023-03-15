@@ -29,17 +29,21 @@ public class Product {
 	@Nonnull
 	private String url;
 	
+	@Column(nullable = true)
+    private String photo;
 	
+
 
 	//constructors
 	public Product() {};
-	public Product(long productId, String productName, int price, String property, String brand, String url) {
+	public Product(long productId, String productName, int price, String property, String brand, String url, String photo) {
 		this.productId = productId;
 		this.productName = productName;
 		this.price = price;
 		this.property = property;
 		this.brand = brand;
 		this.url = url;
+		this.photo = photo;
 		
 	}
 	
@@ -94,13 +98,21 @@ public class Product {
 	}
 	*/
 	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
 	//for debug
 	public String toString() {
 		return "productId: " + this.getProductId() +
 				"productName: " + this.getProductName() +
 				"brand: " + this.getBrand() +
 				"price: " + this.getPrice() +
-				"property: " + this.getProperty()
+				"property: " + this.getProperty() +
+				"photo: " + this.getPhoto()
 				;
 	}
 }
