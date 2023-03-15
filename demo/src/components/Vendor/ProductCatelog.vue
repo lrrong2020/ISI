@@ -103,7 +103,7 @@ export default {
       this.getProductList();
     },
 
-    addProduct(){
+    toAddProductPage(){
       console.log("add product");
       this.$router.push({ name: "VendorProductAdd", params: { } });
     },
@@ -139,7 +139,7 @@ export default {
     size="large"
     type="primary"
     id="Add"
-    @click="addProduct"
+    @click="toAddProductPage"
   >
     Add A New Item
   </van-button>

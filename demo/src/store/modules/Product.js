@@ -50,7 +50,13 @@ export default {
 
     displayErrorMsg(state, data){
       state.errorMsg = data;
-    }
+    },
+
+    //vendor add new product
+    vendorAddProduct(){
+      console.log("[Vendor] Successfully add a new product!");
+    },
+
   },
   actions: {
     //Get ProductList from Backend
@@ -145,6 +151,20 @@ export default {
 
       
       context.commit();
+    },
+
+    vendorAddProduct(context, value){
+      console.log("vendorAddProduct()");
+      console.log(value);
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/add`, {
+        params: value
+      })
+      .then((response)=>{
+        console.log("vendorAddProduct response: ");
+        console.log(response);
+      }).catch((error)=>{
+        alert(error.message);
+      });
     },
 
 
