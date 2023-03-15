@@ -70,6 +70,8 @@ export default {
           console.log("reponse.data in getProductList()");
           console.log(response.data);
           context.commit('SetProductList',response.data);
+
+          console.log(response.data[0].photo)
         }).catch((error)=>{
 
           alert(error.stack);

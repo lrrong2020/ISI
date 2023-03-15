@@ -158,7 +158,7 @@ export default {
       :price="item.price"
       :desc="item.brand"
       :title="item.productName"
-      :thumb="item.url"
+      :thumb="item.photo"
       @click="toDetail(item.productId)"
       class="card"
     >

@@ -36,11 +36,12 @@
 
       <van-field 
       v-model="image" 
-      name="url"
-      type="url" 
+      name="photo"
+      type="file" 
       label="Image" 
-      placeholder="imageeeeee" 
-      :rules="[{ required: true, message: 'Image is required' }]"
+      placeholder="photo" 
+      :rules="[{ required: true, message: 'photo is required' }]"
+      @change="onFileChange"
       />
     </van-cell-group>
 
@@ -85,11 +86,29 @@ export default {
     ...mapState(["Product"]),
   },
 
+
   methods: {
     addProduct(value){
       console.log("add product");
       console.log(value);
       this.$store.dispatch("Product/vendorAddProduct", value);
+    },
+
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      var image = new Image();
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = (e) => {
+        vm.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
     },
 
   },
