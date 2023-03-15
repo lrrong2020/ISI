@@ -42,14 +42,20 @@ export default {
     onSubmit(value) {
       console.log(value);
       if (!this.User.user.length) {
-        showFailToast('User not found');
+        showFailToast({
+          message: 'User not found',
+          wordBreak: 'break-word',
+        });
         console.log("User not found 1");
         return;
       } else {
         for (let i = 0; i < this.User.user.length; i++) {
           if (this.User.user[i].customerEmail === value.customerEmail) {
             if (this.User.user[i].customerPassword === value.customerPassword) {
-              showSuccessToast('Login Success');
+              showSuccessToast({
+                message: 'Login Success',
+                wordBreak: 'break-word',
+              });
               console.log("Login Success");
 
               // Set current user
@@ -60,7 +66,10 @@ export default {
               localStorage.setItem("isLogin", "login");
               this.$router.push({ name: 'Account', params: { id: currentUser.customerId } });
             } else {
-              showFailToast('Password or email is incorrect');
+              showFailToast({
+                message: 'Password is incorrect',
+                wordBreak: 'break-word',
+              });
               this.customerEmail = '';
               this.customerPassword = '';
               console.log("Password is incorrect");
@@ -68,7 +77,10 @@ export default {
             return;
           }
         }
-        showFailToast('User not found');
+        showFailToast({
+          message: 'User not found',
+          wordBreak: 'break-word',
+        });
         console.log("User not found 2");
       }
       // if (!localStorage.userInfo) {

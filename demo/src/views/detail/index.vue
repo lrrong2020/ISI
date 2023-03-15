@@ -40,7 +40,14 @@ export default {
     },
     //Cart
     getCartItems() {
-      this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
+      if (this.User.currentUser.customerId == null) {
+        showFailToast({
+          message: 'You are not login!',
+          wordBreak: 'break-word',
+        });
+      } else {
+        this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
+      } 
     },
     addCartItem(productId) {
       // const payload = {
@@ -48,6 +55,13 @@ export default {
       //   productId: productId,
       //   quantity: 1,
       // };
+      if (this.User.currentUser.customerId == null) {
+        showFailToast({
+          message: 'You are not login!',
+          wordBreak: 'break-word',
+        });
+        return;
+      }
       const payload = {
         customerId: this.User.currentUser.customerId,
         productId: productId,
@@ -55,10 +69,16 @@ export default {
       //判断如果有这个商品就不添加
       //若果没有这个商品就添加
       if (this.Cart.Cart.some(item => item.product.productId == productId)) {
-        showFailToast('You have added this product!');
+        showFailToast({
+          message: 'You have added this product!',
+          wordBreak: 'break-word',
+        });
       } else {
         this.$store.dispatch('Cart/addCartItems', payload);
-        showSuccessToast('Added successfully!');
+        showSuccessToast({
+          message: 'Added successfully!',
+          wordBreak: 'break-word',
+        });
       }
       
       

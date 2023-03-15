@@ -72,7 +72,18 @@ const router = createRouter({
         default: () => import('@/views/detail/index.vue'),
         Header: () => import('@/components/Header.vue'),
       }
-    }
+    },
+    
+    {
+      path: '/generateOrder',
+      name: 'GenerateOrder',
+      components: {
+        default: () => import('@/views/order/GenerateOrder.vue'),
+      },
+      meta: {
+        requireAuth: true
+      }
+    },
     
   ]
 })

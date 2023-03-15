@@ -45,6 +45,9 @@ export default {
     toDetail(productId) {
     this.$router.push({ name: 'Detail', params: { id: productId } });
     },
+    onSubmit() {
+      this.$router.push({ name: 'GenerateOrder' });
+    },  
   },
 }
 </script>
@@ -91,7 +94,7 @@ export default {
     <div class="block"></div>
     <!--CheckOut-->
     <div v-if="Cart.CartTotalQuantity !== 0 ">
-      <van-submit-bar currency="$" :price="Cart.CartTotalPrice * 100" button-text="Submit Order" @submit="onSubmit" class="footer">
+      <van-submit-bar currency="$" :price="Cart.CartTotalPrice * 100" button-text="Check Out" @submit="onSubmit" class="footer">
       </van-submit-bar>
     </div>
     <!-- <div>{{ User.currentUser }}</div>

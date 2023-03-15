@@ -42,7 +42,10 @@ export default {
       this.$store.commit('Cart/clearCart')
       this.$router.push({ name: 'Login' });
 
-      showSuccessToast('Logout Success');
+      showSuccessToast({
+        message: 'Logout Success',
+        wordBreak: 'break-word',
+      });
     }
   }
 }

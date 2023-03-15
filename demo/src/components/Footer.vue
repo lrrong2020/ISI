@@ -22,7 +22,13 @@ export default {
   },
   methods: {
     toAccount() {
-      this.$router.push({ name: 'Account', params: { id: this.User.currentUser.customerId } });
+      if (this.User.currentUser.customerId == null) {
+        this.$router.push({ name: 'Login' });
+        return;
+      } else {
+        this.$router.push({ name: 'Account', params: { id: this.User.currentUser.customerId } });
+      }
+      
     },
   },
 }    
