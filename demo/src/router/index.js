@@ -92,6 +92,17 @@ const router = createRouter({
         Header: () => import('@/components/Vendor/VendorHeader.vue'),
       }
     },
+
+    {
+      path: '/Vendor/add/success',
+      name: 'VendorProductAddSuccess',
+      components: {
+        default: () => import('@/views/Vendor/add/addProductSuccess.vue'),
+        Header: () => import('@/components/Vendor/VendorHeader.vue'),
+      }
+    },
+
+
     
   ]
 })

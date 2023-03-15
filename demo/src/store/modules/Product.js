@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '../../router';
 
 //localhost cannot run on android studio. 127.0.0.1 can run
 const API_HOST_ANDROID_RUNNABLE = "http://127.0.0.1:8080";
@@ -53,8 +54,10 @@ export default {
     },
 
     //vendor add new product
-    vendorAddProduct(){
+    vendorAddProduct(state, data){
       console.log("[Vendor] Successfully add a new product!");
+      console.log("data", data);
+      router.push({ name: "VendorProductAddSuccess", params: { } });
     },
 
   },
@@ -160,6 +163,12 @@ export default {
       .then((response)=>{
         console.log("vendorAddProduct response: ");
         console.log(response);
+
+        //navigate to detail page
+        //but for testing, navigate to product catalog instead. I'll change it later
+
+        context.commit('vendorAddProduct', response.data);
+
       }).catch((error)=>{
         alert(error.message);
       });
