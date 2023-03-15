@@ -93,4 +93,14 @@ public class Product {
 		this.quantity = quantity;
 	}
 	*/
+	
+	//for debug
+	public String toString() {
+		return "productId: " + this.getProductId() +
+				"productName: " + this.getProductName() +
+				"brand: " + this.getBrand() +
+				"price: " + this.getPrice() +
+				"property: " + this.getProperty()
+				;
+	}
 }
