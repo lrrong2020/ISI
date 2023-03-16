@@ -160,11 +160,14 @@ export default {
 
     vendorAddProduct(context, value){
       console.log("vendorAddProduct()");
-      console.log(value);
+      console.log(value.photo);
       axios.post(`${API_HOST_ANDROID_RUNNABLE}/product/add`, value)
       .then((response)=>{
         console.log("vendorAddProduct response: ");
         console.log(response);
+
+        
+        console.log("response.data.photo: ",response.data.photo)
 
         //navigate to detail page
         //but for testing, navigate to product catalog instead. I'll change it later
