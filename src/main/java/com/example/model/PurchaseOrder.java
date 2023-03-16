@@ -24,7 +24,7 @@ public class PurchaseOrder {
 	private int totalAmount;
 	
 	private String status;
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
 	

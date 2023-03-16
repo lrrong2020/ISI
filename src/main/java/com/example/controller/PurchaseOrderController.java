@@ -75,7 +75,7 @@ public class PurchaseOrderController {
 	public void deletePurchaseOrder(@PathVariable long orderId){
 		PurchaseOrder order = orderService.getPurchaseOrder(orderId);
 		orderDetailController.deleteOrderDetail(orderId);
-		orderService.deletePurchaseOrder(order);
+		//orderService.deletePurchaseOrder(order);
 	}
 	
 	

@@ -33,7 +33,10 @@ public class OrderDetailService {
 				+ "is deleted successfully!";
 	}
 	public String deleteOrderDetailById(long orderNumber) {
-		dao.deleteByPurchaseOrderNumber(orderNumber);
+		List<OrderDetail> orderDetail = dao.findByPurchaseOrderNumber(orderNumber);
+		for(OrderDetail detail:orderDetail) {
+			dao.delete(detail);
+		}
 		return "Purchase order "+ orderNumber + "is deleted successfully!";
 	}
 	public String addProductToOrderDetail(OrderDetail detail, Product product) {
