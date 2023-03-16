@@ -50,11 +50,11 @@ public class OrderDetailController {
 	}
 	@PostMapping("/detail/add")
 	public void addOrderDetail(@PathVariable long orderId,@RequestBody Shoppingcart cart) {
-		int sum = 0;
+		
 		Product product = cart.getProduct();
 		PurchaseOrder order = orderService.getPurchaseOrder(orderId);
 		OrderDetail orderDetail = new OrderDetail(order, product, cart.getQuantity(),cart.getUnitPrice()*cart.getQuantity());
-		sum += cart.getQuantity();
+		//order.setTotalAmount(cart.getQuantity()*cart.getUnitPrice());
 		//order.setTotalAmount(sum);
 		service.addOrderDetail(orderDetail);
 		

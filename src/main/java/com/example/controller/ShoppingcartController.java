@@ -123,21 +123,23 @@ public class ShoppingcartController {
 	@PostMapping("/checkout")
 	public void checkOutAllTheProducts(@PathVariable int customerId) {
 		PurchaseOrder order = new PurchaseOrder();
+		int sum =0;
 		PurchaseOrder newOrder = orderController.addPurchaseOrder(order);
 		List<Shoppingcart> shoppingcartRecords = getShoppingcart(customerId);
 		for(Shoppingcart cart:shoppingcartRecords) {
 			Date purchaseDate = new Date();
-			int amount = 0;
 			String status = "pending";
 			Customer customer = customerService.getCustomer(customerId);
 			newOrder.setCustomer(customer);
 			newOrder.setStatus(status);
 			//newOrder.setTotalAmount(amount);
+			sum+=cart.getUnitPrice()*cart.getQuantity();
 			newOrder.setPurchaseDate(purchaseDate);
 			entityManager.persist(newOrder);
 			orderDetailController.addOrderDetail(newOrder.getPurchaseOrderNumber(), cart);
 		}
-		
+		newOrder.setTotalAmount(sum);
+		entityManager.persist(newOrder);
 		clearShoppingcart(customerId);
 		
 		
