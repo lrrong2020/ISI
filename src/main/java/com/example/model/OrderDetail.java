@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToOne;
 @IdClass(OrderDetailId.class)
 public class OrderDetail {
 	@Id
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "purchase_order_number", referencedColumnName = "purchase_order_number")
     private PurchaseOrder order;
 
