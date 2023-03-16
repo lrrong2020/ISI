@@ -50,15 +50,19 @@ public class OrderDetailController {
 	}
 	@PostMapping("/detail/add")
 	public void addOrderDetail(@PathVariable long orderId,@RequestBody Shoppingcart cart) {
-		int sum = 0;
+		
 		Product product = cart.getProduct();
 		PurchaseOrder order = orderService.getPurchaseOrder(orderId);
 		OrderDetail orderDetail = new OrderDetail(order, product, cart.getQuantity(),cart.getUnitPrice()*cart.getQuantity());
-		//sum += cart.getQuantity();
+		//order.setTotalAmount(cart.getQuantity()*cart.getUnitPrice());
+		//order.setTotalAmount(sum);
 		service.addOrderDetail(orderDetail);
 		
 	}
-	
+	@PostMapping("/detail/delete")
+	public void deleteOrderDetail(@PathVariable long orderId) {
+		service.deleteOrderDetailById(orderId);
+	}
 	@PutMapping("/detail/{productId}/update")
 	public OrderDetail updateOrderDetail(@PathVariable long orderId, @PathVariable long pid, @RequestBody OrderDetail detailRequest) {
 		Product product = productService.getProduct(pid);
@@ -77,5 +81,6 @@ public class OrderDetailController {
 		return service.deleteOrderDetail(service.getOrderDetail(id));
 		
 	}
+	
 	
 }
