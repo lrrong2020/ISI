@@ -26,18 +26,6 @@ const router = createRouter({
     },
 
     {
-      path: '/order',
-      name: 'Order',
-      components: {
-        default: () => import('@/views/order/index.vue'),
-        Footer: () => import('@/components/Footer.vue'),
-      },
-      meta: {
-        requireAuth: true
-      }
-    },
-
-    {
       path: '/account/:id',
       name: 'Account',
       components: {
@@ -75,6 +63,18 @@ const router = createRouter({
     },
     
     {
+      path: '/orderList',
+      name: 'OrderList',
+      components: {
+        default: () => import('@/views/order/index.vue'),
+        Footer: () => import('@/components/Footer.vue'),
+      },
+      meta: {
+        requireAuth: true
+      }
+    },
+
+    {
       path: '/generateOrder',
       name: 'GenerateOrder',
       components: {
@@ -84,12 +84,24 @@ const router = createRouter({
         requireAuth: true
       }
     },
+
+    {
+      path: '/orderDetail/:id',
+      name: 'OrderDetail',
+      components: {
+        default: () => import('@/views/order/OrderDetail.vue'),
+      },
+      meta: {
+        requireAuth: true
+      }
+    }
     
   ]
 })
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
     //登录后会在localStorage中存储标识
+
     if (localStorage.isLogin === 'login') {
       next()
     } else {

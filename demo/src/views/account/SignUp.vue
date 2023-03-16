@@ -4,7 +4,7 @@ import router from '../../router';
 import { mapState } from 'vuex';
 
 import { showSuccessToast, showFailToast } from 'vant';
-import 'vant/es/toast/style';
+// import 'vant/es/toast/style';
 
 export default {
   name: "SignUp",

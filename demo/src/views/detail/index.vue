@@ -6,7 +6,7 @@ import axios from 'axios';
 import { mapState } from 'vuex';
 
 import { showSuccessToast, showFailToast } from 'vant';
-import 'vant/es/toast/style';
+// import 'vant/es/toast/style';
 
 export default {
   name: "Detail",
@@ -80,8 +80,33 @@ export default {
           wordBreak: 'break-word',
         });
       }
-      
-      
+    },
+    onClickButtonBuy(productId) {
+      if (this.User.currentUser.customerId == null) {
+        showFailToast({
+          message: 'You are not login!',
+          wordBreak: 'break-word',
+        });
+        return;
+      }
+      const payload = {
+        customerId: this.User.currentUser.customerId,
+        productId: productId,
+      };
+      if (this.Cart.Cart.some(item => item.product.productId == productId)) {
+        showFailToast({
+          message: 'You have added this product!',
+          wordBreak: 'break-word',
+        });
+        this.$router.push({ name: 'Cart' });
+      } else {
+        this.$store.dispatch('Cart/addCartItems', payload);
+        showSuccessToast({
+          message: 'Added successfully!',
+          wordBreak: 'break-word',
+        });
+        this.$router.push({ name: 'Cart' });
+      }
     },
     goToCart() {
       this.$router.push({ name: 'Cart' });
@@ -122,7 +147,7 @@ export default {
         <van-action-bar-icon icon="chat-o" text="客服" />
         <van-action-bar-icon icon="cart-o" text="Cart" @click="goToCart" :badge="!Cart.CartTotalQuantity ? '' : Cart.CartTotalQuantity"/>
         <van-action-bar-button color="#be99ff" type="warning" text="Add to Cart" @click="addCartItem(Detail.productId)"/>
-        <van-action-bar-button color="#7232dd" type="danger" text="Buy Now" @click="onClickButtonBuy"/>
+        <van-action-bar-button color="#7232dd" type="danger" text="Buy Now" @click="onClickButtonBuy(Detail.productId)"/>
       </van-action-bar>
     </div>
     <!-- <div>{{ Cart.Cart[0].productId }}</div> -->

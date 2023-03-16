@@ -4,7 +4,7 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { showSuccessToast, showFailToast } from 'vant';
-import 'vant/es/toast/style';
+// import 'vant/es/toast/style';
 
 const state = reactive({
   user: {},
@@ -57,6 +57,8 @@ export default {
     <div class="main">
       <div class="TopBar">
         <van-nav-bar
+          fixed
+          placeholder
           title="Account"
           left-arrow
           @click-left="onClickLeft"

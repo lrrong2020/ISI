@@ -54,7 +54,11 @@ export default {
 <template>
   <div class="bg">
     <!--TopTitle-->
-    <van-nav-bar title="Cart" />
+    <van-nav-bar 
+      fixed
+      placeholder 
+      title="Cart"
+    />
     <!--NumberofItems-->
     <div>{{ Cart.CartTotal }}</div>
     <!--IfEmptyCart-->
@@ -93,7 +97,7 @@ export default {
     <div class="block"></div>
     <!--CheckOut-->
     <div v-if="Cart.CartTotalQuantity !== 0 ">
-      <van-submit-bar currency="$" :price="Cart.CartTotalPrice * 100" button-text="Check Out" @submit="onSubmit" class="footer">
+      <van-submit-bar label="Total Amount: " currency="$" :price="Cart.CartTotalPrice * 100" button-text="Check Out" @submit="onSubmit" class="footer">
       </van-submit-bar>
     </div>
     <!-- <div>{{ User.currentUser }}</div>
@@ -123,5 +127,6 @@ export default {
   position: fixed;
   bottom: 7%;
   width: 100%;
+
 }
 </style>

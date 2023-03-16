@@ -1,5 +1,7 @@
 <script>
 import { mapState } from 'vuex';
+import { showSuccessToast,showLoadingToast, closeToast } from 'vant';
+
 export default {
   name: "GenerateOrder",
   data() {
@@ -8,17 +10,53 @@ export default {
     };
   },
   computed: {
-    ...mapState(['Cart', 'User']),
+    ...mapState(['Cart', 'User', 'Order']),
   },
   methods: {
     onClickLeft() {
       //router回到上一个页面
       this.$router.go(-1);
     },
-    handleCreateOrder () {
+    closePopup() {
+      this.showPay = false;
+    },
+    async handleCreateOrder () {
       this.showPay = true;
+      const customerId = await this.User.currentUser.customerId;
+      //checkout 生成订单，删除购物车
+      await this.$store.dispatch('Order/checkOut', customerId);
+      //获取订单列表
+      await this.$store.dispatch('Order/getOrderList', customerId);
+      //获取订单详情
+      await this.getOrderDetail();
     },
     async handlePayOrder(){
+      const toast = showLoadingToast({
+        duration: 0,
+        forbidClick: true,
+        message: 'Paying...',
+      });
+      let second = 2;
+      const timer = setInterval(() => {
+        second--;
+        if (second) {
+          // do nothing
+        } else {
+          clearInterval(timer);
+          closeToast();
+          this.showPay = false;
+          showSuccessToast('Payment Success');
+          //跳转到订单详情页面
+          this.$router.push({ name: 'OrderDetail', params: { id: this.Order.OrderDetail[0].order.purchaseOrderNumber } });
+        }
+      }, 1000);
+      
+
+
+
+      // const customerId = await this.User.currentUser.customerId;
+      // await this.$store.dispatch('Order/checkOut', customerId);
+      
       // const payload = {
       //   customerId: this.User.currentUser.customerId,
       // };
@@ -26,6 +64,16 @@ export default {
       // this.orderNo = this.$store.state.Order.orderNo;
       // this.showPay = true;
     },
+    async getOrderDetail() {
+      const currentOrder = await this.Order.OrderList[this.Order.OrderList.length - 1];
+      console.log('currentOrder:' + currentOrder);
+      console.log('currentOrder.purchaseOrderNumber:' + currentOrder.purchaseOrderNumber);
+      const payload = {
+        customerId: this.User.currentUser.customerId,
+        orderId: currentOrder.purchaseOrderNumber,
+      };
+      await this.$store.dispatch('Order/getOrderDetail', payload);
+    }
   }
 }
 </script>
@@ -36,6 +84,8 @@ export default {
       <van-nav-bar
         title="Generate Order"
         left-arrow
+        fixed
+        placeholder
         @click-left="onClickLeft"
       />
     </div>
@@ -78,8 +128,8 @@ export default {
       :style="{ height: '30%' }"
     >
       <div :style="{ width: '90%', margin: '0 auto', padding: '50px 0' }">
-        <van-button :style="{ marginBottom: '10px' }" color="#1989fa" block @click="handlePayOrder()">Alipay</van-button>
-        <van-button color="#4fc08d" block @click="handlePayOrder()">WeChat Pay</van-button>
+        <van-button :style="{ marginBottom: '10px' }" color="#1989fa" block @click="handlePayOrder">Alipay</van-button>
+        <van-button color="#4fc08d" block @click="handlePayOrder">WeChat Pay</van-button>
       </div>
     </van-popup>
     </div>

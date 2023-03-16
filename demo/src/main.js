@@ -7,7 +7,7 @@ import store from '@/store'
 import 'amfe-flexible'
 import './assets/reset.css'
 import '@vant/touch-emulator';
-
+import 'vant/es/toast/style';
 
 const app = createApp(App)
 

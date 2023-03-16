@@ -6,11 +6,50 @@ const API_HOST_ANDROID_RUNNABLE = "http://127.0.0.1:8080";
 export default {
   namespaced: true,
   state: {
-    Order: [],
+    OrderList: [],
+    OrderDetail: {},
   },
   mutations: {
+    setOrderList(state, OrderList) {
+      state.OrderList = OrderList;
+    },
+    setOrderDetail(state, OrderDetail) {
+      state.OrderDetail = OrderDetail;
+    },
   },
   actions: {
+    async checkOut(context, customerId) {
+      await axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/${customerId}/shoppingcart/checkout`)
+      .then((response) => {
+        console.log("Checkout:")
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
+    async getOrderList(context, customerId) {
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/customer/${customerId}/order/all`)
+      .then((response) => {
+        console.log("OrderList:")
+        console.log(response.data);
+        context.commit('setOrderList', response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
+    async getOrderDetail(context, {customerId, orderId}) {
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/customer/${customerId}/order/${orderId}/detail`)
+      .then((response) => {
+        console.log("OrderDetail:")
+        console.log(response.data);
+        context.commit('setOrderDetail', response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
   },
   getters: {
   },
