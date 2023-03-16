@@ -1,11 +1,14 @@
 package com.example.model;
 
+
+
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 
 @Entity
 public class Product {
@@ -45,6 +48,8 @@ public class Product {
 		this.url = url;
 		this.photo = photo;
 		
+		System.out.println("New Product");
+		System.out.println(photo.toString());
 	}
 	
 	//methods
