@@ -120,7 +120,7 @@ export default {
     <div class="swipe">
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#1989fa">
         <van-swipe-item v-for="img in 3" :key="img">
-          <img :src="this.Detail.url" height="250" width="250" style="padding-top: 40px;">
+          <img :src="this.Detail.photo" height="250" width="250" style="padding-top: 40px;">
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -137,8 +137,11 @@ export default {
     </div>
     <div class="prop">
       <van-tabs v-model:active="active" swipeable>
-        <van-tab v-for="index in 3" :title="'Prop' + index">
-          {{ this.Detail.property }} {{ index }}
+        <van-tab title="Color">
+          {{ this.Detail.property }}
+        </van-tab>
+        <van-tab title="Screen Size">
+          {{ this.Detail.propertySecond }}
         </van-tab>
       </van-tabs>
     </div>

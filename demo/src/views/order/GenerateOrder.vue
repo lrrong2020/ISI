@@ -106,7 +106,7 @@ export default {
           :price="item.product.price"
           :desc="item.product.brand"
           :title="item.product.productName"
-          :thumb="item.product.url"
+          :thumb="item.product.photo"
           class="goods-card"
           
         />

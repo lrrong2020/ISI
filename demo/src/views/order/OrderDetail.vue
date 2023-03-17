@@ -66,7 +66,7 @@ export default {
     <div class="order-price">
       <div class="price-item">
         <label>Total Amount: </label>
-        <span>$ {{ Order.OrderDetail[0].order.totalAmount }}</span>
+        <span>${{ Order.OrderDetail[0].order.totalAmount }}</span>
       </div>
       <div class="price-item">
         <label>Username: </label>
@@ -85,7 +85,7 @@ export default {
       :price="item.product.price"
       :desc="item.product.brand"
       :title="item.product.productName"
-      :thumb="item.product.url"
+      :thumb="item.product.photo"
     >
     <template #footer>
       <div style="font-size: 15px; color: crimson;">Subtotal: ${{ item.totalPrice }}</div>
