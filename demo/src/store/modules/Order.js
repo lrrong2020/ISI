@@ -50,6 +50,26 @@ export default {
         console.log(error);
       })
     },
+    async cancelOrder(context, {customerId, orderId}) {
+      const cancel = { status: "cancelled" };
+      await axios({
+        method: 'post',
+        url:`${API_HOST_ANDROID_RUNNABLE}/customer/${customerId}/order/${orderId}`,
+        data: JSON.stringify(cancel),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }) 
+      .then((response) => {
+        console.log("CancelOrder:")
+        console.log(response.data);
+        context.dispatch("getOrderList", customerId);
+        context.dispatch("getOrderDetail", {customerId, orderId});
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
   },
   getters: {
   },

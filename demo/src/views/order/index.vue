@@ -63,6 +63,7 @@ export default {
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
+          <br/>
           <van-tag type="primary">{{ order.status }}</van-tag>
         </template>
       </van-cell>
@@ -79,6 +80,7 @@ export default {
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
+          <br/>
           <van-tag type="primary">{{ order.status }}</van-tag>
         </template>
       </van-cell>
@@ -95,6 +97,7 @@ export default {
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
+          <br/>
           <van-tag type="primary">{{ order.status }}</van-tag>
         </template>
       </van-cell>

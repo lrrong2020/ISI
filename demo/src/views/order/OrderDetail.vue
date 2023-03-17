@@ -25,6 +25,13 @@ export default {
     onClickLeft() {
       //router go to product list page
       this.$router.push({ name: 'OrderList' });
+    },
+    async handleCancelOrder() {
+      const payload = {
+        customerId: this.User.currentUser.customerId,
+        orderId: this.$route.params.id,
+      };
+      await this.$store.dispatch('Order/cancelOrder', payload);
     }
   }
 }

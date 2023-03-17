@@ -60,7 +60,7 @@ export default {
       title="Cart"
     />
     <!--NumberofItems-->
-    <div>{{ Cart.CartTotal }}</div>
+    <!-- <div>{{ Cart.CartTotal }}</div> -->
     <!--IfEmptyCart-->
     <div class="empty" v-if="Cart.CartTotalQuantity == 0">
       <van-empty description="Your cart is empty!">
