@@ -45,11 +45,11 @@ public class Product {
 
 	public Product(long productId, String productName, int price, String property, String brand, String propertySecond, String photo) {
 		this.productId = productId;
-		this.productName = productName;
+		this.productName = productName.trim();
 		this.price = price;
-		this.property = property;
-		this.propertySecond = propertySecond;
-		this.brand = brand;
+		this.property = property.trim();
+		this.propertySecond = propertySecond.trim();
+		this.brand = brand.trim();
 		this.photo = photo;
 		
 		System.out.println("New Product");
