@@ -2,6 +2,8 @@ package com.example.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +21,7 @@ public class PurchaseOrder {
 	@Column(name = "purchase_order_number")
 	private long purchaseOrderNumber;
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date purchaseDate;
 	
 	private int totalAmount;
