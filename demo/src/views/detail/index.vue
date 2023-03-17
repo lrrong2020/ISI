@@ -5,6 +5,9 @@ import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { mapState } from 'vuex';
 
+import { showSuccessToast, showFailToast } from 'vant';
+// import 'vant/es/toast/style';
+
 export default {
   name: "Detail",
   setup() {
@@ -27,7 +30,7 @@ export default {
   //   console.log(this.Detail);
   // },
   computed: {
-    ...mapState(['Cart']),
+    ...mapState(['User','Cart']),
   },
   methods: {
     getDetail() {
@@ -37,10 +40,73 @@ export default {
     },
     //Cart
     getCartItems() {
-      this.$store.dispatch('Cart/getCartItems');
+      if (this.User.currentUser.customerId == null) {
+        showFailToast({
+          message: 'You are not login!',
+          wordBreak: 'break-word',
+        });
+      } else {
+        this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
+      } 
     },
-    addCartItem() {
-      this.$store.dispatch('Cart/addCartItem', this.Detail);
+    addCartItem(productId) {
+      // const payload = {
+      //   customerId: this.User.currentUser.customerId,
+      //   productId: productId,
+      //   quantity: 1,
+      // };
+      if (this.User.currentUser.customerId == null) {
+        showFailToast({
+          message: 'You are not login!',
+          wordBreak: 'break-word',
+        });
+        return;
+      }
+      const payload = {
+        customerId: this.User.currentUser.customerId,
+        productId: productId,
+      };
+      //判断如果有这个商品就不添加
+      //若果没有这个商品就添加
+      if (this.Cart.Cart.some(item => item.product.productId == productId)) {
+        showFailToast({
+          message: 'You have added this product!',
+          wordBreak: 'break-word',
+        });
+      } else {
+        this.$store.dispatch('Cart/addCartItems', payload);
+        showSuccessToast({
+          message: 'Added successfully!',
+          wordBreak: 'break-word',
+        });
+      }
+    },
+    onClickButtonBuy(productId) {
+      if (this.User.currentUser.customerId == null) {
+        showFailToast({
+          message: 'You are not login!',
+          wordBreak: 'break-word',
+        });
+        return;
+      }
+      const payload = {
+        customerId: this.User.currentUser.customerId,
+        productId: productId,
+      };
+      if (this.Cart.Cart.some(item => item.product.productId == productId)) {
+        showFailToast({
+          message: 'You have added this product!',
+          wordBreak: 'break-word',
+        });
+        this.$router.push({ name: 'Cart' });
+      } else {
+        this.$store.dispatch('Cart/addCartItems', payload);
+        showSuccessToast({
+          message: 'Added successfully!',
+          wordBreak: 'break-word',
+        });
+        this.$router.push({ name: 'Cart' });
+      }
     },
     goToCart() {
       this.$router.push({ name: 'Cart' });
@@ -77,13 +143,18 @@ export default {
       </van-tabs>
     </div>
     <div class="footer">
-      <van-action-bar>
+      <van-action-bar placeholder>
         <van-action-bar-icon icon="chat-o" text="客服" />
         <van-action-bar-icon icon="cart-o" text="Cart" @click="goToCart" :badge="!Cart.CartTotalQuantity ? '' : Cart.CartTotalQuantity"/>
-        <van-action-bar-button color="#be99ff" type="warning" text="Add to Cart" @click="addCartItem"/>
-        <van-action-bar-button color="#7232dd" type="danger" text="Buy Now" @click="onClickButtonBuy"/>
+        <van-action-bar-button color="#be99ff" type="warning" text="Add to Cart" @click="addCartItem(Detail.productId)"/>
+        <van-action-bar-button color="#7232dd" type="danger" text="Buy Now" @click="onClickButtonBuy(Detail.productId)"/>
       </van-action-bar>
     </div>
+    <!-- <div>{{ Cart.Cart[0].productId }}</div> -->
+    <!-- <div>{{ Detail.productId }}</div> -->
+    <!-- <div>product {{ Detail }}</div>
+    <div>Cart: {{ Cart.Cart }}</div> -->
+    <div class="block"></div>
   </div>
 </template>
 
@@ -104,6 +175,9 @@ export default {
     .desc{
       font-size: 15px;
     }
+  }
+  .block{
+    height: 50px;
   }
 }
 

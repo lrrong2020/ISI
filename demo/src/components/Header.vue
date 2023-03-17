@@ -1,12 +1,10 @@
 <script>
 export default {
   name: "Header",
-  setup() {
-    const onClickLeft = () => history.back();
-
-    return {
-      onClickLeft,
-    };
+  methods: {
+    onClickLeft() {
+      this.$router.push('/');
+    },
   },
 }
 </script>
@@ -16,6 +14,8 @@ export default {
   :border="false"
   title="Title"
   left-arrow
+  fixed
+  placeholder
   @click-left="onClickLeft"
   class="header"
   />

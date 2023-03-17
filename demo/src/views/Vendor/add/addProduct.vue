@@ -12,9 +12,17 @@
       <van-field 
       v-model="property" 
       name="property"
-      label="Property" 
+      label="Property1" 
       placeholder="What color?" 
       :rules="[{ required: true, message: 'Property is required' }]"
+      />
+
+      <van-field 
+      v-model="propertySecond" 
+      name="propertySecond"
+      label="Property2" 
+      placeholder="What size?" 
+      :rules="[{ required: true, message: 'Property Second is required' }]"
       />
 
       <van-field 
@@ -61,6 +69,7 @@ export default {
   setup() {
     const productName = ref("");
     const property = ref("");
+    const propertySecond = ref("");
     const brand = ref("");
     const price = ref("");
     const image = ref("");
@@ -78,6 +87,7 @@ export default {
       price,
       image,
       property,
+      propertySecond,
       onSubmit,
     };
   },

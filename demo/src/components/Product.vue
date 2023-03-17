@@ -156,7 +156,7 @@ export default {
     </template>
   </van-search>
   <!--Brand-->
-  <Brand />   
+  <!-- <Brand />    -->
 
 
   <van-button size="small" type="primary" id="Xiaomi" @click="filterByBrand">
@@ -186,7 +186,7 @@ export default {
       :price="item.price"
       :desc="item.brand"
       :title="item.productName"
-      :thumb="item.url"
+      :thumb="item.photo"
       @click="toDetail(item.productId)"
       class="card"
       >

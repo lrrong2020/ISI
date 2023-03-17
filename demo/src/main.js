@@ -7,7 +7,7 @@ import store from '@/store'
 import 'amfe-flexible'
 import './assets/reset.css'
 import '@vant/touch-emulator';
-
+import 'vant/es/toast/style';
 
 const app = createApp(App)
 
@@ -20,6 +20,7 @@ const app = createApp(App)
 // .use(Pagination).use(CellGroup).use(Field).use(NavBar).use(Tabbar).use(TabbarItem).use(ActionBar).use(ActionBarIcon)
 // .use(ActionBarButton).use(Grid).use(GridItem).use(Tabs).use(Tab).use(Empty).use(SwipeCell).use(NumberKeyboard)
 // .use(Stepper).use(SubmitBar).use(Checkbox).use(Row).use(Col);
+
 
 app.use(router)
 app.use(store)

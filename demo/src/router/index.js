@@ -5,7 +5,7 @@ import VendorHome from '@/views/Vendor/home/index.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {  
+    {
       path: '/Vendor/',
       name: 'VendorHome',
       components: {
@@ -14,7 +14,7 @@ const router = createRouter({
       }
     },
 
-    {  
+    {
       path: '/',
       name: 'Home',
       components: {
@@ -22,32 +22,29 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       }
     },
-    
+
     {
       path: '/cart',
       name: 'Cart',
       components: {
         default: () => import('@/views/cart/index.vue'),
         Footer: () => import('@/components/Footer.vue'),
+      },
+      meta: {
+        requireAuth: true
       }
     },
 
     {
-      path: '/order',
-      name: 'Order',
-      components: {
-        default: () => import('@/views/order/index.vue'),
-        Footer: () => import('@/components/Footer.vue'),
-      } 
-    },
-
-    {
-      path: '/account',
+      path: '/account/:id',
       name: 'Account',
       components: {
         default: () => import('@/views/account/index.vue'),
         Footer: () => import('@/components/Footer.vue'),
-      } 
+      },
+      meta: {
+        requireAuth: true
+      }
     },
 
     {
@@ -55,7 +52,7 @@ const router = createRouter({
       name: 'Login',
       components: {
         default: () => import('@/views/account/Login.vue'),
-      } 
+      }
     },
 
     {
@@ -63,7 +60,7 @@ const router = createRouter({
       name: 'Signup',
       components: {
         default: () => import('@/views/account/SignUp.vue'),
-      } 
+      }
     },
 
     {
@@ -75,16 +72,32 @@ const router = createRouter({
       }
     },
 
+
     {
       path: '/Vendor/detail/:id',
       name: 'VendorProductDetail',
       components: {
-        default: () => import('@/Vendor/views/Vendor/detail/index.vue'),
+        default: () => import('@/views/Vendor/detail/index.vue'),
         Header: () => import('@/components/Vendor/VendorHeader.vue'),
       }
     },
 
+
     {
+      path: '/orderList',
+      name: 'OrderList',
+      components: {
+        default: () => import('@/views/order/index.vue'),
+        Footer: () => import('@/components/Footer.vue'),
+      },
+      meta: {
+        requireAuth: true
+
+      }
+    },
+
+    {
+
       path: '/Vendor/add',
       name: 'VendorProductAdd',
       components: {
@@ -92,8 +105,20 @@ const router = createRouter({
         Header: () => import('@/components/Vendor/VendorHeader.vue'),
       }
     },
+    {
+      path: '/generateOrder',
+      name: 'GenerateOrder',
+      components: {
+        default: () => import('@/views/order/GenerateOrder.vue'),
+      },
+      meta: {
+        requireAuth: true
+
+      }
+    },
 
     {
+
       path: '/Vendor/add/success',
       name: 'VendorProductAddSuccess',
       components: {
@@ -103,8 +128,32 @@ const router = createRouter({
     },
 
 
-    
+
+    {
+      path: '/orderDetail/:id',
+      name: 'OrderDetail',
+      components: {
+        default: () => import('@/views/order/OrderDetail.vue'),
+      },
+      meta: {
+        requireAuth: true
+      }
+    }
+
+
   ]
 })
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    //登录后会在localStorage中存储标识
 
+    if (localStorage.isLogin === 'login') {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
+})
 export default router
