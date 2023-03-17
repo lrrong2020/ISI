@@ -173,7 +173,7 @@ export default {
         </div>
       </van-form>
     </div>
-    <div v-for="user in User.user" :key="user.customerId">User: {{ user.customerName }} | {{ user.customerPassword }} </div>
+    <!-- <div v-for="user in User.user" :key="user.customerId">User: {{ user.customerName }} | {{ user.customerPassword }} </div> -->
   </div>
 </template>
 

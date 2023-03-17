@@ -148,7 +148,6 @@ export default {
     placeholder="Type to search"
     @search="onSearch"
     @clear="showList"
-    @update:model-value="searchProduct"
 
     >
     <template #action>
@@ -190,10 +189,10 @@ export default {
       @click="toDetail(item.productId)"
       class="card"
       >
-      <template #tags>
+      <!-- <template #tags>
         <van-tag plain type="primary">tag1</van-tag>
         <van-tag plain type="primary">tag2</van-tag>
-      </template>
+      </template> -->
     </van-card>
     <!--Paging-->
     <van-pagination v-model="currentPage" :total-items="Product.productList.length" 
