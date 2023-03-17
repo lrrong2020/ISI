@@ -53,6 +53,9 @@ public class ProductService {
 			existProduct.setProperty(product.getProperty());
 		}
 		
+		if(product.getPropertySecond()!=null) {
+			existProduct.setPropertySecond(product.getPropertySecond());
+		}
 		if(product.getUrl()!=null) {
 			existProduct.setUrl(product.getUrl());
 		}

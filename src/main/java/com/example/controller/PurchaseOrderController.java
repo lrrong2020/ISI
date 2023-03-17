@@ -23,7 +23,7 @@ import jakarta.transaction.Transactional;
 
 @CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
-@RequestMapping("/order")
+@RequestMapping("customer/{customerId}/order")
 public class PurchaseOrderController {
 	
 	@Autowired
@@ -34,6 +34,9 @@ public class PurchaseOrderController {
 	
 	@Autowired
 	private EntityManager entityManager;
+	
+	@Autowired
+	private OrderDetailController orderDetailController;
 	
 	@PostMapping("/add")
 	public PurchaseOrder addPurchaseOrder(@RequestBody PurchaseOrder order) {
@@ -46,8 +49,9 @@ public class PurchaseOrderController {
 	}
 	
 	@GetMapping("/all")
-	public List<PurchaseOrder> getAllPurchaseOrder() {
-		return orderService.getAllPurchaseOrder();
+	public List<PurchaseOrder> getAllPurchaseOrder(@PathVariable int customerId) {
+		Customer customer = customerService.getCustomer(customerId);
+		return orderService.getAllPurchaseOrder(customer);
 	}
 	
 	@Transactional
@@ -59,10 +63,14 @@ public class PurchaseOrderController {
 			int customerId = customer.getCustomerId();
 			existOrder.setCustomer(customerService.getCustomer(customerId));
 		}
-		existOrder.setPurchaseDate(order.getPurchaseDate());
-		existOrder.setShipmentDate(order.getShipmentDate());
-		existOrder.setStatus(order.getStatus());
-		existOrder.setTotalAmount(order.getTotalAmount());
+		if(order.getPurchaseDate()!=null)
+			existOrder.setPurchaseDate(order.getPurchaseDate());
+		if(order.getShipmentDate()!=null)
+			existOrder.setShipmentDate(order.getShipmentDate());
+		if(order.getStatus()!=null)
+			existOrder.setStatus(order.getStatus());
+		if(order.getTotalAmount()!=0)
+			existOrder.setTotalAmount(order.getTotalAmount());
 		entityManager.persist(existOrder);
 		return existOrder;
 	}
@@ -70,7 +78,8 @@ public class PurchaseOrderController {
 	@PostMapping("/{orderId}/delete") 
 	public void deletePurchaseOrder(@PathVariable long orderId){
 		PurchaseOrder order = orderService.getPurchaseOrder(orderId);
-		orderService.deletePurchaseOrder(order);
+		orderDetailController.deleteOrderDetail(orderId);
+		//orderService.deletePurchaseOrder(order);
 	}
 	
 	

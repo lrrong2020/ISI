@@ -28,8 +28,8 @@ public class PurchaseOrderService {
 		return order;
 	}
 	
-	public List<PurchaseOrder> getAllPurchaseOrder() {
-		return dao.findAll();
+	public List<PurchaseOrder> getAllPurchaseOrder(Customer customer) {
+		return dao.findByCustomer(customer);
 	}
 	
 	public PurchaseOrder updatePurchaseOrder(long orderId, PurchaseOrder order) {

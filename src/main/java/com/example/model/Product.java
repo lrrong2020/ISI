@@ -24,6 +24,9 @@ public class Product {
 	private String property;
 	
 	@Nonnull
+	private String propertySecond;
+	
+	@Nonnull
 	private String brand;
 	
 	@Nonnull
@@ -33,17 +36,25 @@ public class Product {
 
 	//constructors
 	public Product() {};
-	public Product(long productId, String productName, int price, String property, String brand, String url) {
+	public Product(long productId, String productName, int price, String property, String brand, String propertySecond, String url) {
 		this.productId = productId;
 		this.productName = productName;
 		this.price = price;
 		this.property = property;
+		this.propertySecond = propertySecond;
 		this.brand = brand;
 		this.url = url;
 		
 	}
 	
 	//methods
+	public String getPropertySecond() {
+		return propertySecond;
+	}
+	public void setPropertySecond(String propertySecond) {
+		this.propertySecond = propertySecond;
+	}
+	
 	public long getProductId() {
 		return productId;
 	}

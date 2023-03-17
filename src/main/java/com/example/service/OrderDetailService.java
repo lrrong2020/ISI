@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.dao.OrderDetailDao;
 import com.example.model.OrderDetail;
 import com.example.model.OrderDetailId;
+import com.example.model.Product;
 import com.example.model.PurchaseOrder;
 
 @Service
@@ -23,12 +24,23 @@ public class OrderDetailService {
 	public OrderDetail getOrderDetail(OrderDetailId id) {
 		return dao.findById(id).orElseThrow();
 	}
-	public List<OrderDetail> getAllOrderDetail() {
-		return dao.findAll();
+	public List<OrderDetail> getAllOrderDetail(long orderNumber) {
+		return dao.findByPurchaseOrderNumber(orderNumber);
 	}
 	public String deleteOrderDetail(OrderDetail detail) {
 		dao.delete(detail);
 		return "Purchase order "+ detail.getOrder().getPurchaseOrderNumber() + "product " + detail.getProduct().getProductId()
 				+ "is deleted successfully!";
+	}
+	public String deleteOrderDetailById(long orderNumber) {
+		List<OrderDetail> orderDetail = dao.findByPurchaseOrderNumber(orderNumber);
+		for(OrderDetail detail:orderDetail) {
+			dao.delete(detail);
+		}
+		return "Purchase order "+ orderNumber + "is deleted successfully!";
+	}
+	public String addProductToOrderDetail(OrderDetail detail, Product product) {
+		detail.setProduct(product);
+		return "Add product "+product.getProductName() + "Successfully!";
 	}
 }

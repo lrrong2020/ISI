@@ -17,5 +17,5 @@ public interface ShoppingcartDao extends JpaRepository<Shoppingcart, Shoppingcar
 	
     void deleteByCustomer(Customer customer);
     
-    void deleteByProduct(Product product);
+    //void deleteByProduct(Product product);
 }

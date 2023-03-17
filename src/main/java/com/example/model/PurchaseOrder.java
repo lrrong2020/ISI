@@ -1,6 +1,8 @@
 package com.example.model;
 
-import java.sql.Date;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,12 +21,13 @@ public class PurchaseOrder {
 	@Column(name = "purchase_order_number")
 	private long purchaseOrderNumber;
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date purchaseDate;
 	
 	private int totalAmount;
 	
 	private String status;
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
 	
