@@ -31,6 +31,11 @@ export default {
     },
     toOrderDetail(orderId) {
       this.$router.push({ name: 'OrderDetail', params: { id: orderId } });
+      const payload = {
+        customerId: this.User.currentUser.customerId,
+        orderId: orderId,
+      }
+      this.$store.dispatch('Order/getOrderDetail', payload);
     }
   }
 }
