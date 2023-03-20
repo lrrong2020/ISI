@@ -1,11 +1,14 @@
 package com.example.model;
 
+
+
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 
 @Entity
 public class Product {
@@ -32,19 +35,25 @@ public class Product {
 	@Nonnull
 	private String url;
 	
+	@Column(nullable = true)
+    private String photo;
 	
+
 
 	//constructors
 	public Product() {};
-	public Product(long productId, String productName, int price, String property, String brand, String propertySecond, String url) {
+
+	public Product(long productId, String productName, int price, String property, String brand, String propertySecond, String photo) {
 		this.productId = productId;
-		this.productName = productName;
+		this.productName = productName.trim();
 		this.price = price;
-		this.property = property;
-		this.propertySecond = propertySecond;
-		this.brand = brand;
-		this.url = url;
+		this.property = property.trim();
+		this.propertySecond = propertySecond.trim();
+		this.brand = brand.trim();
+		this.photo = photo;
 		
+		System.out.println("New Product");
+		System.out.println(photo.toString());
 	}
 	
 	//methods
@@ -89,13 +98,7 @@ public class Product {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-	
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
+
 	
 	/*public int getQuantity() {
 		return quantity;
@@ -104,4 +107,23 @@ public class Product {
 		this.quantity = quantity;
 	}
 	*/
+	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
+	//for debug
+	public String toString() {
+		return "productId: " + this.getProductId() +
+				"productName: " + this.getProductName() +
+				"brand: " + this.getBrand() +
+				"price: " + this.getPrice() +
+				"property: " + this.getProperty() +
+				"property: " + this.getPropertySecond() +
+				"photo: " + this.getPhoto()
+				;
+	}
 }

@@ -63,10 +63,14 @@ public class PurchaseOrderController {
 			int customerId = customer.getCustomerId();
 			existOrder.setCustomer(customerService.getCustomer(customerId));
 		}
-		existOrder.setPurchaseDate(order.getPurchaseDate());
-		existOrder.setShipmentDate(order.getShipmentDate());
-		existOrder.setStatus(order.getStatus());
-		existOrder.setTotalAmount(order.getTotalAmount());
+		if(order.getPurchaseDate()!=null)
+			existOrder.setPurchaseDate(order.getPurchaseDate());
+		if(order.getShipmentDate()!=null)
+			existOrder.setShipmentDate(order.getShipmentDate());
+		if(order.getStatus()!=null)
+			existOrder.setStatus(order.getStatus());
+		if(order.getTotalAmount()!=0)
+			existOrder.setTotalAmount(order.getTotalAmount());
 		entityManager.persist(existOrder);
 		return existOrder;
 	}

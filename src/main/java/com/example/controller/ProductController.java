@@ -24,9 +24,11 @@ public class ProductController {
 	
 	@PostMapping("/add")
 	public Product addProduct(@RequestBody Product product) {
+		System.out.println(product.toString());
 		
 		return productService.addProduct(product);
 	}
+	
 	
 	@GetMapping("/{productId}")
 	public Product getProduct(@PathVariable long productId) {

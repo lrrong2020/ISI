@@ -128,6 +128,7 @@ public class ShoppingcartController {
 		List<Shoppingcart> shoppingcartRecords = getShoppingcart(customerId);
 		for(Shoppingcart cart:shoppingcartRecords) {
 			Date purchaseDate = new Date();
+			System.out.print(purchaseDate.toLocaleString());
 			String status = "pending";
 			Customer customer = customerService.getCustomer(customerId);
 			newOrder.setCustomer(customer);

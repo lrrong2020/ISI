@@ -56,9 +56,11 @@ public class ProductService {
 		if(product.getPropertySecond()!=null) {
 			existProduct.setPropertySecond(product.getPropertySecond());
 		}
-		if(product.getUrl()!=null) {
-			existProduct.setUrl(product.getUrl());
+		
+		if(product.getPhoto()!=null) {
+			existProduct.setPhoto(product.getPhoto());
 		}
+
 		
 		dao.save(existProduct);
 		return existProduct;
