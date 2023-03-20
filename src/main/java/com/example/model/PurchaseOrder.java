@@ -29,6 +29,7 @@ public class PurchaseOrder {
     private Customer customer;
 	
 	private Date shipmentDate;
+	
 	public PurchaseOrder() {};
 	public PurchaseOrder(long purchaseOrderNumber, Date purchaseDate, int totalAmount, String status,
 			Customer customer, Date shipmentDate) {
@@ -38,6 +39,7 @@ public class PurchaseOrder {
 		this.status = status;
 		this.customer = customer;
 		this.shipmentDate = shipmentDate;
+		
 	}
 
 	public Customer getCustomer() {
@@ -85,5 +87,7 @@ public class PurchaseOrder {
 	public void setShipmentDate(Date shipmentDate) {
 		this.shipmentDate = shipmentDate;
 	}
+	
+	
 	
 }
