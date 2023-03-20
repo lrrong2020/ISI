@@ -12,7 +12,7 @@
       <van-field 
       v-model="property" 
       name="property"
-      label="Property1" 
+      label="Color " 
       placeholder="What color?" 
       :rules="[{ required: true, message: 'Property is required' }]"
       />
@@ -20,7 +20,7 @@
       <van-field 
       v-model="propertySecond" 
       name="propertySecond"
-      label="Property2" 
+      label="Size" 
       placeholder="What size?" 
       :rules="[{ required: true, message: 'Property Second is required' }]"
       />
