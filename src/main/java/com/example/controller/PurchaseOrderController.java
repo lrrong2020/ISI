@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +68,13 @@ public class PurchaseOrderController {
 			existOrder.setPurchaseDate(order.getPurchaseDate());
 		if(order.getShipmentDate()!=null)
 			existOrder.setShipmentDate(order.getShipmentDate());
-		if(order.getStatus()!=null)
-			existOrder.setStatus(order.getStatus());
+		if(order.getStatus()!=null) {
+			String status = order.getStatus();
+			existOrder.setStatus(status); 
+			if (status=="cancelled") {
+				existOrder.setCancelDate(new Date());
+			}
+		}
 		if(order.getTotalAmount()!=0)
 			existOrder.setTotalAmount(order.getTotalAmount());
 		entityManager.persist(existOrder);

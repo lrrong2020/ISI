@@ -2,8 +2,6 @@ package com.example.model;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +19,6 @@ public class PurchaseOrder {
 	@Column(name = "purchase_order_number")
 	private long purchaseOrderNumber;
 	
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date purchaseDate;
 	
 	private int totalAmount;
@@ -33,16 +30,18 @@ public class PurchaseOrder {
 	
 	private Date shipmentDate;
 	
+	
+	private Date cancelDate;
 	public PurchaseOrder() {};
 	public PurchaseOrder(long purchaseOrderNumber, Date purchaseDate, int totalAmount, String status,
-			Customer customer, Date shipmentDate) {
+			Customer customer, Date shipmentDate, Date cancelDate) {
 		this.purchaseOrderNumber = purchaseOrderNumber;
 		this.purchaseDate = purchaseDate;
 		this.totalAmount = totalAmount;
 		this.status = status;
 		this.customer = customer;
 		this.shipmentDate = shipmentDate;
-		
+		this.cancelDate = cancelDate;
 	}
 
 	public Customer getCustomer() {
@@ -91,6 +90,12 @@ public class PurchaseOrder {
 		this.shipmentDate = shipmentDate;
 	}
 	
+	public Date getCancelDate() {
+		return cancelDate;
+	}
 	
+	public void setCancelDate(Date cancelDate) {
+		this.cancelDate = cancelDate;
+	}
 	
 }
