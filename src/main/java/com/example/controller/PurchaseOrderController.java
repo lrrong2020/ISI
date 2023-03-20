@@ -71,7 +71,7 @@ public class PurchaseOrderController {
 		if(order.getStatus()!=null) {
 			String status = order.getStatus();
 			existOrder.setStatus(status); 
-			if (status=="cancelled") {
+			if (status.equals("cancelled")) {
 				existOrder.setCancelDate(new Date());
 			}
 		}
