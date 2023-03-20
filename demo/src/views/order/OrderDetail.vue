@@ -6,6 +6,8 @@ export default {
   data() {
     return {
       currentOrder: [],
+      purchaseDate: '',
+      cancelDate: '',
     }
   },
   created() {
@@ -22,17 +24,17 @@ export default {
       };
       await this.$store.dispatch('Order/getOrderDetail', payload);
     },
-    onClickLeft() {
-      //router go to product list page
-      this.$router.push({ name: 'OrderList' });
-    },
     async handleCancelOrder() {
       const payload = {
         customerId: this.User.currentUser.customerId,
         orderId: this.$route.params.id,
       };
       await this.$store.dispatch('Order/cancelOrder', payload);
-    }
+    },
+    onClickLeft() {
+      //router go to product list page
+      this.$router.push({ name: 'OrderList' });
+    },
   }
 }
 </script>
@@ -60,6 +62,10 @@ export default {
       <div class="status-item">
         <label>Purchase Date: </label>
         <span>{{ Order.OrderDetail[0].order.purchaseDate }}</span>
+      </div>
+      <div class="status-item" v-if="Order.OrderDetail[0].order.status == 'cancelled'">
+        <label>Cancel Date: </label>
+        <span>{{ Order.OrderDetail[0].order.cancelDate }}</span>
       </div>
       <van-button v-if="Order.OrderDetail[0].order.status == 'pending' || Order.OrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
     </div>
