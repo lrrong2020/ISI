@@ -119,21 +119,20 @@ export default {
   <div class="bg">
     <div class="swipe">
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#1989fa">
-        <van-swipe-item v-for="img in 3" :key="img">
+        <van-swipe-item v-for="img in 1" :key="img">
           <img :src="this.Detail.photo" height="250" width="250" style="padding-top: 40px;">
         </van-swipe-item>
       </van-swipe>
     </div>
     <div class="main">
-      <div class="price">
-        <p><van-tag plain type="danger">Price</van-tag> ${{this.Detail.price}}</p>
-      </div>
       <div class="name">
         <p>{{ this.Detail.productName }}</p>
+        <p>Brand: {{ this.Detail.brand }}</p>
       </div>
-      <div class="desc">
-        <p><van-tag plain type="primary">{{ this.Detail.brand }}</van-tag>{{ this.Detail.productName }}</p>
+      <div class="price">
+        <h1>${{this.Detail.price}}</h1>
       </div>
+      
     </div>
     <div class="prop">
       <van-tabs v-model:active="active" swipeable>
@@ -171,9 +170,14 @@ export default {
   }
   .main{
     border-radius: 15px;
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     .name{
-      font-size: 20px;
+      margin: 0px;
+    }
+    .price{
+      color: red;
+      margin: 0px;
+      font-size: 15px;
     }
     .desc{
       font-size: 15px;
