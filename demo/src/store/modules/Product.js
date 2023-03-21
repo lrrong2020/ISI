@@ -101,11 +101,17 @@ export default {
 
 
         //1. if it is a single object, then wrap it with an array
-        const responseDataArr = [];
-        responseDataArr.push(response.data);
-        console.log("responseDataArr");
-        console.log(responseDataArr);
-        context.commit('Search', responseDataArr);
+        if(!Array.isArray(response.data)){
+          const responseDataArr = [];
+          responseDataArr.push(response.data);
+          console.log("responseDataArr");
+          console.log(responseDataArr);
+          context.commit('Search', responseDataArr);
+        }
+        else{
+          context.commit('Search', response.data);
+        }
+
 
 
         //2. else if it is an array, just commit data itself
