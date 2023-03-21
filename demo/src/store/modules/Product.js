@@ -90,7 +90,6 @@ export default {
     //   });
     // },
     searchProduct(context,searchValue){
-
       console.log(searchValue);
       axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=${searchValue}`)
       .then((response)=>{
@@ -121,8 +120,11 @@ export default {
       });
     },
 
-    filterProductByBrand(context, brand){
-      console.log();
+    filterProductByBrand(context, brand, isSearching){
+      if(isSearching){
+        console.log("isSearching");
+        context.commit('SetProductList', state.productList.filter(x => x.brand = brand));
+      }
 
       axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=` + brand)
       .then((response)=>{

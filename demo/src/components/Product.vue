@@ -73,11 +73,16 @@ export default {
     filterByBrand(event){
       this.isFiltering = true;
 
+      //filter based on searching
+      if(this.searchValue){
+        this.$store.dispatch('Product/filterProductByBrand', event.target.id, true);
+      }
+
       console.log("this.isFiltering after filter: ");
       console.log(this.isFiltering);
 
       console.log(event.target.id);
-      this.$store.dispatch('Product/filterProductByBrand', event.target.id);
+      this.$store.dispatch('Product/filterProductByBrand', event.target.id, false);
 
     },
 
