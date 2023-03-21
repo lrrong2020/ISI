@@ -39,7 +39,7 @@ export default {
     return {
       totalItems: 0,
       currentPage: 1,
-      itemsPerPage: 5,
+      itemsPerPage: 1,
       page: null,
       //search
       searchValue: '',
@@ -101,7 +101,7 @@ export default {
     },
     pagechange(page) {
       this.currentPage = page;
-      this.getProductList();
+      // this.getProductList();
     },
     toPage(page) {
       this.currentPage = page;
