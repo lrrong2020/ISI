@@ -73,17 +73,30 @@ export default {
     filterByBrand(event){
       this.isFiltering = true;
 
+      console.log("this.searchValue", this.searchValue.length);
+
+      var params = [];
+
+      params.push(event.target.id);
+
+
       //filter based on searching
-      if(this.searchValue){
-        this.$store.dispatch('Product/filterProductByBrand', event.target.id, true);
+      if(this.searchValue.length > 0){
+        console.log("this.searchValue.length > 0");
+        params.push(true);
+        this.$store.dispatch('Product/filterProductByBrand', params);
       }
 
+      else{
+      console.log("this.searchValue.length <= 0");
       console.log("this.isFiltering after filter: ");
       console.log(this.isFiltering);
 
       console.log(event.target.id);
-      this.$store.dispatch('Product/filterProductByBrand', event.target.id, false);
 
+      params.push(false);
+      this.$store.dispatch('Product/filterProductByBrand', params);
+      }
     },
 
     resetFilter(){
