@@ -27,12 +27,12 @@ export default {
     getOrderList() {
       this.$store.dispatch('Vendor/getVendorOrderList');
     },
-    toOrderDetail(orderId, customerId) {
+    async toOrderDetail(orderId, customerId) {
       const payload = {
         customerId: customerId,
         orderId: orderId,
       }
-      this.$store.dispatch('Vendor/getVendorOrderDetail', payload);
+      await this.$store.dispatch('Vendor/getVendorOrderDetail', payload);
       this.$router.push({ name: 'VendorOrderDetail', params: { id: orderId } });
     }
   }

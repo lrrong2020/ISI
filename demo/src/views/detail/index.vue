@@ -30,13 +30,15 @@ export default {
   //   console.log(this.Detail);
   // },
   computed: {
-    ...mapState(['User','Cart']),
+    ...mapState(['User','Cart', 'Product']),
   },
   methods: {
     getDetail() {
-      axios.get(`http://127.0.0.1:8080/product/${this.$route.params.id}`).then((response) => {
-        this.Detail = response.data;
-      })
+      // axios.get(`http://127.0.0.1:8080/product/${this.$route.params.id}`).then((response) => {
+      //   this.Detail = response.data;
+      // })
+      // this.$store.dispatch('Product/getProductDetail', this.$route.params.id);
+      this.Detail = this.Product.ProductDetail;
     },
     //Cart
     getCartItems() {

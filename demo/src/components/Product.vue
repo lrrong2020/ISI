@@ -111,7 +111,8 @@ export default {
       this.showList();
     },
 
-    toDetail(item) {
+    async toDetail(item) {
+      await this.$store.dispatch('Product/getProductDetail', item);
       this.$router.push({ name: 'Detail', params: { id: item } });
     },
     pagechange(page) {
@@ -120,7 +121,7 @@ export default {
     },
     toPage(page) {
       this.currentPage = page;
-      this.getProductList();
+      // this.getProductList();
       console.log(this.page);
       this.page = null;
     },

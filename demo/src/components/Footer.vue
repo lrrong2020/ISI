@@ -21,14 +21,29 @@ export default {
     ...mapState(['User']),
   },
   methods: {
+    toCart() {
+      if (this.User.currentUser.customerId == null) {
+        this.$router.push({ name: 'Login' });
+        return;
+      } else {
+        this.$router.push({ name: 'Cart'});
+      }  
+    },
+    toOrder() {
+      if (this.User.currentUser.customerId == null) {
+        this.$router.push({ name: 'Login' });
+        return;
+      } else {
+        this.$router.push({ name: 'OrderList'});
+      }  
+    },
     toAccount() {
       if (this.User.currentUser.customerId == null) {
         this.$router.push({ name: 'Login' });
         return;
       } else {
         this.$router.push({ name: 'Account', params: { id: this.User.currentUser.customerId } });
-      }
-      
+      }  
     },
   },
 }    
@@ -39,8 +54,8 @@ export default {
     <van-config-provider :theme-vars="themeVars">
       <van-tabbar :placeholder="true" :fixed="true" :z-index="1000" v-model="active" route>
         <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>
-        <van-tabbar-item replace to="/cart" icon="shopping-cart-o">Cart</van-tabbar-item>
-        <van-tabbar-item replace to="/orderList" icon="orders-o">Order</van-tabbar-item>
+        <van-tabbar-item replace icon="shopping-cart-o" @click="toCart">Cart</van-tabbar-item>
+        <van-tabbar-item replace icon="orders-o" @click="toOrder">Order</van-tabbar-item>
         <van-tabbar-item replace icon="user-circle-o" @click="toAccount">Account</van-tabbar-item>
       </van-tabbar>
     </van-config-provider>

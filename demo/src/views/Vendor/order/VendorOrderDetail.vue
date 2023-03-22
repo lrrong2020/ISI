@@ -84,7 +84,7 @@ export default {
         <span>${{ Vendor.VendorOrderDetail[0].order.totalAmount }}</span>
       </div>
       <div class="price-item">
-        <label>Username: </label>
+        <label>Customer Name: </label>
         <span>{{ Vendor.VendorOrderDetail[0].order.customer.customerName }}</span>
       </div>
       <div class="price-item">

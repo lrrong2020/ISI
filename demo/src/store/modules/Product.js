@@ -10,6 +10,7 @@ export default {
   state: {
     productList: [],
     errorMsg:"",
+    ProductDetail: {},
   },
   mutations: {
     //Set productList
@@ -26,9 +27,10 @@ export default {
       
       console.log("state.productList");
       console.log(state.productList);
-
-
-
+    },
+    //Set ProductDetail
+    SetProductDetail(state, data){
+      state.ProductDetail = data;
     },
     //search data from productList
     Search(state, data){
@@ -78,6 +80,20 @@ export default {
           context.commit('displayErrorMsg', error.stack.toString());
         });
     },
+    //Get ProductDetail from Backend
+    async getProductDetail(context, productId){
+      console.log("getProductDetail");
+      console.log(productId);
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/${productId}`)
+      .then((response)=>{
+        console.log("reponse.data in getProductDetail()");
+        console.log(response.data);
+        context.commit('SetProductDetail',response.data);
+      }).catch((error)=>{
+        alert(error.message);
+      });
+    },
+
     //Search Product
     // searchProduct(context,searchValue){
     //   console.log(searchValue);

@@ -87,7 +87,7 @@ export default {
     },
 
     toDetail(item) {
-      this.$router.push({ name: "ProductDetail", params: { id: item } });
+      this.$router.push({ name: "VendorProductDetail", params: { id: item } });
     },
 
     pagechange(page) {
@@ -97,7 +97,7 @@ export default {
 
     toPage(page) {
       this.currentPage = page;
-      this.getProductList();
+      // this.getProductList();
       console.log(this.page);
       this.page = null;
     },
@@ -110,11 +110,6 @@ export default {
     //search
     onSearch(val) {
       showToast(val);
-    },
-
-    //clear
-    showList() {
-      this.getProductList();
     },
 
     toAddProductPage() {
