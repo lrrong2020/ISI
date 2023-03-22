@@ -32,6 +32,10 @@ public class PurchaseOrderService {
 		return dao.findByCustomer(customer);
 	}
 	
+	public List<PurchaseOrder> getAllPurchaseOrder() {
+		return dao.findAll();
+	}
+	
 	public PurchaseOrder updatePurchaseOrder(long orderId, PurchaseOrder order) {
 		PurchaseOrder existOrder = dao.findById(orderId).orElse(null);
 	    if (existOrder != null) {
