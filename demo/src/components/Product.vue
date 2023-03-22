@@ -77,14 +77,16 @@ export default {
 
       var params = [];
 
+      params.push(this.searchValue);
       params.push(event.target.id);
+    
 
 
       //filter based on searching
       if(this.searchValue.length > 0){
         console.log("this.searchValue.length > 0");
-        params.push(true);
-        this.$store.dispatch('Product/filterProductByBrand', params);
+
+        this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
       }
 
       else{
@@ -95,7 +97,7 @@ export default {
       console.log(event.target.id);
 
       params.push(false);
-      this.$store.dispatch('Product/filterProductByBrand', params);
+      this.$store.dispatch('Product/filterProductByBrand', event.target.id);
       }
     },
 
