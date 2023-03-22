@@ -27,6 +27,7 @@ export default {
     async handleCancelOrder() {
       const payload = {
         customerId: this.User.currentUser.customerId,
+        customerName: this.User.currentUser.customerName,
         orderId: this.$route.params.id,
       };
       await this.$store.dispatch('Order/cancelOrder', payload);
@@ -66,6 +67,10 @@ export default {
       <div class="status-item" v-if="Order.OrderDetail[0].order.status == 'cancelled'">
         <label>Cancel Date: </label>
         <span>{{ Order.OrderDetail[0].order.cancelDate }}</span>
+      </div>
+      <div class="status-item" v-if="Order.OrderDetail[0].order.status == 'cancelled'">
+        <label>Canceled Person: </label>
+        <span>{{Order.OrderDetail[0].order.cancelPerson  }}</span>
       </div>
       <van-button v-if="Order.OrderDetail[0].order.status == 'pending' || Order.OrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
     </div>

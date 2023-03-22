@@ -147,7 +147,7 @@ export default {
     <div class="footer">
       <van-action-bar placeholder>
         <van-action-bar-icon icon="chat-o" text="客服" />
-        <van-action-bar-icon icon="cart-o" text="Cart" @click="goToCart" :badge="!Cart.CartTotalQuantity ? '' : Cart.CartTotalQuantity"/>
+        <van-action-bar-icon icon="cart-o" text="Cart" @click="goToCart" :badge="!Cart.CartTotal ? '' : Cart.CartTotal"/>
         <van-action-bar-button color="#be99ff" type="warning" text="Add to Cart" @click="addCartItem(Detail.productId)"/>
         <van-action-bar-button color="#7232dd" type="danger" text="Buy Now" @click="onClickButtonBuy(Detail.productId)"/>
       </van-action-bar>
