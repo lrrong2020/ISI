@@ -14,11 +14,16 @@ public interface ProductDao  extends JpaRepository<Product, Long>{
 	
 	
 	@Query("SELECT p FROM Product p WHERE " +
-			"p.productName LIKE CONCAT('%', :productName, '%')")
+			"p.productName LIKE LOWER(CONCAT('%', :productName, '%'))")
 	List<Product> findByProductName(@Param("productName") String productName);
 
 	
 	@Query("SELECT p FROM Product p WHERE " +
-			"p.brand LIKE :brand")
+			"p.brand LIKE LOWER(CONCAT('%', :brand, '%'))")
 	List<Product> findAllByProductBrand(@Param("brand") String brand);
+	
+	@Query("SELECT p FROM Product p WHERE " +
+			"p.brand LIKE LOWER(CONCAT('%', :brand, '%'))" +
+			" AND p.productName LIKE LOWER(CONCAT('%', :productName, '%'))")
+	List<Product> findAllByProductNameAndBrand(@Param("productName") String productName, @Param("brand") String brand );
 }

@@ -52,10 +52,17 @@ public class ProductController {
 	}
 	
 	@GetMapping("/search")
-	public List<Product> getProductByProductName(@RequestParam("productName") String productName) {
+	public List<Product> getProductByProductName(@RequestParam("productName") String productName, @RequestParam(value = "brand", required = false) String brand) {
 		System.out.println("productname" + productName);
 		
-		return productService.getProductByName(productName);
+		if(brand != null) {
+			System.out.println("brand: " + brand);
+			return productService.getProductByNameAndBrand(productName, brand);
+		}
+		else {
+			return productService.getProductByName(productName);
+		}
+
 	}
 	
 	@GetMapping("/filter")
