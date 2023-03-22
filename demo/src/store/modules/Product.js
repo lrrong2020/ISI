@@ -120,6 +120,37 @@ export default {
       });
     },
 
+    searchProductById(context, id){
+      console.log(id);
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/${id}`)
+      .then((response)=>{
+        console.log("reponse.data in searchProduct()");
+        console.log(response.data);
+
+        //see if the returned data type: array or object
+
+
+        //1. if it is a single object, then wrap it with an array
+        if(!Array.isArray(response.data)){
+          const responseDataArr = [];
+          responseDataArr.push(response.data);
+          console.log("responseDataArr");
+          console.log(responseDataArr);
+          context.commit('Search', responseDataArr);
+        }
+        else{
+          context.commit('Search', response.data);
+        }
+
+
+
+        //2. else if it is an array, just commit data itself
+        
+      }).catch((error)=>{
+        alert(error.message);
+      });
+    },
+
     searchProductAndFilterByBrand(context, params){
       var searchValue = params[0];
       var brand = params[1];

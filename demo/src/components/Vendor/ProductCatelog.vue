@@ -67,9 +67,23 @@ export default {
 
     //searchProduct
     searchProduct() {
-      this.$store.dispatch("Product/searchProduct", this.searchValue);
+      if (this.isNumeric(this.searchValue)){
+        this.$store.dispatch("Product/searchProductById", this.searchValue);
+      }
+      else {
+        this.$store.dispatch("Product/searchProduct", this.searchValue);
+      }
+
       // this.$store.dispatch('Product/getProductList');
       console.log(`search Product: ${this.searchValue}`);
+    },
+
+    isNumeric(str) {
+      if (typeof str != "string") return false;
+      return (
+        !isNaN(str) &&
+        !isNaN(parseFloat(str))
+      );
     },
 
     toDetail(item) {
@@ -103,9 +117,9 @@ export default {
       this.getProductList();
     },
 
-    toAddProductPage(){
+    toAddProductPage() {
       console.log("add product");
-      this.$router.push({ name: "VendorProductAdd", params: { } });
+      this.$router.push({ name: "VendorProductAdd", params: {} });
     },
   },
 };
@@ -129,10 +143,6 @@ export default {
     </template>
   </van-search>
 
-
-
-
-
   <van-button
     plain
     hairline
@@ -143,7 +153,6 @@ export default {
   >
     Add A New Item
   </van-button>
-
 
   <van-config-provider :theme-vars="themeVars">
     <!--全局样式-->
@@ -163,14 +172,10 @@ export default {
       class="card"
     >
       <template #tags>
-        <van-tag plain type="primary">tag1</van-tag>
-        <van-tag plain type="primary">tag2</van-tag>
+        <van-tag plain type="primary">{{ item.productId }}</van-tag>
       </template>
     </van-card>
-
-
   </van-config-provider>
-
 </template>
 
 <style lang="less" scoped>
