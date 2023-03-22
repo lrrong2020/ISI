@@ -120,21 +120,41 @@ export default {
       });
     },
 
-    filterProductByBrand(context, params, isSearching){
+    searchProductAndFilterByBrand(context, params){
+      var searchValue = params[0];
+      var brand = params[1];
 
-      var brand = params[0];
-      var isSearching = params[1];
+      console.log(searchValue);
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=${searchValue}&brand=${brand}`)
+      .then((response)=>{
+        console.log("reponse.data in searchProduct()");
+        console.log(response.data);
 
-      console.log("brand from params", params);
+        //see if the returned data type: array or object
 
-      if(isSearching){
-        console.log(context);
-        console.log("isSearching: ", params[1]);
-        context.commit('SetProductList', state.productList.filter(x => x.brand == brand));
-      }
-      else{
-        console.log(context);
-        console.log("isNotSearching: ", params[1]);
+
+        //1. if it is a single object, then wrap it with an array
+        if(!Array.isArray(response.data)){
+          const responseDataArr = [];
+          responseDataArr.push(response.data);
+          console.log("responseDataArr");
+          console.log(responseDataArr);
+          context.commit('Search', responseDataArr);
+        }
+        else{
+          context.commit('Search', response.data);
+        }
+
+
+
+        //2. else if it is an array, just commit data itself
+        
+      }).catch((error)=>{
+        alert(error.message);
+      });
+    },
+
+    filterProductByBrand(context, brand){
         axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=` + brand)
         .then((response)=>{
           console.log("reponse.data in filterProductByBrand()");
@@ -173,7 +193,7 @@ export default {
   
         
         context.commit();
-      }
+
     },
 
     vendorAddProduct(context, value){
