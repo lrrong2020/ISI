@@ -108,7 +108,7 @@ export default {
       console.log("this.isFiltering after reset: ");
       console.log(this.isFiltering);
 
-      this.showList();
+      this.getProductList();
     },
 
     async toDetail(item) {
@@ -128,15 +128,11 @@ export default {
     //After clear
     showList() {
       this.getProductList();
+      this.resetFilter();
     },
     //search
     onSearch(val) {
       showToast(val);
-    },
-
-    //clear
-    showList() {
-      this.getProductList();
     },
 
     // getProductList() {
@@ -169,7 +165,7 @@ export default {
     placeholder="Type to search"
     @search="onSearch"
     @clear="showList"
-
+    @update:modelValue="searchProduct"
     >
     <template #action>
       <div @click="searchProduct" class="button">Search</div>
