@@ -195,7 +195,12 @@ export default {
           Reset
   </van-button>
 
-  <van-config-provider :theme-vars="themeVars">
+  <!-- Empty -->
+  <div class="empty" v-if="Product.productList.length === 0">
+    <van-empty description="No Product" />
+  </div>
+
+  <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
   <!--全局样式-->
 
     <van-card

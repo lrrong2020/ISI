@@ -61,7 +61,7 @@ export default {
     .main{
       margin-top: -30px;
       .bg{
-        background-color: #c9c9c9;
+        background-color: #f1f1f1;
         padding: 10px 20px 0px 20px;
         border-radius: 30px 30px 0px 0px;
         
