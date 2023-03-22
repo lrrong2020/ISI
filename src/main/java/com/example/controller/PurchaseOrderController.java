@@ -73,6 +73,7 @@ public class PurchaseOrderController {
 			existOrder.setStatus(status); 
 			if (status.equals("cancelled")) {
 				existOrder.setCancelDate(new Date());
+				existOrder.setCancelPerson(order.getCancelPerson());
 			}
 		}
 		if(order.getTotalAmount()!=0)

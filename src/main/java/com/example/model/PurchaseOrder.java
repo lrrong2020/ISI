@@ -37,9 +37,12 @@ public class PurchaseOrder {
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date cancelDate;
 	
+
+	private String cancelPerson;
+
 	public PurchaseOrder() {};
 	public PurchaseOrder(long purchaseOrderNumber, Date purchaseDate, int totalAmount, String status,
-			Customer customer, Date shipmentDate, Date cancelDate) {
+			Customer customer, Date shipmentDate, Date cancelDate, String cancelPerson) {
 		this.purchaseOrderNumber = purchaseOrderNumber;
 		this.purchaseDate = purchaseDate;
 		this.totalAmount = totalAmount;
@@ -47,6 +50,7 @@ public class PurchaseOrder {
 		this.customer = customer;
 		this.shipmentDate = shipmentDate;
 		this.cancelDate = cancelDate;
+		this.cancelPerson = cancelPerson;
 	}
 
 	public Customer getCustomer() {
@@ -102,5 +106,13 @@ public class PurchaseOrder {
 	public void setCancelDate(Date cancelDate) {
 		this.cancelDate = cancelDate;
 	}
+	public String getCancelPerson() {
+		return cancelPerson;
+	}
+	public void setCancelPerson(String cancelPerson) {
+		this.cancelPerson = cancelPerson;
+	}
+	
+	
 	
 }
