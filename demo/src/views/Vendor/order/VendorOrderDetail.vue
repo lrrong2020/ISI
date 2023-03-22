@@ -5,42 +5,41 @@ export default {
   name: "OrderDetail",
   data() {
     return {
-      currentOrder: [],
-      purchaseDate: '',
-      cancelDate: '',
     }
   },
   created() {
-    this.getOrderDetail();
+
   },
   computed: {
-    ...mapState(['User','Order']),
+    ...mapState(['Vendor']),
   },
   methods: {
-    async getOrderDetail() {
-      const payload = {
-        customerId: this.User.currentUser.customerId,
-        orderId: this.$route.params.id,
-      };
-      await this.$store.dispatch('Order/getOrderDetail', payload);
-    },
     async handleCancelOrder() {
       const payload = {
-        customerId: this.User.currentUser.customerId,
-        customerName: this.User.currentUser.customerName,
+        customerId: this.Vendor.VendorOrderDetail[0].order.customer.customerId,
         orderId: this.$route.params.id,
       };
-      await this.$store.dispatch('Order/cancelOrder', payload);
+      await this.$store.dispatch('Vendor/cancelOrder', payload);
+    },
+    async handleShipOrder() {
+      const payload = {
+        customerId: this.Vendor.VendorOrderDetail[0].order.customer.customerId,
+        orderId: this.$route.params.id,
+      };
+      await this.$store.dispatch('Vendor/shipOrder', payload);
     },
     onClickLeft() {
       //router go to product list page
-      this.$router.push({ name: 'OrderList' });
+      this.$router.push({ name: 'VendorOrderList' });
     },
   }
 }
 </script>
 
 <template>
+  <!-- <div>
+    {{ Vendor.VendorOrderDetail }}
+  </div> -->
   <div class="bg">
     <div class="header">
       <van-nav-bar
@@ -54,46 +53,47 @@ export default {
     <div class="order-status">
       <div class="status-item">
         <label>Order Status:</label>
-        <span>{{ Order.OrderDetail[0].order.status }}</span>
+        <span>{{ Vendor.VendorOrderDetail[0].order.status }}</span>
       </div>
       <div class="status-item">
         <label>P.O.number: </label>
-        <span>{{ Order.OrderDetail[0].order.purchaseOrderNumber }}</span>
+        <span>{{ Vendor.VendorOrderDetail[0].order.purchaseOrderNumber }}</span>
       </div>
       <div class="status-item">
         <label>Purchase Date: </label>
-        <span>{{ Order.OrderDetail[0].order.purchaseDate }}</span>
+        <span>{{ Vendor.VendorOrderDetail[0].order.purchaseDate }}</span>
       </div>
-      <div class="status-item" v-if="Order.OrderDetail[0].order.status == 'cancelled'">
+      <div class="status-item" v-if="Vendor.VendorOrderDetail[0].order.status == 'cancelled'">
         <label>Cancel Date: </label>
-        <span>{{ Order.OrderDetail[0].order.cancelDate }}</span>
+        <span>{{ Vendor.VendorOrderDetail[0].order.cancelDate }}</span>
       </div>
-      <div class="status-item" v-if="Order.OrderDetail[0].order.status == 'cancelled'">
+      <div class="status-item" v-if="Vendor.VendorOrderDetail[0].order.status == 'cancelled'">
         <label>Canceled Person: </label>
-        <span>{{Order.OrderDetail[0].order.cancelPerson  }}</span>
+        <span>{{Vendor.VendorOrderDetail[0].order.cancelPerson  }}</span>
       </div>
-      <div class="status-item" v-if="Order.OrderDetail[0].order.status == 'shipped'">
+      <div class="status-item" v-if="Vendor.VendorOrderDetail[0].order.status == 'shipped'">
         <label>Shipment Date: </label>
-        <span>{{ Order.OrderDetail[0].order.shipmentDate }}</span>
+        <span>{{ Vendor.VendorOrderDetail[0].order.shipmentDate }}</span>
       </div>
-      <van-button v-if="Order.OrderDetail[0].order.status == 'pending' || Order.OrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
+      <van-button style="margin-bottom: 15px; margin-top: 20px;" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleShipOrder()">Ship Order</van-button>
+      <van-button v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
     </div>
     <div class="order-price">
       <div class="price-item">
         <label>Total Amount: </label>
-        <span>${{ Order.OrderDetail[0].order.totalAmount }}</span>
+        <span>${{ Vendor.VendorOrderDetail[0].order.totalAmount }}</span>
       </div>
       <div class="price-item">
         <label>Username: </label>
-        <span>{{ Order.OrderDetail[0].order.customer.customerName }}</span>
+        <span>{{ Vendor.VendorOrderDetail[0].order.customer.customerName }}</span>
       </div>
       <div class="price-item">
         <label>Shipping Address: </label>
-        <span>{{ Order.OrderDetail[0].order.customer.shippingAddress }}</span>
+        <span>{{ Vendor.VendorOrderDetail[0].order.customer.shippingAddress }}</span>
       </div>
     </div>
     <van-card
-      v-for="item in Order.OrderDetail"
+      v-for="item in Vendor.VendorOrderDetail"
       :key="item"
       style="background: #fff"
       :num="item.quantity"
@@ -107,9 +107,6 @@ export default {
     </template>
     </van-card>
   </div>
-  <!-- <div>
-    {{ currentOrder[0].order.status }}
-  </div> -->
 </template>
 
 <style lang="less" scoped>

@@ -1,6 +1,4 @@
 <script>
-import { showSuccessToast, showFailToast } from 'vant';
-import { ref } from 'vue';
 import { mapState } from 'vuex';
 
 export default {
@@ -10,8 +8,9 @@ export default {
       value1: 0,
       option1: [
         { text: 'All orders', value: 0 },
-        { text: 'Current Purchases', value: 1 },
-        { text: 'Past Purchases', value: 2 },
+        { text: 'Pending orders', value: 1 },
+        { text: 'Orders on hold', value: 2 },
+        { text: 'Past orders', value: 3 },
       ],
     }
   },
@@ -19,23 +18,22 @@ export default {
     this.getOrderList();
   },
   computed: {
-    ...mapState(['Cart', 'User', 'Order']),
+    ...mapState(['Vendor']),
     reverseOrderList() {
-      return this.Order.OrderList.reverse();
+      return this.Vendor.VendorOrderList.reverse();
     }
   },
   methods: {
     getOrderList() {
-      const customerId = this.User.currentUser.customerId;
-      this.$store.dispatch('Order/getOrderList', customerId);
+      this.$store.dispatch('Vendor/getVendorOrderList');
     },
-    async toOrderDetail(orderId) {
+    toOrderDetail(orderId, customerId) {
       const payload = {
-        customerId: this.User.currentUser.customerId,
+        customerId: customerId,
         orderId: orderId,
       }
-      await this.$store.dispatch('Order/getOrderDetail', payload);
-      this.$router.push({ name: 'OrderDetail', params: { id: orderId } });
+      this.$store.dispatch('Vendor/getVendorOrderDetail', payload);
+      this.$router.push({ name: 'VendorOrderDetail', params: { id: orderId } });
     }
   }
 }
@@ -64,18 +62,20 @@ export default {
         center 
         size="large"
         is-link 
-        @click="toOrderDetail(order.purchaseOrderNumber)">
+        @click="toOrderDetail(order.purchaseOrderNumber, order.customer.customerId)">
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
+          <br/>
+          <span class="custom-title">Customer: {{ order.customer.customerName }}</span>
           <br/>
           <van-tag type="primary">{{ order.status }}</van-tag>
         </template>
       </van-cell>
     </div>
-    <!-- Current purchases -->
-    <div class="current" v-if="this.value1 == 1">
-      <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'pending' || obj.status === 'hold'})" :key="order" 
+    <!-- Pending -->
+    <div class="pending" v-if="this.value1 == 1">
+      <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'pending'})" :key="order" 
         :value="'$' + order.totalAmount" 
         :label="order.purchaseDate"
         center 
@@ -86,12 +86,51 @@ export default {
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
           <br/>
+          <span class="custom-title">Customer: {{ order.customer.customerName }}</span>
+          <br/>
           <van-tag type="primary">{{ order.status }}</van-tag>
         </template>
       </van-cell>
     </div>
+    <!-- Hold -->
+    <div class="hold" v-if="this.value1 == 2">
+      <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'hold'})" :key="order" 
+        :value="'$' + order.totalAmount" 
+        :label="order.purchaseDate"
+        center 
+        size="large"
+        is-link 
+        @click="toOrderDetail(order.purchaseOrderNumber)">
+        <!-- 使用 title 插槽来自定义标题 -->
+        <template #title>
+          <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
+          <br/>
+          <span class="custom-title">Customer: {{ order.customer.customerName }}</span>
+          <br/>
+          <van-tag type="primary">{{ order.status }}</van-tag>
+        </template>
+      </van-cell>
+    </div>
+
+    <!-- Current purchases -->
+    <!-- <div class="current" v-if="this.value1 == 1">
+      <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'pending' || obj.status === 'hold'})" :key="order" 
+        :value="'$' + order.totalAmount" 
+        :label="order.purchaseDate"
+        center 
+        size="large"
+        is-link 
+        @click="toOrderDetail(order.purchaseOrderNumber)">
+        <template #title>
+          <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
+          <br/>
+          <van-tag type="primary">{{ order.status }}</van-tag>
+        </template>
+      </van-cell>
+    </div> -->
+
     <!-- Past purchases -->
-    <div class="past" v-if="this.value1 == 2">
+    <div class="past" v-if="this.value1 == 3">
       <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'shipped' || obj.status === 'cancelled'})" :key="order" 
         :value="'$' + order.totalAmount" 
         :label="order.purchaseDate"
@@ -102,6 +141,8 @@ export default {
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
+          <br/>
+          <span class="custom-title">Customer: {{ order.customer.customerName }}</span>
           <br/>
           <van-tag type="primary">{{ order.status }}</van-tag>
         </template>
@@ -116,6 +157,12 @@ export default {
     vertical-align: middle;
 }
 .allorders {
+    margin-top: 10px;
+}
+.pending {
+    margin-top: 10px;
+}
+.hold {
     margin-top: 10px;
 }
 .current {

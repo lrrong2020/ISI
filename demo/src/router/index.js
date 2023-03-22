@@ -5,15 +5,7 @@ import VendorHome from '@/views/Vendor/home/index.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/Vendor/',
-      name: 'VendorHome',
-      components: {
-        default: VendorHome,
-        Footer: () => import('@/components/Vendor/VendorFooter.vue'),
-      }
-    },
-
+    //Customer
     {
       path: '/',
       name: 'Home',
@@ -22,7 +14,6 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       }
     },
-
     {
       path: '/cart',
       name: 'Cart',
@@ -34,7 +25,6 @@ const router = createRouter({
         requireAuth: true
       }
     },
-
     {
       path: '/account/:id',
       name: 'Account',
@@ -46,7 +36,6 @@ const router = createRouter({
         requireAuth: true
       }
     },
-
     {
       path: '/login',
       name: 'Login',
@@ -54,7 +43,6 @@ const router = createRouter({
         default: () => import('@/views/account/Login.vue'),
       }
     },
-
     {
       path: '/signup',
       name: 'Signup',
@@ -62,7 +50,6 @@ const router = createRouter({
         default: () => import('@/views/account/SignUp.vue'),
       }
     },
-
     {
       path: '/detail/:id',
       name: 'Detail',
@@ -71,18 +58,6 @@ const router = createRouter({
         Header: () => import('@/components/Header.vue'),
       }
     },
-
-
-    {
-      path: '/Vendor/detail/:id',
-      name: 'VendorProductDetail',
-      components: {
-        default: () => import('@/views/Vendor/detail/index.vue'),
-        Header: () => import('@/components/Vendor/VendorHeader.vue'),
-      }
-    },
-
-
     {
       path: '/orderList',
       name: 'OrderList',
@@ -92,17 +67,6 @@ const router = createRouter({
       },
       meta: {
         requireAuth: true
-
-      }
-    },
-
-    {
-
-      path: '/Vendor/add',
-      name: 'VendorProductAdd',
-      components: {
-        default: () => import('@/views/Vendor/add/addProduct.vue'),
-        Header: () => import('@/components/Vendor/VendorHeader.vue'),
       }
     },
     {
@@ -113,22 +77,8 @@ const router = createRouter({
       },
       meta: {
         requireAuth: true
-
       }
     },
-
-    {
-
-      path: '/Vendor/add/success',
-      name: 'VendorProductAddSuccess',
-      components: {
-        default: () => import('@/views/Vendor/add/addProductSuccess.vue'),
-        Header: () => import('@/components/Vendor/VendorHeader.vue'),
-      }
-    },
-
-
-
     {
       path: '/orderDetail/:id',
       name: 'OrderDetail',
@@ -138,7 +88,56 @@ const router = createRouter({
       meta: {
         requireAuth: true
       }
-    }
+    },
+
+    //Vendor
+    {
+      path: '/Vendor/',
+      name: 'VendorHome',
+      components: {
+        default: VendorHome,
+        Footer: () => import('@/components/Vendor/VendorFooter.vue'),
+      }
+    },
+    {
+      path: '/Vendor/detail/:id',
+      name: 'VendorProductDetail',
+      components: {
+        default: () => import('@/views/Vendor/detail/index.vue'),
+        Header: () => import('@/components/Vendor/VendorHeader.vue'),
+      }
+    },
+    {
+      path: '/Vendor/add',
+      name: 'VendorProductAdd',
+      components: {
+        default: () => import('@/views/Vendor/add/addProduct.vue'),
+        Header: () => import('@/components/Vendor/VendorHeader.vue'),
+      }
+    },
+    {
+      path: '/Vendor/add/success',
+      name: 'VendorProductAddSuccess',
+      components: {
+        default: () => import('@/views/Vendor/add/addProductSuccess.vue'),
+        Header: () => import('@/components/Vendor/VendorHeader.vue'),
+      }
+    },
+    {
+      path: '/Vendor/orderList',
+      name: 'VendorOrderList',
+      components: {
+        default: () => import('@/views/Vendor/order/index.vue'),
+        Footer: () => import('@/components/Vendor/VendorFooter.vue'),
+      },
+    },
+    {
+      path: '/Vendor/orderDetail/:id',
+      name: 'VendorOrderDetail',
+      components: {
+        default: () => import('@/views/Vendor/order/VendorOrderDetail.vue'),
+      },
+    },
 
 
   ]

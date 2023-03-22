@@ -3,6 +3,7 @@ import Product from './modules/Product.js'
 import Cart from './modules/Cart.js'
 import User from './modules/User.js'
 import Order from './modules/Order.js'
+import Vendor from './modules/VendorOrder.js'
 
 export default createStore({
 
@@ -11,6 +12,7 @@ export default createStore({
     Cart: Cart,
     User: User,
     Order: Order,
+    Vendor: Vendor,
   }
 
 })

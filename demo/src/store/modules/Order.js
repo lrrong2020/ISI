@@ -7,7 +7,7 @@ export default {
   namespaced: true,
   state: {
     OrderList: [],
-    OrderDetail: {},
+    OrderDetail: [],
   },
   mutations: {
     setOrderList(state, OrderList) {
