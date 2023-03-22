@@ -52,7 +52,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/search")
-	public Product getProductByProductName(@RequestParam("productName") String productName) {
+	public List<Product> getProductByProductName(@RequestParam("productName") String productName) {
 		System.out.println("productname" + productName);
 		
 		return productService.getProductByName(productName);

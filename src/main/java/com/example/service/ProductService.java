@@ -76,15 +76,12 @@ public class ProductService {
 	
 	//search by product name
 	
-	public Product getProductByName(String productNameQuery) {
+	public List<Product> getProductByName(String productNameQuery) {
 		System.out.println("Searching for: " + productNameQuery);
 		
-		Product product = dao.findByProductName(productNameQuery);
-		
-		System.out.println("Found Product Id: " + product.getProductId());
-
-		
-		return product;
+		List<Product> productResList = dao.findByProductName(productNameQuery);
+				
+		return productResList;
 	}
 
 	public List<Product> getProductsByBrand(String brand) {
