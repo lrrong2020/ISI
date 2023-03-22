@@ -50,8 +50,11 @@ export default {
         console.log(error);
       })
     },
-    async cancelOrder(context, {customerId, orderId}) {
-      const cancel = { status: "cancelled" };
+    async cancelOrder(context, {customerId, customerName, orderId}) {
+      const cancel = { 
+        status: "cancelled", 
+        cancelPerson: customerName + " " + "(customer)", 
+      };
       await axios({
         method: 'post',
         url:`${API_HOST_ANDROID_RUNNABLE}/customer/${customerId}/order/${orderId}`,
