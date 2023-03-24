@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -25,6 +26,8 @@ public class PurchaseOrderService {
 	    if (order != null) {
 	        Hibernate.initialize(order);
 	    }
+	    System.out.println("Datteeeeeeeeeeeee:" + order.getShipmentDate());
+	    
 		return order;
 	}
 	
@@ -41,14 +44,14 @@ public class PurchaseOrderService {
 	    if (existOrder != null) {
 	        Hibernate.initialize(existOrder);
 	    }
-	    if(order.getPurchaseDate()!=null)
-	    	existOrder.setPurchaseDate(order.getPurchaseDate());
+	    //if(order.getPurchaseDate()!=null)
+	    	//existOrder.setPurchaseDate(order.getPurchaseDate());
 	    if(order.getStatus()!=null)
 	    	existOrder.setStatus(order.getStatus());
 	    if(order.getTotalAmount()!=existOrder.getTotalAmount())
 	    	existOrder.setTotalAmount(order.getTotalAmount());
 	    if(order.getShipmentDate()!=null && existOrder.getStatus()=="shipped")
-	    	existOrder.setShipmentDate(order.getShipmentDate());
+	    	existOrder.setShipmentDate(new Date(order.getShipmentDate()));
 	    if(order.getCustomer()!=null) {
 	    	Customer customer = order.getCustomer();
 	    	//if(customer.)

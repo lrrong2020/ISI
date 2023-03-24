@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,7 +24,7 @@ public class PurchaseOrder {
 	private long purchaseOrderNumber;
 	
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Date purchaseDate;
+	private String purchaseDate;
 	
 	private int totalAmount;
 	
@@ -31,18 +33,18 @@ public class PurchaseOrder {
 	@JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
 	
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Date shipmentDate;
+	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private String shipmentDate;
 	
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Date cancelDate;
+	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private String cancelDate;
 	
 
 	private String cancelPerson;
 
 	public PurchaseOrder() {};
-	public PurchaseOrder(long purchaseOrderNumber, Date purchaseDate, int totalAmount, String status,
-			Customer customer, Date shipmentDate, Date cancelDate, String cancelPerson) {
+	public PurchaseOrder(long purchaseOrderNumber, String purchaseDate, int totalAmount, String status,
+			Customer customer, String shipmentDate, String cancelDate, String cancelPerson) {
 		this.purchaseOrderNumber = purchaseOrderNumber;
 		this.purchaseDate = purchaseDate;
 		this.totalAmount = totalAmount;
@@ -67,12 +69,14 @@ public class PurchaseOrder {
 		this.purchaseOrderNumber = purchaseOrderNumber;
 	}
 
-	public Date getPurchaseDate() {
+	public String getPurchaseDate() {
 		return purchaseDate;
 	}
 
 	public void setPurchaseDate(Date purchaseDate) {
-		this.purchaseDate = purchaseDate;
+		Timestamp newDate = new Timestamp(purchaseDate.getTime());
+		String s = new SimpleDateFormat("MM/dd/yyyyHH:mm:ss").format(newDate);
+		this.purchaseDate = s;
 	}
 
 	public int getTotalAmount() {
@@ -91,20 +95,25 @@ public class PurchaseOrder {
 		this.status = status;
 	}
 
-	public Date getShipmentDate() {
+	public String getShipmentDate() {
 		return shipmentDate;
 	}
 
 	public void setShipmentDate(Date shipmentDate) {
-		this.shipmentDate = shipmentDate;
+		Timestamp newDate = new Timestamp(shipmentDate.getTime());
+		String s = new SimpleDateFormat("MM/dd/yyyyHH:mm:ss").format(newDate);
+		System.out.println("SimpleDateFormat:" + s);
+		this.shipmentDate = s;
 	}
 	
-	public Date getCancelDate() {
+	public String getCancelDate() {
 		return cancelDate;
 	}
 	
 	public void setCancelDate(Date cancelDate) {
-		this.cancelDate = cancelDate;
+		Timestamp newDate = new Timestamp(cancelDate.getTime());
+		String s = new SimpleDateFormat("MM/dd/yyyyHH:mm:ss").format(newDate);
+		this.cancelDate = s;
 	}
 	public String getCancelPerson() {
 		return cancelPerson;

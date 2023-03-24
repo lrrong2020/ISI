@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -64,21 +66,23 @@ public class PurchaseOrderController {
 			int customerId = customer.getCustomerId();
 			existOrder.setCustomer(customerService.getCustomer(customerId));
 		}
-		if(order.getPurchaseDate()!=null)
-			existOrder.setPurchaseDate(order.getPurchaseDate());
-		if(order.getShipmentDate()!=null)
-			existOrder.setShipmentDate(order.getShipmentDate());
+		//if(order.getPurchaseDate()!=null)
+			//existOrder.setPurchaseDate(order.getPurchaseDate());
 		if(order.getStatus()!=null) {
 			String status = order.getStatus();
 			existOrder.setStatus(status); 
 			if (status.equals("cancelled")) {
 				existOrder.setCancelDate(new Date());
 				existOrder.setCancelPerson(order.getCancelPerson());
+			} else if(status.equals("shipped")) {
+				//System.out.println(order.getShipmentDate().toString());
+				existOrder.setShipmentDate(new Date());
 			}
 		}
 		if(order.getTotalAmount()!=0)
 			existOrder.setTotalAmount(order.getTotalAmount());
 		entityManager.persist(existOrder);
+		System.out.println("sjippment date" + orderService.getPurchaseOrder(orderId).getShipmentDate());
 		return existOrder;
 	}
 	
