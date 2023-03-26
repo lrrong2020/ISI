@@ -113,9 +113,7 @@ export default {
 
     //searchProduct
     searchProduct() {
-      if(this.searchValue.length == 0) this.showList();
-
-      if (this.isNumeric(this.searchValue) && this.searchValue.length > 3){
+if (this.isNumeric(this.searchValue) && this.searchValue.length > 3){
         this.$store.dispatch("Product/searchProductById", this.searchValue.substring(3));
       }
       else {
@@ -172,6 +170,7 @@ console.log(`search Product: ${this.searchValue}`);
     //After clear
     showList() {
       this.getProductList();
+      this.resetFilter();
     },
 
     //search

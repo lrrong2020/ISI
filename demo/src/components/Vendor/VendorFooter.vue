@@ -25,7 +25,6 @@ export default {
       <van-tabbar :placeholder="true" :fixed="true" :z-index="1000" v-model="active" route>
         <van-tabbar-item replace to="/Vendor/" icon="home-o">VendorHome</van-tabbar-item>
         <van-tabbar-item replace to="/Vendor/orderList" icon="orders-o">VendorOrder</van-tabbar-item>
-        <van-tabbar-item replace to="/Vendor/account" icon="user-circle-o">VendorAccount</van-tabbar-item>
       </van-tabbar>
     </van-config-provider>
   </div>

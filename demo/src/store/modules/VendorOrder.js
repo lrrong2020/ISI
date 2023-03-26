@@ -16,6 +16,9 @@ export default{
     setVendorOrderDetail(state, VendorOrderDetail) {
       state.VendorOrderDetail = VendorOrderDetail;
     },
+    search(state, data){
+      state.VendorOrderList = data;
+    }
   },
   actions: {
     async getVendorOrderList(context) {
@@ -84,6 +87,32 @@ export default{
       .catch((error) => {
         console.log(error);
       })
+    },
+
+    searchOrderById(context, searchValue){
+      console.log(searchValue);
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/order/${searchValue}`)
+      .then((response)=>{
+        console.log("reponse.data in searchOrderById()");
+        console.log(response.data);
+
+        //see if the returned data type: array or object
+        //1. if it is a single object, then wrap it with an array
+        if(!Array.isArray(response.data)){
+          const responseDataArr = [];
+          responseDataArr.push(response.data);
+          console.log("responseDataArr");
+          console.log(responseDataArr);
+          context.commit('search', responseDataArr);
+        }
+        else{
+          context.commit('search', response.data);
+        }
+        //2. else if it is an array, just commit data itself
+        
+      }).catch((error)=>{
+        alert(error.message);
+      });
     },
   },
   getters: {
