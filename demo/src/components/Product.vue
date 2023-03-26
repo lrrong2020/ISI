@@ -38,7 +38,6 @@ export default {
   //业务逻辑
   data() {
     return {
-      totalItems: 0,
       currentPage: 1,
       itemsPerPage: 1,
       page: null,

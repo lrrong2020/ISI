@@ -44,7 +44,9 @@ export default {
       page: null,
 
       //search
-      searchValue: "",
+      searchValue: '',
+      isFiltering: false,
+      filterValue:'',
     };
   },
 
@@ -149,9 +151,8 @@ export default {
     Add A New Item
   </van-button>
 
-  <van-config-provider :theme-vars="themeVars">
-    <!--全局样式-->
 
+  <!-- <van-config-provider :theme-vars="themeVars">
     <van-card
       v-for="item in Product.productList.slice(
         (currentPage - 1) * itemsPerPage,
@@ -170,6 +171,57 @@ export default {
         <van-tag plain type="primary">{{ item.productId }}</van-tag>
       </template>
     </van-card>
+  </van-config-provider> -->
+
+  <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
+  <!--全局样式-->
+
+  <van-card
+      v-for="item in Product.productList.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+      )"
+      :key="item.productId"
+      :num="item.quantity"
+      :price="item.price"
+      :desc="item.brand"
+      :title="item.productName"
+      :thumb="item.photo"
+      @click="toDetail(item.productId)"
+      class="card"
+    >
+      <template #tags>
+        <van-tag plain type="primary">{{ item.productId }}</van-tag>
+      </template>
+    </van-card>
+    <!--Paging-->
+    <van-pagination v-model="currentPage" :total-items="Product.productList.length" 
+    :show-page-size="5" :items-per-page="itemsPerPage" @change="pagechange">
+      <template #prev-text>
+          <van-icon name="arrow-left" />
+      </template>
+      <template #next-text>
+          <van-icon name="arrow" />
+      </template>
+      <template #page="{ text }">{{ text }}</template>
+    </van-pagination>
+    <!--Input Location-->
+    <van-cell-group inset class="input">
+      <van-field
+        v-model.number="page"
+        center
+        clearable
+        type="digit"
+        placeholder="Go to page"
+      >
+        <template #button>
+        <van-button size="small" type="primary" @click="toPage(page)">
+          GO!
+        </van-button>
+        </template>
+      </van-field>
+    </van-cell-group>
+  <!--全局样式-->
   </van-config-provider>
 </template>
 
