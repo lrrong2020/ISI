@@ -75,7 +75,7 @@ public class PurchaseOrder {
 
 	public void setPurchaseDate(Date purchaseDate) {
 		Timestamp newDate = new Timestamp(purchaseDate.getTime());
-		String s = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss").format(newDate);
+		String s = new SimpleDateFormat("yyyy-M-ddHH:mm:ss").format(newDate);
 		this.purchaseDate = s;
 	}
 	
@@ -102,7 +102,7 @@ public class PurchaseOrder {
 
 	public void setShipmentDate(Date shipmentDate) {
 		Timestamp newDate = new Timestamp(shipmentDate.getTime());
-		String s = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss").format(newDate);
+		String s = new SimpleDateFormat("yyyy-M-dd HH:mm:ss").format(newDate);
 		System.out.println("SimpleDateFormat:" + s);
 		this.shipmentDate = s;
 	}
@@ -113,7 +113,7 @@ public class PurchaseOrder {
 	
 	public void setCancelDate(Date cancelDate) {
 		Timestamp newDate = new Timestamp(cancelDate.getTime());
-		String s = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss").format(newDate);
+		String s = new SimpleDateFormat("yyyy-M-dd HH:mm:ss").format(newDate);
 		this.cancelDate = s;
 	}
 	public String getCancelPerson() {
