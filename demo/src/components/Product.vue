@@ -6,6 +6,7 @@ import { mapState } from 'vuex';
 //Brand
 import Brand from '@/components/Brand.vue';
 
+
 export default {
   name: "Product",
   //全局样式
@@ -44,6 +45,7 @@ export default {
       //search
       searchValue: '',
       isFiltering: false,
+      filterValue:'',
     }
   },
   created() {
@@ -65,6 +67,15 @@ export default {
     },
     //searchProduct
     searchProduct() {
+      var params = [];
+
+      params.push(this.searchValue);
+      params.push(this.filterValue);
+
+      if(this.isFiltering) {
+        this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
+      }
+
       this.$store.dispatch('Product/searchProduct', this.searchValue);
       // this.$store.dispatch('Product/getProductList');
       console.log(`search Product: ${this.searchValue}`);
@@ -72,6 +83,7 @@ export default {
 
     filterByBrand(event){
       this.isFiltering = true;
+      this.filterValue = event.target.id;
 
       console.log("this.searchValue", this.searchValue.length);
 
