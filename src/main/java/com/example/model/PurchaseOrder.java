@@ -75,7 +75,7 @@ public class PurchaseOrder {
 
 	public void setPurchaseDate(Date purchaseDate) {
 		Timestamp newDate = new Timestamp(purchaseDate.getTime());
-		String s = new SimpleDateFormat("yyyy-M-ddHH:mm:ss").format(newDate);
+		String s = new SimpleDateFormat("yyyy-M-dd HH:mm:ss").format(newDate);
 		this.purchaseDate = s;
 	}
 	
