@@ -122,7 +122,8 @@ export default {
       console.log("this.isFiltering after reset: ");
       console.log(this.isFiltering);
 
-      this.getProductList();
+      this.searchProduct();
+      // this.getProductList();
     },
 
     async toDetail(item) {
