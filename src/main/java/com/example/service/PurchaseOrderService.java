@@ -24,7 +24,11 @@ public class PurchaseOrderService {
 	public PurchaseOrder getPurchaseOrder(long orderId) {
 		PurchaseOrder order = dao.findById(orderId).orElse(null);
 	    if (order != null) {
+	    	System.out.println("found for orderId: " + orderId);
 	        Hibernate.initialize(order);
+	    }
+	    else {
+	    	System.out.println("null found for orderId: " + orderId);
 	    }
 	    System.out.println("Datteeeeeeeeeeeee:" + order.getShipmentDate());
 	    
@@ -64,6 +68,10 @@ public class PurchaseOrderService {
 	public String deletePurchaseOrder(PurchaseOrder order) {
 		dao.delete(order);
 		return "Purchase Order " + order.getPurchaseOrderNumber() + "is deleted successfully!";
+	}
+
+	public PurchaseOrder getOrderById(long orderId) {
+		return dao.findById(orderId).orElse(null);
 	}
 
 }
