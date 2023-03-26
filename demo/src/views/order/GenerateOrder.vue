@@ -22,6 +22,16 @@ export default {
     },
     async handleCreateOrder () {
       this.showPay = true;
+      // const customerId = await this.User.currentUser.customerId;
+      // //checkout 生成订单，删除购物车
+      // await this.$store.dispatch('Order/checkOut', customerId);
+      // //获取订单列表
+      // await this.$store.dispatch('Order/getOrderList', customerId);
+      // //获取订单详情
+      // await this.getOrderDetail();
+    },
+    async handlePayOrder(){
+
       const customerId = await this.User.currentUser.customerId;
       //checkout 生成订单，删除购物车
       await this.$store.dispatch('Order/checkOut', customerId);
@@ -29,8 +39,7 @@ export default {
       await this.$store.dispatch('Order/getOrderList', customerId);
       //获取订单详情
       await this.getOrderDetail();
-    },
-    async handlePayOrder(){
+      
       const toast = showLoadingToast({
         duration: 0,
         forbidClick: true,

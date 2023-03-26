@@ -32,7 +32,26 @@ export default {
       //router go to product list page
       this.$router.push({ name: 'VendorOrderList' });
     },
-  }
+    //用于定时器获取后端数据的方法
+    getVendorOrderDetail() {
+      const payload = {
+        customerId: this.Vendor.VendorOrderDetail[0].order.customer.customerId,
+        orderId: this.$route.params.id,
+      };
+      this.$store.dispatch('Vendor/getVendorOrderDetail', payload);
+    }
+  },
+  //定时器获取后端数据, 1s一次，销毁时清除定时器
+  timer: null,
+  mounted() {
+    this.timer = setInterval(() => {
+      this.getVendorOrderDetail();
+    }, 1000);
+  },
+  beforeUnmount() {
+    clearInterval(this.timer);
+    console.log("clear timer");
+  },
 }
 </script>
 

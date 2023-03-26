@@ -21,7 +21,7 @@ export default {
     ...mapState(['Vendor']),
     reverseOrderList() {
       return this.Vendor.VendorOrderList.reverse();
-    }
+    },
   },
   methods: {
     getOrderList() {
@@ -35,7 +35,18 @@ export default {
       await this.$store.dispatch('Vendor/getVendorOrderDetail', payload);
       this.$router.push({ name: 'VendorOrderDetail', params: { id: orderId } });
     }
-  }
+  },
+  //定时器获取后端数据, 1s一次，销毁时清除定时器
+  timer: null,
+  mounted() {
+    this.timer = setInterval(() => {
+      this.getOrderList();
+    }, 1000);
+  },
+  beforeUnmount() {
+    clearInterval(this.timer);
+    console.log("clear timer");
+  },
 }
 </script>
 

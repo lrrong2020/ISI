@@ -36,7 +36,18 @@ export default {
       //router go to product list page
       this.$router.push({ name: 'OrderList' });
     },
-  }
+  },
+  //定时器获取后端数据, 1s一次，销毁时清除定时器
+  timer: null,
+  mounted() {
+    this.timer = setInterval(() => {
+      this.getOrderDetail();
+    }, 1000);
+  },
+  beforeUnmount() {
+    clearInterval(this.timer);
+    console.log("clear timer");
+  },
 }
 </script>
 

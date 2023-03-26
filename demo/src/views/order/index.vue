@@ -37,7 +37,18 @@ export default {
       await this.$store.dispatch('Order/getOrderDetail', payload);
       this.$router.push({ name: 'OrderDetail', params: { id: orderId } });
     }
-  }
+  },
+  //定时器获取后端数据, 1s一次，销毁时清除定时器
+  timer: null,
+  mounted() {
+    this.timer = setInterval(() => {
+      this.getOrderList();
+    }, 1000);
+  },
+  beforeUnmount() {
+    clearInterval(this.timer);
+    console.log("clear timer");
+  },
 }
 </script>
 
