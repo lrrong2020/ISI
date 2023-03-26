@@ -25,13 +25,22 @@
       :rules="[{ required: true, message: 'Property Second is required' }]"
       />
 
-      <van-field 
-      v-model="brand" 
-      name="brand"
-      label="Brand" 
-      placeholder="Which brand?" 
-      :rules="[{ required: true, message: 'Brand is required' }]"
-      />
+      <van-field
+  v-model="result"
+  is-link
+  readonly
+  name="brand"
+  label="Brand"
+  placeholder="Select Brand"
+  @click="showPicker = true"
+/>
+<van-popup v-model:show="showPicker" position="bottom">
+  <van-picker
+    :columns="columns"
+    @confirm="onConfirm"
+    @cancel="showPicker = false"
+  />
+</van-popup>
 
       <van-field
         v-model="price"
@@ -74,13 +83,26 @@ export default {
     const price = ref("");
     const image = ref("");
 
+
     const that = this;
     const onSubmit = (value) => {
         console.log("onSubmit");
         console.log("value", value);
         addProduct(value);
     };
+    const result = ref('');
+    const showPicker = ref(false);
+    const columns = [
+      { text: 'Huawei', value: 'Huawei' },
+      { text: 'Apple', value: 'Apple' },
+      { text: 'Xiaomi', value: 'Xiaomi' },
 
+    ];
+
+    const onConfirm = ({ selectedOptions }) => {
+      result.value = selectedOptions[0]?.text;
+      showPicker.value = false;
+    };
     return {
       productName,
       brand,
@@ -89,6 +111,10 @@ export default {
       property,
       propertySecond,
       onSubmit,
+      result,
+      columns,
+      onConfirm,
+      showPicker,
     };
   },
 
