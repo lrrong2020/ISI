@@ -66,6 +66,9 @@ export default {
     },
     //searchProduct
     searchProduct() {
+      clearInterval(this.timer);
+      console.log("clear timer");
+
       this.currentPage = 1;
       var params = [];
 
@@ -81,9 +84,18 @@ export default {
       // this.$store.dispatch('Product/getProductList');
       console.log(`search Product: ${this.searchValue}`);
       }
+      //当searchValue为空时，并且isFiltering为false时，重新获取数据
+      if (this.searchValue.length == 0 && this.isFiltering == false) {
+        this.timer = setInterval(() => {
+          this.getProductList();
+        }, 1000);
+      }
     },
 
     filterByBrand(event){
+      clearInterval(this.timer);
+      console.log("clear timer");
+
       this.currentPage = 1;
       this.isFiltering = true;
       this.filterValue = event.target.id;
@@ -123,8 +135,17 @@ export default {
 
       console.log("this.isFiltering after reset: ");
       console.log(this.isFiltering);
+      // 判断search是否为空,不为空则不清空
+      if (this.searchValue.length == 0) {
+        this.getProductList();
+        this.timer = setInterval(() => {
+          this.getProductList();
+        }, 1000);
+      } else {
+        this.searchProduct();
+      }
 
-      this.searchProduct();
+      // this.searchProduct();
       // this.getProductList();
     },
 
@@ -144,8 +165,12 @@ export default {
     },
     //After clear
     showList() {
-      this.getProductList();
-      this.resetFilter();
+      //判断isFiltering是否为true,是则不清空
+      if (this.isFiltering) {
+        this.searchProduct();
+      } else {
+        this.getProductList();
+      }
     },
     //search
     onSearch(val) {
@@ -168,6 +193,17 @@ export default {
     //   })
     // },
   }, 
+  //定时器获取后端数据, 1s一次，销毁时清除定时器
+  timer: null,
+    mounted() {
+      this.timer = setInterval(() => {
+        this.getProductList();
+      }, 1000);
+    },
+    beforeUnmount() {
+      clearInterval(this.timer);
+      console.log("clear timer");
+    },
 }
 </script>
 
