@@ -75,6 +75,7 @@ export default {
       if(this.isFiltering) {
         this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
       }
+
       else{
         this.$store.dispatch('Product/searchProduct', this.searchValue);
       // this.$store.dispatch('Product/getProductList');
