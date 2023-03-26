@@ -67,13 +67,72 @@ export default {
       console.log("1");
     },
 
+    
+    filterByBrand(event){
+      this.isFiltering = true;
+      this.filterValue = event.target.id;
+
+      console.log("this.searchValue", this.searchValue.length);
+
+      var params = [];
+
+      params.push(this.searchValue);
+      params.push(event.target.id);
+    
+
+
+      //filter based on searching
+      if(this.searchValue.length > 0){
+        console.log("this.searchValue.length > 0");
+
+        this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
+      }
+
+      else{
+      console.log("this.searchValue.length <= 0");
+      console.log("this.isFiltering after filter: ");
+      console.log(this.isFiltering);
+
+      console.log(event.target.id);
+
+      params.push(false);
+      this.$store.dispatch('Product/filterProductByBrand', event.target.id);
+      }
+    },
+
+    resetFilter(){
+      console.log("reset filter");
+      this.isFiltering = false;
+
+      console.log("this.isFiltering after reset: ");
+      console.log(this.isFiltering);
+
+      this.searchProduct();
+      // this.getProductList();
+    },
+
     //searchProduct
     searchProduct() {
-      if (this.isNumeric(this.searchValue)){
-        this.$store.dispatch("Product/searchProductById", this.searchValue);
+      if(this.searchValue.length == 0) this.showList();
+
+      if (this.isNumeric(this.searchValue) && this.searchValue.length > 3){
+        this.$store.dispatch("Product/searchProductById", this.searchValue.substring(3));
       }
       else {
-        this.$store.dispatch("Product/searchProduct", this.searchValue);
+        var params = [];
+
+params.push(this.searchValue);
+params.push(this.filterValue);
+
+if(this.isFiltering) {
+  this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
+}
+
+else{
+  this.$store.dispatch('Product/searchProduct', this.searchValue);
+// this.$store.dispatch('Product/getProductList');
+console.log(`search Product: ${this.searchValue}`);
+}
       }
 
       // this.$store.dispatch('Product/getProductList');
@@ -81,11 +140,17 @@ export default {
     },
 
     isNumeric(str) {
-      if (typeof str != "string") return false;
-      return (
-        !isNaN(str) &&
-        !isNaN(parseFloat(str))
-      );
+      // if (typeof str != "string") return false;
+      // return (
+      //   !isNaN(str) &&
+      //   !isNaN(parseFloat(str))
+      // );
+      console.log("isNumeric ")
+      console.log(str);
+      console.log(str.substring(0, 3) == "id:");
+
+      return str.substring(0, 3) == "id:";
+
     },
 
     toDetail(item) {
@@ -139,6 +204,24 @@ export default {
       <div @click="searchProduct" class="button">Search</div>
     </template>
   </van-search>
+
+  <van-button size="small" type="primary" id="Xiaomi" @click="filterByBrand">
+          Xiaomi
+  </van-button>
+
+  <van-button size="small" type="primary" id="Huawei" @click="filterByBrand">
+          Huawei
+  </van-button>
+
+  <van-button size="small" type="primary" id="Apple" @click="filterByBrand">
+          Apple
+  </van-button>
+
+
+  <van-button plain hairline size="small" type="primary" id="Reset" @click="resetFilter" v-if="isFiltering">
+          Reset
+  </van-button>
+
 
   <van-button
     plain
