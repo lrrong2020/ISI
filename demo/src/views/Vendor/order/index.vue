@@ -63,7 +63,7 @@ export default {
       else{
         that.searchOrderById();
       }
-    }, 100000);
+    }, 1000);
   },
   beforeUnmount() {
     clearInterval(this.timer);
