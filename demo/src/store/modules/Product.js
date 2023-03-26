@@ -140,7 +140,7 @@ export default {
       console.log(id);
       axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/${id}`)
       .then((response)=>{
-        console.log("reponse.data in searchProduct()");
+        console.log("reponse.data in searchProductById()");
         console.log(response.data);
 
         //see if the returned data type: array or object
