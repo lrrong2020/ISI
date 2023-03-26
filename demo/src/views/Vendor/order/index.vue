@@ -12,6 +12,7 @@ export default {
         { text: 'Orders on hold', value: 2 },
         { text: 'Past orders', value: 3 },
       ],
+      searchValue:'',
     }
   },
   created() {
@@ -34,14 +35,35 @@ export default {
       }
       await this.$store.dispatch('Vendor/getVendorOrderDetail', payload);
       this.$router.push({ name: 'VendorOrderDetail', params: { id: orderId } });
+    },
+
+    searchOrderById(){
+      if(this.searchValue > 0){
+        this.$store.dispatch('Vendor/searchOrderById', this.searchValue);
+      }
+      else {
+        this.getOrderList();
+      }
+    },
+
+    clearSearch(){
+      this.searchValue='';
+      this.getOrderList();
     }
   },
   //定时器获取后端数据, 1s一次，销毁时清除定时器
   timer: null,
   mounted() {
+    const that = this;
     this.timer = setInterval(() => {
-      this.getOrderList();
-    }, 1000);
+
+      if(that.searchValue.length == 0){
+        that.getOrderList();
+      }
+      else{
+        that.searchOrderById();
+      }
+    }, 100000);
   },
   beforeUnmount() {
     clearInterval(this.timer);
@@ -65,6 +87,23 @@ export default {
         <van-dropdown-item v-model="value1" :options="option1" />
       </van-dropdown-menu>
     </div>
+
+    
+  <!--Search-->
+  <van-search
+    v-model="searchValue"
+    show-action
+    shape="round"
+    background="#ffffff"
+    placeholder="Type to search"
+    @clear="clearSearch"
+    @update:modelValue="searchOrderById"
+    >
+    <template #action>
+      <div @click="searchOrderById" class="button">Search</div>
+    </template>
+  </van-search>
+
     <!-- All order list -->
     <div class="allorders" v-if="this.value1 == 0">
       <van-cell v-for="order in reverseOrderList" :key="order" 
