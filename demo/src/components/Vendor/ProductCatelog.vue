@@ -69,6 +69,7 @@ export default {
 
     
     filterByBrand(event){
+      this.currentPage = 1;
       this.isFiltering = true;
       this.filterValue = event.target.id;
 
@@ -101,6 +102,7 @@ export default {
     },
 
     resetFilter(){
+      this.currentPage = 1;
       console.log("reset filter");
       this.isFiltering = false;
 
@@ -113,24 +115,23 @@ export default {
 
     //searchProduct
     searchProduct() {
-if (this.isNumeric(this.searchValue) && this.searchValue.length > 3){
+      this.currentPage = 1;
+      if (this.isNumeric(this.searchValue) && this.searchValue.length > 3){
         this.$store.dispatch("Product/searchProductById", this.searchValue.substring(3));
       }
       else {
         var params = [];
 
-params.push(this.searchValue);
-params.push(this.filterValue);
+        params.push(this.searchValue);
+        params.push(this.filterValue);
 
-if(this.isFiltering) {
-  this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
-}
-
-else{
-  this.$store.dispatch('Product/searchProduct', this.searchValue);
-// this.$store.dispatch('Product/getProductList');
-console.log(`search Product: ${this.searchValue}`);
-}
+        if(this.isFiltering) {
+          this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
+        } else {
+          this.$store.dispatch('Product/searchProduct', this.searchValue);
+          // this.$store.dispatch('Product/getProductList');
+          console.log(`search Product: ${this.searchValue}`);
+        }
       }
 
       // this.$store.dispatch('Product/getProductList');
@@ -157,7 +158,7 @@ console.log(`search Product: ${this.searchValue}`);
 
     pagechange(page) {
       this.currentPage = page;
-      this.getProductList();
+      // this.getProductList();
     },
 
     toPage(page) {

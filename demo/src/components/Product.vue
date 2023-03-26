@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       currentPage: 1,
-      itemsPerPage: 1,
+      itemsPerPage: 5,
       page: null,
       //search
       searchValue: '',
@@ -66,6 +66,7 @@ export default {
     },
     //searchProduct
     searchProduct() {
+      this.currentPage = 1;
       var params = [];
 
       params.push(this.searchValue);
@@ -83,6 +84,7 @@ export default {
     },
 
     filterByBrand(event){
+      this.currentPage = 1;
       this.isFiltering = true;
       this.filterValue = event.target.id;
 
@@ -115,6 +117,7 @@ export default {
     },
 
     resetFilter(){
+      this.currentPage = 1;
       console.log("reset filter");
       this.isFiltering = false;
 

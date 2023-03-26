@@ -121,6 +121,7 @@ export default {
         />
       </van-swipe-cell>
     </div>
+    <div class="block" style="height: 100px;"></div>
     <div class="footer">
       <div class="pay-wrap">
       <div class="price">
