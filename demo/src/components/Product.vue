@@ -87,7 +87,7 @@ export default {
       this.isFiltering = true;
       this.filterValue = event.target.id;
 
-      console.log("this.searchValue", this.searchValue.length);
+      console.log("this.searchValue", this.searchValue.lengtgith);
 
       var params = [];
 
