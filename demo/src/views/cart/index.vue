@@ -42,7 +42,7 @@ export default {
       this.$store.dispatch('Cart/updateCartItems', payload);
     },
     toDetail(productId) {
-    this.$router.push({ name: 'Detail', params: { id: productId } });
+      this.$router.push({ name: 'Detail', params: { id: productId } });
     },
     onSubmit() {
       this.$router.push({ name: 'GenerateOrder' });
