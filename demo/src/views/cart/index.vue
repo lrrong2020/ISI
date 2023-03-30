@@ -41,8 +41,9 @@ export default {
       };
       this.$store.dispatch('Cart/updateCartItems', payload);
     },
-    toDetail(productId) {
-      this.$router.push({ name: 'Detail', params: { id: productId } });
+    async toDetail(item) {
+      await this.$store.dispatch('Product/getProductDetail', item);
+      this.$router.push({ name: 'Detail', params: { id: item } });
     },
     onSubmit() {
       this.$router.push({ name: 'GenerateOrder' });
