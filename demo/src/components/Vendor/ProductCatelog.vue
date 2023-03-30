@@ -109,7 +109,13 @@ export default {
       console.log("this.isFiltering after reset: ");
       console.log(this.isFiltering);
 
-      this.searchProduct();
+      // 判断search是否为空,不为空则不清空
+      if (this.searchValue.length == 0) {
+        this.getProductList();
+      } else {
+        this.searchProduct();
+      }
+      // this.searchProduct();
       // this.getProductList();
     },
 
@@ -170,8 +176,12 @@ export default {
 
     //After clear
     showList() {
-      this.getProductList();
-      this.resetFilter();
+      //判断isFiltering是否为true,是则不清空
+      if (this.isFiltering) {
+        this.searchProduct();
+      } else {
+        this.getProductList();
+      }
     },
 
     //search

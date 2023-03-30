@@ -59,9 +59,10 @@ export default {
       // };
       if (this.User.currentUser.customerId == null) {
         showFailToast({
-          message: 'You are not login!',
+          message: 'Please login first!',
           wordBreak: 'break-word',
         });
+        this.$router.push({ name: 'Login' });
         return;
       }
       const payload = {
@@ -86,9 +87,10 @@ export default {
     onClickButtonBuy(productId) {
       if (this.User.currentUser.customerId == null) {
         showFailToast({
-          message: 'You are not login!',
+          message: 'Please login first!',
           wordBreak: 'break-word',
         });
+        this.$router.push({ name: 'Login' });
         return;
       }
       const payload = {
@@ -111,7 +113,16 @@ export default {
       }
     },
     goToCart() {
-      this.$router.push({ name: 'Cart' });
+      if (this.User.currentUser.customerId == null) {
+        showFailToast({
+          message: 'Please login first!',
+          wordBreak: 'break-word',
+        });
+        this.$router.push({ name: 'Login' });
+        return;
+      } else {
+        this.$router.push({ name: 'Cart' });
+      }
     },
   }
 }
