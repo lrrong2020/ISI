@@ -23,8 +23,7 @@ export default {
     <div>
       <!--Footer-->
       <router-view class="view footer" name="Footer"></router-view>
-    </div>
-    
+    </div> 
   </div>
 </template>
 

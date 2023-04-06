@@ -50,15 +50,10 @@ export default {
   created() {
     this.getProductList();
   },
-  mounted() {
- 
-  },
   computed: {
     ...mapState(['Product']),
   },
   methods: {
-    
-
     //getProductList from Store
     getProductList() {
        this.$store.dispatch('Product/getProductList');
@@ -91,7 +86,7 @@ export default {
         }, 1000);
       }
     },
-
+    //Filter by Brands
     filterByBrand(event){
       clearInterval(this.timer);
       console.log("clear timer");
@@ -127,7 +122,7 @@ export default {
       this.$store.dispatch('Product/filterProductByBrand', event.target.id);
       }
     },
-
+    //Reset Filter
     resetFilter(){
       this.currentPage = 1;
       console.log("reset filter");
@@ -144,11 +139,10 @@ export default {
       } else {
         this.searchProduct();
       }
-
       // this.searchProduct();
       // this.getProductList();
     },
-
+    //Go to Detail Page
     async toDetail(item) {
       await this.$store.dispatch('Product/getProductDetail', item);
       this.$router.push({ name: 'Detail', params: { id: item } });
@@ -195,15 +189,15 @@ export default {
   }, 
   //定时器获取后端数据, 1s一次，销毁时清除定时器
   timer: null,
-    mounted() {
-      this.timer = setInterval(() => {
-        this.getProductList();
-      }, 1000);
-    },
-    beforeUnmount() {
-      clearInterval(this.timer);
-      console.log("clear timer");
-    },
+  mounted() {
+    this.timer = setInterval(() => {
+      this.getProductList();
+    }, 1000);
+  },
+  beforeUnmount() {
+    clearInterval(this.timer);
+    console.log("clear timer");
+  },
 }
 </script>
 
@@ -252,7 +246,6 @@ export default {
 
   <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
   <!--全局样式-->
-
     <van-card
       v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
       :key="item.productId"
@@ -311,5 +304,5 @@ export default {
 .input{
   margin: 0px;
   border-radius: 0%;
-} 
+}   
 </style>

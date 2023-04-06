@@ -13,6 +13,10 @@ export default {
     ProductDetail: {},
   },
   mutations: {
+    //Set productList empty
+    SetProductListEmpty(state){
+      state.productList = [];
+    },
     //Set productList
     SetProductList(state, data){
       console.log("setProductList(state, data)");
@@ -65,20 +69,20 @@ export default {
   },
   actions: {
     //Get ProductList from Backend
-    getProductList(context){
+    async getProductList(context){
       console.log("getProductList");    
-        axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/all`)
-        .then((response)=>{
-          console.log("reponse.data in getProductList()");
-          console.log(response.data);
-          context.commit('SetProductList',response.data);
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/all`)
+      .then((response)=>{
+        console.log("reponse.data in getProductList()");
+        console.log(response.data);
+        context.commit('SetProductList',response.data);
 
-          console.log(response.data[0].photo)
-        }).catch((error)=>{
+        console.log(response.data[0].photo)
+      }).catch((error)=>{
 
-          alert(error.stack);
-          context.commit('displayErrorMsg', error.stack.toString());
-        });
+        alert(error.stack);
+        context.commit('displayErrorMsg', error.stack.toString());
+      });
     },
     //Get ProductDetail from Backend
     async getProductDetail(context, productId){
@@ -105,9 +109,9 @@ export default {
     //     alert(error.message);
     //   });
     // },
-    searchProduct(context,searchValue){
+    async searchProduct(context,searchValue){
       console.log(searchValue);
-      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=${searchValue}`)
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=${searchValue}`)
       .then((response)=>{
         console.log("reponse.data in searchProduct()");
         console.log(response.data);
@@ -136,9 +140,9 @@ export default {
       });
     },
 
-    searchProductById(context, id){
+    async searchProductById(context, id){
       console.log(id);
-      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/${id}`)
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/${id}`)
       .then((response)=>{
         console.log("reponse.data in searchProductById()");
         console.log(response.data);
@@ -167,12 +171,12 @@ export default {
       });
     },
 
-    searchProductAndFilterByBrand(context, params){
+    async searchProductAndFilterByBrand(context, params){
       var searchValue = params[0];
       var brand = params[1];
 
       console.log(searchValue);
-      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=${searchValue}&brand=${brand}`)
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=${searchValue}&brand=${brand}`)
       .then((response)=>{
         console.log("reponse.data in searchProduct()");
         console.log(response.data);
@@ -201,52 +205,48 @@ export default {
       });
     },
 
-    filterProductByBrand(context, brand){
-        axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=` + brand)
-        .then((response)=>{
-          console.log("reponse.data in filterProductByBrand()");
-          console.log(response.data);
-  
-          //see if the returned data type: array or object
-          console.log("typeof response.data");
-  
-          var typeOfResponseData = typeof response.data; 
-          console.log(typeOfResponseData)
-          
-          // if(typeof response.data !== "array")
-          // {
-          
-          // //1. if it is a single object, then wrap it with an array
-          // const responseDataArr = [];
-          // responseDataArr.push(response.data);
-          // console.log("responseDataArr");
-          // console.log(responseDataArr);
-          // context.commit('SetProductList', responseDataArr);
-  
-          // }
-  
-          // else
-          // {
-            context.commit('SetProductList', response.data);
-  
-          // }
-  
-  
-          //2. else if it is an array, just commit data itself
-          
-        }).catch((error)=>{
-          alert(error.message);
-        });
-  
-        
-        context.commit();
+    async filterProductByBrand(context, brand){
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=` + brand)
+      .then((response)=>{
+        console.log("reponse.data in filterProductByBrand()");
+        console.log(response.data);
 
+        //see if the returned data type: array or object
+        console.log("typeof response.data");
+
+        var typeOfResponseData = typeof response.data; 
+        console.log(typeOfResponseData)
+        
+        // if(typeof response.data !== "array")
+        // {
+        
+        // //1. if it is a single object, then wrap it with an array
+        // const responseDataArr = [];
+        // responseDataArr.push(response.data);
+        // console.log("responseDataArr");
+        // console.log(responseDataArr);
+        // context.commit('SetProductList', responseDataArr);
+
+        // }
+
+        // else
+        // {
+          context.commit('SetProductList', response.data);
+
+        // }
+
+
+        //2. else if it is an array, just commit data itself
+        
+      }).catch((error)=>{
+        alert(error.message);
+      });
     },
 
-    vendorAddProduct(context, value){
+    async vendorAddProduct(context, value){
       console.log("vendorAddProduct()");
       console.log(value.photo);
-      axios.post(`${API_HOST_ANDROID_RUNNABLE}/product/add`, value)
+      await axios.post(`${API_HOST_ANDROID_RUNNABLE}/product/add`, value)
       .then((response)=>{
         console.log("vendorAddProduct response: ");
         console.log(response);
