@@ -36,7 +36,10 @@ public class ProductController {
 	}
 	
 	@GetMapping("/all")
-	public List<Product> getAllProduct() {
+	public List<Product> getAllProductPaging(@RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
+		if(page != null && size != null) {
+			return productService.getAllProductPaging(Integer.valueOf(page), Integer.valueOf(size));
+		}
 		return productService.getAllProduct();
 	}
 	

@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.example.dao.ProductDao;
 
@@ -110,6 +113,15 @@ public class ProductService {
 		return products;
 	}
 	
+	public List<Product> getAllProductPaging(int page, int size) {
+		
+		Pageable firstPageWithTwoElements = PageRequest.of(page, size);
+		
+		Page<Product> allProducts = dao.findAll(firstPageWithTwoElements);
+
+		List<Product> productList = allProducts.getContent();
+		return productList;
+	}
 	
 	//filter by product brand
 }

@@ -2,6 +2,8 @@ package com.example.dao;
 
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,11 +14,9 @@ import com.example.model.Product;
 @Repository
 public interface ProductDao  extends JpaRepository<Product, Long>{
 	
-	
 	@Query("SELECT p FROM Product p WHERE " +
 			"p.productName LIKE LOWER(CONCAT('%', :productName, '%'))")
 	List<Product> findByProductName(@Param("productName") String productName);
-
 	
 	@Query("SELECT p FROM Product p WHERE " +
 			"p.brand LIKE LOWER(CONCAT('%', :brand, '%'))")
