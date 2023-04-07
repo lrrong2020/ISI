@@ -22,12 +22,13 @@ export default {
   },
   created() {
     this.getUser();
+    this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
   },
   mounted() {
     this.loading = false;
   },
   computed: {
-    ...mapState(["User"]),
+    ...mapState(['User', 'Cart']),
   },
   methods: {
     getUser() {
@@ -35,6 +36,9 @@ export default {
     }, 
     onClickLeft() {
       this.$router.push({ name: 'Home' });
+    },
+    toOrder() {
+      this.$router.push({ name: 'OrderList' });
     },
     Logout() {
       localStorage.removeItem("isLogin");

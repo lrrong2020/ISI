@@ -12,9 +12,10 @@ export default {
   },
   created() {
     this.getOrderDetail();
+    this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
   },
   computed: {
-    ...mapState(['User','Order']),
+    ...mapState(['User','Order', 'Cart']),
   },
   methods: {
     async getOrderDetail() {
