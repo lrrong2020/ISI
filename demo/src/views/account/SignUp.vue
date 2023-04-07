@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import router from '../../router';
 import { mapState } from 'vuex';
-
+import signupImg from '@/assets/Signup.png';
 import { showSuccessToast, showFailToast } from 'vant';
 // import 'vant/es/toast/style';
 
@@ -15,6 +15,7 @@ export default {
       customerEmail: '',
       customerPassword: '',
       shippingAddress: '',
+      signupImg,
     }
   },
   created() {
@@ -149,78 +150,91 @@ export default {
       @click-left="onClickLeft"
       class="header"
     />
-    <!--Icon-->
-    <van-row justify="center">
-      <van-icon name="add-o" color="#9819fa" size="80"/>
-    </van-row>
-    <!--Title-->
-    <van-row justify="center">
-      <van-col>
-        <h1 style="font-size: 40px;">Sign Up</h1>
-      </van-col>
-    </van-row>
-    <!--Input Form-->
-    <div class="signup-form">
-      <van-form @submit="onSubmit">
-        <van-cell-group inset>
-        <van-field
-          v-model="customerName"
-          name="customerName"
-          label="Username"
-          right-icon="contact"
-          placeholder="Your username"
-          :rules="[
-            { required: true, message: 'Please enter username' },
-          ]"
+    <div class="mainbody">
+      <!--Icon-->
+      <van-row justify="center">
+        <van-image
+          width="130"
+          height="130"
+          :src="signupImg"
         />
-        <van-field
-          v-model="customerEmail"
-          name="customerEmail"
-          label="E-mail"
-          right-icon="envelop-o"
-          placeholder="Your e-mail"
-          :rules="[
-            { required: true, message: 'Please enter E-mail' },
-            { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: 'Please enter valid email' },  
-          ]"
-        />
-        <van-field
-          v-model="customerPassword"
-          type="password"
-          name="customerPassword"
-          label="Password"
-          right-icon="closed-eye"
-          placeholder="Your password"
-          :rules="[
-            { required: true, message: 'Please enter password' },
-            { validator, message: 'Password must be at least 6 characters' },
-          ]"
-        />
-        <van-field
-          v-model="shippingAddress"
-          name="shippingAddress"
-          label="Address"
-          right-icon="location-o"
-          placeholder="Your address"
-          :rules="[
-            { required: true, message: 'Please enter address' },
-          ]"
-        />
-        </van-cell-group>
-        <div style="margin: 16px;">
-          <van-button round block type="primary" native-type="submit">
-            Sign Up
-          </van-button>
-        </div>
-        <div style="margin: 16px; text-align: center; font-size: medium;">
-          <router-link to="/login">Login</router-link>
-        </div>
-      </van-form>
+      </van-row>
+      <!--Title-->
+      <van-row justify="center">
+        <van-col>
+          <h1 style="font-size: 40px;">Sign Up</h1>
+        </van-col>
+      </van-row>
+      <!--Input Form-->
+      <div class="signup-form">
+        <van-form @submit="onSubmit">
+          <van-cell-group inset>
+          <van-field
+            v-model="customerName"
+            clearable
+            name="customerName"
+            label="Username"
+            right-icon="contact"
+            placeholder="Your username"
+            :rules="[
+              { required: true, message: 'Please enter username' },
+            ]"
+          />
+          <van-field
+            v-model="customerEmail"
+            clearable
+            name="customerEmail"
+            label="E-mail"
+            right-icon="envelop-o"
+            placeholder="Your e-mail"
+            :rules="[
+              { required: true, message: 'Please enter E-mail' },
+              { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: 'Please enter valid email' },  
+            ]"
+          />
+          <van-field
+            v-model="customerPassword"
+            clearable
+            type="password"
+            name="customerPassword"
+            label="Password"
+            right-icon="closed-eye"
+            placeholder="Your password"
+            :rules="[
+              { required: true, message: 'Please enter password' },
+              { validator, message: 'Password must be at least 6 characters' },
+            ]"
+          />
+          <van-field
+            v-model="shippingAddress"
+            clearable
+            name="shippingAddress"
+            label="Address"
+            right-icon="location-o"
+            placeholder="Your address"
+            :rules="[
+              { required: true, message: 'Please enter address' },
+            ]"
+          />
+          </van-cell-group>
+          <div style="margin: 16px;">
+            <van-button round block type="primary" native-type="submit" style="font-size: 20px;">
+              Sign Up
+            </van-button>
+          </div>
+          <div style="font-size: 20px;text-align: center;">or</div>
+          <div style="margin: 16px; text-align: center; font-size: medium;">
+            <router-link to="/login" style="color: #1989fa;font-size: 20px; text-decoration:underline">Login</router-link>
+          </div>
+        </van-form>
+      </div>
     </div>
-    <!-- <div v-for="user in User.user" :key="user.customerId">User: {{ user.customerName }} | {{ user.customerPassword }} </div> -->
   </div>
   
 </template>
 
 <style scoped>
+.mainbody {
+  margin-top: 20%;
+}
 </style>

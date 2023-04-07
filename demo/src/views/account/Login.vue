@@ -1,7 +1,7 @@
 <script>
 import { ref } from 'vue';
 import { mapState } from 'vuex';
-
+import loginImg from '@/assets/Login.png';
 import { showSuccessToast, showFailToast } from 'vant';
 // import 'vant/es/toast/style';
 
@@ -11,6 +11,7 @@ export default {
   data: () => ({
     customerEmail: '',
     customerPassword: '',
+    loginImg,
   }),
   created() {
     this.getUser();
@@ -115,67 +116,76 @@ export default {
 
 <template>
   <div class="login">
-    <div>
-      <van-nav-bar
+    <van-nav-bar
         :border="false"
         title="Login"
         left-arrow
         @click-left="onClickLeft"
         class="header"
       />
-      <!--Icon-->
-      <van-row justify="center">
-        <van-icon name="user-circle-o" color="#9819fa" size="80"/>
-      </van-row>
-      <!--Title-->
-      <van-row justify="center">
-        <van-col>
-          <h1 style="font-size: 40px;">Login</h1>
-        </van-col>
-      </van-row>
-    </div>
-    <!--Input Form-->
-    <div class="login-form">
-      <van-form @submit="onSubmit">
-        <van-cell-group inset>
-        <van-field
-          v-model="customerEmail"
-          name="customerEmail"
-          label="Email"
-          right-icon="contact"
-          placeholder="Email"
-          :rules="[
-            { required: true, message: 'Please enter e-mail' },
-            { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: 'Please enter valid email' },
-          ]"
-        />
+      <div class="mainbody">
+        <!--Icon-->
+        <van-row justify="center">
+          <van-image
+            width="130"
+            height="130"
+            :src="loginImg"
+          />
+        </van-row>
+        <!--Title-->
+        <van-row justify="center">
+          <van-col>
+            <h1 style="font-size: 40px;">Login</h1>
+          </van-col>
+        </van-row>
+        <!--Input Form-->
+        <div class="login-form">
+          <van-form @submit="onSubmit">
+            <van-cell-group inset>
+            <van-field
+              v-model="customerEmail"
+              clearable
+              name="customerEmail"
+              label="Email"
+              right-icon="contact"
+              placeholder="Email"
+              :rules="[
+                { required: true, message: 'Please enter e-mail' },
+                { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: 'Please enter valid email' },
+              ]"
+            />
 
-        <van-field
-          v-model="customerPassword"
-          type="password"
-          name="customerPassword"
-          label="Password"
-          right-icon="closed-eye"
-          placeholder="Password"
-          :rules="[
-            { required: true, message: 'Please enter password' },
-            { validator, message: 'Password must be at least 6 characters' },
-          ]"
-        />
-        </van-cell-group>
-        <div style="margin: 16px;">
-          <van-button round block type="primary" native-type="submit">
-            Login
-          </van-button>
+            <van-field
+              v-model="customerPassword"
+              clearable
+              type="password"
+              name="customerPassword"
+              label="Password"
+              right-icon="closed-eye"
+              placeholder="Password"
+              :rules="[
+                { required: true, message: 'Please enter password' },
+                { validator, message: 'Password must be at least 6 characters' },
+              ]"
+            />
+            </van-cell-group>
+            <div style="margin: 16px;">
+              <van-button round block type="primary" native-type="submit" style="font-size: 20px;">
+                Login
+              </van-button>
+            </div>
+            <div style="font-size: 20px;text-align: center;">or</div>
+            <div style="margin: 16px; text-align: center; font-size: medium;">
+              <router-link to="/signup" style="color: #1989fa;font-size: 20px; text-decoration:underline">Sign Up</router-link>
+            </div>
+          </van-form>
         </div>
-        <div style="margin: 16px; text-align: center; font-size: medium;">
-          <router-link to="/signup">Sign Up</router-link>
-        </div>
-      </van-form>
     </div>
-    <!-- <div v-for="user in User.user" :key="user.customerId">User: {{ user.customerName }} | {{ user.customerPassword }} </div> -->
   </div>
 </template>
 
-<style>
+<style lang="less" scoped>
+.mainbody{
+  margin-top: 30%;
+}
 </style>

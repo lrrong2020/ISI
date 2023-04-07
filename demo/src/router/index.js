@@ -12,6 +12,9 @@ const router = createRouter({
       components: {
         default: Home,
         Footer: () => import('@/components/Footer.vue'),
+      },
+      meta: {
+        index: 1
       }
     },
     {
@@ -19,6 +22,9 @@ const router = createRouter({
       name: 'Search',
       components: {
         default: () => import('@/views/home/SearchPage.vue'),
+      },
+      meta: {
+        index: 2
       }
     },
     {
@@ -29,6 +35,7 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       },
       meta: {
+        index: 1,
         requireAuth: true
       }
     },
@@ -40,6 +47,7 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       },
       meta: {
+        index: 1,
         requireAuth: true
       }
     },
@@ -48,6 +56,9 @@ const router = createRouter({
       name: 'Login',
       components: {
         default: () => import('@/views/account/Login.vue'),
+      },
+      meta: {
+        index: 1,
       }
     },
     {
@@ -55,6 +66,9 @@ const router = createRouter({
       name: 'Signup',
       components: {
         default: () => import('@/views/account/SignUp.vue'),
+      },
+      meta: {
+        index: 1,
       }
     },
     {
@@ -63,6 +77,9 @@ const router = createRouter({
       components: {
         default: () => import('@/views/detail/index.vue'),
         Header: () => import('@/components/Header.vue'),
+      },
+      meta: {
+        index: 3,
       }
     },
     {
@@ -73,6 +90,7 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       },
       meta: {
+        index: 1,
         requireAuth: true
       }
     },
@@ -83,6 +101,7 @@ const router = createRouter({
         default: () => import('@/views/order/GenerateOrder.vue'),
       },
       meta: {
+        index: 2,
         requireAuth: true
       }
     },
@@ -93,6 +112,7 @@ const router = createRouter({
         default: () => import('@/views/order/OrderDetail.vue'),
       },
       meta: {
+        index: 2,
         requireAuth: true
       }
     },
