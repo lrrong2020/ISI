@@ -139,7 +139,6 @@ const router = createRouter({
       name: 'VendorProductAdd',
       components: {
         default: () => import('@/views/Vendor/add/addProduct.vue'),
-        Header: () => import('@/components/Vendor/VendorHeader.vue'),
       }
     },
     {
