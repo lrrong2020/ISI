@@ -80,7 +80,10 @@ export default {
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
           <br/>
-          <van-tag type="primary">{{ order.status }}</van-tag>
+          <van-tag plain type="primary" v-if="order.status == 'pending'">{{ order.status }}</van-tag>
+          <van-tag plain type="warning" v-if="order.status == 'hold'">{{ order.status }}</van-tag>
+          <van-tag plain type="success" v-if="order.status == 'shipped'">{{ order.status }}</van-tag>
+          <van-tag plain type="danger" v-if="order.status == 'cancelled'">{{ order.status }}</van-tag>
         </template>
       </van-cell>
     </div>
@@ -97,7 +100,8 @@ export default {
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
           <br/>
-          <van-tag type="primary">{{ order.status }}</van-tag>
+          <van-tag plain type="primary" v-if="order.status == 'pending'">{{ order.status }}</van-tag>
+          <van-tag plain type="warning" v-if="order.status == 'hold'">{{ order.status }}</van-tag>
         </template>
       </van-cell>
     </div>
@@ -114,7 +118,8 @@ export default {
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
           <br/>
-          <van-tag type="primary">{{ order.status }}</van-tag>
+          <van-tag plain type="success" v-if="order.status == 'shipped'">{{ order.status }}</van-tag>
+          <van-tag plain type="danger" v-if="order.status == 'cancelled'">{{ order.status }}</van-tag>
         </template>
       </van-cell>
     </div>

@@ -1,25 +1,28 @@
 <script>
-import { ref } from 'vue';
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
 import { mapState } from 'vuex';
+import { reactive } from 'vue';
 
 import { showSuccessToast, showFailToast } from 'vant';
 // import 'vant/es/toast/style';
 
 export default {
   name: "Detail",
-  setup() {
-    const active = ref(0);
-
-    return { active };
-  },
   data() {
     return {
       // id: '',
       Detail: {},
     }
+  },
+  setup() {
+    // themeVars 内的值会被转换成对应 CSS 变量
+    // 比如 sliderBarHeight 会转换成 `--van-slider-bar-height`
+    const themeVars = reactive({
+      actionBarIconSize: '25px',
+      actionBarIconFontSize: '15px',
+    });
+    return {
+      themeVars,
+    };
   },
   created() {
     // this.id = this.$route.params.id;
@@ -130,75 +133,81 @@ export default {
 
 <template>
   <div class="bg">
-    <div class="swipe">
+    <div class="img">
+      <van-image
+        width= "100%"
+        height="300px"
+        :src="this.Detail.photo"
+        fit="contain"
+      />
+    </div>
+    <!-- <div class="swipe">
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#1989fa">
         <van-swipe-item v-for="img in 1" :key="img">
           <img :src="this.Detail.photo" height="250" width="250" style="padding-top: 40px;">
         </van-swipe-item>
       </van-swipe>
-    </div>
-    <div class="main">
+    </div> -->
+    <div class="main-card">
       <div class="name">
-        <p>{{ this.Detail.productName }}</p>
-        <p>Brand: {{ this.Detail.brand }}</p>
+        <p style="margin: 5px 0px; font-size: 30px;">{{ this.Detail.productName }}</p>
+        <p style="margin: 5px 0px;font-size: 20px; color: #b4b4b4;">Brand: {{ this.Detail.brand }}</p>
       </div>
       <div class="price">
-        <h1>${{this.Detail.price}}</h1>
-      </div>
-      
+        <h1 style="margin: 5px 0px">${{this.Detail.price}}</h1>
+      </div> 
     </div>
     <div class="prop">
-      <van-tabs v-model:active="active" swipeable>
-        <van-tab title="Color">
-          {{ this.Detail.property }}
-        </van-tab>
-        <van-tab title="Screen Size">
-          {{ this.Detail.propertySecond }}
-        </van-tab>
-      </van-tabs>
+      <p style="margin: 5px 0px">Color: {{ this.Detail.property }}</p>
+      <p style="margin: 5px 0px">Screen Size: {{ this.Detail.propertySecond }}</p>
     </div>
     <div class="footer">
-      <van-action-bar placeholder>
-        <van-action-bar-icon icon="chat-o" text="客服" />
-        <van-action-bar-icon icon="cart-o" text="Cart" @click="goToCart" :badge="!Cart.CartTotal ? '' : Cart.CartTotal"/>
-        <van-action-bar-button color="#be99ff" type="warning" text="Add to Cart" @click="addCartItem(Detail.productId)"/>
-        <van-action-bar-button color="#7232dd" type="danger" text="Buy Now" @click="onClickButtonBuy(Detail.productId)"/>
-      </van-action-bar>
+      <van-config-provider :theme-vars="themeVars">
+        <van-action-bar placeholder>
+          <van-action-bar-icon icon="cart-o" text="Cart" @click="goToCart" :badge="!Cart.CartTotal ? '' : Cart.CartTotal" style="margin: 0px 15px;"/>
+          <van-action-bar-button color="#54c9ff" type="warning" text="Add to Cart" @click="addCartItem(Detail.productId)"/>
+          <van-action-bar-button color="#0392ff" type="danger" text="Buy Now" @click="onClickButtonBuy(Detail.productId)"/>
+        </van-action-bar>
+      </van-config-provider>
     </div>
-    <!-- <div>{{ Cart.Cart[0].productId }}</div> -->
-    <!-- <div>{{ Detail.productId }}</div> -->
-    <!-- <div>product {{ Detail }}</div>
-    <div>Cart: {{ Cart.Cart }}</div> -->
-    <div class="block"></div>
   </div>
 </template>
 
 <style lang="less" scoped>
-.bg{
-    .my-swipe .van-swipe-item {
-    font-size: 20px;
-    line-height: 150px;
-    text-align: center;
-    background-color: #ff0000a8;
+//用less写样式
+  .img{
+    width: 100%;
+    height: 300px;
   }
-  .main{
-    border-radius: 15px;
-    background-color: rgb(255, 255, 255);
+  //main是卡片样式，卡片背景色为白色，圆角为15px，宽度为90%，有阴影
+  .main-card{
+    border-radius: 10px;
+    box-shadow: 0 0 5px #bdbdbd;
+    margin: 20px 10px 0px 10px;
+    padding: 10px;
     .name{
       margin: 0px;
     }
     .price{
       color: red;
       margin: 0px;
-      font-size: 15px;
+      font-size: 10px;
     }
     .desc{
-      font-size: 15px;
+      margin: 0px;
     }
   }
-  .block{
-    height: 50px;
+  .prop{
+    border-radius: 10px;
+    box-shadow: 0 0 5px #bdbdbd;
+    margin: 10px 10px;
+    padding: 10px;
+    font-size: 20px;
   }
-}
+  .footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
 
 </style>

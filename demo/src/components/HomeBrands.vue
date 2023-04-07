@@ -61,19 +61,17 @@ export default {
     // themeVars 内的值会被转换成对应 CSS 变量
     // 比如 sliderBarHeight 会转换成 `--van-slider-bar-height`
     const themeVars = reactive({
-      cardRadius: '20px',
-      cardThumbSize: '150px',
+      cardThumbSize: '120px',
       cardThumbRadius: '0px',
       cardBackground: '#ffffff',
       cardPriceColor: '#ee0a24',
-      cardFontSize: '15px',
+      cardFontSize: '17px',
       cardTitleLineHeight: '50px',
       cardDescLineHeight: '50px',
       cardPriceFontSize: '15px',
       cardPriceIntegerFontSize: '25px',
       gridItemContentPadding: '0px',
     });
-
     return {
       themeVars,
     };
@@ -173,12 +171,19 @@ export default {
 <div class="empty" v-if="Product.productList.length === 0">
   <van-empty description="No Product!" />
 </div>
+<van-divider
+  :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '30px 16px 15px 16px', fontSize: '20px' }"
+  v-if="Product.productList.length !== 0"
+>
+Hot Products
+</van-divider>
 <!-- Product List -->
 <div class="product">
   <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
   <!--全局样式-->
     <van-card
       v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
+      currency="$"
       :key="item.productId"
       :num="item.quantity"
       :price="item.price"
@@ -214,7 +219,7 @@ export default {
         placeholder="Go to page"
       >
         <template #button>
-        <van-button size="small" type="primary" @click="toPage(page)">
+        <van-button type="primary" @click="toPage(page)">
           GO!
         </van-button>
         </template>
@@ -226,9 +231,9 @@ export default {
 </template>
 
 <style lang="less" scoped>
+//brands
 .brands {
   margin: 20px 10px 20px 10px;
-
   .grid-item {
     .image {
     width: 50px;
@@ -240,5 +245,18 @@ export default {
       margin: 0px;
     }
   }
+}
+.card {
+  border-bottom: 1px solid #e5e5e5;
+}
+.title {
+  background-color: rgb(247, 247, 247);
+  margin: 10px 0px 20px 0px;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(0, 136, 255);
+  text-align: center;
+  padding: 1px 0px 1px 0px;
+  
 }
 </style>

@@ -61,12 +61,11 @@ export default {
     // themeVars 内的值会被转换成对应 CSS 变量
     // 比如 sliderBarHeight 会转换成 `--van-slider-bar-height`
     const themeVars = reactive({
-      cardRadius: '20px',
-      cardThumbSize: '150px',
+      cardThumbSize: '120px',
       cardThumbRadius: '0px',
       cardBackground: '#ffffff',
       cardPriceColor: '#ee0a24',
-      cardFontSize: '15px',
+      cardFontSize: '17px',
       cardTitleLineHeight: '50px',
       cardDescLineHeight: '50px',
       cardPriceFontSize: '15px',
@@ -311,7 +310,7 @@ export default {
             placeholder="Go to page"
           >
             <template #button>
-            <van-button size="small" type="primary" @click="toPage(page)">
+            <van-button type="primary" @click="toPage(page)">
               GO!
             </van-button>
             </template>
@@ -346,6 +345,9 @@ export default {
   }
   .block {
     height: 60px;
+  }
+  .card {
+    border-bottom: 1px solid #e5e5e5;
   }
   .brands {
     margin: 0px 10px 20px 10px;

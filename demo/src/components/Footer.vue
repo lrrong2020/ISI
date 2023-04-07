@@ -10,7 +10,7 @@ export default {
       tabbarHeight: '7%' ,
       tabbarItemIconSize: '30px',
       tabbarItemFontSize: '15px',
-      tabbarItemActiveColor: '#7232dd',
+      tabbarItemActiveColor: '#0392ff',
     });
     return { 
       active,
@@ -18,9 +18,26 @@ export default {
     };
   },
   computed: {
-    ...mapState(['User']),
+    ...mapState(['User', 'Cart']),
+    //判断router的name，来确定当前点击的tabbar，从而改变颜色
+    click() {
+      if (this.$route.name == 'Home') {
+        return 'home';
+      } else if (this.$route.name == 'Cart') {
+        return 'cart';
+      } else if (this.$route.name == 'OrderList') {
+        return 'order';
+      } else if (this.$route.name == 'Account') {
+        return 'account';
+      } else {
+        return '';
+      }
+    },
   },
   methods: {
+    toHome() {
+      this.$router.push({ name: 'Home' });
+    },
     toCart() {
       if (this.User.currentUser.customerId == null) {
         this.$router.push({ name: 'Login' });
@@ -53,10 +70,10 @@ export default {
   <div>
     <van-config-provider :theme-vars="themeVars">
       <van-tabbar :placeholder="true" :fixed="true" :z-index="1000" v-model="active" route>
-        <van-tabbar-item replace to="/" icon="home-o">Home</van-tabbar-item>
-        <van-tabbar-item replace icon="shopping-cart-o" @click="toCart">Cart</van-tabbar-item>
-        <van-tabbar-item replace icon="orders-o" @click="toOrder">Order</van-tabbar-item>
-        <van-tabbar-item replace icon="user-circle-o" @click="toAccount">Account</van-tabbar-item>
+        <van-tabbar-item replace icon="home-o" @click="toHome" :style="{ color: click === 'home' ? '#0392ff' : '' }">Home</van-tabbar-item>
+        <van-tabbar-item replace icon="shopping-cart-o" @click="toCart" :badge="!Cart.CartTotal ? '' : Cart.CartTotal" :style="{ color: click === 'cart' ? '#0392ff' : '' }">Cart</van-tabbar-item>
+        <van-tabbar-item replace icon="orders-o" @click="toOrder" :style="{ color: click === 'order' ? '#0392ff' : '' }">Order</van-tabbar-item>
+        <van-tabbar-item replace icon="user-circle-o" @click="toAccount" :style="{ color: click === 'account' ? '#0392ff' : '' }">Account</van-tabbar-item>
       </van-tabbar>
     </van-config-provider>
   </div>

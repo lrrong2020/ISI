@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="bg">
     <div>
       <!--Header-->
       <router-view class="view header" name="Header"></router-view>
@@ -28,5 +28,7 @@ export default {
 </template>
 
 <style scoped>
-
+.bg {
+  font-family: "Comic Sans MS";
+}
 </style>

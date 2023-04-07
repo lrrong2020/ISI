@@ -63,8 +63,6 @@ export default {
 .bg {
   background-color: rgb(255, 255, 255);
   height: 100%;
-  font-family: "Comic Sans MS";
-  
 }
 // .bg {
 //   display: flex;
