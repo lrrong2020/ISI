@@ -108,7 +108,7 @@ export default {
     <div class="empty" v-if="Vendor.VendorOrderList[0].length == 0">
       <van-empty description="No order yet" />
     </div>
-
+    
     <!-- All order list -->
     <div class="allorders" v-if="this.value1 == 0 && Vendor.VendorOrderList[0].length != 0">
       <van-cell v-for="order in reverseOrderList" :key="order" 

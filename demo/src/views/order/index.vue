@@ -68,6 +68,10 @@ export default {
         <van-dropdown-item v-model="value1" :options="option1" />
       </van-dropdown-menu>
     </div>
+    <!-- Empty -->
+    <div class="empty" v-if="this.reverseOrderList.length == 0">
+      <van-empty description="No order yet" />
+    </div>
     <!-- All order list -->
     <div class="allorders" v-if="this.value1 == 0">
       <van-cell v-for="order in reverseOrderList" :key="order" 
