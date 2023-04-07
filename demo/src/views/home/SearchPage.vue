@@ -275,6 +275,7 @@ export default {
       <!--全局样式-->
         <van-card
           v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
+          currency="$"
           :key="item.productId"
           :num="item.quantity"
           :price="item.price"

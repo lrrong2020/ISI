@@ -91,7 +91,7 @@ export default {
         <label>Shipment Date: </label>
         <span>{{ Order.OrderDetail[0].order.shipmentDate }}</span>
       </div>
-      <van-button v-if="Order.OrderDetail[0].order.status == 'pending' || Order.OrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
+      <van-button plain type="danger" v-if="Order.OrderDetail[0].order.status == 'pending' || Order.OrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
     </div>
     <div class="order-price">
       <div class="price-item">

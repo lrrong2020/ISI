@@ -175,39 +175,38 @@ export default {
 
 <style lang="less" scoped>
 //用less写样式
-  .img{
-    width: 100%;
-    height: 300px;
+.img{
+  width: 100%;
+  height: 300px;
+}
+//main是卡片样式，卡片背景色为白色，圆角为15px，宽度为90%，有阴影
+.main-card{
+  border-radius: 10px;
+  box-shadow: 0 0 5px #bdbdbd;
+  margin: 20px 10px 0px 10px;
+  padding: 10px;
+  .name{
+    margin: 0px;
   }
-  //main是卡片样式，卡片背景色为白色，圆角为15px，宽度为90%，有阴影
-  .main-card{
-    border-radius: 10px;
-    box-shadow: 0 0 5px #bdbdbd;
-    margin: 20px 10px 0px 10px;
-    padding: 10px;
-    .name{
-      margin: 0px;
-    }
-    .price{
-      color: red;
-      margin: 0px;
-      font-size: 10px;
-    }
-    .desc{
-      margin: 0px;
-    }
+  .price{
+    color: red;
+    margin: 0px;
+    font-size: 10px;
   }
-  .prop{
-    border-radius: 10px;
-    box-shadow: 0 0 5px #bdbdbd;
-    margin: 10px 10px;
-    padding: 10px;
-    font-size: 20px;
+  .desc{
+    margin: 0px;
   }
-  .footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-
+}
+.prop{
+  border-radius: 10px;
+  box-shadow: 0 0 5px #bdbdbd;
+  margin: 10px 10px;
+  padding: 10px;
+  font-size: 20px;
+}
+.footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
 </style>

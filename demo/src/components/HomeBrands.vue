@@ -175,7 +175,7 @@ export default {
   :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '30px 16px 15px 16px', fontSize: '20px' }"
   v-if="Product.productList.length !== 0"
 >
-Hot Products
+  Hot Products
 </van-divider>
 <!-- Product List -->
 <div class="product">

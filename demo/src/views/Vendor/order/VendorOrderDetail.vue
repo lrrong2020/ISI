@@ -71,8 +71,11 @@ export default {
     </div>
     <div class="order-status">
       <div class="status-item">
-        <label>Order Status:</label>
-        <span>{{ Vendor.VendorOrderDetail[0].order.status }}</span>
+        <label>Order Status: </label>
+        <span style="color: #0392ff" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending'">{{ Vendor.VendorOrderDetail[0].order.status }}</span>
+        <span style="color: #ffa303" v-if="Vendor.VendorOrderDetail[0].order.status == 'hold'">{{ Vendor.VendorOrderDetail[0].order.status }}</span>
+        <span style="color: #1dbd00" v-if="Vendor.VendorOrderDetail[0].order.status == 'shipped'">{{ Vendor.VendorOrderDetail[0].order.status }}</span>
+        <span style="color: #ff0303" v-if="Vendor.VendorOrderDetail[0].order.status == 'cancelled'">{{ Vendor.VendorOrderDetail[0].order.status }}</span>
       </div>
       <div class="status-item">
         <label>P.O.number: </label>
@@ -94,13 +97,13 @@ export default {
         <label>Shipment Date: </label>
         <span>{{ Vendor.VendorOrderDetail[0].order.shipmentDate }}</span>
       </div>
-      <van-button style="margin-bottom: 15px; margin-top: 20px;" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleShipOrder()">Ship Order</van-button>
-      <van-button v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
+      <van-button plain type="success" style="margin-bottom: 15px; margin-top: 20px;" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleShipOrder()">Ship Order</van-button>
+      <van-button plain type="danger" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
     </div>
     <div class="order-price">
       <div class="price-item">
         <label>Total Amount: </label>
-        <span>${{ Vendor.VendorOrderDetail[0].order.totalAmount }}</span>
+        <span style="color: red">${{ Vendor.VendorOrderDetail[0].order.totalAmount }}</span>
       </div>
       <div class="price-item">
         <label>Customer Name: </label>
@@ -113,6 +116,7 @@ export default {
     </div>
     <van-card
       v-for="item in Vendor.VendorOrderDetail"
+      currency="$"
       :key="item"
       style="background: #fff"
       :num="item.quantity"
