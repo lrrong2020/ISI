@@ -208,6 +208,9 @@ export default {
           <van-field
             v-model="shippingAddress"
             clearable
+            type="textarea"
+            rows="1"
+            autosize
             name="shippingAddress"
             label="Address"
             right-icon="location-o"

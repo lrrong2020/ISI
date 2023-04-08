@@ -13,9 +13,9 @@ const router = createRouter({
         default: Home,
         Footer: () => import('@/components/Footer.vue'),
       },
-      meta: {
-        index: 1
-      }
+      // meta: { 
+      //   index: 1,
+      // },
     },
     {
       path: '/search',
@@ -23,9 +23,9 @@ const router = createRouter({
       components: {
         default: () => import('@/views/home/SearchPage.vue'),
       },
-      meta: {
-        index: 2
-      }
+      // meta: { 
+      //   index: 2,
+      // },
     },
     {
       path: '/cart',
@@ -35,7 +35,7 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       },
       meta: {
-        index: 1,
+        // index: 1,
         requireAuth: true
       }
     },
@@ -47,9 +47,23 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       },
       meta: {
-        index: 1,
+        // index: 1,
         requireAuth: true
       }
+    },
+    {
+      path: '/account/:id/accountManagement',
+      name: 'AccountManagement',
+      components: {
+        default: () => import('@/views/account/AccountManagement.vue'),
+      },
+    },
+    {
+      path: '/account/:id/addressManagement',
+      name: 'AddressManagement',
+      components: {
+        default: () => import('@/views/account/AddressManagement.vue'),
+      },
     },
     {
       path: '/login',
@@ -57,9 +71,9 @@ const router = createRouter({
       components: {
         default: () => import('@/views/account/Login.vue'),
       },
-      meta: {
-        index: 1,
-      }
+      // meta: {
+      //   index: 1,
+      // }
     },
     {
       path: '/signup',
@@ -67,9 +81,9 @@ const router = createRouter({
       components: {
         default: () => import('@/views/account/SignUp.vue'),
       },
-      meta: {
-        index: 1,
-      }
+      // meta: {
+      //   index: 2,
+      // }
     },
     {
       path: '/detail/:id',
@@ -78,9 +92,9 @@ const router = createRouter({
         default: () => import('@/views/detail/index.vue'),
         Header: () => import('@/components/Header.vue'),
       },
-      meta: {
-        index: 3,
-      }
+      // meta: {
+      //   index: 2,
+      // }
     },
     {
       path: '/orderList',
@@ -90,7 +104,7 @@ const router = createRouter({
         Footer: () => import('@/components/Footer.vue'),
       },
       meta: {
-        index: 1,
+        // index: 1,
         requireAuth: true
       }
     },
@@ -101,7 +115,7 @@ const router = createRouter({
         default: () => import('@/views/order/GenerateOrder.vue'),
       },
       meta: {
-        index: 2,
+        // index: 2,
         requireAuth: true
       }
     },
@@ -112,7 +126,7 @@ const router = createRouter({
         default: () => import('@/views/order/OrderDetail.vue'),
       },
       meta: {
-        index: 2,
+        // index: 2,
         requireAuth: true
       }
     },

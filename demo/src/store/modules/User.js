@@ -45,6 +45,16 @@ export default {
           console.log(error);
         })
     },
+    async getCurrentUser(context, data) {
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/customer/${data}`)
+        .then((response) => {
+          context.commit("setCurrentUser", response.data);
+          console.log("getCurrentUser");
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
     // deleteUser(context, data) {
     //   axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/${data}/delete`)
     //     .then((response) => {
@@ -72,10 +82,44 @@ export default {
     //       console.log(error);
     //     })
     // },
-    async updateUser(context, data) {
-      await axios.post(`${API_HOST_ANDROID_RUNNABLE}/customer/${data}`)
+    async updateUser(context, {customerId, customerName, customerPassword}) {
+      const data = {
+        customerName: `${customerName}`,
+        customerPassword: `${customerPassword}`
+      };
+      console.log("vuex updateUser");
+      console.log(customerId + " " + customerName + " " + customerPassword);
+      await axios({
+        method: 'post',
+        url:`${API_HOST_ANDROID_RUNNABLE}/customer/${customerId}`,
+        data: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }) 
       .then((response) => {
-        context.dispatch("getUser", response.data);
+        context.dispatch("getUser");
+        context.dispatch("getCurrentUser", customerId);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
+    async updateAddress(context, {customerId, shippingAddress}) {
+      const data = {
+        shippingAddress: `${shippingAddress}`,
+      };
+      await axios({
+        method: 'post',
+        url:`${API_HOST_ANDROID_RUNNABLE}/customer/${customerId}`,
+        data: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }) 
+      .then((response) => {
+        context.dispatch("getUser");
+        context.dispatch("getCurrentUser", customerId);
       })
       .catch((error) => {
         console.log(error);

@@ -40,6 +40,12 @@ export default {
     toOrder() {
       this.$router.push({ name: 'OrderList' });
     },
+    toAccountManagement() {
+      this.$router.push({ name: 'AccountManagement', params: { id: this.User.currentUser.customerId } });
+    },
+    toAddressManagement() {
+      this.$router.push({ name: 'AddressManagement', params: { id: this.User.currentUser.customerId } });
+    },
     Logout() {
       localStorage.removeItem("isLogin");
       this.$store.commit('User/deleteCurrentUser');
@@ -94,11 +100,11 @@ export default {
         <span>My Orders</span>
         <van-icon name="arrow" />
       </li>
-      <li class="van-hairline--bottom" @click="goTo()">
+      <li class="van-hairline--bottom" @click="toAccountManagement">
         <span>Account Management</span>
         <van-icon name="arrow" />
       </li>
-      <li class="van-hairline--bottom" @click="goTo()">
+      <li class="van-hairline--bottom" @click="toAddressManagement">
         <span>Address Management</span>
         <van-icon name="arrow" />
       </li>
