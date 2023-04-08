@@ -1,11 +1,10 @@
 <script>
-import { reactive } from 'vue';
-import { ref } from 'vue';
-import { toRaw } from 'vue';
-import { mapState } from 'vuex';
+import { reactive } from "vue";
+import { ref } from "vue";
+import { toRaw } from "vue";
+import { mapState } from "vuex";
 //Brand
-import Brand from '@/components/Brand.vue';
-
+import Brand from "@/components/Brand.vue";
 
 export default {
   name: "Product",
@@ -14,17 +13,17 @@ export default {
     // themeVars 内的值会被转换成对应 CSS 变量
     // 比如 sliderBarHeight 会转换成 `--van-slider-bar-height`
     const themeVars = reactive({
-      cardRadius: '20px',
-      cardThumbSize: '150px',
-      cardThumbRadius: '0px',
-      cardBackground: '#ffffff',
-      cardPriceColor: '#ee0a24',
-      cardFontSize: '15px',
-      cardTitleLineHeight: '50px',
-      cardDescLineHeight: '50px',
-      cardPriceFontSize: '15px',
-      cardPriceIntegerFontSize: '25px',
-      gridItemContentPadding: '0px',
+      cardRadius: "20px",
+      cardThumbSize: "150px",
+      cardThumbRadius: "0px",
+      cardBackground: "#ffffff",
+      cardPriceColor: "#ee0a24",
+      cardFontSize: "15px",
+      cardTitleLineHeight: "50px",
+      cardDescLineHeight: "50px",
+      cardPriceFontSize: "15px",
+      cardPriceIntegerFontSize: "25px",
+      gridItemContentPadding: "0px",
     });
 
     return {
@@ -33,7 +32,7 @@ export default {
   },
   //Brand
   components: {
-      Brand,
+    Brand,
   },
   //业务逻辑
   data() {
@@ -42,27 +41,31 @@ export default {
       itemsPerPage: 5,
       page: null,
       //search
-      searchValue: '',
+      searchValue: "",
       isFiltering: false,
-      filterValue:'',
-    }
+      filterValue: "",
+    };
   },
   created() {
-    this.getProductList();
+    // this.getProductList();
+    this.getProductListPaging();
   },
-  mounted() {
- 
-  },
+  mounted() {},
   computed: {
-    ...mapState(['Product']),
+    ...mapState(["Product"]),
   },
   methods: {
-    
-
     //getProductList from Store
     getProductList() {
-       this.$store.dispatch('Product/getProductList');
-       console.log("1");
+      this.$store.dispatch("Product/getProductList");
+    },
+
+    //getProductList from Store
+    getProductListPaging() {
+      var params = [];
+      params.push(0);
+      params.push(3);
+      this.$store.dispatch("Product/getProductListPaging", params);
     },
     //searchProduct
     searchProduct() {
@@ -75,24 +78,23 @@ export default {
       params.push(this.searchValue);
       params.push(this.filterValue);
 
-      if(this.isFiltering) {
-        this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
-      }
-
-      else{
-        this.$store.dispatch('Product/searchProduct', this.searchValue);
-      // this.$store.dispatch('Product/getProductList');
-      console.log(`search Product: ${this.searchValue}`);
+      if (this.isFiltering) {
+        this.$store.dispatch("Product/searchProductAndFilterByBrand", params);
+      } else {
+        this.$store.dispatch("Product/searchProduct", this.searchValue);
+        // this.$store.dispatch('Product/getProductList');
+        console.log(`search Product: ${this.searchValue}`);
       }
       //当searchValue为空时，并且isFiltering为false时，重新获取数据
       if (this.searchValue.length == 0 && this.isFiltering == false) {
         this.timer = setInterval(() => {
-          this.getProductList();
+          // this.getProductList();
+          this.getProductListPaging();
         }, 1000);
       }
     },
 
-    filterByBrand(event){
+    filterByBrand(event) {
       clearInterval(this.timer);
       console.log("clear timer");
 
@@ -106,29 +108,25 @@ export default {
 
       params.push(this.searchValue);
       params.push(event.target.id);
-    
-
 
       //filter based on searching
-      if(this.searchValue.length > 0){
+      if (this.searchValue.length > 0) {
         console.log("this.searchValue.length > 0");
 
-        this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
-      }
+        this.$store.dispatch("Product/searchProductAndFilterByBrand", params);
+      } else {
+        console.log("this.searchValue.length <= 0");
+        console.log("this.isFiltering after filter: ");
+        console.log(this.isFiltering);
 
-      else{
-      console.log("this.searchValue.length <= 0");
-      console.log("this.isFiltering after filter: ");
-      console.log(this.isFiltering);
+        console.log(event.target.id);
 
-      console.log(event.target.id);
-
-      params.push(false);
-      this.$store.dispatch('Product/filterProductByBrand', event.target.id);
+        params.push(false);
+        this.$store.dispatch("Product/filterProductByBrand", event.target.id);
       }
     },
 
-    resetFilter(){
+    resetFilter() {
       this.currentPage = 1;
       console.log("reset filter");
       this.isFiltering = false;
@@ -137,9 +135,11 @@ export default {
       console.log(this.isFiltering);
       // 判断search是否为空,不为空则不清空
       if (this.searchValue.length == 0) {
-        this.getProductList();
+        // this.getProductList();
+        this.getProductListPaging();
         this.timer = setInterval(() => {
-          this.getProductList();
+          // this.getProductList();
+          this.getProductListPaging();
         }, 1000);
       } else {
         this.searchProduct();
@@ -150,14 +150,20 @@ export default {
     },
 
     async toDetail(item) {
-      await this.$store.dispatch('Product/getProductDetail', item);
-      this.$router.push({ name: 'Detail', params: { id: item } });
+      await this.$store.dispatch("Product/getProductDetail", item);
+      this.$router.push({ name: "Detail", params: { id: item } });
     },
+
     pagechange(page) {
+      console.log("PageChange", page);
       this.currentPage = page;
       // this.getProductList();
     },
+
     toPage(page) {
+      console.log("ToPage", page);
+      console.log();
+
       this.currentPage = page;
       // this.getProductList();
       console.log(this.page);
@@ -169,7 +175,8 @@ export default {
       if (this.isFiltering) {
         this.searchProduct();
       } else {
-        this.getProductList();
+        // this.getProductList();
+        this.getProductListPaging();
       }
     },
     //search
@@ -192,23 +199,23 @@ export default {
     //     console.log(response.data)
     //   })
     // },
-  }, 
+  },
   //定时器获取后端数据, 1s一次，销毁时清除定时器
   timer: null,
-    mounted() {
-      this.timer = setInterval(() => {
-        this.getProductList();
-      }, 1000);
-    },
-    beforeUnmount() {
-      clearInterval(this.timer);
-      console.log("clear timer");
-    },
-}
+  mounted() {
+    // temporarily disable for paging debug
+    // this.timer = setInterval(() => {
+    //   this.getProductList();
+    // }, 1000);
+  },
+  beforeUnmount() {
+    clearInterval(this.timer);
+    console.log("clear timer");
+  },
+};
 </script>
 
 <template>
-
   <!--Search-->
   <van-search
     v-model="searchValue"
@@ -219,7 +226,7 @@ export default {
     @search="onSearch"
     @clear="showList"
     @update:modelValue="searchProduct"
-    >
+  >
     <template #action>
       <div @click="searchProduct" class="button">Search</div>
     </template>
@@ -227,34 +234,43 @@ export default {
   <!--Brand-->
   <!-- <Brand />    -->
 
-
   <van-button size="small" type="primary" id="Xiaomi" @click="filterByBrand">
-          Xiaomi
+    Xiaomi
   </van-button>
 
   <van-button size="small" type="primary" id="Huawei" @click="filterByBrand">
-          Huawei
+    Huawei
   </van-button>
 
   <van-button size="small" type="primary" id="Apple" @click="filterByBrand">
-          Apple
+    Apple
   </van-button>
 
-
-  <van-button plain hairline size="small" type="primary" id="Reset" @click="resetFilter" v-if="isFiltering">
-          Reset
+  <van-button
+    plain
+    hairline
+    size="small"
+    type="primary"
+    id="Reset"
+    @click="resetFilter"
+    v-if="isFiltering"
+  >
+    Reset
   </van-button>
 
   <!-- Empty -->
-  <div class="empty" v-if="Product.productList.length === 0">
+  <div class="empty" v-if="Product.productListPaging.length === 0">
     <van-empty description="No Product" />
   </div>
 
-  <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
-  <!--全局样式-->
+  <van-config-provider :theme-vars="themeVars" v-if="Product.productListPaging.length !== 0">
+    <!--全局样式-->
 
-    <van-card
-      v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
+    <!-- <van-card
+      v-for="item in Product.productList.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+      )"
       :key="item.productId"
       :num="item.quantity"
       :price="item.price"
@@ -263,23 +279,39 @@ export default {
       :thumb="item.photo"
       @click="toDetail(item.productId)"
       class="card"
-      >
-      <!-- <template #tags>
-        <van-tag plain type="primary">tag1</van-tag>
-        <van-tag plain type="primary">tag2</van-tag>
-      </template> -->
+    >
+    </van-card> -->
+
+    <van-card
+      v-for="item in Product.productListPaging"
+      :key="item.productId"
+      :num="item.quantity"
+      :price="item.price"
+      :desc="item.brand"
+      :title="item.productName"
+      :thumb="item.photo"
+      @click="toDetail(item.productId)"
+      class="card"
+    >
     </van-card>
+
     <!--Paging-->
-    <van-pagination v-model="currentPage" :total-items="Product.productList.length" 
-    :show-page-size="5" :items-per-page="itemsPerPage" @change="pagechange">
+    <van-pagination
+      v-model="Product.page"
+      :total-items="Product.noOfTotalElements"
+      :show-page-size="5"
+      :items-per-page="5"
+      @change="pagechange"
+    >
       <template #prev-text>
-          <van-icon name="arrow-left" />
+        <van-icon name="arrow-left" />
       </template>
       <template #next-text>
-          <van-icon name="arrow" />
+        <van-icon name="arrow" />
       </template>
       <template #page="{ text }">{{ text }}</template>
     </van-pagination>
+
     <!--Input Location-->
     <van-cell-group inset class="input">
       <van-field
@@ -290,17 +322,15 @@ export default {
         placeholder="Go to page"
       >
         <template #button>
-        <van-button size="small" type="primary" @click="toPage(page)">
-          GO!
-        </van-button>
+          <van-button size="small" type="primary" @click="toPage(page)"> GO! </van-button>
         </template>
       </van-field>
     </van-cell-group>
-  <!--全局样式-->
+    <!--全局样式-->
   </van-config-provider>
 
   <p>
-  {{ Product.errorMsg }}
+    {{ Product.errorMsg }}
   </p>
 </template>
 
@@ -308,8 +338,8 @@ export default {
 .card {
   border-radius: 20px;
 }
-.input{
+.input {
   margin: 0px;
   border-radius: 0%;
-} 
+}
 </style>
