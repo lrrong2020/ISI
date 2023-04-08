@@ -28,7 +28,7 @@ export default {
     this.loading = false;
   },
   computed: {
-    ...mapState(['User', 'Cart']),
+    ...mapState(['User', 'Cart', 'Order']),
   },
   methods: {
     getUser() {
@@ -37,8 +37,10 @@ export default {
     onClickLeft() {
       this.$router.push({ name: 'Home' });
     },
-    toOrder() {
-      this.$router.push({ name: 'OrderList' });
+    async toOrder() {
+      const customerId = this.User.currentUser.customerId;
+      await this.$store.dispatch('Order/getOrderList', customerId);
+      await this.$router.push({ name: 'OrderList' });
     },
     toAccountManagement() {
       this.$router.push({ name: 'AccountManagement', params: { id: this.User.currentUser.customerId } });

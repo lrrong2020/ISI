@@ -17,7 +17,7 @@ export default {
   },
   created() {
     this.getOrderList();
-    this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
+    // this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
   },
   computed: {
     ...mapState(['Cart', 'User', 'Order']),

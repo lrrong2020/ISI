@@ -18,7 +18,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['User', 'Cart']),
+    ...mapState(['User', 'Cart', 'Order']),
     //判断router的name，来确定当前点击的tabbar，从而改变颜色
     click() {
       if (this.$route.name == 'Home') {
@@ -46,12 +46,14 @@ export default {
         this.$router.push({ name: 'Cart'});
       }  
     },
-    toOrder() {
+    async toOrder() {
       if (this.User.currentUser.customerId == null) {
         this.$router.push({ name: 'Login' });
         return;
       } else {
-        this.$router.push({ name: 'OrderList'});
+        const customerId = this.User.currentUser.customerId;
+        await this.$store.dispatch('Order/getOrderList', customerId);
+        await this.$router.push({ name: 'OrderList' });
       }  
     },
     toAccount() {

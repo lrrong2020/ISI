@@ -33,9 +33,11 @@ export default {
       };
       await this.$store.dispatch('Order/cancelOrder', payload);
     },
-    onClickLeft() {
-      //router go to product list page
-      this.$router.push({ name: 'OrderList' });
+    async onClickLeft() {
+      //router go to product list page 
+      const customerId = this.User.currentUser.customerId;
+      await this.$store.dispatch('Order/getOrderList', customerId);
+      await this.$router.push({ name: 'OrderList' });
     },
   },
   //定时器获取后端数据, 1s一次，销毁时清除定时器
@@ -123,9 +125,6 @@ export default {
       </template>
     </van-card> 
   </div>
-  <!-- <div>
-    {{ currentOrder[0].order.status }}
-  </div> -->
 </template>
 
 <style lang="less" scoped>
