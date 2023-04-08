@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       currentPage: 1,
-      itemsPerPage: 5,
+      itemsPerPage: 3,
       page: null,
       //search
       searchValue: "",
@@ -64,7 +64,7 @@ export default {
     getProductListPaging() {
       var params = [];
       params.push(0);
-      params.push(3);
+      params.push(this.itemsPerPage);
       this.$store.dispatch("Product/getProductListPaging", params);
     },
     //searchProduct
@@ -157,6 +157,12 @@ export default {
     pagechange(page) {
       console.log("PageChange", page);
       this.currentPage = page;
+
+      var params = [];
+      params.push(page - 1);
+      params.push(this.itemsPerPage);
+      this.$store.dispatch("Product/getProductListPaging", params);
+
       // this.getProductList();
     },
 
@@ -299,8 +305,8 @@ export default {
     <van-pagination
       v-model="Product.page"
       :total-items="Product.noOfTotalElements"
-      :show-page-size="5"
-      :items-per-page="5"
+      :show-page-size="this.itemsPerPage"
+      :items-per-page="this.itemsPerPage"
       @change="pagechange"
     >
       <template #prev-text>
