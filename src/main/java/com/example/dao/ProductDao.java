@@ -13,7 +13,7 @@ import com.example.model.Product;
 
 @Repository
 public interface ProductDao  extends JpaRepository<Product, Long>{
-	
+
 	@Query("SELECT p FROM Product p WHERE " +
 			"p.productName LIKE LOWER(CONCAT('%', :productName, '%'))")
 	List<Product> findByProductName(@Param("productName") String productName);

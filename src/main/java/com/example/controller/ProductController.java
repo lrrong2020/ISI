@@ -43,6 +43,16 @@ public class ProductController {
 		return productService.getAllProduct();
 	}
 	
+	@GetMapping("/all/noOfItems")
+	public long getNoOfAllProducts(@RequestParam(value = "page", required = true) String page, @RequestParam(value = "size", required = true) String size) {
+		return productService.getNoOfAllProducts(Integer.valueOf(page), Integer.valueOf(size));
+	}
+	
+	@GetMapping("/all/noOfPages")
+	public int getNoOfPages(@RequestParam(value = "page", required = true) String page, @RequestParam(value = "size", required = true) String size) {
+		return productService.getNoOfPagesAllProducts(Integer.valueOf(page), Integer.valueOf(size));
+	}
+	
 	@PostMapping("/{productId}")
 	public Product updateCustomer(@PathVariable long productId, @RequestBody Product product) {
 		return productService.updateProduct(productId, product);

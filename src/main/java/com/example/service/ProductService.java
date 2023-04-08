@@ -123,5 +123,26 @@ public class ProductService {
 		return productList;
 	}
 	
+	
+	//return how many pages of all products
+	public int getNoOfPagesAllProducts(int page, int size) {
+		
+		Pageable firstPageWithTwoElements = PageRequest.of(page, size);
+		
+		Page<Product> allProducts = dao.findAll(firstPageWithTwoElements);
+
+		return allProducts.getTotalPages();
+	}
+	
+	//return how many pages of all products
+	public long getNoOfAllProducts(int page, int size) {
+		
+		Pageable firstPageWithTwoElements = PageRequest.of(page, size);
+		
+		Page<Product> allProducts = dao.findAll(firstPageWithTwoElements);
+
+		return allProducts.getTotalElements();
+	}
+	
 	//filter by product brand
 }
