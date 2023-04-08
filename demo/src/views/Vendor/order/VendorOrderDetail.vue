@@ -56,9 +56,6 @@ export default {
 </script>
 
 <template>
-  <!-- <div>
-    {{ Vendor.VendorOrderDetail }}
-  </div> -->
   <div class="bg">
     <div class="header">
       <van-nav-bar
