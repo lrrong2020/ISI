@@ -265,8 +265,8 @@ export default {
         });
     },
 
-    async filterProductByBrand(context, brand) {
-      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=` + brand)
+    async filterProductByBrand(context, params) {
+      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=${params[0]}&page=${params[1]}&size=${params[2]}`)
         .then((response) => {
           console.log("reponse.data in filterProductByBrand()");
           console.log(response.data);
@@ -292,7 +292,7 @@ export default {
 
           // else
           // {
-          context.commit('SetProductList', response.data);
+          context.commit('SetProductListPaging', response.data);
 
           // }
 
@@ -301,6 +301,27 @@ export default {
 
         }).catch((error) => {
           alert(error.message);
+        });
+
+
+      //get no of items
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/all/noOfItems?brand=${params[0]}&page=${params[1]}&size=${params[2]}`)
+        .then((response) => {
+          console.log(response.data);
+          context.commit('SetNoOfItems', response.data);
+        }).catch((error) => {
+          console.log(error.stack);
+          context.commit('displayErrorMsg', error.stack.toString());
+        });
+
+      //get no of pages
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/all/noOfPages?brand=${params[0]}&page=${params[1]}&size=${params[2]}`)
+        .then((response) => {
+          console.log(response.data);
+          context.commit('SetNoOfPages', response.data);
+        }).catch((error) => {
+          console.log(error.stack);
+          context.commit('displayErrorMsg', error.stack.toString());
         });
     },
 

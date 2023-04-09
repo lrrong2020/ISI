@@ -51,7 +51,7 @@ export default {
         name: "All",
       },
       currentPage: 1,
-      itemsPerPage: 3,
+      itemsPerPage: 1,
       page: null,
       //search
       searchValue: "",
@@ -110,7 +110,12 @@ export default {
       this.filterValue = id;
       this.activeIndex = id;
 
-      this.$store.dispatch("Product/filterProductByBrand", id);
+      var params = [];
+      params.push(id);
+      params.push(0);
+      params.push(this.itemsPerPage);
+
+      this.$store.dispatch("Product/filterProductByBrand", params);
     },
     resetFilter() {
       if (this.isFiltering === true) {
@@ -122,9 +127,9 @@ export default {
         console.log("this.isFiltering after reset: ");
         console.log(this.isFiltering);
 
-        this.getProductList();
+        this.getProductListPaging();
         this.timer = setInterval(() => {
-          this.getProductList();
+          this.getProductListPaging();
         }, 1000);
       }
     },
@@ -136,18 +141,26 @@ export default {
       console.log("PageChange", page);
       this.currentPage = page;
 
-      var params = [];
-      params.push(page - 1);
-      params.push(this.itemsPerPage);
-      this.$store.dispatch("Product/getProductListPaging", params);
+      if (this.isFiltering) {
+        var params = [];
+        params.push(this.filterValue);
+        params.push(page - 1);
+        params.push(this.itemsPerPage);
+        this.$store.dispatch("Product/filterProductByBrand", params);
+      } else {
+        var params = [];
+        params.push(page - 1);
+        params.push(this.itemsPerPage);
+        this.$store.dispatch("Product/getProductListPaging", params);
+      }
 
       // this.getProductList();
     },
     toPage(page, max) {
-      if(page > max){
+      if (page > max) {
         page = max;
       }
-      if (page == 0){
+      if (page == 0) {
         page = 1;
       }
 
@@ -161,7 +174,7 @@ export default {
   timer: null,
   mounted() {
     this.timer = setInterval(() => {
-      this.getProductList();
+      this.getProductListPaging();
     }, 1000);
   },
   beforeUnmount() {
@@ -194,9 +207,11 @@ export default {
     </van-grid>
   </div>
   <!-- Empty -->
-  <div class="empty" v-if="Product.productList.length === 0">
+  <div class="empty" v-if="Product.productListPaging.length === 0">
     <van-empty description="No Product!" />
   </div>
+
+
   <van-divider
     :style="{
       color: '#1989fa',
@@ -204,13 +219,13 @@ export default {
       padding: '30px 16px 15px 16px',
       fontSize: '20px',
     }"
-    v-if="Product.productList.length !== 0"
+    v-if="Product.productListPaging.length !== 0"
   >
     Hot Products
   </van-divider>
   <!-- Product List -->
   <div class="product">
-    <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
+    <van-config-provider :theme-vars="themeVars" v-if="Product.productListPaging.length !== 0">
       <!--全局样式-->
 
       <van-card
@@ -235,7 +250,7 @@ export default {
       <van-pagination
         v-model="this.currentPage"
         :total-items="Product.noOfTotalElements"
-        :show-page-size="this.itemsPerPage"
+        :show-page-size="5"
         :items-per-page="this.itemsPerPage"
         @change="pagechange"
       >
@@ -257,7 +272,9 @@ export default {
           placeholder="Go to page"
         >
           <template #button>
-            <van-button type="primary" @click="toPage(page, Product.noOfPages)"> GO! </van-button>
+            <van-button type="primary" @click="toPage(page, Product.noOfPages)">
+              GO!
+            </van-button>
           </template>
         </van-field>
       </van-cell-group>
