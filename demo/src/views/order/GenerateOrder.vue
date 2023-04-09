@@ -128,7 +128,7 @@ export default {
         <span style="font-size: 20px;">Total Amount</span>
         <span>${{ Cart.CartTotalPrice }}</span>
       </div>
-      <van-button @click="handleCreateOrder" class="pay-btn" color="#0392ff" type="primary" block>Conform</van-button>
+      <van-button @click="handleCreateOrder" class="pay-btn" color="#0392ff" type="primary" block>Confirm</van-button>
     </div>
     <van-popup
       closeable

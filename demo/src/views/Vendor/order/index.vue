@@ -106,7 +106,7 @@ export default {
 
     <!-- empty -->
     <div class="empty" v-if="Vendor.VendorOrderList[0].length == 0">
-      <van-empty description="No order yet" />
+      <van-empty description="No Order Found!" />
     </div>
     
     <!-- All order list -->
