@@ -27,6 +27,12 @@ export default {
 </template>
 
 <style scoped>
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
 .bg {
   font-family: "Comic Sans MS";
 }

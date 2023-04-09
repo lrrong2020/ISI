@@ -88,6 +88,28 @@ export default{
         console.log(error);
       })
     },
+    async holdOrder(context, {customerId, orderId}) {
+      const cancel = { 
+        status: "hold",
+      };
+      await axios({
+        method: 'post',
+        url:`${API_HOST_ANDROID_RUNNABLE}/customer/${customerId}/order/${orderId}`,
+        data: JSON.stringify(cancel),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }) 
+      .then((response) => {
+        console.log("ShipOrder:")
+        console.log(response.data);
+        context.dispatch("getVendorOrderList");
+        context.dispatch("getVendorOrderDetail", {customerId, orderId});
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
 
     searchOrderById(context, searchValue){
       console.log(searchValue);

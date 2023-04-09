@@ -229,124 +229,127 @@ export default {
 </script>
 
 <template>
-  <van-search
-    v-model="searchValue"
-    show-action
-    shape="round"
-    background="#ffffff"
-    placeholder="Type to search"
-    @clear="showList"
-    @update:model-value="searchProduct"
-  >
-    <template #action>
-      <div @click="searchProduct" class="button">Search</div>
-    </template>
-  </van-search>
-
-  <van-button
-    plain
-    hairline
-    size="large"
-    type="primary"
-    id="Add"
-    @click="toAddProductPage"
-  >
-    Add A New Product
-  </van-button>
-
-  <div class="brands">
-    <van-grid :column-num="4" square :border="false" :gutter="15" clickable>
-      <!-- 7 brands -->
-      <van-grid-item v-for="brand in brands" :key="brand.id" class="grid-item" @click="filterByBrand(brand.id)" >
-        <van-image class="image" fit="cover"
-          :src="brand.url"
-          
-        />
-        <p class="text" :style="{ color: activeIndex === brand.id ? '#03abff' : '' }">{{brand.name}}</p>
-      </van-grid-item>
-      <!-- All reset -->
-      <van-grid-item class="grid-item" @click="resetFilter">
-        <van-image class="image" fit="cover"
-          :src="all.url"
-        />
-        <p class="text">{{all.name}}</p>
-      </van-grid-item>
-    </van-grid>
-  </div>
-
-  <!-- <van-button size="small" type="primary" id="Xiaomi" @click="filterByBrand">
-          Xiaomi
-  </van-button>
-
-  <van-button size="small" type="primary" id="Huawei" @click="filterByBrand">
-          Huawei
-  </van-button>
-
-  <van-button size="small" type="primary" id="Apple" @click="filterByBrand">
-          Apple
-  </van-button>
-
-
-  <van-button plain hairline size="small" type="primary" id="Reset" @click="resetFilter" v-if="isFiltering">
-          Reset
-  </van-button> -->
-
-  <!-- Empty -->
-  <div class="empty" v-if="Product.productList.length === 0">
-    <van-empty description="No Product!" />
-  </div>
-
-  <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
-  <!--全局样式-->
-
-  <van-card
-      v-for="item in Product.productList.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-      )"
-      currency="$"
-      :key="item.productId"
-      :num="item.quantity"
-      :price="item.price"
-      :desc="item.brand"
-      :title="item.productName"
-      :thumb="item.photo"
-      @click="toDetail(item.productId)"
-      class="card"
+  <div class="bg">
+    <van-search
+      v-model="searchValue"
+      show-action
+      shape="round"
+      background="#ffffff"
+      placeholder="Type to search"
+      @clear="showList"
+      @update:model-value="searchProduct"
     >
-      <template #tags>
-        <van-tag plain type="primary">{{ item.productId }}</van-tag>
+      <template #action>
+        <div @click="searchProduct" class="button">Search</div>
       </template>
-    </van-card>
-    <!--Paging-->
-    <van-pagination v-model="currentPage" :total-items="Product.productList.length" 
-    :show-page-size="5" :items-per-page="itemsPerPage" @change="pagechange">
-      <template #prev-text>
-          <van-icon name="arrow-left" />
-      </template>
-      <template #next-text>
-          <van-icon name="arrow" />
-      </template>
-      <template #page="{ text }">{{ text }}</template>
-    </van-pagination>
-    <!--Input Location-->
-    <van-cell-group inset class="input">
-      <van-field
-        v-model.number="page"
-        center
-        clearable
-        type="digit"
-        placeholder="Go to page"
+    </van-search>
+
+    <van-button
+      plain
+      hairline
+      size="large"
+      type="primary"
+      id="Add"
+      @click="toAddProductPage"
+      class="add-button"
+    >
+      Add A New Product
+    </van-button>
+
+    <div class="brands">
+      <van-grid :column-num="4" square :border="false" :gutter="15" clickable>
+        <!-- 7 brands -->
+        <van-grid-item v-for="brand in brands" :key="brand.id" class="grid-item" @click="filterByBrand(brand.id)" >
+          <van-image class="image" fit="cover"
+            :src="brand.url"
+            
+          />
+          <p class="text" :style="{ color: activeIndex === brand.id ? '#03abff' : '' }">{{brand.name}}</p>
+        </van-grid-item>
+        <!-- All reset -->
+        <van-grid-item class="grid-item" @click="resetFilter">
+          <van-image class="image" fit="cover"
+            :src="all.url"
+          />
+          <p class="text">{{all.name}}</p>
+        </van-grid-item>
+      </van-grid>
+    </div>
+
+    <!-- <van-button size="small" type="primary" id="Xiaomi" @click="filterByBrand">
+            Xiaomi
+    </van-button>
+
+    <van-button size="small" type="primary" id="Huawei" @click="filterByBrand">
+            Huawei
+    </van-button>
+
+    <van-button size="small" type="primary" id="Apple" @click="filterByBrand">
+            Apple
+    </van-button>
+
+
+    <van-button plain hairline size="small" type="primary" id="Reset" @click="resetFilter" v-if="isFiltering">
+            Reset
+    </van-button> -->
+
+    <!-- Empty -->
+    <div class="empty" v-if="Product.productList.length === 0">
+      <van-empty description="No Product!" />
+    </div>
+
+    <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
+    <!--全局样式-->
+
+    <van-card
+        v-for="item in Product.productList.slice(
+          (currentPage - 1) * itemsPerPage,
+          currentPage * itemsPerPage
+        )"
+        currency="$"
+        :key="item.productId"
+        :num="item.quantity"
+        :price="item.price"
+        :desc="item.brand"
+        :title="item.productName"
+        :thumb="item.photo"
+        @click="toDetail(item.productId)"
+        class="card"
       >
-        <template #button>
-        <van-button type="primary" @click="toPage(page)">
-          GO!
-        </van-button>
+        <template #tags>
+          <van-tag plain type="primary">{{ item.productId }}</van-tag>
         </template>
-      </van-field>
-    </van-cell-group>
-  <!--全局样式-->
-  </van-config-provider>
+      </van-card>
+      <!--Paging-->
+      <van-pagination v-model="currentPage" :total-items="Product.productList.length" 
+      :show-page-size="5" :items-per-page="itemsPerPage" @change="pagechange">
+        <template #prev-text>
+            <van-icon name="arrow-left" />
+        </template>
+        <template #next-text>
+            <van-icon name="arrow" />
+        </template>
+        <template #page="{ text }">{{ text }}</template>
+      </van-pagination>
+      <!--Input Location-->
+      <van-cell-group inset class="input">
+        <van-field
+          v-model.number="page"
+          center
+          clearable
+          type="digit"
+          placeholder="Go to page"
+        >
+          <template #button>
+          <van-button type="primary" @click="toPage(page)">
+            GO!
+          </van-button>
+          </template>
+        </van-field>
+      </van-cell-group>
+    <!--全局样式-->
+    </van-config-provider>    
+  </div>
 </template>
 
 <style lang="less" scoped>
