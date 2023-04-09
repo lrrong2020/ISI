@@ -68,8 +68,8 @@ export default {
       cardBackground: '#ffffff',
       cardPriceColor: '#ee0a24',
       cardFontSize: '17px',
-      cardTitleLineHeight: '50px',
-      cardDescLineHeight: '50px',
+      cardTitleLineHeight: '20px',
+      cardDescLineHeight: '30px',
       cardPriceFontSize: '15px',
       cardPriceIntegerFontSize: '25px',
       gridItemContentPadding: '0px',
@@ -317,7 +317,7 @@ export default {
         class="card"
       >
         <template #tags>
-          <van-tag plain type="primary">{{ item.productId }}</van-tag>
+          <van-tag plain size="medium" type="primary">{{ item.productId }}</van-tag>
         </template>
       </van-card>
       <!--Paging-->

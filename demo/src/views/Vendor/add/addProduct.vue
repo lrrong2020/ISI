@@ -103,7 +103,10 @@ export default {
       { text: 'Huawei', value: 'Huawei' },
       { text: 'Apple', value: 'Apple' },
       { text: 'Xiaomi', value: 'Xiaomi' },
-
+      { text: 'Samsung', value: 'Samsung' },
+      { text: 'vivo', value: 'vivo' },
+      { text: 'OPPO', value: 'OPPO' },
+      { text: 'realme', value: 'realme' },
     ];
 
     const onConfirm = ({ selectedOptions }) => {
