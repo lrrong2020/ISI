@@ -143,7 +143,14 @@ export default {
 
       // this.getProductList();
     },
-    toPage(page) {
+    toPage(page, max) {
+      if(page > max){
+        page = max;
+      }
+      if (page == 0){
+        page = 1;
+      }
+
       this.pagechange(page);
       this.page = null;
     },
@@ -250,7 +257,7 @@ export default {
           placeholder="Go to page"
         >
           <template #button>
-            <van-button type="primary" @click="toPage(page)"> GO! </van-button>
+            <van-button type="primary" @click="toPage(page, Product.noOfPages)"> GO! </van-button>
           </template>
         </van-field>
       </van-cell-group>
