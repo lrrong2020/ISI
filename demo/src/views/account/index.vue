@@ -22,12 +22,13 @@ export default {
   },
   created() {
     this.getUser();
+    this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
   },
   mounted() {
     this.loading = false;
   },
   computed: {
-    ...mapState(["User"]),
+    ...mapState(['User', 'Cart', 'Order']),
   },
   methods: {
     getUser() {
@@ -35,6 +36,17 @@ export default {
     }, 
     onClickLeft() {
       this.$router.push({ name: 'Home' });
+    },
+    async toOrder() {
+      const customerId = this.User.currentUser.customerId;
+      await this.$store.dispatch('Order/getOrderList', customerId);
+      await this.$router.push({ name: 'OrderList' });
+    },
+    toAccountManagement() {
+      this.$router.push({ name: 'AccountManagement', params: { id: this.User.currentUser.customerId } });
+    },
+    toAddressManagement() {
+      this.$router.push({ name: 'AddressManagement', params: { id: this.User.currentUser.customerId } });
     },
     Logout() {
       localStorage.removeItem("isLogin");
@@ -54,55 +66,53 @@ export default {
 
 <template>
   <div class="bg">
-    <div class="main">
-      <div class="TopBar">
-        <van-nav-bar
-          fixed
-          placeholder
-          title="Account"
-          left-arrow
-          @click-left="onClickLeft"
-        />
-      </div>
-      <div class="Account">
-        <van-skeleton title :avatar="true" :row="3" :loading="this.loading">
-          <div class="user-info">
-            <div class="user-avatar">
-              <van-image
-                src="https://fastly.jsdelivr.net/npm/@vant/assets/user-active.png"
-                width="80px"
-                height="80px"
-                fit="cover"
-              />
-            </div>
-            <div class="user-desc">
+    <div class="TopBar">
+      <van-nav-bar
+        fixed
+        placeholder
+        title="My Account"
+        left-arrow
+        @click-left="onClickLeft"
+      />
+    </div>
+    <div class="Account">
+      <van-skeleton title :avatar="true" :row="3" :loading="this.loading">
+        <div class="user-info">
+          <div class="user-avatar">
+            <van-image
+              src="https://png.pngtree.com/png-vector/20190805/ourlarge/pngtree-account-avatar-user-abstract-circle-background-flat-color-icon-png-image_1650938.jpg"
+              width="100px"
+              height="100px"
+              fit="cover"
+            />
+          </div>
+          <div class="user-desc">
+            <div class="user-name">
               <span> User: {{ User.currentUser.customerName }}</span>
             </div>
+            <div class="user-email">
+              <span> E-mail: {{ User.currentUser.customerEmail }}</span>
+            </div>
           </div>
-        </van-skeleton>
-      </div>
-      <ul class="user-list">
-        <li class="van-hairline--bottom" @click="goTo()">
-          <span>我的订单</span>
-          <van-icon name="arrow" />
-        </li>
-        <li class="van-hairline--bottom" @click="goTo()">
-          <span>账号管理</span>
-          <van-icon name="arrow" />
-        </li>
-        <li class="van-hairline--bottom" @click="goTo()">
-          <span>地址管理</span>
-          <van-icon name="arrow" />
-        </li>
-        <li @click="goTo()">
-          <span>关于我们</span>
-          <van-icon name="arrow" />
-        </li>
-      </ul>
+        </div>
+      </van-skeleton>
     </div>
-    <div>
+    <ul class="user-list">
+      <li class="van-hairline--bottom" @click="toOrder">
+        <span>My Orders</span>
+        <van-icon name="arrow" />
+      </li>
+      <li class="van-hairline--bottom" @click="toAccountManagement">
+        <span>Account Management</span>
+        <van-icon name="arrow" />
+      </li>
+      <li class="van-hairline--bottom" @click="toAddressManagement">
+        <span>Address Management</span>
+        <van-icon name="arrow" />
+      </li>
+    </ul>
+    <div class="Logout">
       <van-button plain size="large" round block
-        icon="https://fastly.jsdelivr.net/npm/@vant/assets/user-active.png"
         type="primary"
         @click="Logout">
           Log Out
@@ -112,5 +122,66 @@ export default {
 </template>
 
 <style lang="less" scoped>
+//用less写样式
+
+.bg{
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  .Account{
+    height: 20%;
+    width: 90%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #888888;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 20px;
+    .user-info{
+      display: flex;
+      flex-direction: row;
+      .user-avatar{
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+      .user-desc{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .user-name{
+          font-size: 20px;
+          font-weight: bold;
+        }
+        .user-email{
+          font-size: 15px;
+          color: #999;
+        }
+      }
+    }
+  }
+  .user-list{
+    margin-top: 20px;
+    li{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #333;
+      span{
+        font-size: 16px;
+        color: #333;
+      }
+    }
+  }
+  .Logout{
+    position: absolute;
+    bottom: 8%;
+    width: 90%;
+    font-size: 20px;
+    left: 5%;
+  }
+}
+
 
 </style>

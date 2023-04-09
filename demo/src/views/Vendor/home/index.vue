@@ -47,22 +47,22 @@ export default {
     flex: 1;
     overflow-y: auto;
     .header {
-      background-image: linear-gradient(#7232dd, #ffffff);
+      background-image: linear-gradient(#1989fa, #ffffff);
       // display: flex;
       // justify-content: space-between;
       // align-items: center;
       text-align: center;
       padding: 20px 20px 40px 20px;
       .title {
-        font-size: 30px;
+        font-size: 29px;
         font-weight: 600;
         font-family: "Comic Sans MS"
       }
     }
     .main{
-      margin-top: -30px;
+      margin-top: -20px;
       .bg{
-        background-color: #c9c9c9;
+        background-color: #ffffff;
         padding: 10px 20px 0px 20px;
         border-radius: 30px 30px 0px 0px;
         

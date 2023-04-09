@@ -17,6 +17,7 @@ export default {
   },
   created() {
     this.getOrderList();
+    // this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
   },
   computed: {
     ...mapState(['Cart', 'User', 'Order']),
@@ -67,6 +68,10 @@ export default {
         <van-dropdown-item v-model="value1" :options="option1" />
       </van-dropdown-menu>
     </div>
+    <!-- Empty -->
+    <div class="empty" v-if="this.reverseOrderList.length == 0">
+      <van-empty description="No order yet" />
+    </div>
     <!-- All order list -->
     <div class="allorders" v-if="this.value1 == 0">
       <van-cell v-for="order in reverseOrderList" :key="order" 
@@ -80,7 +85,10 @@ export default {
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
           <br/>
-          <van-tag type="primary">{{ order.status }}</van-tag>
+          <van-tag plain type="primary" v-if="order.status == 'pending'">{{ order.status }}</van-tag>
+          <van-tag plain type="warning" v-if="order.status == 'hold'">{{ order.status }}</van-tag>
+          <van-tag plain type="success" v-if="order.status == 'shipped'">{{ order.status }}</van-tag>
+          <van-tag plain type="danger" v-if="order.status == 'cancelled'">{{ order.status }}</van-tag>
         </template>
       </van-cell>
     </div>
@@ -97,7 +105,8 @@ export default {
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
           <br/>
-          <van-tag type="primary">{{ order.status }}</van-tag>
+          <van-tag plain type="primary" v-if="order.status == 'pending'">{{ order.status }}</van-tag>
+          <van-tag plain type="warning" v-if="order.status == 'hold'">{{ order.status }}</van-tag>
         </template>
       </van-cell>
     </div>
@@ -114,7 +123,8 @@ export default {
         <template #title>
           <span class="custom-title">P.O.number: {{ order.purchaseOrderNumber }}</span>
           <br/>
-          <van-tag type="primary">{{ order.status }}</van-tag>
+          <van-tag plain type="success" v-if="order.status == 'shipped'">{{ order.status }}</van-tag>
+          <van-tag plain type="danger" v-if="order.status == 'cancelled'">{{ order.status }}</van-tag>
         </template>
       </van-cell>
     </div>

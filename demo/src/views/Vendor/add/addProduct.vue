@@ -1,4 +1,12 @@
 <template>
+  <div>
+  <van-nav-bar
+    :border="false"
+    title="Add New Product"
+    left-arrow
+    @click-left="onClickLeft"
+    class="header"
+  />
   <van-form @submit="addProduct">
     <van-cell-group inset>
       <van-field
@@ -26,21 +34,21 @@
       />
 
       <van-field
-  v-model="result"
-  is-link
-  readonly
-  name="brand"
-  label="Brand"
-  placeholder="Select Brand"
-  @click="showPicker = true"
-/>
-<van-popup v-model:show="showPicker" position="bottom">
-  <van-picker
-    :columns="columns"
-    @confirm="onConfirm"
-    @cancel="showPicker = false"
-  />
-</van-popup>
+        v-model="result"
+        is-link
+        readonly
+        name="brand"
+        label="Brand"
+        placeholder="Select Brand"
+        @click="showPicker = true"
+      />
+      <van-popup v-model:show="showPicker" position="bottom">
+        <van-picker
+          :columns="columns"
+          @confirm="onConfirm"
+          @cancel="showPicker = false"
+        />
+      </van-popup>
 
       <van-field
         v-model="price"
@@ -66,7 +74,7 @@
       <van-button round block type="primary" native-type="submit"> Submit </van-button>
     </div>
   </van-form>
-
+</div>
 </template>
 
 <script>
@@ -82,7 +90,6 @@ export default {
     const brand = ref("");
     const price = ref("");
     const image = ref("");
-
 
     const that = this;
     const onSubmit = (value) => {
@@ -103,6 +110,7 @@ export default {
       result.value = selectedOptions[0]?.text;
       showPicker.value = false;
     };
+    const onClickLeft = () => history.back();
     return {
       productName,
       brand,
@@ -115,6 +123,7 @@ export default {
       columns,
       onConfirm,
       showPicker,
+      onClickLeft,
     };
   },
 

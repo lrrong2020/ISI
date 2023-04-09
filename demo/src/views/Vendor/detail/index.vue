@@ -9,7 +9,6 @@ export default {
   name: "Detail",
   setup() {
     const active = ref(0);
-
     return { active };
   },
   data() {
@@ -51,75 +50,60 @@ export default {
 
 <template>
   <div class="bg">
-    <div class="swipe">
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#1989fa">
-        <van-swipe-item v-for="img in 1" :key="img">
-          <img :src="this.Detail.photo" height="250" width="250" style="padding-top: 40px;">
-        </van-swipe-item>
-      </van-swipe>
+    <div class="img">
+      <van-image
+        width= "100%"
+        height="300px"
+        :src="this.Detail.photo"
+        fit="contain"
+      />
     </div>
-    <div class="main">
+    <div class="main-card">
       <div class="name">
-        <p>{{ this.Detail.productName }}</p>
-        <p>Brand: {{ this.Detail.brand }}</p>
+        <p style="margin: 5px 0px; font-size: 30px;">{{ this.Detail.productName }}</p>
+        <p style="margin: 5px 0px;font-size: 20px; color: #b4b4b4;">Brand: {{ this.Detail.brand }}</p>
+        <p style="margin: 5px 0px;font-size: 20px; color: #00aaff;">ID: {{ this.Detail.productId }}</p>
       </div>
       <div class="price">
-        <h1>${{this.Detail.price}}</h1>
-      </div>
-      
+        <h1 style="margin: 5px 0px">${{this.Detail.price}}</h1>
+      </div> 
     </div>
     <div class="prop">
-      <van-tabs v-model:active="active" swipeable>
-        <van-tab title="Color">
-          {{ this.Detail.property }}
-        </van-tab>
-        <van-tab title="Screen Size">
-          {{ this.Detail.propertySecond }}
-        </van-tab>
-      </van-tabs>
+      <p style="margin: 5px 0px">Color: {{ this.Detail.property }}</p>
+      <p style="margin: 5px 0px">Screen Size: {{ this.Detail.propertySecond }}</p>
     </div>
-    <!-- <div class="footer">
-      <van-action-bar placeholder>
-        <van-action-bar-icon icon="chat-o" text="客服" />
-        <van-action-bar-icon icon="cart-o" text="Cart" @click="goToCart" :badge="!Cart.CartTotal ? '' : Cart.CartTotal"/>
-        <van-action-bar-button color="#be99ff" type="warning" text="Add to Cart" @click="addCartItem(Detail.productId)"/>
-        <van-action-bar-button color="#7232dd" type="danger" text="Buy Now" @click="onClickButtonBuy(Detail.productId)"/>
-      </van-action-bar>
-    </div> -->
-    <!-- <div>{{ Cart.Cart[0].productId }}</div> -->
-    <!-- <div>{{ Detail.productId }}</div> -->
-    <!-- <div>product {{ Detail }}</div>
-    <div>Cart: {{ Cart.Cart }}</div> -->
-    <div class="block"></div>
   </div>
 </template>
 
 <style lang="less" scoped>
-.bg{
-    .my-swipe .van-swipe-item {
-    font-size: 20px;
-    line-height: 150px;
-    text-align: center;
-    background-color: #ff0000a8;
+.img{
+  width: 100%;
+  height: 300px;
+}
+//main是卡片样式，卡片背景色为白色，圆角为15px，宽度为90%，有阴影
+.main-card{
+  border-radius: 10px;
+  box-shadow: 0 0 5px #bdbdbd;
+  margin: 20px 10px 0px 10px;
+  padding: 10px;
+  .name{
+    margin: 0px;
   }
-  .main{
-    border-radius: 15px;
-    background-color: rgb(255, 255, 255);
-    .name{
-      margin: 0px;
-    }
-    .price{
-      color: red;
-      margin: 0px;
-      font-size: 15px;
-    }
-    .desc{
-      font-size: 15px;
-    }
+  .price{
+    color: red;
+    margin: 0px;
+    font-size: 10px;
   }
-  .block{
-    height: 50px;
+  .desc{
+    margin: 0px;
   }
+}
+.prop{
+  border-radius: 10px;
+  box-shadow: 0 0 5px #bdbdbd;
+  margin: 10px 10px;
+  padding: 10px;
+  font-size: 20px;
 }
 
 </style>

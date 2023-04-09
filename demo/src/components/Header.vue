@@ -3,7 +3,7 @@ export default {
   name: "Header",
   methods: {
     onClickLeft() {
-      this.$router.push('/');
+      this.$router.go(-1);
     },
   },
 }
@@ -12,7 +12,7 @@ export default {
 <template>
   <van-nav-bar
   :border="false"
-  title="Title"
+  title="Product Detail"
   left-arrow
   fixed
   placeholder

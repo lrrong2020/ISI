@@ -18,7 +18,7 @@ export default {
       cardThumbRadius: "0px",
       cardBackground: "#ffffff",
       cardPriceColor: "#ee0a24",
-      cardFontSize: "15px",
+      cardFontSize: "15px", 
       cardTitleLineHeight: "50px",
       cardDescLineHeight: "50px",
       cardPriceFontSize: "15px",
@@ -50,7 +50,7 @@ export default {
     // this.getProductList();
     this.getProductListPaging();
   },
-  mounted() {},
+
   computed: {
     ...mapState(["Product"]),
   },
@@ -102,7 +102,7 @@ export default {
       this.isFiltering = true;
       this.filterValue = event.target.id;
 
-      console.log("this.searchValue", this.searchValue.lengtgith);
+      console.log("this.searchValue", this.searchValue.length);
 
       var params = [];
 
@@ -126,7 +126,9 @@ export default {
       }
     },
 
+    // reset filter
     resetFilter() {
+
       this.currentPage = 1;
       console.log("reset filter");
       this.isFiltering = false;
@@ -144,11 +146,10 @@ export default {
       } else {
         this.searchProduct();
       }
-
       // this.searchProduct();
       // this.getProductList();
     },
-
+    //Go to Detail Page
     async toDetail(item) {
       await this.$store.dispatch("Product/getProductDetail", item);
       this.$router.push({ name: "Detail", params: { id: item } });
@@ -209,16 +210,17 @@ export default {
   //定时器获取后端数据, 1s一次，销毁时清除定时器
   timer: null,
   mounted() {
-    // temporarily disable for paging debug
-    // this.timer = setInterval(() => {
-    //   this.getProductList();
-    // }, 1000);
+    this.timer = setInterval(() => {
+      this.getProductList();
+    }, 1000);
   },
+
   beforeUnmount() {
     clearInterval(this.timer);
     console.log("clear timer");
   },
 };
+
 </script>
 
 <template>
@@ -269,25 +271,8 @@ export default {
     <van-empty description="No Product" />
   </div>
 
+
   <van-config-provider :theme-vars="themeVars" v-if="Product.productListPaging.length !== 0">
-    <!--全局样式-->
-
-    <!-- <van-card
-      v-for="item in Product.productList.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-      )"
-      :key="item.productId"
-      :num="item.quantity"
-      :price="item.price"
-      :desc="item.brand"
-      :title="item.productName"
-      :thumb="item.photo"
-      @click="toDetail(item.productId)"
-      class="card"
-    >
-    </van-card> -->
-
     <van-card
       v-for="item in Product.productListPaging"
       :key="item.productId"
@@ -349,3 +334,4 @@ export default {
   border-radius: 0%;
 }
 </style>
+

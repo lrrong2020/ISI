@@ -125,10 +125,10 @@ export default {
     <div class="footer">
       <div class="pay-wrap">
       <div class="price">
-        <span>Total Amount</span>
+        <span style="font-size: 20px;">Total Amount</span>
         <span>${{ Cart.CartTotalPrice }}</span>
       </div>
-      <van-button @click="handleCreateOrder" class="pay-btn" color="#9805fa" type="primary" block>Conform</van-button>
+      <van-button @click="handleCreateOrder" class="pay-btn" color="#0392ff" type="primary" block>Conform</van-button>
     </div>
     <van-popup
       closeable
@@ -149,7 +149,7 @@ export default {
 <style lang="less" scoped>
 .address-wrap {
   margin-bottom: 20px;
-  background: #fff;
+  background: #ffffff;
   position: relative;
   font-size: 17px;
   padding: 15px;
@@ -186,35 +186,37 @@ export default {
   .goods-card {
     margin: 5px 0px;
     width: 100%;
+    font-size: 15px;
   }
 }
 .pay-wrap {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #fff;
-      padding: 10px 0;
-      padding-bottom: 50px;
-      border-top: 1px solid #e9e9e9;
-      >div {
-        display: flex;
-        justify-content: space-between;
-        padding: 0 5%;
-        margin: 10px 0;
-        font-size: 14px;
-        span:nth-child(2) {
-          color: red;
-          font-size: 18px;
-        }
-      }
-      .pay-btn {
-        position: fixed;
-        bottom: 7px;
-        right: 0;
-        left: 0;
-        width: 90%;
-        margin: 0 auto;
-      }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  padding: 10px 0;
+  padding-bottom: 50px;
+  border-top: 1px solid #e9e9e9;
+  >div {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+    margin: 10px 0;
+    font-size: 14px;
+    span:nth-child(2) {
+      color: red;
+      font-size: 18px;
     }
+  }
+  .pay-btn {
+    position: fixed;
+    bottom: 7px;
+    right: 0;
+    left: 0;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 20px;
+  }
+}
 </style>

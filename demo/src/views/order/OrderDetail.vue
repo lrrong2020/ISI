@@ -12,9 +12,10 @@ export default {
   },
   created() {
     this.getOrderDetail();
+    this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
   },
   computed: {
-    ...mapState(['User','Order']),
+    ...mapState(['User','Order', 'Cart']),
   },
   methods: {
     async getOrderDetail() {
@@ -32,9 +33,11 @@ export default {
       };
       await this.$store.dispatch('Order/cancelOrder', payload);
     },
-    onClickLeft() {
-      //router go to product list page
-      this.$router.push({ name: 'OrderList' });
+    async onClickLeft() {
+      //router go to product list page 
+      const customerId = this.User.currentUser.customerId;
+      await this.$store.dispatch('Order/getOrderList', customerId);
+      await this.$router.push({ name: 'OrderList' });
     },
   },
   //定时器获取后端数据, 1s一次，销毁时清除定时器
@@ -64,8 +67,11 @@ export default {
     </div>
     <div class="order-status">
       <div class="status-item">
-        <label>Order Status:</label>
-        <span>{{ Order.OrderDetail[0].order.status }}</span>
+        <label>Order Status: </label>
+        <span style="color: #0392ff" v-if="Order.OrderDetail[0].order.status == 'pending'">{{ Order.OrderDetail[0].order.status }}</span>
+        <span style="color: #ffa303" v-if="Order.OrderDetail[0].order.status == 'hold'">{{ Order.OrderDetail[0].order.status }}</span>
+        <span style="color: #1dbd00" v-if="Order.OrderDetail[0].order.status == 'shipped'">{{ Order.OrderDetail[0].order.status }}</span>
+        <span style="color: #ff0303" v-if="Order.OrderDetail[0].order.status == 'cancelled'">{{ Order.OrderDetail[0].order.status }}</span>
       </div>
       <div class="status-item">
         <label>P.O.number: </label>
@@ -87,12 +93,12 @@ export default {
         <label>Shipment Date: </label>
         <span>{{ Order.OrderDetail[0].order.shipmentDate }}</span>
       </div>
-      <van-button v-if="Order.OrderDetail[0].order.status == 'pending' || Order.OrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
+      <van-button plain type="danger" v-if="Order.OrderDetail[0].order.status == 'pending' || Order.OrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
     </div>
     <div class="order-price">
       <div class="price-item">
         <label>Total Amount: </label>
-        <span>${{ Order.OrderDetail[0].order.totalAmount }}</span>
+        <span style="color: red">${{ Order.OrderDetail[0].order.totalAmount }}</span>
       </div>
       <div class="price-item">
         <label>Username: </label>
@@ -105,6 +111,7 @@ export default {
     </div>
     <van-card
       v-for="item in Order.OrderDetail"
+      currency="$"
       :key="item"
       style="background: #fff"
       :num="item.quantity"
@@ -113,14 +120,11 @@ export default {
       :title="item.product.productName"
       :thumb="item.product.photo"
     >
-    <template #footer>
-      <div style="font-size: 15px; color: crimson;">Subtotal: ${{ item.totalPrice }}</div>
-    </template>
-    </van-card>
+      <template #footer>
+        <div style="font-size: 15px; color: crimson;">Subtotal: ${{ item.totalPrice }}</div>
+      </template>
+    </van-card> 
   </div>
-  <!-- <div>
-    {{ currentOrder[0].order.status }}
-  </div> -->
 </template>
 
 <style lang="less" scoped>
@@ -128,28 +132,27 @@ export default {
   background: #f7f7f7;
   height: 100%;
   .order-status {
-  background: #fff;
-  padding: 20px;
-  font-size: 15px;
-  .status-item {
-    margin-bottom: 10px;
-    label {
-      color: #999;
+    background: #fff;
+    padding: 20px;
+    font-size: 15px;
+    .status-item {
+      margin-bottom: 10px;
+      label {
+        color: #999;
+      }
+    }
+  }
+  .order-price {
+    background: #fff;
+    margin: 20px 0;
+    padding: 20px;
+    font-size: 15px;
+    .price-item {
+      margin-bottom: 10px;
+      label {
+        color: #999;
+      }
     }
   }
 }
-.order-price {
-  background: #fff;
-  margin: 20px 0;
-  padding: 20px;
-  font-size: 15px;
-  .price-item {
-    margin-bottom: 10px;
-    label {
-      color: #999;
-    }
-  }
-}
-}
-
 </style>

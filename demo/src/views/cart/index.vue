@@ -41,8 +41,9 @@ export default {
       };
       this.$store.dispatch('Cart/updateCartItems', payload);
     },
-    toDetail(productId) {
-    this.$router.push({ name: 'Detail', params: { id: productId } });
+    async toDetail(item) {
+      await this.$store.dispatch('Product/getProductDetail', item);
+      this.$router.push({ name: 'Detail', params: { id: item } });
     },
     onSubmit() {
       this.$router.push({ name: 'GenerateOrder' });
@@ -72,6 +73,7 @@ export default {
       <van-swipe-cell v-for="item in Cart.Cart" :key="item">
         <van-card
         class="goods-card"
+        currency="$"
         :price="item.product.price"
         :desc="item.product.brand"
         :title="item.product.productName"
@@ -97,7 +99,7 @@ export default {
     <div class="block"></div>
     <!--CheckOut-->
     <div v-if="Cart.CartTotalQuantity !== 0 ">
-      <van-submit-bar label="Total Amount: " currency="$" :price="Cart.CartTotalPrice * 100" button-text="Check Out" @submit="onSubmit" class="footer">
+      <van-submit-bar text-align="left" label="Total Amount: " currency="$" :price="Cart.CartTotalPrice * 100" button-text="Check Out" @submit="onSubmit" class="footer">
       </van-submit-bar>
     </div>
     <!-- <div>{{ User.currentUser }}</div>
@@ -111,17 +113,22 @@ export default {
 </template>
 
 <style scoped>
+.empty {
+  margin-top: 30%;
+}
 .goods-card {
     margin: 0;
     background-color: #ffffff;
     width: 100%;
+    font-size: 15px;
+    border-bottom: 1px solid #f0f0f0;
   }
 .delete-button {
   height: 100%;
 }
 .block{
   position: relative;
-  height: 50px;
+  height: 25px;
 }
 .footer{
   position: fixed;

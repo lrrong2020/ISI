@@ -3,7 +3,6 @@ export default {
   name: "VendorHeader",
   setup() {
     const onClickLeft = () => history.back();
-
     return {
       onClickLeft,
     };
@@ -13,11 +12,11 @@ export default {
 
 <template>
   <van-nav-bar
-  :border="false"
-  title="Title"
-  left-arrow
-  @click-left="onClickLeft"
-  class="header"
+    :border="false"
+    title="Product Detail"
+    left-arrow
+    @click-left="onClickLeft"
+    class="header"
   />
 </template>
 
