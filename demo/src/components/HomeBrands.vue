@@ -51,7 +51,7 @@ export default {
         name: "All",
       },
       currentPage: 1,
-      itemsPerPage: 1,
+      itemsPerPage: 4,
       page: null,
       //search
       searchValue: "",
@@ -94,7 +94,7 @@ export default {
     //getProductList from Store with paging
     getProductListPaging() {
       var params = [];
-      params.push(0);
+      params.push(this.currentPage - 1);
       params.push(this.itemsPerPage);
       this.$store.dispatch("Product/getProductListPaging", params);
     },
@@ -112,7 +112,7 @@ export default {
 
       var params = [];
       params.push(id);
-      params.push(0);
+      params.push(this.currentPage - 1);
       params.push(this.itemsPerPage);
 
       this.$store.dispatch("Product/filterProductByBrand", params);
