@@ -44,12 +44,18 @@ public class ProductController {
 	}
 	
 	@GetMapping("/all/noOfItems")
-	public long getNoOfAllProducts(@RequestParam(value = "page", required = true) String page, @RequestParam(value = "size", required = true) String size) {
+	public long getNoOfAllProducts(@RequestParam(value = "brand", required = false) String brand, @RequestParam(value = "page", required = true) String page, @RequestParam(value = "size", required = true) String size) {
+		if(brand != null) {
+			return productService.getNoOfAllProducts(brand, Integer.valueOf(page), Integer.valueOf(size));
+		}
 		return productService.getNoOfAllProducts(Integer.valueOf(page), Integer.valueOf(size));
 	}
 	
 	@GetMapping("/all/noOfPages")
-	public int getNoOfPages(@RequestParam(value = "page", required = true) String page, @RequestParam(value = "size", required = true) String size) {
+	public int getNoOfPages(@RequestParam(value = "brand", required = false) String brand, @RequestParam(value = "page", required = true) String page, @RequestParam(value = "size", required = true) String size) {
+		if(brand != null) {
+			return productService.getNoOfPagesAllProducts(brand, Integer.valueOf(page), Integer.valueOf(size));
+		}
 		return productService.getNoOfPagesAllProducts(Integer.valueOf(page), Integer.valueOf(size));
 	}
 	
@@ -79,11 +85,10 @@ public class ProductController {
 	}
 	
 	@GetMapping("/filter")
-	public List<Product> getProductsByBrand(@RequestParam("brand") String brand) {
+	public List<Product> getProductsByBrand(@RequestParam("brand") String brand, @RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
 		System.out.println("brand:" + brand);
 		
-		return productService.getProductsByBrand(brand);
+		return productService.getProductsByBrand(brand, Integer.valueOf(page), Integer.valueOf(size));
 	}
-	
 
 }

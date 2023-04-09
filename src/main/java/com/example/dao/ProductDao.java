@@ -2,7 +2,7 @@ package com.example.dao;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +20,7 @@ public interface ProductDao  extends JpaRepository<Product, Long>{
 	
 	@Query("SELECT p FROM Product p WHERE " +
 			"p.brand LIKE LOWER(CONCAT('%', :brand, '%'))")
-	List<Product> findAllByProductBrand(@Param("brand") String brand);
+	Page<Product> findAllByProductBrand(@Param("brand") String brand, Pageable pageable);
 	
 	@Query("SELECT p FROM Product p WHERE " +
 			"p.brand LIKE LOWER(CONCAT('%', :brand, '%'))" +

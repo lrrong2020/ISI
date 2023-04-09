@@ -87,10 +87,12 @@ public class ProductService {
 		return productResList;
 	}
 
-	public List<Product> getProductsByBrand(String brand) {
+	public List<Product> getProductsByBrand(String brand, int page, int size) {
 		System.out.println("brand: " + brand);
 		
-		List<Product> products = dao.findAllByProductBrand(brand);
+		Pageable firstPageWithTwoElements = PageRequest.of(page, size);
+
+		List<Product> products = dao.findAllByProductBrand(brand, firstPageWithTwoElements).getContent();
 		
 		for(Product product: products) 
 		{
@@ -140,6 +142,26 @@ public class ProductService {
 		Pageable firstPageWithTwoElements = PageRequest.of(page, size);
 		
 		Page<Product> allProducts = dao.findAll(firstPageWithTwoElements);
+
+		return allProducts.getTotalElements();
+	}
+	
+	//return how many pages of all products
+	public int getNoOfPagesAllProducts(String brand, int page, int size) {
+		
+		Pageable firstPageWithTwoElements = PageRequest.of(page, size);
+		
+		Page<Product> allProducts = dao.findAllByProductBrand(brand, firstPageWithTwoElements);
+
+		return allProducts.getTotalPages();
+	}
+	
+	//return how many pages of all products
+	public long getNoOfAllProducts(String brand, int page, int size) {
+		
+		Pageable firstPageWithTwoElements = PageRequest.of(page, size);
+		
+		Page<Product> allProducts = dao.findAllByProductBrand(brand, firstPageWithTwoElements);
 
 		return allProducts.getTotalElements();
 	}
