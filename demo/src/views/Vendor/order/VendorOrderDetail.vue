@@ -28,6 +28,13 @@ export default {
       };
       await this.$store.dispatch('Vendor/shipOrder', payload);
     },
+    async handleHoldOrder() {
+      const payload = {
+        customerId: this.Vendor.VendorOrderDetail[0].order.customer.customerId,
+        orderId: this.$route.params.id,
+      };
+      await this.$store.dispatch('Vendor/holdOrder', payload);
+    },
     onClickLeft() {
       //router go to product list page
       this.$router.push({ name: 'VendorOrderList' });
@@ -94,7 +101,8 @@ export default {
         <label>Shipment Date: </label>
         <span>{{ Vendor.VendorOrderDetail[0].order.shipmentDate }}</span>
       </div>
-      <van-button plain type="success" style="margin-bottom: 15px; margin-top: 20px;" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleShipOrder()">Ship Order</van-button>
+      <van-button plain type="warning" style="margin-bottom: 15px; margin-top: 20px;" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending'" block @click="handleHoldOrder()">Hold Order</van-button>
+      <van-button plain type="success" style="margin-bottom: 15px;" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleShipOrder()">Ship Order</van-button>
       <van-button plain type="danger" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
     </div>
     <div class="order-price">

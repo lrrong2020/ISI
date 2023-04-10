@@ -52,7 +52,7 @@ export default {
       // justify-content: space-between;
       // align-items: center;
       text-align: center;
-      padding: 20px 20px 40px 20px;
+      padding: 20px 0px 40px 0px;
       .title {
         font-size: 29px;
         font-weight: 600;
@@ -61,11 +61,14 @@ export default {
     }
     .main{
       margin-top: -20px;
+      width: 100%;
       .bg{
         background-color: #ffffff;
-        padding: 10px 20px 0px 20px;
+        padding: 10px 0px 0px 0px;
         border-radius: 30px 30px 0px 0px;
-        
+        .product{
+          margin: 0px 10px 0px 10px;
+        }
       }
     }
   }

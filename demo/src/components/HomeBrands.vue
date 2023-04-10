@@ -64,16 +64,16 @@ export default {
     // themeVars 内的值会被转换成对应 CSS 变量
     // 比如 sliderBarHeight 会转换成 `--van-slider-bar-height`
     const themeVars = reactive({
-      cardThumbSize: "120px",
-      cardThumbRadius: "0px",
-      cardBackground: "#ffffff",
-      cardPriceColor: "#ee0a24",
-      cardFontSize: "17px",
-      cardTitleLineHeight: "50px",
-      cardDescLineHeight: "50px",
-      cardPriceFontSize: "15px",
-      cardPriceIntegerFontSize: "25px",
-      gridItemContentPadding: "0px",
+      cardThumbSize: '120px',
+      cardThumbRadius: '0px',
+      cardBackground: '#ffffff',
+      cardPriceColor: '#ee0a24',
+      cardFontSize: '17px',
+      cardTitleLineHeight: '30px',
+      cardDescLineHeight: '20px',
+      cardPriceFontSize: '15px',
+      cardPriceIntegerFontSize: '25px',
+      gridItemContentPadding: '0px',
     });
     return {
       themeVars,
