@@ -3,6 +3,7 @@ package com.example.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -101,10 +102,10 @@ public class ProductService {
 		List<String> unUsedKeywords = new ArrayList<String>();
 		
 		for(int i = 0; i < productNames.length; ++i) {
-			String productNameRemovedQuotes = productNames[i].substring(1, productNames[i].length() - 1);
-			System.out.println("Searching for: " + productNameRemovedQuotes);
+//			String productNameRemovedQuotes = productNames[i].substring(1, productNames[i].length() - 1);
+			System.out.println("Searching for: " + productNames[i]);
 			
-			List<Product> tempList = dao.findByProductName(productNames[i].substring(1, productNames[i].length() - 1));//get rid of double quotation mark
+			List<Product> tempList = dao.findByProductName(productNames[i]);//get rid of double quotation mark
 			
 			for(Product p : tempList) {
 				System.out.println("In tempList");
@@ -212,17 +213,15 @@ public class ProductService {
 		return products;
 	}
 
-	public List<Product> getProductByNameAndBrand(String productName, String brand) {
-		System.out.println("brand: " + brand);
+	public List<Product> getProductByNameAndBrand(Map<String, String> query) {
+
+		String brand = query.get("brand");
+		Map<String, String> newQuery = new HashMap<String, String>(query);
+		newQuery.remove("brand");
+		List<Product> products = this.getProductByName(newQuery);
 		
-		List<Product> products = dao.findAllByProductNameAndBrand(productName, brand);
 		
-		for(Product product: products) 
-		{
-			System.out.println("found in complex filtering prodcut id: " + product.getProductId());
-		}
-		
-		return products;
+		return products.stream().filter(x -> x.getBrand().equals(brand)).toList();
 	}
 	
 	public List<Product> getAllProductPaging(int page, int size) {

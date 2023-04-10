@@ -89,7 +89,7 @@ public class ProductController {
 		}
 		
 		if(query.containsKey("brand")) {
-			return productService.getProductByNameAndBrand("Huawei", "A");
+			return productService.getProductByNameAndBrand(query);
 		}
 		else {
 			return productService.getProductByName(query);
