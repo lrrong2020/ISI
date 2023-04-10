@@ -1,10 +1,12 @@
 package com.example.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,11 +98,15 @@ public class ProductService {
 		
 		List<Product> productResList = new ArrayList<Product>();
 		
+		List<String> unUsedKeywords = new ArrayList<String>();
+		
 		for(int i = 0; i < productNames.length; ++i) {
 			System.out.println("Searching for: " + productNames[i]);
 			List<Product> tempList = dao.findByProductName(productNames[i].substring(1, productNames[i].length() - 1));//get rid of double quotation mark
 			
 			if(tempList.size() == 0) {
+				unUsedKeywords.add(productNames[i]);
+				System.out.println("Unused: " + productNames[i]);
 				continue;
 			}
 			
@@ -111,10 +117,75 @@ public class ProductService {
 				productResList.retainAll(tempList);
 			}
 		}
+		
+		//deal with unused keywords
+		List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
+		
+		productResList.addAll(fuzzySearch(unUsedKeywords, allProductNames));
 				
 		return productResList;
 	}
+	
+	//fuzzy search
+	public List<Product> fuzzySearch(List<String> unUsedKeywords, List<String> allProductNames){
+		List<String> realProductNames = new ArrayList<String>();
+		List<Product> products = new ArrayList<Product>();
+		for(String s : unUsedKeywords) {
+			realProductNames.addAll(approximateMatch(allProductNames, s, 4));
+		}
+		
+		for(String s : realProductNames) {
+			products.addAll(dao.findByProductName(s));
+		}
+		return products;
+	}
+	
+	static int levenshteinDistance(String x, String y) {
+		System.out.println("Comparing " + x + " with " + y);
+	    int[][] dp = new int[x.length() + 1][y.length() + 1];
 
+	    for (int i = 0; i <= x.length(); i++) {
+	        for (int j = 0; j <= y.length(); j++) {
+	            if (i == 0) {
+	                dp[i][j] = j;
+	            }
+	            else if (j == 0) {
+	                dp[i][j] = i;
+	            }
+	            else {
+	                dp[i][j] = min(dp[i - 1][j - 1] 
+	                 + costOfSubstitution(x.charAt(i - 1), y.charAt(j - 1)), 
+	                  dp[i - 1][j] + 1, 
+	                  dp[i][j - 1] + 1);
+	            }
+	        }
+	    }
+
+	    return dp[x.length()][y.length()];
+	}
+
+    public static int costOfSubstitution(char a, char b) {
+        return a == b ? 0 : 1;
+    }
+    
+    public static int min(int... numbers) {
+        return Arrays.stream(numbers)
+          .min().orElse(Integer.MAX_VALUE);
+    }
+	
+    public static List<String> approximateMatch(List<String> strings, String query, int maxDistance) {
+        List<String> matches = new ArrayList<>();
+
+        for (String s : strings) {
+        	int distance = levenshteinDistance(s, query);
+        	System.out.println("distance: " + distance);
+            if (distance <= maxDistance) {
+                matches.add(s);
+            }
+        }
+
+        return matches;
+    }
 	
 	public List<Product> getProductsByBrand(String brand, int page, int size) {
 		System.out.println("brand: " + brand);
