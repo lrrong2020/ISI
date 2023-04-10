@@ -1,6 +1,10 @@
 package com.example.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,14 +83,39 @@ public class ProductService {
 	
 	//search by product name
 	
-	public List<Product> getProductByName(String productNameQuery) {
-		System.out.println("Searching for: " + productNameQuery);
+	public List<Product> getProductByName(Map<String, String> query) {
+		String[] productNames = query.values().toArray(new String[0]);
 		
-		List<Product> productResList = dao.findByProductName(productNameQuery);
+		for(int i = 0; i < productNames.length; ++i) {
+			System.out.println("productName [" + i + "] " + productNames[i]);
+		}
+		
+		//search all of them at once
+		
+		//return the first non-empty result
+		
+		List<Product> productResList = new ArrayList<Product>();
+		
+		for(int i = 0; i < productNames.length; ++i) {
+			System.out.println("Searching for: " + productNames[i]);
+			List<Product> tempList = dao.findByProductName(productNames[i].substring(1, productNames[i].length() - 1));//get rid of double quotation mark
+			
+			if(tempList.size() == 0) {
+				continue;
+			}
+			
+			if(productResList.size() == 0) {
+				productResList.addAll(tempList);
+			}
+			else {
+				productResList.retainAll(tempList);
+			}
+		}
 				
 		return productResList;
 	}
 
+	
 	public List<Product> getProductsByBrand(String brand, int page, int size) {
 		System.out.println("brand: " + brand);
 		

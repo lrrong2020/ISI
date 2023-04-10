@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -71,15 +73,26 @@ public class ProductController {
 	}
 	
 	@GetMapping("/search")
-	public List<Product> getProductByProductName(@RequestParam("productName") String productName, @RequestParam(value = "brand", required = false) String brand) {
-		System.out.println("productname" + productName);
+	public List<Product> getProductByProductName(@RequestParam Map<String, String> query) {
+		System.out.println("query = brand " + query.containsKey("brand"));
 		
-		if(brand != null) {
-			System.out.println("brand: " + brand);
-			return productService.getProductByNameAndBrand(productName, brand);
+		System.out.println("query = productName " + query.containsKey("productName"));
+		
+		System.out.println("query = na " + query.containsKey("na"));
+		
+		for(String q : query.keySet()) {
+			System.out.println("key: " + q);
+		}
+		
+		for(Entry<String, String> q : query.entrySet()) {
+			System.out.println("value: " + q.getValue());
+		}
+		
+		if(query.containsKey("brand")) {
+			return productService.getProductByNameAndBrand("Huawei", "A");
 		}
 		else {
-			return productService.getProductByName(productName);
+			return productService.getProductByName(query);
 		}
 
 	}
