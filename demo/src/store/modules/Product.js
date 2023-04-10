@@ -341,8 +341,9 @@ export default {
           alert(error.message);
         });
       }
+      else{
 
-      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=${params[0]}&page=${params[1]}&size=${params[2]}`)
+        await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=${params[0]}&page=${params[1]}&size=${params[2]}`)
         .then((response) => {
           console.log("reponse.data in filterProductByBrand()");
           console.log(response.data);
@@ -399,6 +400,7 @@ export default {
           console.log(error.stack);
           context.commit('displayErrorMsg', error.stack.toString());
         });
+      }
     },
 
 
