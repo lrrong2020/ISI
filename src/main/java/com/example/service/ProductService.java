@@ -101,8 +101,15 @@ public class ProductService {
 		List<String> unUsedKeywords = new ArrayList<String>();
 		
 		for(int i = 0; i < productNames.length; ++i) {
-			System.out.println("Searching for: " + productNames[i]);
+			String productNameRemovedQuotes = productNames[i].substring(1, productNames[i].length() - 1);
+			System.out.println("Searching for: " + productNameRemovedQuotes);
+			
 			List<Product> tempList = dao.findByProductName(productNames[i].substring(1, productNames[i].length() - 1));//get rid of double quotation mark
+			
+			for(Product p : tempList) {
+				System.out.println("In tempList");
+				System.out.println(p.getProductName());
+			}
 			
 			if(tempList.size() == 0) {
 				unUsedKeywords.add(productNames[i]);
@@ -118,10 +125,13 @@ public class ProductService {
 			}
 		}
 		
-		//deal with unused keywords
-		List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
-		
-		productResList.addAll(fuzzySearch(unUsedKeywords, allProductNames));
+		if(productResList.size() < 3) {
+			//deal with unused keywords
+			List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
+			
+			//might be slow
+			productResList.addAll(fuzzySearch(unUsedKeywords, allProductNames));
+		}
 				
 		return productResList;
 	}
