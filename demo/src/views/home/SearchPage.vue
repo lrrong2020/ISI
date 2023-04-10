@@ -177,7 +177,11 @@ export default {
         }
       } else {
         this.activeIndex = '';
-        this.getProductList();
+        if (this.searchValue.length == 0) {
+          this.getProductList();
+        } else {
+          this.searchProduct();
+        }
       }
     },
     //Go to Detail Page
