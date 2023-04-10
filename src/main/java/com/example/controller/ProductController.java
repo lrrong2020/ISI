@@ -100,8 +100,12 @@ public class ProductController {
 	@GetMapping("/filter")
 	public List<Product> getProductsByBrand(@RequestParam("brand") String brand, @RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
 		System.out.println("brand:" + brand);
-		
-		return productService.getProductsByBrand(brand, Integer.valueOf(page), Integer.valueOf(size));
+		if(page == null) {
+			return productService.getProductsByBrand(brand);
+		}
+		else {
+			return productService.getProductsByBrand(brand, Integer.valueOf(page), Integer.valueOf(size));
+		}
 	}
 
 }

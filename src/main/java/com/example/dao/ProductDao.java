@@ -23,6 +23,10 @@ public interface ProductDao  extends JpaRepository<Product, Long>{
 	Page<Product> findAllByProductBrand(@Param("brand") String brand, Pageable pageable);
 	
 	@Query("SELECT p FROM Product p WHERE " +
+			"p.brand LIKE LOWER(CONCAT('%', :brand, '%'))")
+	List<Product> findAllByProductBrand(@Param("brand") String brand);
+	
+	@Query("SELECT p FROM Product p WHERE " +
 			"p.brand LIKE LOWER(CONCAT('%', :brand, '%'))" +
 			" AND p.productName LIKE LOWER(CONCAT('%', :productName, '%'))")
 	List<Product> findAllByProductNameAndBrand(@Param("productName") String productName, @Param("brand") String brand );
