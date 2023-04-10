@@ -164,7 +164,24 @@ export default {
 
     async searchProduct(context, searchValue) {
       console.log(searchValue);
-      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=${searchValue}`)
+
+      var searchValues = searchValue.split(' ');
+      searchValues = searchValues.filter(Boolean);
+      console.log("searchValues", searchValues);
+
+      var searchUrl = `${API_HOST_ANDROID_RUNNABLE}/product/search?`;
+
+      for(var i = 0; i < searchValues.length; i++){
+        searchUrl += `q${i}=${searchValues[i]}`;
+        if(i !== searchValues.length - 1) {
+          //not the last one, add &
+            searchUrl += "&";
+        }
+      }
+
+      //split searchValue and convert it into an array
+
+      await axios.get(searchUrl)
         .then((response) => {
           console.log("reponse.data in searchProduct()");
           console.log(response.data);
@@ -233,9 +250,31 @@ export default {
       var searchValue = params[0];
       var brand = params[1];
 
+      console.log("SearchValue: ", searchValue);
+      console.log("Brand: ", searchValue);
+
+      var searchValues = searchValue.split(' ');
+      searchValues = searchValues.filter(Boolean);
+      console.log("searchValues", searchValues);
+
+      var searchUrl = `${API_HOST_ANDROID_RUNNABLE}/product/search?`;
+
+      searchUrl += `brand=${brand}&`;
+
+      for(var i = 0; i < searchValues.length; i++){
+        searchUrl += `q${i}=${searchValues[i]}`;
+        if(i !== searchValues.length - 1) {
+          //not the last one, add &
+            searchUrl += "&";
+        }
+      }
+
+      //split searchValue and convert it into an array
+
+
       console.log(searchValue);
 
-      await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/search?productName=${searchValue}&brand=${brand}`)
+      await axios.get(searchUrl)
         .then((response) => {
           console.log("reponse.data in searchProduct()");
           console.log(response.data);
@@ -266,6 +305,43 @@ export default {
     },
 
     async filterProductByBrand(context, params) {
+      console.log("params");
+      console.log(params);
+
+      if(typeof params === 'string' || params instanceof String) {
+        var brand = params;
+        await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=` + brand)
+        .then((response)=>{
+          console.log("reponse.data in filterProductByBrand()");
+          console.log(response.data);
+  
+          //see if the returned data type: array or object
+          console.log("typeof response.data");
+  
+          var typeOfResponseData = typeof response.data; 
+          console.log(typeOfResponseData)
+          
+          // if(typeof response.data !== "array")
+          // {
+          
+          // //1. if it is a single object, then wrap it with an array
+          // const responseDataArr = [];
+          // responseDataArr.push(response.data);
+          // console.log("responseDataArr");
+          // console.log(responseDataArr);
+          // context.commit('SetProductList', responseDataArr);
+  
+          // }
+
+            context.commit('SetProductList', response.data);
+
+          //2. else if it is an array, just commit data itself
+          
+        }).catch((error)=>{
+          alert(error.message);
+        });
+      }
+
       await axios.get(`${API_HOST_ANDROID_RUNNABLE}/product/filter?brand=${params[0]}&page=${params[1]}&size=${params[2]}`)
         .then((response) => {
           console.log("reponse.data in filterProductByBrand()");

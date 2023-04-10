@@ -131,7 +131,7 @@ export default {
       this.filterValue = id;
       this.activeIndex = id;
 
-      console.log("this.searchValue", this.searchValue.lengtgith);
+      console.log("this.searchValue", this.searchValue.length);
 
       var params = [];
 
