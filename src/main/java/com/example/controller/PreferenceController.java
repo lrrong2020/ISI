@@ -2,6 +2,7 @@ package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import com.example.service.ProductService;
 
 @CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
-@RequestMapping(value = "/preference")
+@RequestMapping("/preference")
 public class PreferenceController {
 	@Autowired
 	private PreferenceService preferenceService;
@@ -28,7 +29,7 @@ public class PreferenceController {
 	@Autowired
 	private ProductService productService;
 	
-	@PostMapping("/")
+	@GetMapping("/")
 	public String home() {
 		return "Hello World";
 	}
@@ -50,7 +51,7 @@ public class PreferenceController {
 		preferenceService.updatePreference(new Preference(customer, product, like));
 	}
 	
-	@PostMapping("/get")
+	@GetMapping("/get")
 	public Preference getPreference(@PathVariable int customerId, @PathVariable long productId) {
 		Customer customer = customerService.getCustomer(customerId);
 		
