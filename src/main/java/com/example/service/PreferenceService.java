@@ -1,6 +1,7 @@
 package com.example.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.dao.CustomerDao;
 import com.example.dao.PreferenceDao;
@@ -10,6 +11,7 @@ import com.example.model.Preference;
 import com.example.model.PreferenceId;
 import com.example.model.Product;
 
+@Service
 public class PreferenceService {
 	
 	@Autowired
