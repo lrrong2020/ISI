@@ -10,6 +10,7 @@ export default {
   state: {
     productList: [],
     productListPaging: [],
+    top3:[],
     errorMsg: "",
     ProductDetail: {},
     page: 0,
@@ -41,6 +42,14 @@ export default {
       console.log("setting product List paging");
       console.log(data);
       state.productListPaging = data;
+    },
+
+    SetTop3(state, data){
+      state.top3 = data;
+    },
+
+    ClearTop3(state, data){
+      state.top3 = [];
     },
 
     SetNoOfItems(state, data) {
@@ -425,6 +434,16 @@ export default {
         });
     },
 
+    getTop3(context, customerId){
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/preference/top3?customerId=${customerId}`)
+      .then((response) => {
+        console.log("top3")
+        console.log(response.data)
+        context.commit('SetTop3', response.data);
+      }).catch((error) => {
+        alert(error.message);
+      });
+    },
 
   },
   getters: {

@@ -88,7 +88,7 @@ export default {
     this.getProductListPaging();
   },
   computed: {
-    ...mapState(["Product"]),
+    ...mapState(["Product", "User"]),
   },
   methods: {
     //getProductList from Store
@@ -102,6 +102,7 @@ export default {
       params.push(this.currentPage - 1);
       params.push(this.itemsPerPage);
       this.$store.dispatch("Product/getProductListPaging", params);
+      this.getTop3();
     },
 
     //Filter by Brands
@@ -174,6 +175,17 @@ export default {
     },
     showList() {
       this.getProductLisPaging();
+
+    },
+
+    getTop3(){
+      console.log("this.user.currentUser");
+      console.log(this.User);
+
+      if(this.User.currentUser.customerId){
+        console.log(this.User.currentUser);
+        this.$store.dispatch('Product/getTop3', this.User.currentUser.customerId);
+      }
     },
   },
   timer: null,
@@ -211,6 +223,16 @@ export default {
       </van-grid-item>
     </van-grid>
   </div>
+
+
+  <div v-if="Product.top3.length != 0">
+      <div v-for="product in Product.top3">
+        <van-button type="primary" @click="toDetail(product.productId)">
+              {{product.productName}}
+            </van-button>
+      </div>
+    </div>
+
   <!-- Empty -->
   <div class="empty" v-if="Product.productListPaging.length === 0">
     <van-empty description="No Product!" />
