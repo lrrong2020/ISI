@@ -17,7 +17,7 @@ import com.example.service.ProductService;
 
 @CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
-@RequestMapping("/preference")
+@RequestMapping(value = "/preference")
 public class PreferenceController {
 	@Autowired
 	private PreferenceService preferenceService;
@@ -27,6 +27,11 @@ public class PreferenceController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@PostMapping("/")
+	public String home() {
+		return "Hello World";
+	}
 	
 	@PostMapping("/add")
 	public void addPreference(@PathVariable int customerId, @PathVariable long productId, @PathVariable boolean like) {
