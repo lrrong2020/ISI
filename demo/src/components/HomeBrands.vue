@@ -177,15 +177,27 @@ export default {
     },
   },
   timer: null,
-  mounted() {
-    this.timer = setInterval(() => {
-      this.getProductListPaging();
-    }, 10000);
+  // mounted() {
+  //   this.timer = setInterval(() => {
+  //     this.getProductListPaging();
+  //   }, 10000);
+  // },
+  // beforeUnmount() {
+  //   clearInterval(this.timer);
+  //   console.log("clear timer");
+  // },
+  activated() {
+    if (!this.isFiltering) {
+      this.timer = setInterval(() => {
+        this.getProductListPaging();
+      }, 1000);
+    }
   },
-  beforeUnmount() {
+  deactivated() {
     clearInterval(this.timer);
     console.log("clear timer");
   },
+
 };
 </script>
 

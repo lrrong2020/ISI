@@ -1,8 +1,14 @@
+App.vue
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'App',
-  
+  computed: {
+    ...mapState(['Include']),
+  },
 };
+
 </script>
 
 <template>
@@ -12,7 +18,13 @@ export default {
       <router-view class="view header" name="Header"></router-view>
     </div>
     <div>
-      <router-view class="main view" />
+      <router-view class="main view" v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+        <keep-alive :max="10" :include="Include.include">
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+      </router-view>
       <!-- <router-view class="main view" v-slot="{Component}">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -22,7 +34,7 @@ export default {
     <div>
       <!--Footer-->
       <router-view class="view footer" name="Footer"></router-view>
-    </div> 
+    </div>
   </div>
 </template>
 
@@ -39,7 +51,7 @@ html, body {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s;
+  transition: opacity 0.1s;
 }
 .fade-enter-from,
 .fade-leave-to {

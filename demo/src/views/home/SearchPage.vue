@@ -11,7 +11,7 @@ import realme from "@/assets/realme.png";
 import All from "@/assets/All.png";
 
 export default {
-  name: "Search",
+  name: "SearchPage",
   data() {
     return {
       brands: [
@@ -63,6 +63,7 @@ export default {
       isFiltering: false,
       filterValue:'',
       activeIndex: '',
+      scrollTop: 0,
     }
   },
   setup() {
@@ -115,18 +116,18 @@ export default {
       params.push(this.searchValue);
       params.push(this.filterValue);
 
-      if(this.isFiltering) {
+      if(this.isFiltering == true && this.searchValue.length != 0) {
         this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
-      }
-
-      else{
+      } else if (this.isFiltering == true && this.searchValue.length == 0) {
+        this.$store.dispatch('Product/filterProductByBrand', this.filterValue);
+      } else {
         this.$store.dispatch('Product/searchProduct', this.searchValue);
         // this.$store.dispatch('Product/getProductList');
         console.log(`search Product: ${this.searchValue}`);
       }
-      if (this.searchValue.length == 0 && this.isFiltering == false) {
-        this.setProductListEmpty();
-      }
+      // if (this.searchValue.length == 0 && this.isFiltering == false) {
+      //   this.setProductListEmpty();
+      // }
     },
     //Filter by Brands
     filterByBrand(id){
@@ -220,6 +221,14 @@ export default {
     // onSearch(val) {
     //   showToast(val);
     // },
+  },
+  activated() {
+    //进入路由时，滚动条回到上次离开时的位置
+    document.documentElement.scrollTop = this.scrollTop;
+  },
+  beforeRouteLeave(to, from, next) {
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    next();
   },
   //定时器获取后端数据, 1s一次，销毁时清除定时器
   // timer: null,

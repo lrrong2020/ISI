@@ -1,8 +1,6 @@
 <script>
-// import Search from '@/components/Search.vue';
-// import Brand from '@/components/Brand.vue';
-
 import ProductCatelog from '../../../components/Vendor/ProductCatelog.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: "VendorHome",
@@ -10,6 +8,26 @@ export default {
     // Search,
     // Brand,
     ProductCatelog,
+  },
+  data() {
+    return {
+      scrollTop: 0,
+    };
+  },
+  mounted() {
+    this.$store.commit('Include/AddInclude');
+  },
+  computed: {
+    ...mapState(['Include',])
+  },
+  activated() {
+    //进入路由时，滚动条回到上次离开时的位置
+    document.documentElement.scrollTop = this.scrollTop;
+  },
+  beforeRouteLeave(to, from, next) {
+    //离开路由时，记录滚动条位置
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    next();
   },
 };
 </script>

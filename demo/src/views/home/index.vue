@@ -13,8 +13,16 @@ export default {
     Product,
     Swipe,
   },
+  data() {
+    return {
+      scrollTop: 0,
+    }
+  },
+  mounted() {
+    this.$store.commit('Include/AddInclude');
+  },
   computed: {
-    ...mapState(['User']),
+    ...mapState(['User', 'Include',]),
   },
   methods: {
     toAccount() {
@@ -28,6 +36,14 @@ export default {
     toSearch() {
       this.$router.push({ name: 'Search' });
     },
+  },
+  activated() {
+    //进入路由时，滚动条回到上次离开时的位置
+    document.documentElement.scrollTop = this.scrollTop;
+  },
+  beforeRouteLeave(to, from, next) {
+    this.scrollTop = document.documentElement.scrollTop;
+    next();
   },
 };
 </script>

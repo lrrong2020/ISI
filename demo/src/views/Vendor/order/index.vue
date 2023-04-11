@@ -2,7 +2,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: "OrderList", 
+  name: "VendorOrderList", 
   data() {
     return {
       value1: 0,
@@ -13,13 +13,14 @@ export default {
         { text: 'Past orders', value: 3 },
       ],
       searchValue:'',
+      scrollTop: 0,
     }
   },
   created() {
     this.getOrderList();
   },
   computed: {
-    ...mapState(['Vendor']),
+    ...mapState(['Vendor', 'Include']),
     reverseOrderList() {
       return this.Vendor.VendorOrderList.reverse();
     },
@@ -34,6 +35,8 @@ export default {
         orderId: orderId,
       }
       await this.$store.dispatch('Vendor/getVendorOrderDetail', payload);
+      clearInterval(this.timer);
+      console.log("clear timer");
       this.$router.push({ name: 'VendorOrderDetail', params: { id: orderId } });
     },
 
@@ -54,6 +57,13 @@ export default {
   //定时器获取后端数据, 1s一次，销毁时清除定时器
   timer: null,
   mounted() {
+    this.$store.commit('Include/AddInclude');
+  },
+  // beforeUnmount() {
+  //   clearInterval(this.timer);
+  //   console.log("clear timer");
+  // },
+  activated() {
     const that = this;
     this.timer = setInterval(() => {
 
@@ -64,10 +74,15 @@ export default {
         that.searchOrderById();
       }
     }, 1000);
+    //进入路由时，滚动条回到上次离开时的位置
+    document.documentElement.scrollTop = this.scrollTop;
   },
-  beforeUnmount() {
+  beforeRouteLeave(to, from, next) {
     clearInterval(this.timer);
     console.log("clear timer");
+    //离开路由时，记录滚动条位置
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    next();
   },
 }
 </script>

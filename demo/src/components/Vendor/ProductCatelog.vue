@@ -11,7 +11,7 @@ import realme from "@/assets/realme.png";
 import All from "@/assets/All.png";
 
 export default {
-  name: "Product",
+  name: "ProductCatalogue",
   //business logic
   data() {
     return {
@@ -95,7 +95,9 @@ export default {
     this.getProductList();
   },
 
-  mounted() {},
+  mounted() {
+
+  },
 
   computed: {
     ...mapState(["Product"]),
@@ -176,8 +178,10 @@ export default {
         params.push(this.searchValue);
         params.push(this.filterValue);
 
-        if(this.isFiltering) {
+        if(this.isFiltering == true && this.searchValue.length != 0) {
           this.$store.dispatch('Product/searchProductAndFilterByBrand', params);
+        } else if (this.isFiltering == true && this.searchValue.length == 0) {
+          this.$store.dispatch('Product/filterProductByBrand', this.filterValue);
         } else {
           this.$store.dispatch('Product/searchProduct', this.searchValue);
           // this.$store.dispatch('Product/getProductList');

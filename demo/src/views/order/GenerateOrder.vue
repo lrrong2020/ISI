@@ -17,6 +17,9 @@ export default {
       //router回到上一个页面
       this.$router.go(-1);
     },
+    toAddressManagement() {
+      this.$router.push({ name: 'AddressManagement', params: { id: this.User.currentUser.customerId } });
+    },
     closePopup() {
       this.showPay = false;
     },
@@ -98,9 +101,9 @@ export default {
         @click-left="onClickLeft"
       />
     </div>
-    <div class="address-wrap">
-      <van-icon name="location-o" class="arrow" />
-      <div class="name" @click="goTo">
+    <div class="address-wrap" @click="toAddressManagement">
+      <van-icon name="edit" class="arrow" />
+      <div class="name">
         <span>{{ User.currentUser.customerName }}</span>
         <span style="padding-left: 15px;">{{ User.currentUser.customerEmail }}</span>
       </div>

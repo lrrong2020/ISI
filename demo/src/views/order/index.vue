@@ -1,6 +1,6 @@
 <script>
 import { showSuccessToast, showFailToast } from 'vant';
-import { ref } from 'vue';
+import { nextTick, ref } from 'vue';
 import { mapState } from 'vuex';
 
 export default {
@@ -13,14 +13,18 @@ export default {
         { text: 'Current Purchases', value: 1 },
         { text: 'Past Purchases', value: 2 },
       ],
+      scrollTop: 0,
     }
   },
   created() {
     this.getOrderList();
     // this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
   },
+  mounted() {
+    this.$store.commit('Include/AddInclude');
+  },
   computed: {
-    ...mapState(['Cart', 'User', 'Order']),
+    ...mapState(['Cart', 'User', 'Order', 'Include']),
     reverseOrderList() {
       return this.Order.OrderList.reverse();
     }
@@ -41,14 +45,32 @@ export default {
   },
   //定时器获取后端数据, 1s一次，销毁时清除定时器
   timer: null,
-  mounted() {
+  // mounted() {
+  //   this.timer = setInterval(() => {
+  //     this.getOrderList();
+  //   }, 1000);
+  // },
+  // beforeUnmount() {
+  //   clearInterval(this.timer);
+  //   console.log("clear timer");
+  // },
+
+  //keep-alive hooks
+  activated() {
     this.timer = setInterval(() => {
       this.getOrderList();
-    }, 1000);
+    }, 10000);
+    //进入路由时，滚动条回到上次离开时的位置
+    document.documentElement.scrollTop = this.scrollTop;
   },
-  beforeUnmount() {
+  deactivated() {
     clearInterval(this.timer);
     console.log("clear timer");
+  },
+  
+  beforeRouteLeave(to, from, next) {
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    next();
   },
 }
 </script>
