@@ -29,10 +29,23 @@ public class PreferenceService {
 	}
 	
 	public Preference getPreference(PreferenceId preferenceId) {
+		System.out.println("getPreference in service");
 		Customer customer = customerDao.getReferenceById(preferenceId.getCustomer().getCustomerId());
 		Product product = productDao.getReferenceById(preferenceId.getProduct().getProductId());
+		PreferenceId id = new PreferenceId(customer, product);
+		System.out.println("id: " + id);
 		
-		return dao.getReferenceById(new PreferenceId(customer, product));
+		Preference res = dao.findById(id).orElse(null);
+		
+		System.out.println("res: " + res);
+		
+		if(res == null) {
+			System.out.println("Null preference");
+			return new Preference();
+		}
+		else {
+			return res;
+		}
 	}
 	
 	public Preference updatePreference(Preference preference) {

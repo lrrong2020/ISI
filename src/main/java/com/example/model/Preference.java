@@ -1,9 +1,9 @@
 package com.example.model;
-import jakarta.annotation.Nonnull;
-import jakarta.persistence.Column;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
@@ -24,6 +24,10 @@ public class Preference {
     private Product product;
     
 	private boolean like;
+	
+	public Preference() {
+		super();
+	}
 	
 	public Preference(Customer customer, Product product, boolean like) {
 		super();
