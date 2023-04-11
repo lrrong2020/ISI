@@ -67,17 +67,18 @@ public class PreferenceService {
 		List<Product> allProducts = productDao.findAll();
 		List<Product> resultProducts = sortProductListPreference(allProducts, customer);
 		
-		return resultProducts.subList(0, 4);
+		return resultProducts;
 	}
 	
 	
 	//sort a product list according to the customer's likelihood of preference on them
 	public List<Product> sortProductListPreference(List<Product> products, Customer customer){
 		List<Product> resProducts = new ArrayList<Product>();
+		
 		resProducts.addAll(products);
 		
 		resProducts.sort((a, b) -> Double.compare(rate(a, customer), rate(b, customer)));
-		return null;
+		return resProducts;
 	}
 	
 	public double similarity(Customer c1, Customer c2) {
