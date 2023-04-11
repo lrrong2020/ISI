@@ -35,18 +35,18 @@ public class PreferenceService {
 	}
 	
 	public Preference getPreference(PreferenceId preferenceId) {
-		System.out.println("getPreference in service");
+//		System.out.println("getPreference in service");
 		Customer customer = customerDao.getReferenceById(preferenceId.getCustomer().getCustomerId());
 		Product product = productDao.getReferenceById(preferenceId.getProduct().getProductId());
 		PreferenceId id = new PreferenceId(customer, product);
-		System.out.println("id: " + id);
+//		System.out.println("id: " + id);
 		
 		Preference res = dao.findById(id).orElse(null);
 		
-		System.out.println("res: " + res);
+//		System.out.println("res: " + res);
 		
 		if(res == null) {
-			System.out.println("Null preference");
+//			System.out.println("Null preference");
 			return new Preference();
 		}
 		else {
@@ -67,22 +67,18 @@ public class PreferenceService {
 		List<Product> allProducts = productDao.findAll();
 		List<Product> resultProducts = sortProductListPreference(allProducts, customer);
 		
-		return resultProducts;
+		return resultProducts.subList(0, 3);
 	}
 	
 	
 	//sort a product list according to the customer's likelihood of preference on them
 	public List<Product> sortProductListPreference(List<Product> products, Customer customer){
-		List<Product> resProducts = new ArrayList<Product>();
-		
-		resProducts.addAll(products);
-		
-		resProducts.sort((a, b) -> Double.compare(rate(b, customer), rate(a, customer)));
-		return resProducts.stream().filter(x -> !Double.isNaN(rate(x, customer))).toList();
+		products.sort((a, b) -> Double.compare(rate(b, customer), rate(a, customer)));
+		return products.stream().filter(x -> !Double.isNaN(rate(x, customer))).toList();
 	}
 	
 	public double similarity(Customer c1, Customer c2) {
-		System.out.println("Comparing " + "customer[" + c1.getCustomerId() + "] with [" + c2.getCustomerId() + "]");
+//		System.out.println("Comparing " + "customer[" + c1.getCustomerId() + "] with [" + c2.getCustomerId() + "]");
 		
 		Set<Product> c1Like = getAllProductACustomerLikes(c1);
 		Set<Product> c2Like = getAllProductACustomerLikes(c2);
@@ -115,7 +111,7 @@ public class PreferenceService {
 		
 		double similarity = (double)(term1.size() + term2.size() - term3.size() - term4.size()) / (double)(term5.size());
 		
-		System.out.println("Similarity: " + similarity);
+//		System.out.println("Similarity: " + similarity);
 		
 		return similarity;
 	}
@@ -142,7 +138,7 @@ public class PreferenceService {
 		
 		double rate = (sumOfSimilarityLike - sumOfSimilarityDislike) / (double)(customersLike.size() + customersDislike.size());
 		
-		System.out.println("Rate of Customer[" + customer.getCustomerId() + "] on Product[" + product.getProductName() + "] is: " + rate);
+//		System.out.println("Rate of Customer[" + customer.getCustomerId() + "] on Product[" + product.getProductName() + "] is: " + rate);
 		
 		return rate;
 	}
@@ -152,9 +148,9 @@ public class PreferenceService {
 		List<Preference> preferences = dao.findAll();
 		for(Preference p : preferences) {
 			if(p.getProduct().getProductId() == product.getProductId()) {
-				System.out.println("p.isLike: " + p.isLike());
+//				System.out.println("p.isLike: " + p.isLike());
 				if(p.isLike()) {//like
-					System.out.println("Product[" + product.getProductId() + "] is not liked by Customer[" + p.getCustomer().getCustomerId() + "]");
+//					System.out.println("Product[" + product.getProductId() + "] is not liked by Customer[" + p.getCustomer().getCustomerId() + "]");
 					customers.add(p.getCustomer());
 				}
 				else {
@@ -173,9 +169,9 @@ public class PreferenceService {
 		List<Preference> preferences = dao.findAll();
 		for(Preference p : preferences) {
 			if(p.getProduct().getProductId() == product.getProductId()) {
-				System.out.println("p.isLike: " + p.isLike());
+//				System.out.println("p.isLike: " + p.isLike());
 				if(!p.isLike()) {//dislike
-					System.out.println("Product[" + product.getProductId() + "] is not liked by Customer[" + p.getCustomer().getCustomerId() + "]");
+//					System.out.println("Product[" + product.getProductId() + "] is not liked by Customer[" + p.getCustomer().getCustomerId() + "]");
 					customers.add(p.getCustomer());
 				}
 				else {
