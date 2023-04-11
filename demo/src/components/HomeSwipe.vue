@@ -1,29 +1,57 @@
 <script>
+import { mapState } from "vuex";
+import Apple from "@/assets/Brands/Apple.jpg"
+import Huawei from "@/assets/Brands/Huawei.jpg"
+import Xiaomi from "@/assets/Brands/Xiaomi.jpg"
+import Samsung from "@/assets/Brands/Samsung.jpg"
+import vivo from "@/assets/Brands/vivo.jpg"
+import OPPO from "@/assets/Brands/OPPO.jpg"
+import realme from "@/assets/Brands/realme.jpg"
+
 export default {
   name: "HomeSwipe",
   data() {
     return {
       Swipe: [
         {
-          url: 'https://i.ytimg.com/vi/TppeEN7gnsA/maxresdefault.jpg',
+          id: 11,
+          url: Apple,
         },
         {
-          url: 'https://consumer.huawei.com/content/dam/huawei-cbg-site/common/mkt/pdp/phones/p60/images/design/huawei-p60-colours-01.jpg',
+          id:33,
+          url: Huawei,
         },
         {
-          url: 'https://i.teknolojioku.com/2/1280/720/storage/files/images/2023/03/11/adwed-1-TBbt_cover.jpg',
+          id: 34,
+          url: Xiaomi,
         },
         {
-          url: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202302/14649_samsung_s23-ultra_1-2-2023_1200x675-sixteen_nine.jpg?VersionId=11lWDaf3FVEq35iFvPeCQOod65Aj0cjD',
+          id: 35,
+          url: Samsung,
         },
         {
-          url: 'https://fdn.gsmarena.com/imgroot/news/23/01/vivo-x90-series-malaysia-launch-soon/inline/-1200/gsmarena_001.jpg',
+          id: 36,
+          url: vivo,
         },
         {
-          url: 'https://technave.com/data/files/article/202205180627059647.jpeg',
+          id: 37,
+          url: OPPO,
+        },
+        {
+          id:38,
+          url: realme,
         },
       ],
     }
+  },
+  computed: {
+    ...mapState(["Product"]),
+  },
+  methods: {
+    async toDetail(id) {
+      await this.$store.dispatch("Product/getProductDetail", id);
+      this.$router.push({ name: "Detail", params: { id: id } });
+    },
   },
 }
 </script>
@@ -31,7 +59,7 @@ export default {
   <div>
     <van-swipe :autoplay="3000" class="swipe">
       <van-swipe-item v-for="item in Swipe" :key="item">
-        <img :src="item.url" alt="" class="img">
+        <img :src="item.url" alt="" class="img" @click="toDetail(item.id)">
       </van-swipe-item>
     </van-swipe>
   </div>
