@@ -1,6 +1,14 @@
 <script>
 import { reactive } from "vue";
 import { mapState } from "vuex";
+import Apple from "@/assets/Apple.png";
+import Huawei from "@/assets/Huawei.png";
+import Xiaomi from "@/assets/Xiaomi.png";
+import Samsung from "@/assets/Samsung.png";
+import vivo from "@/assets/vivo.png";
+import OPPO from "@/assets/OPPO.png";
+import realme from "@/assets/realme.png";
+import All from "@/assets/All.png";
 
 export default {
   name: "Product",
@@ -9,44 +17,44 @@ export default {
     return {
       brands: [
         {
-          id: 'Apple',
-          url: 'https://cdn3.iconfinder.com/data/icons/social-media-logos-glyph/2048/5315_-_Apple-512.png',
-          name: 'Apple',
+          id: "Apple",
+          url: Apple,
+          name: "Apple",
         },
         {
-          id: 'Huawei',
-          url: 'https://cdn.icon-icons.com/icons2/2699/PNG/512/huawei_logo_icon_169026.png',
-          name: 'HuaWei',
+          id: "Huawei",
+          url: Huawei,
+          name: "HuaWei",
         },
         {
-          id: 'Xiaomi',
-          url: 'https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/xiaomi-512.png',
-          name: 'XiaoMi',
+          id: "Xiaomi",
+          url: Xiaomi,
+          name: "XiaoMi",
         },
         {
-          id: 'Samsung',
-          url: 'https://cdn-icons-png.flaticon.com/512/882/882747.png',
-          name: 'Samsung',
+          id: "Samsung",
+          url: Samsung,
+          name: "Samsung",
         },
         {
-          id: 'vivo',
-          url: 'https://cdn-icons-png.flaticon.com/512/882/882813.png',
-          name: 'vivo',
+          id: "vivo",
+          url: vivo,
+          name: "vivo",
         },
         {
-          id: 'OPPO',
-          url: 'https://cdn-icons-png.flaticon.com/512/882/882745.png',
-          name: 'OPPO',
+          id: "OPPO",
+          url: OPPO,
+          name: "OPPO",
         },
         {
-          id: 'realme',
-          url: 'https://egyptian-gazette.com/wp-content/uploads/2021/10/realme-logo.png',
-          name: 'realme',
+          id: "realme",
+          url: realme,
+          name: "realme",
         },
       ],
       all: {
-        url: 'https://cdn-icons-png.flaticon.com/128/5996/5996290.png',
-        name: 'All',
+        url: All,
+        name: "All",
       },
       currentPage: 1,
       itemsPerPage: 5,

@@ -12,12 +12,12 @@ export default {
       <router-view class="view header" name="Header"></router-view>
     </div>
     <div>
-      <!-- <router-view class="main view" /> -->
-      <router-view class="main view" v-slot="{Component}">
+      <router-view class="main view" />
+      <!-- <router-view class="main view" v-slot="{Component}">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
         </transition>
-      </router-view>
+      </router-view> -->
     </div>
     <div>
       <!--Footer-->
