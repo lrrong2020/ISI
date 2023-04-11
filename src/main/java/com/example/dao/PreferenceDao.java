@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,10 +15,5 @@ import com.example.model.Shoppingcart;
 import com.example.model.ShoppingcartId;
 
 public interface PreferenceDao extends JpaRepository<Preference, PreferenceId>{
-	List<Preference> findByCustomer(Customer customer);
-	
-	
-    void deleteByCustomer(Customer customer);
-    
-    //void deleteByProduct(Product product);
+
 }

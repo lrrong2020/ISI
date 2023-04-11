@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,5 +58,11 @@ public class PreferenceController {
 		System.out.println("getPreference in controller");
 		
 		return preferenceService.getPreference(new PreferenceId(customer, product));
+	}
+	
+	@GetMapping("/top3")
+	public List<Product> top3ProductsPreferred(@RequestParam(value = "customerId") int customerId){
+		Customer customer = customerService.getCustomer(customerId);
+		return preferenceService.top3PreferredProducts(customer);
 	}
 }
