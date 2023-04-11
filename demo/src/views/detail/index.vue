@@ -47,7 +47,7 @@ export default {
     getCartItems() {
       if (this.User.currentUser.customerId == null) {
         showFailToast({
-          message: 'You are not login!',
+          message: 'Please log in!',
           wordBreak: 'break-word',
         });
       } else {
