@@ -77,8 +77,8 @@ public class PreferenceService {
 		
 		resProducts.addAll(products);
 		
-		resProducts.sort((a, b) -> Double.compare(rate(a, customer), rate(b, customer)));
-		return resProducts;
+		resProducts.sort((a, b) -> Double.compare(rate(b, customer), rate(a, customer)));
+		return resProducts.stream().filter(x -> !Double.isNaN(rate(x, customer))).toList();
 	}
 	
 	public double similarity(Customer c1, Customer c2) {
@@ -134,15 +134,15 @@ public class PreferenceService {
 			sumOfSimilarityDislike += similarity(customer, c);
 		}
 		
-		System.out.println();
-		System.out.println(sumOfSimilarityLike);
-		System.out.println(sumOfSimilarityDislike);
-		System.out.println(customersLike.size());
-		System.out.println(customersDislike.size());
+//		System.out.println();
+//		System.out.println(sumOfSimilarityLike);
+//		System.out.println(sumOfSimilarityDislike);
+//		System.out.println(customersLike.size());
+//		System.out.println(customersDislike.size());
 		
 		double rate = (sumOfSimilarityLike - sumOfSimilarityDislike) / (double)(customersLike.size() + customersDislike.size());
 		
-		System.out.println("Rate of Customer[" + customer.getCustomerId() + "] on Product[" + product.getProductId() + "] is: " + rate);
+		System.out.println("Rate of Customer[" + customer.getCustomerId() + "] on Product[" + product.getProductName() + "] is: " + rate);
 		
 		return rate;
 	}
