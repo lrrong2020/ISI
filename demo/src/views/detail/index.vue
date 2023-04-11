@@ -171,6 +171,11 @@ export default {
       </van-config-provider>
     </div>
   </div>
+
+  <div v-if="User.currentUser.customerId !== null">
+    <van-icon name="success" />
+    <van-icon name="cross" />
+  </div>
 </template>
 
 <style lang="less" scoped>
