@@ -145,6 +145,7 @@ export default {
             <van-field
               v-model="customerEmail"
               clearable
+              autocomplete
               name="customerEmail"
               label="Email"
               right-icon="contact"
@@ -158,6 +159,7 @@ export default {
             <van-field
               v-model="customerPassword"
               clearable
+              autocomplete
               type="password"
               name="customerPassword"
               label="Password"

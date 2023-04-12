@@ -172,6 +172,7 @@ export default {
           <van-field
             v-model="customerName"
             clearable
+            autocomplete
             name="customerName"
             label="Username"
             right-icon="contact"
@@ -183,6 +184,7 @@ export default {
           <van-field
             v-model="customerEmail"
             clearable
+            autocomplete
             name="customerEmail"
             label="E-mail"
             right-icon="envelop-o"
@@ -195,6 +197,7 @@ export default {
           <van-field
             v-model="customerPassword"
             clearable
+            autocomplete
             type="password"
             name="customerPassword"
             label="Password"
@@ -208,6 +211,7 @@ export default {
           <van-field
             v-model="shippingAddress"
             clearable
+            autocomplete
             type="textarea"
             rows="1"
             autosize
