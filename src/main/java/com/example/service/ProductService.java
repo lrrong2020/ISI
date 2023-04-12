@@ -125,28 +125,29 @@ public class ProductService {
 				productResList.retainAll(tempList);
 			}
 		}
-		
-		int initialDistance = 1;
-		
-		while(productResList.size() < 2) {
-			initialDistance += 1;
+
+			
+		if(productResList.size() < 2) {
+
 			
 			//deal with unused keywords
 			List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
 			
 			//might be slow
-			productResList.addAll(fuzzySearch(unUsedKeywords, allProductNames, initialDistance));
+			productResList.addAll(fuzzySearch(unUsedKeywords, allProductNames));
 		}
 				
 		return productResList;
 	}
 	
 	//fuzzy search
-	public List<Product> fuzzySearch(List<String> unUsedKeywords, List<String> allProductNames, int maxDistance){
+	public List<Product> fuzzySearch(List<String> unUsedKeywords, List<String> allProductNames){
 		List<String> realProductNames = new ArrayList<String>();
 		List<Product> products = new ArrayList<Product>();
 		for(String s : unUsedKeywords) {
-			realProductNames.addAll(approximateMatch(allProductNames, s, maxDistance));
+
+			realProductNames.addAll(approximateMatch(allProductNames, s, 3));
+
 		}
 		
 		for(String s : realProductNames) {
@@ -191,12 +192,20 @@ public class ProductService {
     public static List<String> approximateMatch(List<String> strings, String query, int maxDistance) {
         List<String> matches = new ArrayList<>();
 
+        
+        
         for (String s : strings) {
-        	int distance = levenshteinDistance(s, query);
-        	System.out.println("distance: " + distance);
-            if (distance <= maxDistance) {
-                matches.add(s);
-            }
+        	//breakdown the String into several words
+        	String[] keywords = s.split("\\s+");
+        	
+        	for(String ss : keywords) {
+            	int distance = levenshteinDistance(ss, query);
+            	System.out.println("distance: " + distance);
+                if (distance <= maxDistance) {
+                    matches.add(s);
+                }
+        	}
+      
         }
         matches.sort((a, b) -> levenshteinDistance(a, query) - levenshteinDistance(b, query));
         return matches;
