@@ -5,3 +5,6 @@ COMP321 Information System Implementation (Online Shopping Mall)
   * Chapter 2 (Background => change to which pattern)
   * Related Work: the third one totally made up
   * ER => waiting for merging
+
+## Schedule
+  * Do some testing to write paragraph
