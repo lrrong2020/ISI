@@ -67,7 +67,8 @@ public class PreferenceService {
 		List<Product> allProducts = productDao.findAll();
 		List<Product> resultProducts = sortProductListPreference(allProducts, customer);
 		
-		return resultProducts.subList(0, 3);
+		int lastIndex = resultProducts.size() >= 3 ? 3 : resultProducts.size();
+		return resultProducts.subList(0, lastIndex);
 	}
 	
 	
@@ -190,6 +191,9 @@ public class PreferenceService {
 		Set<Product> products = new HashSet<Product>();
 		List<Preference> preferences = dao.findAll();
 		for (Preference p : preferences) {
+			if(p == null) {
+				return new HashSet<Product>();
+			}
 			if (p.getCustomer().getCustomerId() ==customer.getCustomerId()) {
 				if(p.isLike()) {//like
 					products.add(p.getProduct());

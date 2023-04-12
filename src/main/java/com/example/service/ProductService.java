@@ -125,8 +125,9 @@ public class ProductService {
 				productResList.retainAll(tempList);
 			}
 		}
-		
-		if(productResList.size() < 3) {
+			
+		if(productResList.size() < 2) {
+			
 			//deal with unused keywords
 			List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
 			
@@ -142,7 +143,7 @@ public class ProductService {
 		List<String> realProductNames = new ArrayList<String>();
 		List<Product> products = new ArrayList<Product>();
 		for(String s : unUsedKeywords) {
-			realProductNames.addAll(approximateMatch(allProductNames, s, 4));
+			realProductNames.addAll(approximateMatch(allProductNames, s, 3));
 		}
 		
 		for(String s : realProductNames) {
@@ -194,7 +195,7 @@ public class ProductService {
                 matches.add(s);
             }
         }
-
+        matches.sort((a, b) -> levenshteinDistance(a, query) - levenshteinDistance(b, query));
         return matches;
     }
 	
