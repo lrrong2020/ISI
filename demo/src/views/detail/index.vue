@@ -2,9 +2,11 @@
 import { mapState } from 'vuex';
 import { reactive } from 'vue';
 import axios from 'axios';
-
 import { showSuccessToast, showFailToast } from 'vant';
-// import 'vant/es/toast/style';
+import Like from '@/assets/LikeDislike/Like.jpg';
+import Dislike from '@/assets/LikeDislike/Dislike.jpg';
+import { Notify } from 'vant'
+import { showNotify } from 'vant';
 
 export default {
   name: "Detail",
@@ -14,6 +16,8 @@ export default {
       Detail: {},
       like: false,
       notPreferred: null,
+      Like,
+      Dislike,
     }
   },
   setup() {
@@ -163,6 +167,12 @@ export default {
       const that = this;
       this.like = !this.like;
 
+      if(this.like){
+        showNotify({ type: 'success', message: 'Like It!', duration: 1000 });
+      }
+      else{
+        showNotify({ type: 'danger', message: "Don't Like It!", duration: 1000 });
+      }
 
 
       if(this.notPreferred){
@@ -232,6 +242,22 @@ export default {
       <p style="margin: 5px 0px">Color: {{ this.Detail.property }}</p>
       <p style="margin: 5px 0px">Screen Size: {{ this.Detail.propertySecond }}</p>
     </div>
+    <div class="LikeDislike" v-if="User.currentUser.customerId != null">
+      <van-image v-if="!isLike()" id="like" @click="toggleLike"
+        round
+        width= "45px"
+        height="45px"
+        :src="Like"
+        fit="cover"
+      />
+      <van-image v-if="isLike()" id="like" @click="toggleLike"
+        round
+        width= "45px"
+        height="45px"
+        :src="Dislike"
+        fit="cover"
+      />
+    </div>
     <div class="footer">
       <van-config-provider :theme-vars="themeVars">
         <van-action-bar placeholder>
@@ -241,11 +267,18 @@ export default {
         </van-action-bar>
       </van-config-provider>
     </div>
-  </div>
-
-  <div v-if="User.currentUser.customerId !== null">
-    <van-button v-if="!isLike()" type="success" id="like" @click="toggleLike"></van-button>
+    <!-- <div v-if="User.currentUser.customerId != null">
+    <van-button v-if="!isLike()" type="success" id="like" @click="toggleLike">
+      <van-image
+        round
+        width= "50px"
+        height="50px"
+        :src="Like"
+        fit="cover"
+      />
+    </van-button>
     <van-button v-if="isLike()" type="danger" id="like" @click="toggleLike"></van-button>
+  </div> -->
   </div>
 </template>
 
@@ -285,4 +318,10 @@ export default {
   bottom: 0;
   width: 100%;
 }
+.LikeDislike{
+  position: relative;
+  text-align: right;
+  margin: 10px 20px;
+}
+
 </style>
