@@ -28,7 +28,7 @@ export default {
     this.loading = false;
   },
   computed: {
-    ...mapState(['User', 'Cart', 'Order', 'Include']),
+    ...mapState(['User', 'Cart', 'Order', 'Include', 'Product']),
   },
   methods: {
     getUser() {
@@ -53,6 +53,7 @@ export default {
       this.$store.commit('User/deleteCurrentUser');
       this.$store.commit('Cart/clearCart')
       this.$store.commit('Include/ClearInclude');
+      this.$store.commit('Product/ClearTop3');
       this.$router.push({ name: 'Login' });
 
       showSuccessToast({

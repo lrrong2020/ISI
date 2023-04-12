@@ -10,6 +10,7 @@ export default {
   state: {
     productList: [],
     productListPaging: [],
+    top3:[],
     errorMsg: "",
     ProductDetail: {},
     page: 0,
@@ -41,6 +42,14 @@ export default {
       console.log("setting product List paging");
       console.log(data);
       state.productListPaging = data;
+    },
+
+    SetTop3(state, data){
+      state.top3 = data;
+    },
+
+    ClearTop3(state, data){
+      state.top3 = [];
     },
 
     SetNoOfItems(state, data) {
@@ -146,7 +155,7 @@ export default {
           console.log(response.data);
           context.commit('SetProductDetail', response.data);
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
@@ -158,7 +167,7 @@ export default {
     //     console.log(response.data);
     //     context.commit('Search',response.data);
     //   }).catch((error)=>{
-    //     alert(error.message);
+    //     console.log(error.message);
     //   });
     // },
 
@@ -207,7 +216,7 @@ export default {
           //2. else if it is an array, just commit data itself
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
@@ -240,7 +249,7 @@ export default {
           //2. else if it is an array, just commit data itself
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
@@ -300,7 +309,7 @@ export default {
           //2. else if it is an array, just commit data itself
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
@@ -338,7 +347,7 @@ export default {
           //2. else if it is an array, just commit data itself
           
         }).catch((error)=>{
-          alert(error.message);
+          console.log(error.message);
         });
       }
       else{
@@ -377,7 +386,7 @@ export default {
           //2. else if it is an array, just commit data itself
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
 
 
@@ -421,10 +430,20 @@ export default {
           context.commit('vendorAddProduct', response.data);
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
+    getTop3(context, customerId){
+      axios.get(`${API_HOST_ANDROID_RUNNABLE}/preference/top3?customerId=${customerId}`)
+      .then((response) => {
+        console.log("top3")
+        console.log(response.data)
+        context.commit('SetTop3', response.data);
+      }).catch((error) => {
+        console.log(error.message);
+      });
+    },
 
   },
   getters: {

@@ -1,9 +1,12 @@
 <script>
 import { mapState } from 'vuex';
 import { reactive } from 'vue';
-
+import axios from 'axios';
 import { showSuccessToast, showFailToast } from 'vant';
-// import 'vant/es/toast/style';
+import Like from '@/assets/LikeDislike/Like.jpg';
+import Dislike from '@/assets/LikeDislike/Dislike.jpg';
+import { Notify } from 'vant'
+import { showNotify } from 'vant';
 
 export default {
   name: "Detail",
@@ -11,6 +14,10 @@ export default {
     return {
       // id: '',
       Detail: {},
+      like: false,
+      notPreferred: null,
+      Like,
+      Dislike,
     }
   },
   setup() {
@@ -52,6 +59,26 @@ export default {
         });
       } else {
         this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
+
+        const that = this;
+        axios.get(`http://127.0.0.1:8080/preference/get?customerId=${this.User.currentUser.customerId}&productId=${this.Detail.productId}`)
+        .then((response) => {
+          console.log("response.data");
+          console.log(response.data)
+          if(response.data.customer != null){
+            that.like = response.data.like;
+            that.setPreferred(false);
+            console.log(that.like);
+          }
+          else{
+            console.log("response.data.customer is null");
+            that.setPreferred(true);
+            console.log("notPreferred?");
+            console.log(that.notPreferred)
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
       } 
     },
     addCartItem(productId) {
@@ -127,6 +154,60 @@ export default {
         this.$router.push({ name: 'Cart' });
       }
     },
+
+    setPreferred(value){
+      this.notPreferred = value;
+    },
+
+    async toggleLike(){
+      if(this.notPreferred == null){
+        alert("fail to toggle");
+        return;
+      }
+      const that = this;
+      this.like = !this.like;
+
+      if(this.like){
+        showNotify({ type: 'success', message: 'Like It!', duration: 1000 });
+      }
+      else{
+        showNotify({ type: 'danger', message: "Don't Like It!", duration: 1000 });
+      }
+
+
+      if(this.notPreferred){
+        console.log("this.notPreferred: ", this.notPreferred);
+        await axios.post(`http://127.0.0.1:8080/preference/add?customerId=${this.User.currentUser.customerId}&productId=${this.Detail.productId}&like=${this.like}`)
+        .then((response) => {
+          console.log("response.data");
+          console.log(response.data)
+          if(response.data.customer.customerId != null){
+            that.like = response.data.like;
+            console.log(that.like);
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
+      else{
+        console.log("this.notPreferred: ", this.notPreferred);
+        await axios.post(`http://127.0.0.1:8080/preference/update?customerId=${this.User.currentUser.customerId}&productId=${this.Detail.productId}&like=${this.like}`)
+        .then((response) => {
+          console.log("response.data");
+          console.log(response.data)
+          if(response.data.customer.customerId != null){
+            that.like = response.data.like;
+            console.log(that.like);
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
+    },
+
+    isLike(){
+      return this.like;
+    }
   }
 }
 </script>
@@ -161,6 +242,22 @@ export default {
       <p style="margin: 5px 0px">Color: {{ this.Detail.property }}</p>
       <p style="margin: 5px 0px">Screen Size: {{ this.Detail.propertySecond }}</p>
     </div>
+    <div class="LikeDislike" v-if="User.currentUser.customerId != null">
+      <van-image v-if="!isLike()" id="like" @click="toggleLike"
+        round
+        width= "45px"
+        height="45px"
+        :src="Like"
+        fit="cover"
+      />
+      <van-image v-if="isLike()" id="like" @click="toggleLike"
+        round
+        width= "45px"
+        height="45px"
+        :src="Dislike"
+        fit="cover"
+      />
+    </div>
     <div class="footer">
       <van-config-provider :theme-vars="themeVars">
         <van-action-bar placeholder>
@@ -170,6 +267,18 @@ export default {
         </van-action-bar>
       </van-config-provider>
     </div>
+    <!-- <div v-if="User.currentUser.customerId != null">
+    <van-button v-if="!isLike()" type="success" id="like" @click="toggleLike">
+      <van-image
+        round
+        width= "50px"
+        height="50px"
+        :src="Like"
+        fit="cover"
+      />
+    </van-button>
+    <van-button v-if="isLike()" type="danger" id="like" @click="toggleLike"></van-button>
+  </div> -->
   </div>
 </template>
 
@@ -209,4 +318,10 @@ export default {
   bottom: 0;
   width: 100%;
 }
+.LikeDislike{
+  position: relative;
+  text-align: right;
+  margin: 10px 20px;
+}
+
 </style>

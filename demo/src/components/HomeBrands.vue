@@ -1,14 +1,14 @@
 <script>
 import { reactive } from "vue";
 import { mapState } from "vuex";
-import Apple from "@/assets/Apple.png";
-import Huawei from "@/assets/Huawei.png";
-import Xiaomi from "@/assets/Xiaomi.png";
-import Samsung from "@/assets/Samsung.png";
-import vivo from "@/assets/vivo.png";
-import OPPO from "@/assets/OPPO.png";
-import realme from "@/assets/realme.png";
-import All from "@/assets/All.png";
+import Apple from "@/assets/Brands/Apple.png";
+import Huawei from "@/assets/Brands/Huawei.png";
+import Xiaomi from "@/assets/Brands/Xiaomi.png";
+import Samsung from "@/assets/Brands/Samsung.png";
+import vivo from "@/assets/Brands/vivo.png";
+import OPPO from "@/assets/Brands/OPPO.png";
+import realme from "@/assets/Brands/realme.png";
+import All from "@/assets/Brands/All.png";
 
 export default {
   name: "HomeBrands",
@@ -88,7 +88,7 @@ export default {
     this.getProductListPaging();
   },
   computed: {
-    ...mapState(["Product"]),
+    ...mapState(["Product", "User"]),
   },
   methods: {
     //getProductList from Store
@@ -102,6 +102,7 @@ export default {
       params.push(this.currentPage - 1);
       params.push(this.itemsPerPage);
       this.$store.dispatch("Product/getProductListPaging", params);
+      this.getTop3();
     },
 
     //Filter by Brands
@@ -174,6 +175,17 @@ export default {
     },
     showList() {
       this.getProductLisPaging();
+
+    },
+
+    getTop3(){
+      console.log("this.user.currentUser");
+      console.log(this.User);
+
+      if(this.User.currentUser.customerId){
+        console.log(this.User.currentUser);
+        this.$store.dispatch('Product/getTop3', this.User.currentUser.customerId);
+      }
     },
   },
   timer: null,
@@ -223,12 +235,52 @@ export default {
       </van-grid-item>
     </van-grid>
   </div>
+
+<!-- Recommend Products -->
+  <van-divider
+    :style="{
+      color: '#1989fa',
+      borderColor: '#1989fa',
+      padding: '15px 16px 15px 16px',
+      fontSize: '20px',
+    }"
+    v-if="Product.top3.length != 0"
+  >
+    Recommended To You !
+  </van-divider>
+
+  <div v-if="Product.top3.length != 0">
+    <van-config-provider :theme-vars="themeVars">
+      <van-card
+          v-for="product in Product.top3"
+          currency="$"
+          :key="product.productId"
+          :num="product.quantity"
+          :price="product.price"
+          :desc="product.brand"
+          :title="product.productName"
+          :thumb="product.photo"
+          @click="toDetail(product.productId)"
+          class="card"
+        >
+        </van-card>
+    </van-config-provider>
+  </div>
+
+  <!-- <div v-if="Product.top3.length != 0">
+      <div v-for="product in Product.top3">
+        <van-button type="primary" @click="toDetail(product.productId)">
+              {{product.productName}}
+            </van-button>
+      </div>
+    </div> -->
+
   <!-- Empty -->
   <div class="empty" v-if="Product.productListPaging.length === 0">
     <van-empty description="No Product!" />
   </div>
 
-
+<!-- Hot Products -->
   <van-divider
     :style="{
       color: '#1989fa',
@@ -257,10 +309,6 @@ export default {
         @click="toDetail(item.productId)"
         class="card"
       >
-        <!-- <template #tags>
-        <van-tag plain type="primary">tag1</van-tag>
-        <van-tag plain type="primary">tag2</van-tag>
-      </template> -->
       </van-card>
 
       <!--Paging-->
