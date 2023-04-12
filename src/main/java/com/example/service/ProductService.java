@@ -126,23 +126,27 @@ public class ProductService {
 			}
 		}
 		
-		if(productResList.size() < 3) {
+		int initialDistance = 1;
+		
+		while(productResList.size() < 2) {
+			initialDistance += 1;
+			
 			//deal with unused keywords
 			List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
 			
 			//might be slow
-			productResList.addAll(fuzzySearch(unUsedKeywords, allProductNames));
+			productResList.addAll(fuzzySearch(unUsedKeywords, allProductNames, initialDistance));
 		}
 				
 		return productResList;
 	}
 	
 	//fuzzy search
-	public List<Product> fuzzySearch(List<String> unUsedKeywords, List<String> allProductNames){
+	public List<Product> fuzzySearch(List<String> unUsedKeywords, List<String> allProductNames, int maxDistance){
 		List<String> realProductNames = new ArrayList<String>();
 		List<Product> products = new ArrayList<Product>();
 		for(String s : unUsedKeywords) {
-			realProductNames.addAll(approximateMatch(allProductNames, s, 4));
+			realProductNames.addAll(approximateMatch(allProductNames, s, maxDistance));
 		}
 		
 		for(String s : realProductNames) {
@@ -194,7 +198,7 @@ public class ProductService {
                 matches.add(s);
             }
         }
-
+        matches.sort((a, b) -> levenshteinDistance(a, query) - levenshteinDistance(b, query));
         return matches;
     }
 	
