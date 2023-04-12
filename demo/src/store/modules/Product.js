@@ -155,7 +155,7 @@ export default {
           console.log(response.data);
           context.commit('SetProductDetail', response.data);
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
@@ -167,7 +167,7 @@ export default {
     //     console.log(response.data);
     //     context.commit('Search',response.data);
     //   }).catch((error)=>{
-    //     alert(error.message);
+    //     console.log(error.message);
     //   });
     // },
 
@@ -216,7 +216,7 @@ export default {
           //2. else if it is an array, just commit data itself
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
@@ -249,7 +249,7 @@ export default {
           //2. else if it is an array, just commit data itself
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
@@ -309,7 +309,7 @@ export default {
           //2. else if it is an array, just commit data itself
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
@@ -347,7 +347,7 @@ export default {
           //2. else if it is an array, just commit data itself
           
         }).catch((error)=>{
-          alert(error.message);
+          console.log(error.message);
         });
       }
       else{
@@ -386,7 +386,7 @@ export default {
           //2. else if it is an array, just commit data itself
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
 
 
@@ -430,7 +430,7 @@ export default {
           context.commit('vendorAddProduct', response.data);
 
         }).catch((error) => {
-          alert(error.message);
+          console.log(error.message);
         });
     },
 
@@ -441,7 +441,7 @@ export default {
         console.log(response.data)
         context.commit('SetTop3', response.data);
       }).catch((error) => {
-        alert(error.message);
+        console.log(error.message);
       });
     },
 
