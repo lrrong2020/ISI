@@ -118,16 +118,25 @@ public class ProductService {
 				continue;
 			}
 			
-			if(productResList.size() == 0) {
-				productResList.addAll(tempList);
+			List<Product> unionList = new ArrayList<Product>();
+			List<Product> intersectionList = new ArrayList<Product>();
+			
+			unionList.addAll(productResList);
+			intersectionList.addAll(productResList);
+			
+			unionList.addAll(tempList);
+			intersectionList.retainAll(tempList);
+			
+			if(intersectionList.size() < 2) {
+				productResList = unionList;
 			}
 			else {
-				productResList.retainAll(tempList);
+				productResList = intersectionList;
 			}
+			productResList.retainAll(tempList);
 		}
 			
-		if(productResList.size() < 2) {
-			
+		if(productResList.size() < 2) {			
 			//deal with unused keywords
 			List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
 			
