@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
+import java.util.Set;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,7 @@ public class ProductService {
 		List<Product> productResList = new ArrayList<Product>();
 		
 		List<String> unUsedKeywords = new ArrayList<String>();
+		List<Product> unAddedRes = new ArrayList<Product>();
 		
 		for(int i = 0; i < productNames.length; ++i) {
 //			String productNameRemovedQuotes = productNames[i].substring(1, productNames[i].length() - 1);
@@ -124,15 +126,28 @@ public class ProductService {
 			else {
 				productResList.retainAll(tempList);
 			}
+			
+			if(productResList.size() == 0) {
+				unAddedRes.addAll(tempList);
+			}
+		}
+
+
+			
+		if(productResList.size() < 3) {
+			//turn to a wider range
+			productResList.addAll(unAddedRes);
+
 		}
 		
-		if(productResList.size() < 3) {
-			//deal with unused keywords
-			List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
-			
-			//might be slow
-			productResList.addAll(fuzzySearch(unUsedKeywords, allProductNames));
-		}
+		//deal with unused keywords
+		List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
+		
+		//fuzzy search
+		Set<Product> existingRes = new HashSet<Product>();
+		existingRes.addAll(productResList);
+		existingRes.addAll(fuzzySearch(unUsedKeywords, allProductNames));
+		productResList = existingRes.stream().toList();
 				
 		return productResList;
 	}
@@ -142,7 +157,7 @@ public class ProductService {
 		List<String> realProductNames = new ArrayList<String>();
 		List<Product> products = new ArrayList<Product>();
 		for(String s : unUsedKeywords) {
-			realProductNames.addAll(approximateMatch(allProductNames, s, 4));
+			realProductNames.addAll(approximateMatch(allProductNames, s, 3));
 		}
 		
 		for(String s : realProductNames) {
