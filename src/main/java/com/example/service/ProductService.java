@@ -134,20 +134,21 @@ public class ProductService {
 
 
 			
-		if(productResList.size() < 3) {
+		if(productResList.size() < 2) {
 			//turn to a wider range
 			productResList.addAll(unAddedRes);
 
+			//deal with unused keywords
+			List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
+			
+			//fuzzy search
+			Set<Product> existingRes = new HashSet<Product>();
+			existingRes.addAll(productResList);
+			existingRes.addAll(fuzzySearch(unUsedKeywords, allProductNames));
+			productResList = existingRes.stream().toList();
 		}
 		
-		//deal with unused keywords
-		List<String> allProductNames = dao.findAll().stream().map(x -> x.getProductName()).toList();
-		
-		//fuzzy search
-		Set<Product> existingRes = new HashSet<Product>();
-		existingRes.addAll(productResList);
-		existingRes.addAll(fuzzySearch(unUsedKeywords, allProductNames));
-		productResList = existingRes.stream().toList();
+
 				
 		return productResList;
 	}
@@ -157,7 +158,7 @@ public class ProductService {
 		List<String> realProductNames = new ArrayList<String>();
 		List<Product> products = new ArrayList<Product>();
 		for(String s : unUsedKeywords) {
-			realProductNames.addAll(approximateMatch(allProductNames, s, 3));
+			realProductNames.addAll(approximateMatch(allProductNames, s, 4));
 		}
 		
 		for(String s : realProductNames) {
