@@ -103,7 +103,7 @@ export default {
       </div>
       <van-button plain type="warning" style="margin-bottom: 15px; margin-top: 20px;" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending'" block @click="handleHoldOrder()">Hold Order</van-button>
       <van-button plain type="success" style="margin-bottom: 15px;" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleShipOrder()">Ship Order</van-button>
-      <van-button plain type="danger" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancelled Order</van-button>
+      <van-button plain type="danger" v-if="Vendor.VendorOrderDetail[0].order.status == 'pending' || Vendor.VendorOrderDetail[0].order.status == 'hold'" block @click="handleCancelOrder()">Cancel Order</van-button>
     </div>
     <div class="order-price">
       <div class="price-item">
