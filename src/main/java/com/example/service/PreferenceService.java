@@ -67,6 +67,8 @@ public class PreferenceService {
 		List<Product> allProducts = productDao.findAll();
 		List<Product> resultProducts = sortProductListPreference(allProducts, customer);
 		
+
+		//return 
 		int lastIndex = resultProducts.size() >= 3 ? 3 : resultProducts.size();
 		return resultProducts.subList(0, lastIndex);
 	}
@@ -75,7 +77,9 @@ public class PreferenceService {
 	//sort a product list according to the customer's likelihood of preference on them
 	public List<Product> sortProductListPreference(List<Product> products, Customer customer){
 		products.sort((a, b) -> Double.compare(rate(b, customer), rate(a, customer)));
-		return products.stream().filter(x -> !Double.isNaN(rate(x, customer))).toList();
+
+		return products.stream().filter(x -> !Double.isNaN(rate(x, customer))).toList();//remove invalid indices
+
 	}
 	
 	public double similarity(Customer c1, Customer c2) {
@@ -137,7 +141,11 @@ public class PreferenceService {
 //		System.out.println(customersLike.size());
 //		System.out.println(customersDislike.size());
 		
-		double rate = (sumOfSimilarityLike - sumOfSimilarityDislike) / (double)(customersLike.size() + customersDislike.size());
+
+		//range is [-1, 1]
+		double rate = (sumOfSimilarityLike - sumOfSimilarityDislike) / 
+				(double)(customersLike.size() + customersDislike.size());
+
 		
 //		System.out.println("Rate of Customer[" + customer.getCustomerId() + "] on Product[" + product.getProductName() + "] is: " + rate);
 		
