@@ -77,7 +77,8 @@ export default {
       // this.showPay = true;
     },
     async getOrderDetail() {
-      const currentOrder = await this.Order.OrderList[this.Order.OrderList.length - 1];
+      const currentOrder = await this.Order.OrderList[0];
+      console.log('orderList:' + this.Order.OrderList);
       console.log('currentOrder:' + currentOrder);
       console.log('currentOrder.purchaseOrderNumber:' + currentOrder.purchaseOrderNumber);
       const payload = {

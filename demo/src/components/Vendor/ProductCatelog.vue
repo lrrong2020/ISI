@@ -1,14 +1,14 @@
 <script>
 import { reactive } from "vue";
 import { mapState } from "vuex";
-import Apple from "@/assets/Apple.png";
-import Huawei from "@/assets/Huawei.png";
-import Xiaomi from "@/assets/Xiaomi.png";
-import Samsung from "@/assets/Samsung.png";
-import vivo from "@/assets/vivo.png";
-import OPPO from "@/assets/OPPO.png";
-import realme from "@/assets/realme.png";
-import All from "@/assets/All.png";
+import Apple from "@/assets/Brands/Apple.png";
+import Huawei from "@/assets/Brands/Huawei.png";
+import Xiaomi from "@/assets/Brands/Xiaomi.png";
+import Samsung from "@/assets/Brands/Samsung.png";
+import vivo from "@/assets/Brands/vivo.png";
+import OPPO from "@/assets/Brands/OPPO.png";
+import realme from "@/assets/Brands/realme.png";
+import All from "@/assets/Brands/All.png";
 
 export default {
   name: "ProductCatalogue",
