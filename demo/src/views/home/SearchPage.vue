@@ -295,7 +295,7 @@ export default {
       <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
       <!--全局样式-->
         <van-card
-          v-for="item in Product.productList.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage)"
+          v-for="item in Product.productList.slice((currentPage-1) * itemsPerPage, currentPage * itemsPerPage)"
           currency="$"
           :key="item.productId"
           :num="item.quantity"
