@@ -174,9 +174,9 @@ export default {
     async searchProduct(context, searchValue) {
       console.log(searchValue);
 
-      var searchValues = searchValue.split(' ');
-      searchValues = searchValues.filter(Boolean);
-      console.log("searchValues", searchValues);
+      //decompose query string into multiple keywords
+      var searchValues = searchValue.split(' ');//separate by whitespace
+      searchValues = searchValues.filter(Boolean);//remove empty entries
 
       var searchUrl = `${API_HOST_ANDROID_RUNNABLE}/product/search?`;
 
