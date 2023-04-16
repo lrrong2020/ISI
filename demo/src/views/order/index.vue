@@ -9,7 +9,7 @@ export default {
     return {
       value1: 0,
       option1: [
-        { text: 'All orders', value: 0 },
+        { text: 'All Orders', value: 0 },
         { text: 'Current Purchases', value: 1 },
         { text: 'Past Purchases', value: 2 },
       ],

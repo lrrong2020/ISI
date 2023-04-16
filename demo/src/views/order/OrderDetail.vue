@@ -45,7 +45,7 @@ export default {
   mounted() {
     this.timer = setInterval(() => {
       this.getOrderDetail();
-    }, 1000);
+    }, 10000);
   },
   beforeUnmount() {
     clearInterval(this.timer);

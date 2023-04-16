@@ -7,10 +7,10 @@ export default {
     return {
       value1: 0,
       option1: [
-        { text: 'All orders', value: 0 },
-        { text: 'Pending orders', value: 1 },
-        { text: 'Orders on hold', value: 2 },
-        { text: 'Past orders', value: 3 },
+        { text: 'All Orders', value: 0 },
+        { text: 'Pending Orders', value: 1 },
+        { text: 'Orders on Hold', value: 2 },
+        { text: 'Past Orders', value: 3 },
       ],
       searchValue:'',
       scrollTop: 0,

@@ -202,7 +202,7 @@ export default {
     if (!this.isFiltering) {
       this.timer = setInterval(() => {
         this.getProductListPaging();
-      }, 1000);
+      }, 10000);
     }
   },
   deactivated() {
