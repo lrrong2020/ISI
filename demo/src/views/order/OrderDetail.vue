@@ -13,6 +13,7 @@ export default {
   created() {
     this.getOrderDetail();
     this.$store.dispatch('Cart/getCartItems', this.User.currentUser.customerId);
+    document.documentElement.scrollTop = 0;
   },
   computed: {
     ...mapState(['User','Order', 'Cart']),

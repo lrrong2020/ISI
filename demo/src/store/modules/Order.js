@@ -33,7 +33,8 @@ export default {
       .then((response) => {
         console.log("OrderList:")
         console.log(response.data);
-        context.commit('setOrderList', response.data);
+        const reverseOrderList = response.data.reverse();
+        context.commit('setOrderList', reverseOrderList);
       })
       .catch((error) => {
         console.log(error);
