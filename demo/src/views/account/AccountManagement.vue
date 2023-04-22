@@ -72,7 +72,7 @@ export default {
       />
     </div>
     <div class="edit">
-      <van-form>
+      <van-form @submit="Save">
         <van-cell-group inset>
           <van-field
             v-model="customerName"
@@ -104,7 +104,7 @@ export default {
           />
         </van-cell-group>
         <div style="margin-top: 30px; margin-left: 16px; margin-right: 16px;">
-          <van-button round block type="primary" native-type="submit" style="font-size: 20px;" @click="Save">
+          <van-button round block type="primary" native-type="submit" style="font-size: 20px;">
             Save
           </van-button>
         </div>

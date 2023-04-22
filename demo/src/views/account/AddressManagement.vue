@@ -58,7 +58,7 @@ export default {
       />
     </div>
     <div class="edit">
-      <van-form>
+      <van-form @submit="Save">
         <van-cell-group inset>
           <van-field
             v-model="shippingAddress"
@@ -77,7 +77,7 @@ export default {
           />
         </van-cell-group>
         <div style="margin: 30px 16px;">
-          <van-button round block type="primary" native-type="submit" style="font-size: 20px;" @click="Save">
+          <van-button round block type="primary" native-type="submit" style="font-size: 20px;">
             Save
           </van-button>
         </div>
