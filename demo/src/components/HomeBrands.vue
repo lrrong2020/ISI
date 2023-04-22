@@ -98,8 +98,9 @@ export default {
 
     //getProductList from Store with paging
     getProductListPaging() {
-      var params = [];
+      var params = []; 
       params.push(this.currentPage - 1);
+      console.log("this.currentPage - 1", this.currentPage - 1);
       params.push(this.itemsPerPage);
       this.$store.dispatch("Product/getProductListPaging", params);
       this.getTop3();
@@ -201,8 +202,10 @@ export default {
   activated() {
     if (!this.isFiltering) {
       this.timer = setInterval(() => {
+        console.log("Interval 1");
         this.getProductListPaging();
-      }, 10000);
+        this.getTop3();
+      }, 3000);
     }
   },
   deactivated() {

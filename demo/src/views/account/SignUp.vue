@@ -16,6 +16,8 @@ export default {
       customerPassword: '',
       shippingAddress: '',
       signupImg,
+      Password: false,
+      type: 'password',
     }
   },
   created() {
@@ -134,6 +136,10 @@ export default {
     //   localStorage.setItem("isLogin", "login");
     //   // this.$router.push('/account');
     // },
+    showPassword() {
+      this.Password = !this.Password;
+      this.type = this.Password ? 'text' : 'password';
+    },
     validator(val) {
       return /^.{6,20}$/.test(val);
     },
@@ -198,10 +204,11 @@ export default {
             v-model="customerPassword"
             clearable
             autocomplete
-            type="password"
+            :type="type"
             name="customerPassword"
             label="Password"
-            right-icon="closed-eye"
+            :right-icon="Password ? 'eye-o' : 'eye'"
+            @click-right-icon="showPassword"
             placeholder="Your password"
             :rules="[
               { required: true, message: 'Please enter password' },

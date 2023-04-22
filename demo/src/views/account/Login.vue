@@ -12,6 +12,8 @@ export default {
     customerEmail: '',
     customerPassword: '',
     loginImg,
+    Password: false,
+    type: 'password',
   }),
   created() {
     this.getUser();
@@ -106,6 +108,10 @@ export default {
       this.customerEmail = '';
       this.customerPassword = '';
     },
+    showPassword() {
+      this.Password = !this.Password;
+      this.type = this.Password ? 'text' : 'password';
+    },
     // Password length function check
     validator(val) {
       return /^.{6,20}$/.test(val);
@@ -160,11 +166,12 @@ export default {
               v-model="customerPassword"
               clearable
               autocomplete
-              type="password"
+              :type="type"
               name="customerPassword"
               label="Password"
-              right-icon="closed-eye"
               placeholder="Password"
+              :right-icon="Password ? 'eye-o' : 'eye'"
+              @click-right-icon="showPassword"
               :rules="[
                 { required: true, message: 'Please enter password' },
                 { validator, message: 'Password must be at least 6 characters' },

@@ -77,13 +77,19 @@ export default {
     //进入路由时，滚动条回到上次离开时的位置
     document.documentElement.scrollTop = this.scrollTop;
   },
-  beforeRouteLeave(to, from, next) {
+  deactivated() {
     clearInterval(this.timer);
     console.log("clear timer");
     //离开路由时，记录滚动条位置
     this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    next();
   },
+  // beforeRouteLeave(to, from, next) {
+  //   clearInterval(this.timer);
+  //   console.log("clear timer");
+  //   //离开路由时，记录滚动条位置
+  //   this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  //   next();
+  // },
 }
 </script>
 

@@ -41,10 +41,14 @@ export default {
     //进入路由时，滚动条回到上次离开时的位置
     document.documentElement.scrollTop = this.scrollTop;
   },
-  beforeRouteLeave(to, from, next) {
-    this.scrollTop = document.documentElement.scrollTop;
-    next();
+  deactivated() {
+    //离开路由时，记录离开时的滚动条位置
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   },
+  // beforeRouteLeave(to, from, next) {
+  //   this.scrollTop = document.documentElement.scrollTop;
+  //   next();
+  // },
 };
 </script>
 <template>

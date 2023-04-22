@@ -66,12 +66,13 @@ export default {
   deactivated() {
     clearInterval(this.timer);
     console.log("clear timer");
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   },
   
-  beforeRouteLeave(to, from, next) {
-    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    next();
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  //   next();
+  // },
 }
 </script>
 
