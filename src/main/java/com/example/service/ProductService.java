@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -245,9 +246,13 @@ public class ProductService {
 	public List<Product> getProductByNameAndBrand(Map<String, String> query) {
 
 		String brand = query.get("brand");
-		Map<String, String> newQuery = new HashMap<String, String>(query);
+		Map<String, String> newQuery = new TreeMap<String, String>(query);
 		newQuery.remove("brand");
+		
 		List<Product> products = this.getProductByName(newQuery);
+		
+		System.out.println("getProductByNameAndBrand =======");
+		
 
 		return products.stream().filter(x -> x.getBrand().equals(brand)).toList();
 	}
