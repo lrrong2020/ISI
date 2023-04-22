@@ -156,20 +156,19 @@ public class ProductService {
 	public List<Product> fuzzySearch(List<String> unUsedKeywords, List<String> allProductNames) {
 		List<String> realProductNames = new ArrayList<String>();
 		List<Product> products = new ArrayList<Product>();
+		
 		for (String s : unUsedKeywords) {
-
 			realProductNames.addAll(approximateMatch(allProductNames, s, 3));
-
 		}
 
 		for (String s : realProductNames) {
 			products.addAll(dao.findByProductName(s));
 		}
+		
 		return products;
 	}
 
 	static int levenshteinDistance(String x, String y) {
-		System.out.println("Comparing " + x + " with " + y);
 		int[][] dp = new int[x.length() + 1][y.length() + 1];
 
 		for (int i = 0; i <= x.length(); i++) {
@@ -205,13 +204,14 @@ public class ProductService {
 
 			for (String ss : keywords) {
 				int distance = levenshteinDistance(ss, query);
-				System.out.println("distance: " + distance);
-				if (distance <= maxDistance) {
+
+				if (distance <= maxDistance) {//threshold 
 					matches.add(s);
 				}
 			}
-
 		}
+		
+		//sort before return
 		matches.sort((a, b) -> levenshteinDistance(a, query) - levenshteinDistance(b, query));
 		return matches;
 	}
@@ -219,9 +219,9 @@ public class ProductService {
 	public List<Product> getProductsByBrand(String brand, int page, int size) {
 		System.out.println("brand: " + brand);
 
-		Pageable firstPageWithTwoElements = PageRequest.of(page, size);
+		Pageable pageWithElements = PageRequest.of(page, size);
 
-		List<Product> products = dao.findAllByProductBrand(brand, firstPageWithTwoElements).getContent();
+		List<Product> products = dao.findAllByProductBrand(brand, pageWithElements).getContent();
 
 		for (Product product : products) {
 			System.out.println("prodcut Name: " + product.getProductName());
