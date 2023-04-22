@@ -133,7 +133,7 @@ export default{
         //2. else if it is an array, just commit data itself
         
       }).catch((error)=>{
-        alert(error.message);
+        console.log(error);
       });
     },
   },
