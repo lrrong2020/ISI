@@ -51,7 +51,7 @@ html, body {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.1s;
+  transition: opacity 0.15s;
 }
 .fade-enter-from,
 .fade-leave-to {
