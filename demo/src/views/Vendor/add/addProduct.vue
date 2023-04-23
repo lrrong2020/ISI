@@ -148,6 +148,7 @@ export default {
         return;
       this.createImage(files[0]);
     },
+    
     createImage(file) {
       var image = new Image();
       var reader = new FileReader();
