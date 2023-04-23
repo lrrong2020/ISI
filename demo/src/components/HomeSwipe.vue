@@ -14,7 +14,7 @@ export default {
     return {
       Swipe: [
         {
-          id: 11,
+          id: 39,
           url: Apple,
         },
         {
