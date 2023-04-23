@@ -310,7 +310,7 @@ export default {
       <van-empty description="No Product!" />
     </div>
 
-    <van-config-provider :theme-vars="themeVars" v-if="Product.productList.length !== 0">
+    <van-config-provider :theme-vars="themeVars" v-if="Product.productList">
     <!--全局样式-->
 
     <van-card
