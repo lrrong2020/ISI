@@ -73,7 +73,7 @@ export default {
       else{
         that.searchOrderById();
       }
-    }, 1000);
+    }, 5000);
     //进入路由时，滚动条回到上次离开时的位置
     document.documentElement.scrollTop = this.scrollTop;
   },
@@ -126,12 +126,12 @@ export default {
     </van-search>
 
     <!-- empty -->
-    <div class="empty" v-if="Vendor.VendorOrderList[0].length == 0">
+    <div class="empty" v-if="!Vendor.VendorOrderList">
       <van-empty description="No Order Found!" />
     </div>
     
     <!-- All order list -->
-    <div class="allorders" v-if="this.value1 == 0 && Vendor.VendorOrderList[0].length != 0">
+    <div class="allorders" v-if="this.value1 == 0 && Vendor.VendorOrderList">
       <van-cell v-for="order in reverseOrderList" :key="order" 
         :value="'$' + order.totalAmount" 
         :label="order.purchaseDate"
@@ -153,7 +153,7 @@ export default {
       </van-cell>
     </div>
     <!-- Pending -->
-    <div class="pending" v-if="this.value1 == 1 && Vendor.VendorOrderList[0].length != 0">
+    <div class="pending" v-if="this.value1 == 1 && Vendor.VendorOrderList">
       <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'pending'})" :key="order" 
         :value="'$' + order.totalAmount" 
         :label="order.purchaseDate"
@@ -172,7 +172,7 @@ export default {
       </van-cell>
     </div>
     <!-- Hold -->
-    <div class="hold" v-if="this.value1 == 2 && Vendor.VendorOrderList[0].length != 0">
+    <div class="hold" v-if="this.value1 == 2 && Vendor.VendorOrderList">
       <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'hold'})" :key="order" 
         :value="'$' + order.totalAmount" 
         :label="order.purchaseDate"
@@ -191,7 +191,7 @@ export default {
       </van-cell>
     </div>
     <!-- Past purchases -->
-    <div class="past" v-if="this.value1 == 3 && Vendor.VendorOrderList[0].length != 0">
+    <div class="past" v-if="this.value1 == 3 && Vendor.VendorOrderList">
       <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'shipped' || obj.status === 'cancelled'})" :key="order" 
         :value="'$' + order.totalAmount" 
         :label="order.purchaseDate"

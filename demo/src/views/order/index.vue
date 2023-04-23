@@ -59,7 +59,7 @@ export default {
   activated() {
     this.timer = setInterval(() => {
       this.getOrderList();
-    }, 10000);
+    }, 5000);
     //进入路由时，滚动条回到上次离开时的位置
     document.documentElement.scrollTop = this.scrollTop;
   },

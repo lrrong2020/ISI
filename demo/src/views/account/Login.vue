@@ -49,6 +49,8 @@ export default {
           message: 'User not found',
           wordBreak: 'break-word',
         });
+        this.customerEmail = '';
+        this.customerPassword = '';
         console.log("User not found 1");
         return;
       } else {
@@ -73,7 +75,6 @@ export default {
                 message: 'Password is incorrect',
                 wordBreak: 'break-word',
               });
-              this.customerEmail = '';
               this.customerPassword = '';
               console.log("Password is incorrect");
             }
@@ -84,6 +85,8 @@ export default {
           message: 'User not found',
           wordBreak: 'break-word',
         });
+        this.customerEmail = '';
+        this.customerPassword = '';
         console.log("User not found 2");
       }
       // if (!localStorage.userInfo) {
