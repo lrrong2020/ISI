@@ -18,7 +18,13 @@ export default {
       this.$router.go(-1);
     },
     toAddressManagement() {
-      this.$router.push({ name: 'AddressManagement', params: { id: this.User.currentUser.customerId } });
+      try{
+        this.$router.push({ name: 'AddressManagement', params: { id: this.User.currentUser.customerId } });
+      }
+      catch(e){
+        console.log(e);
+      }
+
     },
     closePopup() {
       this.showPay = false;
@@ -103,7 +109,7 @@ export default {
       />
     </div>
     <div class="address-wrap" @click="toAddressManagement">
-      <van-icon name="edit" class="arrow" />
+
       <div class="name">
         <span>{{ User.currentUser.customerName }}</span>
         <span style="padding-left: 15px;">{{ User.currentUser.customerEmail }}</span>
@@ -162,6 +168,8 @@ export default {
     margin: 8px 0px;
     padding-left: 20px;
   }
+
+
   .name {
     margin: 8px 0px;
     padding-left: 20px;

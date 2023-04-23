@@ -42,7 +42,7 @@ export default {
       this.$store.dispatch('User/getUser');
     },    
     onClickLeft() {
-      this.$router.push('/')
+      this.$router.go(-1);
     },
     onSubmit(value) {
       // console.log(value)

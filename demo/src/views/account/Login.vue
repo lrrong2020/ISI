@@ -38,7 +38,7 @@ export default {
     //   });
     // },
     onClickLeft() {
-      this.$router.push('/')
+      this.$router.go(-1);
     },
     onSubmit(value) {
       console.log(value);

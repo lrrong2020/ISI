@@ -306,7 +306,7 @@ export default {
     </van-button> -->
 
     <!-- Empty -->
-    <div class="empty" v-if="Product.productList.length === 0">
+    <div class="empty" v-if="Product.productList && Product.productList[0] == ''">
       <van-empty description="No Product!" />
     </div>
 
@@ -329,7 +329,7 @@ export default {
         class="card"
       >
         <template #tags>
-          <van-tag plain size="medium" type="primary">{{ item.productId }}</van-tag>
+          <van-tag  plain size="medium" type="primary">{{ item.productId }}</van-tag>
         </template>
       </van-card>
       <!--Paging-->
