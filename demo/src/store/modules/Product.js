@@ -178,6 +178,10 @@ export default {
       var searchValues = searchValue.split(' ');//separate by whitespace
       searchValues = searchValues.filter(Boolean);//remove empty entries
 
+      console.log("searchVlalues: ");
+      console.log(searchValues);
+
+      
       var searchUrl = `${API_HOST_ANDROID_RUNNABLE}/product/search?`;
 
       for(var i = 0; i < searchValues.length; i++){
@@ -187,6 +191,9 @@ export default {
             searchUrl += "&";
         }
       }
+
+      console.log("searchUrl: ");
+      console.log(searchUrl);
 
       //split searchValue and convert it into an array
 
@@ -277,6 +284,8 @@ export default {
             searchUrl += "&";
         }
       }
+
+      console.log(searchUrl);
 
       //split searchValue and convert it into an array
 

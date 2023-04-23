@@ -9,7 +9,7 @@ export default {
     return {
       value1: 0,
       option1: [
-        { text: 'All orders', value: 0 },
+        { text: 'All Orders', value: 0 },
         { text: 'Current Purchases', value: 1 },
         { text: 'Past Purchases', value: 2 },
       ],
@@ -25,9 +25,9 @@ export default {
   },
   computed: {
     ...mapState(['Cart', 'User', 'Order', 'Include']),
-    reverseOrderList() {
-      return this.Order.OrderList.reverse();
-    }
+    // reverseOrderList() {
+    //   return this.Order.OrderList.reverse();
+    // }
   },
   methods: {
     getOrderList() {
@@ -66,12 +66,13 @@ export default {
   deactivated() {
     clearInterval(this.timer);
     console.log("clear timer");
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   },
   
-  beforeRouteLeave(to, from, next) {
-    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    next();
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  //   next();
+  // },
 }
 </script>
 
@@ -91,12 +92,12 @@ export default {
       </van-dropdown-menu>
     </div>
     <!-- Empty -->
-    <div class="empty" v-if="this.reverseOrderList.length == 0">
+    <div class="empty" v-if="Order.OrderList.length == 0">
       <van-empty description="No order yet" />
     </div>
     <!-- All order list -->
     <div class="allorders" v-if="this.value1 == 0">
-      <van-cell v-for="order in reverseOrderList" :key="order" 
+      <van-cell v-for="order in Order.OrderList" :key="order" 
         :value="'$' + order.totalAmount" 
         :label="order.purchaseDate"
         center 
@@ -116,7 +117,7 @@ export default {
     </div>
     <!-- Current purchases -->
     <div class="current" v-if="this.value1 == 1">
-      <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'pending' || obj.status === 'hold'})" :key="order" 
+      <van-cell v-for="order in Order.OrderList.filter(obj => {return obj.status === 'pending' || obj.status === 'hold'})" :key="order" 
         :value="'$' + order.totalAmount" 
         :label="order.purchaseDate"
         center 
@@ -134,7 +135,7 @@ export default {
     </div>
     <!-- Past purchases -->
     <div class="past" v-if="this.value1 == 2">
-      <van-cell v-for="order in reverseOrderList.filter(obj => {return obj.status === 'shipped' || obj.status === 'cancelled'})" :key="order" 
+      <van-cell v-for="order in Order.OrderList.filter(obj => {return obj.status === 'shipped' || obj.status === 'cancelled'})" :key="order" 
         :value="'$' + order.totalAmount" 
         :label="order.purchaseDate"
         center 

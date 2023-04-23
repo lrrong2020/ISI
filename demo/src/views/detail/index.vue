@@ -161,7 +161,8 @@ export default {
 
     async toggleLike(){
       if(this.notPreferred == null){
-        alert("fail to toggle");
+        // alert("fail to toggle");
+        console.log("fail to toggle");
         return;
       }
       const that = this;

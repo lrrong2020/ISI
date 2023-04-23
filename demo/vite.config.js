@@ -19,13 +19,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  
+  //Postcss-pxtorem config
   css: {
-    postcss: {  // postcss配置
+    postcss: {
       plugins: [
         postCssPxToRem({
-          rootValue: 37.5, // 1rem的大小
-          propList: ['*'], // 需要转换的属性，这里选择全部都进行转换
+          rootValue: 37.5, // Conversion base: 1rem = 37.5px; 
+          propList: ['*'], // Select all attributes to be converted here
         })
       ]
     }

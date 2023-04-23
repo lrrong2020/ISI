@@ -7,10 +7,10 @@ export default {
     return {
       value1: 0,
       option1: [
-        { text: 'All orders', value: 0 },
-        { text: 'Pending orders', value: 1 },
-        { text: 'Orders on hold', value: 2 },
-        { text: 'Past orders', value: 3 },
+        { text: 'All Orders', value: 0 },
+        { text: 'Pending Orders', value: 1 },
+        { text: 'Orders on Hold', value: 2 },
+        { text: 'Past Orders', value: 3 },
       ],
       searchValue:'',
       scrollTop: 0,
@@ -77,13 +77,19 @@ export default {
     //进入路由时，滚动条回到上次离开时的位置
     document.documentElement.scrollTop = this.scrollTop;
   },
-  beforeRouteLeave(to, from, next) {
+  deactivated() {
     clearInterval(this.timer);
     console.log("clear timer");
     //离开路由时，记录滚动条位置
     this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    next();
   },
+  // beforeRouteLeave(to, from, next) {
+  //   clearInterval(this.timer);
+  //   console.log("clear timer");
+  //   //离开路由时，记录滚动条位置
+  //   this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  //   next();
+  // },
 }
 </script>
 
