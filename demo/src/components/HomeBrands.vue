@@ -137,7 +137,7 @@ export default {
         this.getProductListPaging();
         this.timer = setInterval(() => {
           this.getProductListPaging();
-        }, 10000);
+        }, 3000);
       }
     },
     async toDetail(item) {
@@ -191,9 +191,13 @@ export default {
   },
   timer: null,
   // mounted() {
-  //   this.timer = setInterval(() => {
-  //     this.getProductListPaging();
-  //   }, 10000);
+  //   if (!this.isFiltering) {
+  //     this.timer = setInterval(() => {
+  //       console.log("Interval 1");
+  //       this.getProductListPaging();
+  //       this.getTop3();
+  //     }, 3000);
+  //   }
   // },
   // beforeUnmount() {
   //   clearInterval(this.timer);
